@@ -14,7 +14,7 @@ GHICON = '<svg class="ghi" viewBox="0 0 16 16" width="22" height="22" aria-hidde
 def ext(html):
     """External links open in a new tab."""
     return re.sub(r'<a ([^>]*href="https?://[^"]*"[^>]*)>', lambda m: '<a ' + m.group(1) + ' target="_blank" rel="noopener noreferrer">', html)
-REL = 'https://github.com/vbth/choir-rehearsal-pack/releases/download/v1.1.0/'   # example ZIPs: assets of the release in the former repository
+REL = GH + '/releases/download/v1.0.0/'   # example ZIPs: assets of the release v1.0.0
 ZIPS = [('Deutsch: Alle meine Entchen', 'Chor_Uebungen_Alle_meine_Entchen.zip'), ('English: All My Ducklings', 'Choir_Practice_All_My_Ducklings.zip')]   # make_previews.py renders both
 ZIP_OF = {'de': ZIPS[0][1], 'en': ZIPS[1][1]}   # each page links only the package of its own language
 VERSION = open(os.path.join(HERE, '..', 'choir-practice', 'VERSION'), encoding='utf-8').read().strip()
