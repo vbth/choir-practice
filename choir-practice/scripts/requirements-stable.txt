@@ -1,0 +1,11 @@
+# Python packages in the versions the skill was tested with (setup.sh --stable installs exactly these).
+# Pip names, one per line. Re-test the whole pipeline before raising a version, then update CHANGELOG.md.
+verovio==6.3.0
+cairosvg==2.9.1
+lxml==6.1.3
+pypdf==6.21.2
+mido==1.3.3
+reportlab==5.1.0
+pillow==13.0.0
+numpy==2.5.4
+scipy==1.18.1

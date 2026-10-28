@@ -1,0 +1,22 @@
+name: Release
+on:
+  push:
+    tags: ['v*']
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Check that tag and VERSION match
+        run: test "v$(cat choir-practice/VERSION)" = "$GITHUB_REF_NAME"
+      - name: Build .skill and release notes
+        run: |
+          V="${GITHUB_REF_NAME#v}"
+          zip -qr choir-practice.skill choir-practice -x '*/__pycache__/*'
+          awk -v v="$V" '$0 ~ "^## "v" " {p=1; next} /^## / {p=0} p' CHANGELOG.md > notes.md
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release create "$GITHUB_REF_NAME" choir-practice.skill --title "$GITHUB_REF_NAME" --notes-file notes.md

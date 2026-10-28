@@ -1,0 +1,433 @@
+{
+  "lang": "de",
+  "language_name": "Deutsch",
+  "folders": {
+    "scores": "01_Noten",
+    "practice": "02_Ueben",
+    "tutti": "03_Tutti",
+    "original": "04_Original",
+    "tools": "05_Werkzeuge"
+  },
+  "stages": {
+    "solo": "1_Solo",
+    "accomp": "2_Mit_Begleitung",
+    "choir": "3_Im_Chor"
+  },
+  "sounds": {
+    "choir": "Chor",
+    "piano": "Klavier"
+  },
+  "files": {
+    "score": "Noten",
+    "tutti": "Tutti",
+    "overview": "Uebersicht_Uebe_Mixe",
+    "protocol": "Pruefprotokoll"
+  },
+  "credit_text": "Text",
+  "credit_arr": "Satz",
+  "overview": {
+    "title": "Übe-Dateien: Verteilung auf dem Kopfhörer",
+    "sub1": "Eigene Stimme (schwarz) immer in der Mitte mit 0 dB. Punktgröße = Lautstärke, Position = links/rechts im Kopfhörer.",
+    "sub2": "Aufstellung im Chor von links nach rechts: {seating}",
+    "stage_titles": {
+      "solo": "Stufe 1 – Solo (Nr. 1, 2)",
+      "accomp": "Stufe 2 – mit Begleitung (Nr. 3, 4)",
+      "choir": "Stufe 3 – im Chor (Nr. 5)"
+    },
+    "stage_subs": {
+      "solo": "Nur die eigene Stimme: Linie lernen.",
+      "accomp": "Eigene Stimme, dazu die Melodie ({melody}) und eine leise Klavierbegleitung aller Stimmen – wie mit dem Chorleiter am Flügel.",
+      "choir": "Wie in der Chorreihe: Nachbarn links/rechts, bei Randstimmen füllt die übernächste Stimme die freie Seite."
+    },
+    "own": "eigene Stimme",
+    "accomp": "Klavierbegleitung",
+    "left": "links",
+    "right": "rechts",
+    "center": "Mitte",
+    "panel": "Übe-Dateien {voice}"
+  },
+  "readme": {
+    "title": "Noten und Übe-Dateien",
+    "intro": "Dieses Paket enthält die Chorstimmen als Noten mit Text sowie Übe-Dateien (Audio). Grundlage ist die gelieferte Vorlage {source}.",
+    "folders_h": "Ordner",
+    "col_folder": "Ordner",
+    "col_content": "Inhalt",
+    "col_use": "Wofür",
+    "f_scores": [
+      "Noten (KI-Version und Scan der Vorlage), MusicXML mit Chor- und Klavierwiedergabe, MIDI-Dateien aller Stimmen und des Tutti",
+      "Ansehen, in einem Notensatzprogramm weiterbearbeiten, MIDI weiterverwenden"
+    ],
+    "f_practice": [
+      "Übersicht der Übe-Dateien, Anleitung für die Chorleitung (Nummern, Kürzel, Hinweise) und pro Stimme eine ZIP-Datei „<Kürzel>_Ueben_<Titel>.zip“ mit Anleitung, Noten und den Übe-MP3s in Chor- und Klavierklang; Datei 6 (Tutti) liegt in jeder Stimmen-ZIP-Datei",
+      "Einstieg für die Person, die das Paket verteilt; die Stimmen-ZIP-Dateien unverändert weitergeben"
+    ],
+    "f_tools": [
+      "Projektdaten (score.json, docs.json, mixes.json, layout.json) und der Skill zum Nachbauen",
+      "Nachbauen oder ändern"
+    ],
+    "f_docs": [
+      "README (zweisprachig), Prüfprotokoll, Korrekturprotokoll, Session_Handoff (Englisch)",
+      "Information und Fortsetzung"
+    ],
+    "stages_h": "Übe-Dateien und Stufen",
+    "col_stage": "Stufe",
+    "col_mix": "Mischung",
+    "col_purpose": "Gedacht für",
+    "s_solo": [
+      "nur die eigene Stimme",
+      "Linie lernen"
+    ],
+    "s_accomp": [
+      "eigene Stimme, Melodie {mel} dB, Klavierbegleitung {acc} dB",
+      "Zusammenhang und Harmonie hören"
+    ],
+    "s_choir": [
+      "Nachbarn links/rechts {near} dB, übernächste {second} dB, übrige {far} dB",
+      "sich im Chor behaupten"
+    ],
+    "s_tutti": [
+      "alle Stimmen gleich laut",
+      "Gesamtklang anhören"
+    ],
+    "sound_h": "Klang und Einstellungen",
+    "sound_items": [
+      "Jede Audiodatei gibt es zweimal: mit Chorklang und mit optimiertem Klavier (legato).",
+      "Soundfont {soundfont}, gerendert mit FluidSynth, leichter Raumhall, Lautheit {lufs} LUFS.",
+      "Tempo: {tempo}.",
+      "Die eigene Stimme steht immer in der Mitte; die MIDI-Dateien enthalten dieselben Lautstärke- und Panoramawerte.",
+      "Solo und Mit Begleitung (Nr. 1 bis 4) gibt es zusätzlich langsam ({slow_pct} % Tempo, im Dateinamen „{slow}“). Vor der Musik erklingt der eigene Anfangston, danach eine kurze Pause; Datei 6 (Tutti) beginnt mit den Anfangstönen aller Stimmen nacheinander (von unten nach oben). Zwischen den Strophen liegt eine kurze Pause."
+    ],
+    "ai_h": "Hinweis zur Entstehung",
+    "ai_text": "Die Noten wurden aus der Vorlage (Scan) mit KI-Unterstützung transkribiert, zweifach gegen die Vorlage korrigiert und mit Verovio (verovio.org) gesetzt. Die Korrekturen stehen im Korrekturprotokoll. Der Klang entsteht durch Software-Synthese mit einem Soundfont, nicht durch generative KI. Die Übe-Dateien sind rein mechanisch und notengetreu; sie ersetzen keine Interpretation. Vorlage, Entscheidungen und Freigaben liegen bei Menschen. Ohne Gewähr: im Zweifel gilt die Vorlage.",
+    "score_h": "Noten",
+    "notes_h": "Hinweise zur Vorlage und Korrekturen",
+    "open_h": "Offene Punkte",
+    "sources_h": "Quellen",
+    "meta_h": "Werkangaben",
+    "confirmed": "vom Nutzer freigegeben",
+    "unconfirmed": "nicht bestätigt",
+    "date": "Stand",
+    "score_line": "DIN A4 hoch, Titelseite und {pages} Notenseiten mit je {spp} Systemen, Linienabstand {mm} mm (gut lesbar ab 1,6 mm)",
+    "col_no": "Nr.",
+    "stage_nos": {
+      "solo": "1, 2",
+      "accomp": "3, 4",
+      "choir": "5",
+      "tutti": "6"
+    },
+    "stage_names": {
+      "tutti": "Tutti"
+    },
+    "rights_h": "Rechte",
+    "rights_base": "Die Rechte an Musik, Text und Vorlage liegen bei den Urhebenden und Rechteinhabenden (Komposition, Text, Verlag). Dieses Paket ersetzt keine Rechteklärung. Nutzung und Weitergabe nur im Rahmen der vorhandenen Erlaubnis.",
+    "rights_status": {
+      "public_domain": "Rechtestatus nach Angabe des Nutzers: gemeinfrei.",
+      "licensed": "Rechtestatus laut Angabe: Lizenz oder Erlaubnis für Vervielfältigung und Nutzung liegt vor.",
+      "own": "Rechtestatus laut Angabe: eigenes Werk oder Rechte beim Auftraggeber.",
+      "unclear": "Rechtestatus ungeklärt. Das Paket nicht weitergeben, bevor die Nutzungsrechte geklärt sind."
+    },
+    "rights_note": "Angabe zu den Rechten: {note}",
+    "rights_notice": "Vermerk der Vorlage: {notice}",
+    "rights_use": {
+      "rehearsal": "Vorgesehene Nutzung: Probe im eigenen Chor.",
+      "commercial": "Vorgesehene Nutzung: gewerblich."
+    },
+    "rights_skill_licence": "Lizenz des Skills: Der Skill, mit dem dieses Paket erstellt wurde, steht unter der PolyForm Noncommercial License 1.0.0. Kommerzielle Nutzung des Skills braucht eine eigene Lizenz (siehe LICENSE im Skill).",
+    "rights_ref": "Lizenz-Referenz: {reference}",
+    "rights_warn_commercial": "ACHTUNG: Gewerbliche Nutzung bei ungeklärten Rechten. Ohne Lizenz oder Erlaubnis der Rechteinhabenden nicht vervielfältigen, nicht weitergeben und nicht gewerblich nutzen. Rechte vorher klären."
+  },
+  "protocol": {
+    "title": "Prüfprotokoll",
+    "col_phase": "Phase",
+    "col_check": "Prüfung",
+    "col_result": "Ergebnis",
+    "col_note": "Bemerkung",
+    "pass": "bestanden",
+    "fail": "nicht bestanden",
+    "warn": "Hinweis",
+    "manual": "manuell"
+  },
+  "slow": "langsam",
+  "beats": {
+    "quarter": "Viertel",
+    "dotted-quarter": "punktierte Viertel",
+    "half": "Halbe",
+    "dotted-half": "punktierte Halbe",
+    "eighth": "Achtel",
+    "whole": "Ganze"
+  },
+  "corr": {
+    "title": "Korrekturprotokoll",
+    "intro": "Alle Abweichungen von der Vorlage, Korrekturen, Auslegungen und unsicheren Stellen. Bitte unsichere Stellen am Original prüfen.",
+    "cols": [
+      "Nr.",
+      "Takt",
+      "Stimme",
+      "Art",
+      "Vorlage",
+      "Ergebnis",
+      "Begründung",
+      "Status"
+    ],
+    "kinds": {
+      "pitch": "Tonhöhe",
+      "rhythm": "Rhythmus",
+      "lyrics": "Text",
+      "slur": "Bogen",
+      "dynamics": "Dynamik",
+      "meta": "Werkangabe",
+      "layout": "Satzbild",
+      "other": "Sonstiges"
+    },
+    "status": {
+      "corrected": "korrigiert",
+      "as_in_source": "wie Vorlage (geprüft)",
+      "interpretation": "Auslegung",
+      "uncertain": "unsicher – bitte prüfen"
+    },
+    "none": "Keine Korrekturen oder Auffälligkeiten."
+  },
+  "protocol_intro": "Automatische und manuelle Prüfungen in der Reihenfolge ihrer Durchführung.",
+  "phases": {
+    "0": "Vorbereitung",
+    "1": "Sichten",
+    "2": "Erfassen",
+    "3": "Gegenlesen",
+    "4": "Notensatz",
+    "5": "Audio",
+    "6": "Dokumentation/Paket"
+  },
+  "files_more": {
+    "corrections": "Korrekturprotokoll",
+    "voice_pkg": "Stimme"
+  },
+  "readme_more": {
+    "lang_note": "Deutsch / English",
+    "meta_cols": [
+      "Angabe",
+      "Wert",
+      "Quelle",
+      "Status"
+    ],
+    "fields": {
+      "title": "Titel",
+      "subtitle": "Untertitel",
+      "composer": "Musik",
+      "arranger": "Satz/Bearbeitung",
+      "lyricist": "Text",
+      "source": "Vorlage"
+    },
+    "per_voice": "Jede Stimmen-ZIP-Datei in {practice} ist in sich vollständig. Doppelt vorhanden sind nur Anleitung, Noten und Datei 6 (Tutti), damit eine Stimme allein weitergegeben werden kann. Alle Dateien und Ordner beginnen mit einer Nummer, nur die Stimmen-ZIP-Dateien (und die MIDI-Ordner je Stimme) mit dem Kürzel, zum Beispiel T1_<Titel>. Alle MP3s tragen Titel, Album, Spur und Interpret als Tags."
+  },
+  "share": {
+    "root": "Freigabe",
+    "director": "Chorleiter",
+    "items": {
+      "guide": "Anleitung",
+      "score": "Noten",
+      "solo_slow": "Allein langsam",
+      "solo": "Allein",
+      "accomp_slow": "Mit Melodie langsam",
+      "accomp": "Mit Melodie",
+      "accomp_mel_slow": "Mit Klavier langsam",
+      "accomp_mel": "Mit Klavier",
+      "choir": "Eigene Stimme lauter",
+      "tutti": "Alle Stimmen gleich laut",
+      "zip": "Alle Dateien"
+    },
+    "what": {
+      "score": "Die Noten zum Mitlesen und Ausdrucken.",
+      "solo_slow": "Nur deine Stimme, langsamer. Hier lernst du Töne und Text.",
+      "solo": "Nur deine Stimme, im richtigen Tempo.",
+      "accomp_slow": "Deine Stimme, dazu leise die Melodie und Klavier. Langsamer.",
+      "accomp": "Deine Stimme mit Melodie und Klavier, im richtigen Tempo.",
+      "accomp_mel_slow": "Deine Stimme mit leiser Klavierbegleitung. Langsamer.",
+      "accomp_mel": "Deine Stimme mit Klavierbegleitung, im richtigen Tempo.",
+      "choir": "Der ganze Chor, deine Stimme ist etwas lauter.",
+      "tutti": "Der ganze Chor, alle Stimmen gleich laut."
+    },
+    "guide": {
+      "sub": "Übe-Dateien für {voice}",
+      "intro": "Am besten mit Kopfhörern üben.",
+      "col_no": "Nr.",
+      "col_file": "Datei",
+      "col_what": "Was du hörst",
+      "tips": [
+        "Jede Aufnahme beginnt mit deinem ersten Ton, danach kommt eine kurze Pause und dann die Musik. Nur die letzte Datei (alle Stimmen gleich laut) beginnt mit den ersten Tönen aller Stimmen nacheinander.",
+        "Die Nummer vorne im Dateinamen ist die Reihenfolge zum Üben.",
+        "Die beiden Audio-Ordner („{choir_dir}“ und „{piano_dir}“ im Namen) enthalten dieselben Aufnahmen, einmal mit Chorklang und einmal mit Klavierklang."
+      ]
+    },
+    "director_guide": {
+      "sub": "Übe-Dateien aller Stimmen für die Chorleitung",
+      "intro": "Die Übe-Dateien aller Stimmen liegen in 2_Ueben, je Stimme eine ZIP-Datei, die unverändert weitergegeben werden kann. Die Nummern sind in allen ZIP-Dateien gleich.",
+      "naming": "Benennung der Audio-Dateien: Nummer, Stimmkürzel, Titel, Klang, Inhalt, zum Beispiel {example}.",
+      "title_word": "Titel",
+      "abbr_h": "Kürzel",
+      "table_h": "So steht es in der Anleitung der Sänger:",
+      "melody_note": "Für die Melodiestimme ({abbr}) heißen 3 und 4 „Mit Klavier“, weil sie die Melodie selbst singt.",
+      "tutti_note": "Datei 6 ist für alle Stimmen gleich und liegt deshalb in jedem Stimmenordner."
+    }
+  },
+  "ai_note": "KI-generiert, ohne Gewähr",
+  "ai_note_info": "KI-generiert, ohne Gewähr",
+  "ai_tag": "KI-generiert",
+  "ai_meta": "KI-generiert, ohne Gewähr",
+  "skill_name": "choir-practice",
+  "made_with": "Erstellt mit dem Skill „{name}“.",
+  "delivery": {
+    "score_layout": "{pages} Notenseiten x {systems} Systeme, Maßstab {scale}, Notenlinienabstand {space} mm",
+    "scores": "1_Noten",
+    "practice": "2_Ueben",
+    "docs": "3_Dokumentation",
+    "tools": "4_Werkzeuge",
+    "guide": "Anleitung",
+    "score": "Noten",
+    "partitur": "Noten",
+    "scan": "Scan",
+    "overview": "Uebersicht",
+    "musicxml": "MusicXML",
+    "midi": "MIDI",
+    "package": "Chor_Uebungen",
+    "audio": "Audio",
+    "choir_dir": "Chorklang",
+    "piano_dir": "Klavierklang",
+    "readme": "README",
+    "handoff": "Session_Handoff",
+    "data": "Projektdaten",
+    "skill": "SKILL",
+    "tutti": "Tutti",
+    "fname": {
+      "solo_slow": "allein_langsam",
+      "solo": "allein",
+      "accomp_slow": "mit_Melodie_langsam",
+      "accomp": "mit_Melodie",
+      "accomp_mel_slow": "mit_Klavier_langsam",
+      "accomp_mel": "mit_Klavier",
+      "choir": "eigene_Stimme_lauter",
+      "tutti": "alle_Stimmen_gleich_laut"
+    },
+    "voice_dir": "Ueben"
+  },
+  "cover": {
+    "composer": "Musik",
+    "lyricist": "Text",
+    "notes_h": "Hinweise zur Ausführung (aus der Vorlage)",
+    "bar_page": "Takt {bar}, Seite {page}",
+    "tempo": "Tempo",
+    "time": "Takt",
+    "voices": "Stimmen",
+    "melody": "Melodie",
+    "verses": "Strophen"
+  },
+  "doc_titles": {
+    "partitur": "Noten",
+    "score": "Noten",
+    "guide": "Anleitung",
+    "overview": "Übersicht",
+    "readme": "README",
+    "protocol": "Prüfprotokoll",
+    "corrections": "Korrekturprotokoll"
+  },
+  "capitalised_nouns": [
+    "Chor",
+    "Klavier",
+    "Melodie",
+    "Stimme",
+    "Stimmen",
+    "Tutti",
+    "Noten",
+    "Partitur",
+    "Anleitung",
+    "Material",
+    "Audio",
+    "Chorklang",
+    "Klavierklang",
+    "Projektdaten",
+    "Übersicht",
+    "Uebersicht",
+    "Ueben"
+  ],
+  "protocol_notes": [
+    [
+      "^bars/lyrics consistent; syllables .*",
+      "Takte und Text stimmig, Silbenzahl je Stimme und Strophe geprüft"
+    ],
+    [
+      "^(\\d+) pages, scale (\\d+) \\(min (\\d+)\\), staff space ([\\d.]+) mm.*",
+      "\\1 Seiten, Maßstab \\2 (mindestens \\3), Linienabstand \\4 mm"
+    ],
+    [
+      "^(\\d+) findings \\(range/leap/rhythm\\).*",
+      "\\1 Meldung(en) zu Umfang, Sprung oder Rhythmus, jeweils gegen die Vorlage geprüft"
+    ],
+    [
+      "^(\\d+) files$",
+      "\\1 Dateien"
+    ],
+    [
+      "^(\\d+) audio/MIDI files, soundfont (\\S+), (-?\\d+) LUFS",
+      "\\1 Audio- und MIDI-Dateien, Soundfont \\2, \\3 LUFS"
+    ],
+    [
+      "^one page A4 landscape$",
+      "eine Seite A4 quer"
+    ],
+    [
+      "^(\\d+) correction-log entries, (\\d+) uncertain",
+      "\\1 Einträge im Korrekturprotokoll, \\2 unsicher"
+    ],
+    [
+      "^structure, A4 layout, overview, lyrics, MIDI vs\\. score \\((\\d+) files\\), audio durations, names OK",
+      "Struktur, A4-Layout, Übersicht, Text, MIDI gegen Noten (\\1 Dateien), Audiolängen und Namen in Ordnung"
+    ],
+    [
+      "^(\\d+) voice folders \\(2 PDFs \\+ (\\d+) MP3 each\\), numbering without gaps, max 3 levels, no stored duplicates, MP3 tags, guides 1 page.*",
+      "\\1 Stimmenordner (je 2 PDFs und \\2 MP3), Nummerierung lückenlos, höchstens 3 Ebenen, keine doppelt gespeicherten Dateien, MP3-Tags, Anleitungen einseitig, Namen, Metadaten, Begriffe, Handoff und Rechte geprüft"
+    ],
+    [
+      "^status public_domain$",
+      "Rechtestatus: gemeinfrei"
+    ],
+    [
+      "^status licensed$",
+      "Rechtestatus: Lizenz oder Erlaubnis liegt vor"
+    ],
+    [
+      "^status own$",
+      "Rechtestatus: eigenes Werk oder Rechte beim Auftraggeber"
+    ],
+    [
+      "^status unclear$",
+      "Rechtestatus: ungeklärt (Paket nicht weitergeben)"
+    ],
+    [
+      "^(\\d+) files: duration, gaps, clipping, loudness, stereo$",
+      "\\1 Audiodateien technisch geprüft: Dauer, Lücken, Übersteuerung, Lautstärke, Stereo"
+    ],
+    [
+      "^(\\d+) of (\\d+) files with problems$",
+      "Bei \\1 von \\2 Audiodateien Auffälligkeiten (siehe Meldung)"
+    ],
+    [
+      "^status unclear, commercial use, skill licence, open$",
+      "Rechtestatus: ungeklärt, gewerbliche Nutzung geplant (Warnung: erst Rechte klären); Skill-Lizenz beachten"
+    ],
+    [
+      "^status licensed, commercial use, skill licence, open$",
+      "Rechtestatus: Lizenz angegeben, aber ohne Referenz, gewerbliche Nutzung geplant (Warnung); Skill-Lizenz beachten"
+    ],
+    [
+      "^status (public_domain|licensed|own), commercial use, skill licence$",
+      "Rechtestatus mit gewerblicher Nutzung: \\1; Skill-Lizenz beachten"
+    ],
+    [
+      "^hue (\\d+), major, (\\d+) quarter notes/min, (\\d+) main beats, title contrast ([\\d.]+):1, label contrast ([\\d.]+):1, light zone ([\\d.]+)$",
+      "Album-Cover: Farbton \\1° (Dur), Tempo \\2 Viertel/min, \\3 Hauptschläge; Kontrast Titel \\4:1, Kennzeichnung \\5:1"
+    ],
+    [
+      "^hue (\\d+), minor, (\\d+) quarter notes/min, (\\d+) main beats, title contrast ([\\d.]+):1, label contrast ([\\d.]+):1, light zone ([\\d.]+)$",
+      "Album-Cover: Farbton \\1° (Moll), Tempo \\2 Viertel/min, \\3 Hauptschläge; Kontrast Titel \\4:1, Kennzeichnung \\5:1"
+    ]
+  ]
+}

@@ -1,0 +1,174 @@
+{
+ "language": "en",
+ "meta": {
+  "title": "All My Ducklings",
+  "composer": "Unknown (folk song)",
+  "lyricist": "Unknown (folk song)"
+ },
+ "tempo": {
+  "text": "Cheerful",
+  "bpm": 150,
+  "beat": "quarter"
+ },
+ "key_fifths": 0,
+ "time": [
+  2,
+  4
+ ],
+ "divisions": 4,
+ "pickup": false,
+ "voices": [
+  {
+   "id": "S",
+   "name": "Soprano",
+   "abbr": "S",
+   "clef": "treble",
+   "voice_type": "soprano"
+  },
+  {
+   "id": "A",
+   "name": "Alto",
+   "abbr": "A",
+   "clef": "treble",
+   "voice_type": "alto"
+  },
+  {
+   "id": "T",
+   "name": "Tenor",
+   "abbr": "T",
+   "clef": "treble8",
+   "voice_type": "tenor"
+  },
+  {
+   "id": "B",
+   "name": "Bass",
+   "abbr": "B",
+   "clef": "bass",
+   "voice_type": "bass"
+  }
+ ],
+ "seating": [
+  "S",
+  "A",
+  "T",
+  "B"
+ ],
+ "melody": "S",
+ "music": {
+  "S": [
+   "C5/4 D5/4",
+   "E5/4 F5/4",
+   "G5/8",
+   "G5/8",
+   "A5/4 A5/4",
+   "A5/4 A5/4",
+   "G5/8~",
+   "G5/8",
+   "A5/4 A5/4",
+   "A5/4 A5/4",
+   "G5/8~",
+   "G5/8",
+   "F5/4 F5/4",
+   "F5/4 F5/4",
+   "E5/8",
+   "E5/8",
+   "D5/4 D5/4",
+   "D5/4 D5/4",
+   "C5/8~",
+   "C5/8^"
+  ],
+  "A": [
+   "G4/4 B4/4",
+   "G4/4 A4/4",
+   "E5/8",
+   "D5/8",
+   "F5/4 F5/4",
+   "F5/4 F5/4",
+   "D5/8~",
+   "D5/8",
+   "F5/4 F5/4",
+   "F5/4 F5/4",
+   "E5/8~",
+   "E5/8",
+   "C5/4 D5/4",
+   "C5/4 A4/4",
+   "G4/8",
+   "C5/8",
+   "B4/4 B4/4",
+   "G4/4 B4/4",
+   "G4/8~",
+   "G4/8^"
+  ],
+  "T": [
+   "E4/4 G4/4",
+   "C4/4 C4/4",
+   "C4/8",
+   "B3/8",
+   "C4/4 D4/4",
+   "C4/4 D4/4",
+   "B3/8~",
+   "B3/8",
+   "C4/4 D4/4",
+   "C4/4 D4/4",
+   "C4/8~",
+   "C4/8",
+   "A3/4 Bb3/4",
+   "A3/4 D4/4",
+   "C4/8",
+   "A3/8",
+   "G3/4 F4/4",
+   "B3/4 F4/4",
+   "E4/8~",
+   "E4/8^"
+  ],
+  "B": [
+   "C3/4 G2/4",
+   "C3/4 F3/4",
+   "C3/8",
+   "G2/8",
+   "F3/4 D3/4",
+   "F3/4 D3/4",
+   "G2/8~",
+   "G2/8",
+   "F3/4 D3/4",
+   "F3/4 D3/4",
+   "C3/8~",
+   "C3/8",
+   "F3/4 Bb2/4",
+   "F3/4 D3/4",
+   "C3/8",
+   "A2/8",
+   "G2/4 G2/4",
+   "G2/4 G2/4",
+   "C3/8~",
+   "C3/8^"
+  ]
+ },
+ "lyrics": {
+  "verses": {
+   "1": "0:0:All | 0:4:my | 1:0:duck- | 1:4:lings | 4:0:Swim- | 4:4:ming | 5:0:on | 5:4:the | 6:0:lake, | 8:0:Swim- | 8:4:ming | 9:0:on | 9:4:the | 10:0:lake, | 12:0:Heads | 12:4:in | 13:0:the | 13:4:wa- | 14:0:ter, | 16:0:Tails | 16:4:up | 17:0:in | 17:4:the | 18:0:air!"
+  },
+  "number_verses": true
+ },
+ "directions": [
+  {
+   "bar": 0,
+   "onset": 0,
+   "kind": "dyn",
+   "value": "mf"
+  }
+ ],
+ "playback": [
+  [
+   1,
+   20
+  ]
+ ],
+ "rights": {
+  "status": "public_domain",
+  "use": "rehearsal",
+  "reference": "https://de.wikipedia.org/wiki/Alle_meine_Entchen",
+  "note": "Folk song, author and composer not known; four-part setting created for the website",
+  "notice": ""
+ }
+}

@@ -1,0 +1,174 @@
+{
+ "language": "de",
+ "meta": {
+  "title": "Alle meine Entchen",
+  "composer": "Unbekannt (Volkslied)",
+  "lyricist": "Unbekannt (Volkslied)"
+ },
+ "tempo": {
+  "text": "Munter",
+  "bpm": 150,
+  "beat": "quarter"
+ },
+ "key_fifths": 0,
+ "time": [
+  2,
+  4
+ ],
+ "divisions": 4,
+ "pickup": false,
+ "voices": [
+  {
+   "id": "S",
+   "name": "Sopran",
+   "abbr": "S",
+   "clef": "treble",
+   "voice_type": "soprano"
+  },
+  {
+   "id": "A",
+   "name": "Alt",
+   "abbr": "A",
+   "clef": "treble",
+   "voice_type": "alto"
+  },
+  {
+   "id": "T",
+   "name": "Tenor",
+   "abbr": "T",
+   "clef": "treble8",
+   "voice_type": "tenor"
+  },
+  {
+   "id": "B",
+   "name": "Bass",
+   "abbr": "B",
+   "clef": "bass",
+   "voice_type": "bass"
+  }
+ ],
+ "seating": [
+  "S",
+  "A",
+  "T",
+  "B"
+ ],
+ "melody": "S",
+ "music": {
+  "S": [
+   "C5/4 D5/4",
+   "E5/4 F5/4",
+   "G5/8",
+   "G5/8",
+   "A5/4 A5/4",
+   "A5/4 A5/4",
+   "G5/8~",
+   "G5/8",
+   "A5/4 A5/4",
+   "A5/4 A5/4",
+   "G5/8~",
+   "G5/8",
+   "F5/4 F5/4",
+   "F5/4 F5/4",
+   "E5/8",
+   "E5/8",
+   "D5/4 D5/4",
+   "D5/4 D5/4",
+   "C5/8~",
+   "C5/8^"
+  ],
+  "A": [
+   "G4/4 B4/4",
+   "G4/4 A4/4",
+   "E5/8",
+   "D5/8",
+   "F5/4 F5/4",
+   "F5/4 F5/4",
+   "D5/8~",
+   "D5/8",
+   "F5/4 F5/4",
+   "F5/4 F5/4",
+   "E5/8~",
+   "E5/8",
+   "C5/4 D5/4",
+   "C5/4 A4/4",
+   "G4/8",
+   "C5/8",
+   "B4/4 B4/4",
+   "G4/4 B4/4",
+   "G4/8~",
+   "G4/8^"
+  ],
+  "T": [
+   "E4/4 G4/4",
+   "C4/4 C4/4",
+   "C4/8",
+   "B3/8",
+   "C4/4 D4/4",
+   "C4/4 D4/4",
+   "B3/8~",
+   "B3/8",
+   "C4/4 D4/4",
+   "C4/4 D4/4",
+   "C4/8~",
+   "C4/8",
+   "A3/4 Bb3/4",
+   "A3/4 D4/4",
+   "C4/8",
+   "A3/8",
+   "G3/4 F4/4",
+   "B3/4 F4/4",
+   "E4/8~",
+   "E4/8^"
+  ],
+  "B": [
+   "C3/4 G2/4",
+   "C3/4 F3/4",
+   "C3/8",
+   "G2/8",
+   "F3/4 D3/4",
+   "F3/4 D3/4",
+   "G2/8~",
+   "G2/8",
+   "F3/4 D3/4",
+   "F3/4 D3/4",
+   "C3/8~",
+   "C3/8",
+   "F3/4 Bb2/4",
+   "F3/4 D3/4",
+   "C3/8",
+   "A2/8",
+   "G2/4 G2/4",
+   "G2/4 G2/4",
+   "C3/8~",
+   "C3/8^"
+  ]
+ },
+ "lyrics": {
+  "verses": {
+   "1": "0:0:Al- | 0:4:le | 1:0:mei- | 1:4:ne | 2:0:Ent- | 3:0:chen | 4:0:schwim- | 4:4:men | 5:0:auf | 5:4:dem | 6:0:See, | 8:0:schwim- | 8:4:men | 9:0:auf | 9:4:dem | 10:0:See, | 12:0:Köpf- | 12:4:chen | 13:0:in | 13:4:das | 14:0:Was- | 15:0:ser, | 16:0:Schwänz- | 16:4:chen | 17:0:in | 17:4:die | 18:0:Höh."
+  },
+  "number_verses": true
+ },
+ "directions": [
+  {
+   "bar": 0,
+   "onset": 0,
+   "kind": "dyn",
+   "value": "mf"
+  }
+ ],
+ "playback": [
+  [
+   1,
+   20
+  ]
+ ],
+ "rights": {
+  "status": "public_domain",
+  "use": "rehearsal",
+  "reference": "https://de.wikipedia.org/wiki/Alle_meine_Entchen",
+  "note": "Volkslied, Verfasser und Komponist nicht überliefert; vierstimmiger Satz neu gesetzt",
+  "notice": ""
+ }
+}

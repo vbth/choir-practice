@@ -1,0 +1,612 @@
+#!/usr/bin/env python3
+"""Builds docs/index.html (de), docs/en/index.html (en), css/site.css, js/site.js for the landing page.
+Level data comes from the skill itself (make_audio.stages), so the headphone graphic cannot drift from the audio."""
+import re, os, sys, json, hashlib, subprocess, zipfile
+HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, os.path.join(HERE, '..', 'choir-practice', 'scripts'))
+import make_audio as M
+OUT = os.path.join(HERE, '..', 'docs')
+GH = 'https://github.com/vbth/choir-practice'
+PROFILE = 'https://github.com/vbth'
+SITE = 'https://vbth.github.io/choir-practice/'
+GHICON = '<svg class="ghi" viewBox="0 0 16 16" width="22" height="22" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>'
+
+def ext(html):
+    """External links open in a new tab."""
+    return re.sub(r'<a ([^>]*href="https?://[^"]*"[^>]*)>', lambda m: '<a ' + m.group(1) + ' target="_blank" rel="noopener noreferrer">', html)
+REL = 'https://github.com/vbth/choir-rehearsal-pack/releases/download/v1.1.0/'   # example ZIPs: assets of the release in the former repository
+ZIPS = [('Deutsch: Alle meine Entchen', 'Chor_Uebungen_Alle_meine_Entchen.zip'), ('English: All My Ducklings', 'Choir_Practice_All_My_Ducklings.zip')]   # make_previews.py renders both
+ZIP_OF = {'de': ZIPS[0][1], 'en': ZIPS[1][1]}   # each page links only the package of its own language
+VERSION = open(os.path.join(HERE, '..', 'choir-practice', 'VERSION'), encoding='utf-8').read().strip()
+
+SEAT = ['S', 'A', 'T', 'B']
+ST = M.stages(SEAT, 'S')
+spread = {v: round(-0.5 + k / 3, 2) for k, v in enumerate(SEAT)}
+ST['tutti'] = {own: [[v, spread[v], M.LV['tutti'], 'own'] for v in SEAT] for own in SEAT}
+
+T = {
+ 'de': {
+  'html': 'de', 'name': 'choir-practice Skill', 'title': 'choir-practice Skill – Übe-MP3s je Stimme aus Chornoten', 'other': ('en/', 'EN'), 'self_prefix': '', 'assets': '',
+  'desc': 'Der Claude-Skill choir-practice macht aus Chornoten ein geprüftes ZIP: MP3 und MIDI zum Üben für jede Stimme, dazu eine Anleitung für die Chorleitung.',
+  'ids': {'start': 'start', 'ablauf': 'ablauf', 'ueben': 'ueben', 'paket': 'beispiel-zip', 'rechte': 'rechte-und-ki', 'loslegen': 'loslegen', 'lizenz': 'lizenz'},
+  'menu': [('start', 'Start'), ('ablauf', 'Ablauf'), ('ueben', 'Üben'), ('paket', 'Beispiel-ZIP'), ('rechte', 'Rechte und KI'), ('loslegen', 'Loslegen'), ('lizenz', 'Lizenz')],
+  'menu_label': 'Menü', 'skip': 'Zum Inhalt', 'theme_to_dark': 'Zum dunklen Modus wechseln', 'theme_to_light': 'Zum hellen Modus wechseln',
+  'h1': 'Hören, mitsingen, sicher werden.',
+  'lead': 'choir-practice ist ein praktischer Claude-Skill, der viel Zeit spart: Aus Chornoten entsteht ein geprüftes ZIP, in dem man für jeden Sänger eigene Audio-Dateien zum Üben findet, fertig zum Weitergeben.',
+  'cta1': 'Skill installieren', 'cta2': 'Beispiel-ZIP ansehen',
+  'ai': 'KI-generiert, ohne Gewähr',
+  'facts': [('4', 'Stufen je Stimme'), ('2', 'Klänge: Chor und Klavier'), ('75 %', 'Tempo der langsamen Fassung'), ('42', 'Aufnahmen im Beispiel')],
+  'inh_h': 'Inhalte', 'paket_h': 'Beispiel-ZIP', 'paket_p': 'Im ZIP liegen vier Ordner. Die Stimmen-ZIPs in 2_Ueben sind fertig zum Weitergeben, ihr Inhalt steht zuletzt. Einen Ordner anklicken.',
+  'tree': [
+   ('1_Noten', 'Noten (PDF), MusicXML und MIDI.', [
+    '1_Noten_<Titel>_Scan.pdf', '2_Noten_<Titel>.pdf', '3_MusicXML_<Titel>_Chor.musicxml', '4_MusicXML_<Titel>_Klavier.musicxml',
+    '5_MIDI_<Titel>/', '  S_MIDI_<Titel>/  (je Stimme: S, A, T, B)', '    1 bis 5_S_<Titel>_Chor_und_Klavier_*.mid  (zehn Dateien)', '  Tutti_MIDI_<Titel>/', '    <Titel>_Tutti_Chor.mid', '    <Titel>_Tutti_Klavier.mid']),
+   ('2_Ueben', 'Übersicht, Anleitung und je Stimme eine fertige ZIP-Datei.', [
+    '1_Uebersicht.pdf', '2_Anleitung.pdf', 'S_Ueben_<Titel>.zip', 'A_Ueben_<Titel>.zip', 'T_Ueben_<Titel>.zip', 'B_Ueben_<Titel>.zip']),
+   ('3_Dokumentation', 'README, Prüfprotokoll, Korrekturprotokoll und Session-Handoff.', [
+    '1_README_<Titel>.md und .pdf', '2_Pruefprotokoll_<Titel>.md und .pdf', '3_Korrekturprotokoll_<Titel>.md und .pdf', '4_Session_Handoff_<Titel>.md']),
+   ('4_Werkzeuge', 'Projektdaten und der Skill selbst, zum Weiterarbeiten.', [
+    '1_Projektdaten_<Titel>/', '  score.json', '  docs.json', '  layout.json', '  mixes.json',
+    '2_SKILL_choir_practice_v<Version>/', '  choir_practice.skill', '  README.md', '  session_handoff.md']),
+   ('S_Ueben_<Titel>.zip', 'Inhalt jeder Stimmen-ZIP (hier Sopran): alles, was eine Stimme braucht.', [
+    '1_S_Anleitung.pdf', '2_S_Noten_<Titel>.pdf', '3_S_Audio_Chorklang_<Titel>/', '  1 bis 6_S_<Titel>_Chor_*.mp3  (allein, mit Klavier, jeweils langsam und normal; eigene Stimme lauter; alle gleich laut)',
+    '4_S_Audio_Klavierklang_<Titel>/', '  1 bis 6_S_<Titel>_Klavier_*.mp3  (dieselben sechs)']),
+  ],
+  'ablauf_h': 'Ablauf', 'ablauf_p': 'Zwölf Schritte, zwei Stopps mit Rückfragen. Einen Schritt anklicken.',
+  'who_claude': 'Claude', 'who_you': 'Nutzer',
+  'steps': [
+   ('Aufruf', 'you', 'Skill in Claude starten, noch ohne Noten.', ''),
+   ('Einrichtung, Stopp A', 'both', 'Angabe der Rechte und des Verwendungszwecks.', 'Alles bereit?'),
+   ('Noten anhängen', 'you', 'Als PDF, Foto oder Scan.', ''),
+   ('Sichtung', 'claude', 'Claude liest die Seiten und prüft die Qualität.', 'Alles verstanden?'),
+   ('Stopp B', 'you', 'Titel, Stimmen und Tempo bestätigen.', ''),
+   ('Notenerfassung', 'claude', 'Claude überträgt die Noten.', 'Fehlerfrei?'),
+   ('Korrekturlesen', 'claude', 'Claude vergleicht das Ergebnis zweimal mit der Vorlage: erst Töne, dann Text.', 'Alles sauber? Sonst zurück zu Schritt 6.'),
+   ('Endgültiger Notensatz', 'claude', 'Claude setzt die Noten sauber, mit Titelblatt.', 'Gut lesbar?'),
+   ('Audio', 'claude', 'Claude erzeugt für jede Stimme die Audio-Dateien zum Üben.', 'Alles da?'),
+   ('Paket', 'claude', 'Claude schreibt die Anleitungen und packt alles zusammen.', 'Alles geprüft?'),
+   ('Abschluss', 'both', 'Claude macht Verbesserungsvorschläge. Die Entscheidung liegt beim Nutzer.', ''),
+   ('Herunterladen', 'you', 'Herunterladen und die Stimmen-ZIPs an den Chor weitergeben.', ''),
+  ],
+  'ueben_h': 'Üben', 'ueben_p': 'Jede Stimme bekommt ihren eigenen Mix. Die eigene Stimme liegt in der Mitte, die anderen sind nach der Chorsitzordnung im Stereobild verteilt. Stimme, Stufe, Klang und Tempo sind wählbar: Der Kopfhörer zeigt die Verteilung, und zu hören ist genau dieser Mix. Mit Kopfhörern klingt es am besten. Die Aufnahmen sind mechanisch exakt, ohne Interpretation.',
+  'gate_lbl': 'Prüfung am Ende', 'voice_label': 'Stimme', 'stage_label': 'Stufe',
+  'voices': {'S': 'Sopran', 'A': 'Alt', 'T': 'Tenor', 'B': 'Bass'},
+  'stages': {'solo': 'Allein', 'accomp': 'Mit Begleitung', 'choir': 'Im Chor', 'tutti': 'Tutti'},
+  'sound_label': 'Klang', 'sounds': {'choir': 'Chor', 'piano': 'Klavier'}, 'tempo_label': 'Tempo', 'tempos': {'normal': 'Normal', 'slow': 'Langsam'}, 'sound_names': {'choir': 'Chorklang', 'piano': 'Klavierklang'}, 'slow_name': 'langsam',
+  'stage_txt': {
+   'solo': 'Nur die eigene Stimme, in der Mitte.',
+   'accomp': 'Eigene Stimme, die Melodie leiser, dazu die Klavierbegleitung aller Stimmen.',
+   'choir': 'Die anderen Stimmen sitzen wie im Chor: Nachbarn links und rechts etwas leiser, weiter entfernte noch leiser.',
+   'tutti': 'Alle Stimmen gleich laut.'}, 'own_lbl': 'Gesang', 'acc_lbl': 'Klavier',
+  'dl_p': 'Das Ergebnis: Aufnahmen zum Üben für jede Stimme, Anleitungen und Protokolle.', 'dl_btn': 'Beispiel-ZIP herunterladen (32 MB)',
+  'tutti_all': 'Tutti, alle Stimmen', 'pl_title': 'Alle meine Entchen', 'pl_play': 'Wiedergabe', 'pl_pause': 'Pause', 'pl_seek': 'Position',
+  'pl_cover': 'Albumcover des Beispielpakets',
+  'rechte_h': 'Rechte und KI',
+  'rechte_items': [
+   ('Rechte', 'Bevor Noten verarbeitet werden, fragt der Skill nach den Rechten. Die Antwort vermerkt er in der README des Pakets. Lizenzen für Noten müssen eingehalten werden. Der Skill ersetzt keine Rechtsberatung.'),
+   ('Kennzeichnung', 'Alles, was der Skill erzeugt, ist als KI-Inhalt gekennzeichnet, sowohl mit dem EU-Label für KI-generierte Inhalte als auch im Text und in den Metadaten der Dokumente.'),
+   ('Grenzen', 'Die Dateien enthalten jeden Ton und jeden Einsatz „mechanisch exakt“, so wie er notiert ist, ohne Interpretation.'),
+  ],
+  'los_h': 'Loslegen',
+  'los_steps': ['choir-practice.skill im Claude-Konto hochladen (Einstellungen).', 'Skill ohne Noten aufrufen und Stopp A beantworten (Rechte und Verwendungszweck).', 'Noten anhängen und Stopp B beantworten (Werkdaten).', 'ZIP am Ende herunterladen und Audio-Dateien an den Chor weitergeben.'],
+  'los_dl': 'Skill herunterladen',
+  'lic_h': 'Lizenz', 'lic_p': 'PolyForm Noncommercial License 1.0.0,\nfrei für nichtkommerzielle Nutzung.',
+  'lic_link': 'Lizenztext lesen', 'foot_profile': 'GitHub-Profil vbth', 'private': 'privates Projekt', 'og_alt': 'Ein Mann mit Kopfhörern steht in einer alten Badewanne und singt vom Notenblatt, neben ihm schwimmt eine Quietscheente, rote Noten schweben im Raum',
+  'alt_cover': 'Deckblatt des Beispielpakets', 'alt_page1': 'Erste Notenseite des Beispielpakets', 'alt_page2': 'Zweite Notenseite des Beispielpakets', 'alt_ai': 'EU-Label AI GENERATED',
+  'ai_label': 'AI GENERATED', 'top': 'Nach oben',
+ },
+ 'en': {
+  'html': 'en', 'name': 'choir-practice Skill', 'title': 'choir-practice Skill – Practice MP3s per voice from a choir score', 'other': ('../', 'DE'), 'self_prefix': '../', 'assets': '../',
+  'desc': 'The Claude skill choir-practice turns a choir score into a checked ZIP: MP3 and MIDI practice files for every voice, plus a guide for the director.',
+  'ids': {'start': 'start', 'ablauf': 'workflow', 'ueben': 'practice', 'paket': 'example-zip', 'rechte': 'rights-and-ai', 'loslegen': 'get-started', 'lizenz': 'licence'},
+  'menu': [('start', 'Start'), ('ablauf', 'Workflow'), ('ueben', 'Practice'), ('paket', 'Example ZIP'), ('rechte', 'Rights and AI'), ('loslegen', 'Get started'), ('lizenz', 'Licence')],
+  'menu_label': 'Menu', 'skip': 'Skip to content', 'theme_to_dark': 'Switch to dark mode', 'theme_to_light': 'Switch to light mode',
+  'h1': 'Listen, sing along, get it right.',
+  'lead': 'choir-practice is a practical Claude skill that saves you a lot of time: your choir score becomes a checked ZIP in which every voice finds its own recordings to practise with, ready to share.',
+  'cta1': 'Install the skill', 'cta2': 'See the example ZIP',
+  'ai': 'AI-generated, no guarantee',
+  'facts': [('4', 'stages per voice'), ('2', 'sounds: choir and piano'), ('75%', 'tempo of the slow version'), ('42', 'recordings in the example')],
+  'inh_h': 'Contents', 'paket_h': 'Example ZIP', 'paket_p': 'The ZIP holds four folders. The voice ZIPs in 2_Practice are ready to hand out, their contents are listed last. Click a folder.',
+  'tree': [
+   ('1_Scores', 'Score (PDF), MusicXML and MIDI.', [
+    '1_Score_<Title>_Scan.pdf', '2_Score_<Title>.pdf', '3_MusicXML_<Title>_Choir.musicxml', '4_MusicXML_<Title>_Piano.musicxml',
+    '5_MIDI_<Title>/', '  S_MIDI_<Title>/  (one per voice: S, A, T, B)', '    1 to 5_S_<Title>_Choir_and_Piano_*.mid  (ten files)', '  Tutti_MIDI_<Title>/', '    <Title>_Tutti_Choir.mid', '    <Title>_Tutti_Piano.mid']),
+   ('2_Practice', 'Overview, guide and one ready ZIP per voice.', [
+    '1_Overview.pdf', '2_Guide.pdf', 'S_Practice_<Title>.zip', 'A_Practice_<Title>.zip', 'T_Practice_<Title>.zip', 'B_Practice_<Title>.zip']),
+   ('3_Documentation', 'README, check log, correction log and session handoff.', [
+    '1_README_<Title>.md and .pdf', '2_Check_Log_<Title>.md and .pdf', '3_Correction_Log_<Title>.md and .pdf', '4_Session_Handoff_<Title>.md']),
+   ('4_Tools', 'Project data and the skill itself, for further work.', [
+    '1_Project_Data_<Title>/', '  score.json', '  docs.json', '  layout.json', '  mixes.json',
+    '2_SKILL_choir_practice_v<Version>/', '  choir_practice.skill', '  README.md', '  session_handoff.md']),
+   ('S_Practice_<Title>.zip', 'Contents of every voice ZIP (soprano shown): everything one voice needs.', [
+    '1_S_Guide.pdf', '2_S_Score_<Title>.pdf', '3_S_Audio_Choir_Sound_<Title>/', '  1 to 6_S_<Title>_Choir_*.mp3  (solo, with piano, each slow and normal; own voice louder; all voices equal)',
+    '4_S_Audio_Piano_Sound_<Title>/', '  1 to 6_S_<Title>_Piano_*.mp3  (the same six)']),
+  ],
+  'ablauf_h': 'Workflow', 'ablauf_p': 'Twelve steps, two stops with questions for you. Click a step.',
+  'who_claude': 'Claude', 'who_you': 'You',
+  'steps': [
+   ('Call', 'you', 'Start the skill in Claude, still without a score.', ''),
+   ('Setup, Stop A', 'both', 'You say how the rights stand and what the material is for.', 'All set?'),
+   ('Attach score', 'you', 'As PDF, photo or scan.', ''),
+   ('Survey', 'claude', 'Claude reads the pages and checks the quality.', 'Everything understood?'),
+   ('Stop B', 'you', 'Confirm title, voices and tempo.', ''),
+   ('Transcription', 'claude', 'Claude transcribes the score.', 'No errors?'),
+   ('Proofreading', 'claude', 'Claude compares the result twice with your original: notes first, then lyrics.', 'All clean? Otherwise back to step 6.'),
+   ('Final engraving', 'claude', 'Claude sets the score cleanly, with a title page.', 'Easy to read?'),
+   ('Audio', 'claude', 'Claude creates the practice recordings for every voice.', 'All there?'),
+   ('Package', 'claude', 'Claude writes the guides and packs everything together.', 'Everything checked?'),
+   ('Closing', 'both', 'Claude suggests improvements. You decide.', ''),
+   ('Download', 'you', 'Download it and pass the voice ZIPs on to the choir.', ''),
+  ],
+  'ueben_h': 'Practice', 'ueben_p': 'Every voice gets its own mix. Your own voice sits in the middle, the others are spread across the stereo image like the choir stands. Pick a voice, a stage, a sound and a tempo: the headphones show the distribution, and you hear exactly that mix. It sounds best on headphones. The recordings are mechanically exact, without interpretation.',
+  'gate_lbl': 'Check at the end', 'voice_label': 'Voice', 'stage_label': 'Stage',
+  'voices': {'S': 'Soprano', 'A': 'Alto', 'T': 'Tenor', 'B': 'Bass'},
+  'stages': {'solo': 'Solo', 'accomp': 'With accompaniment', 'choir': 'In the choir', 'tutti': 'Tutti'},
+  'sound_label': 'Sound', 'sounds': {'choir': 'Choir', 'piano': 'Piano'}, 'tempo_label': 'Tempo', 'tempos': {'normal': 'Normal', 'slow': 'Slow'}, 'sound_names': {'choir': 'choir sound', 'piano': 'piano sound'}, 'slow_name': 'slow',
+  'stage_txt': {
+   'solo': 'Only your own voice, in the middle.',
+   'accomp': 'Your own voice, the melody quieter, plus the piano accompaniment of all voices.',
+   'choir': 'The other voices sit as in the choir: neighbours left and right a little quieter, voices further away quieter still.',
+   'tutti': 'All voices equally loud.'}, 'own_lbl': 'Singing', 'acc_lbl': 'Piano',
+  'dl_p': 'The result: practice recordings for every voice, guides and logs.', 'dl_btn': 'Download the example ZIP (32 MB)',
+  'tutti_all': 'Tutti, all voices', 'pl_title': 'All My Ducklings', 'pl_play': 'Play', 'pl_pause': 'Pause', 'pl_seek': 'Position',
+  'pl_cover': 'Album cover of the example pack',
+  'rechte_h': 'Rights and AI',
+  'rechte_items': [
+   ('Rights', 'Before scores are processed, the skill asks about the rights. It records the answer in the pack’s README. The licences of the score must be observed. The skill is not a substitute for legal advice.'),
+   ('Labelling', 'Everything the skill creates is labelled as AI content, both with the EU label for AI-generated content and in the text and metadata of the documents.'),
+   ('Limits', 'The files contain every note and every entry “mechanically exact”, just as it is written, without interpretation.'),
+  ],
+  'los_h': 'Get started',
+  'los_steps': ['Upload choir-practice.skill in your Claude account (settings).', 'Call the skill without a score and answer stop A (rights and intended use).', 'Attach the score and answer stop B (work data).', 'Download the ZIP at the end and pass the audio files on to the choir.'],
+  'los_dl': 'Download the skill',
+  'lic_h': 'Licence', 'lic_p': 'PolyForm Noncommercial License 1.0.0,\nfree for non-commercial use.',
+  'lic_link': 'Read the licence text', 'foot_profile': 'GitHub profile vbth', 'private': 'private project', 'og_alt': 'A man with headphones stands in an old bathtub and sings from a sheet of music, a rubber duck floats beside him, red notes drift through the room',
+  'alt_cover': 'Title page of the example pack', 'alt_page1': 'First score page of the example pack', 'alt_page2': 'Second score page of the example pack', 'alt_ai': 'EU label AI GENERATED',
+  'ai_label': 'AI GENERATED', 'top': 'Back to top',
+ },
+}
+
+def asset_version():
+    """Short hash of CSS and JS: appended to their URLs, so browsers and the Pages cache fetch changed files at once."""
+    return hashlib.sha1((CSS + JS).encode('utf-8')).hexdigest()[:8]
+
+def esc(s): return s.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
+
+def playlist(t):
+    """Every recording of the example pack: per voice 2 sounds x (solo, with accompaniment: normal + slow; in the choir), plus tutti in both sounds."""
+    def b(label, voice, stage, snd, tempo):
+        v = f' data-voice="{voice}"' if voice else ''
+        return f'<li><button type="button"{v} data-stage="{stage}" data-sound="{snd}" data-tempo="{tempo}" aria-pressed="false">{esc(label)}</button></li>'
+    out = []
+    for v, vn in t['voices'].items():
+        it = []
+        for snd, sn in t['sound_names'].items():
+            for st in ('solo', 'accomp', 'choir'):
+                for slow in ((False, True) if st != 'choir' else (False,)):
+                    it.append(b(f"{t['stages'][st]}, {sn}" + (f", {t['slow_name']}" if slow else ''), v, st, snd, 'slow' if slow else 'normal'))
+        out.append(f'<details data-voice="{v}"><summary>{esc(vn)}</summary><ul class="trk">{"".join(it)}</ul></details>')
+    it = [b(f"{t['stages']['tutti']}, {sn}", None, 'tutti', snd, 'normal') for snd, sn in t['sound_names'].items()]
+    out.append(f'<details data-tutti="1"><summary>{esc(t["tutti_all"])}</summary><ul class="trk">{"".join(it)}</ul></details>')
+    return ''.join(out)
+
+FAN_W = (160, 240, 320, 480, 720)   # widths written by make_previews.py: 160 and 240 CSS px at 1x, 2x, 3x
+
+def fan_img(A, L, name, cls, alt):
+    """Score page of the fan: one file per device pixel density (srcset), so the staff lines stay sharp."""
+    srcset = ', '.join(f'{A}img/example-{name}-{L}-{w}.png {w}w' for w in FAN_W)
+    return f'<img class="{cls}" src="{A}img/example-{name}-{L}-480.png" srcset="{srcset}" sizes="(max-width:520px) 160px, 240px" alt="{esc(alt)}" width="240" height="339" loading="lazy">'
+
+def page(L):
+    t = T[L]; A = t['assets']
+    I = t['ids']
+    menu = ''.join(f'<li><a href="#{I[a]}">{esc(n)}</a></li>' for a, n in t['menu'])
+    facts = ''.join(f'<div><dt>{esc(a)}</dt><dd>{esc(b)}</dd></div>' for a, b in t['facts'])
+    tree = ''.join(
+        f'<div class="folder"><button type="button" aria-expanded="false" aria-controls="f{i}"><span class="fn">{esc(n)}</span><span class="fd">{esc(d)}</span></button>'
+        f'<ul id="f{i}" hidden>' + ''.join(f'<li class="mono" style="padding-left:{(len(c)-len(c.lstrip()))*7+10}px">{esc(c.strip())}</li>' for c in ch) + '</ul></div>'
+        for i, (n, d, ch) in enumerate(t['tree']))
+    steps = ''.join(f'<li><button type="button" data-step="{i}" aria-pressed="false"><span class="n">{i+1}</span><span class="s">{esc(s[0])}</span></button></li>' for i, s in enumerate(t['steps']))
+    rights = ''.join(f'<article><h3>{esc(h)}</h3><p>{esc(p)}</p></article>' for h, p in t['rechte_items'])
+    los = ''.join(f'<li>{esc(s)}</li>' for s in t['los_steps'])
+    voices = ''.join(f'<button type="button" data-voice="{v}" aria-pressed="false">{esc(n)}</button>' for v, n in t['voices'].items())
+    stages = ''.join(f'<button type="button" data-stage="{k}" aria-pressed="false">{esc(n)}</button>' for k, n in t['stages'].items())
+    sounds = ''.join(f'<button type="button" data-sound="{k}" aria-pressed="false">{esc(n)}</button>' for k, n in t['sounds'].items())
+    tempos = ''.join(f'<button type="button" data-tempo="{k}" aria-pressed="false">{esc(n)}</button>' for k, n in t['tempos'].items())
+    ai = open(os.path.join(OUT, 'img', 'ai-generated.svg'), encoding='utf-8').read()
+    ai = ai[ai.index('<svg'):].replace('role="img"', 'role="img" class="ailabel" focusable="false"', 1)
+    data = {'lang': L, 'seat': SEAT, 'mix': ST, 'voices': t['voices'], 'stages': t['stages'], 'stage_txt': t['stage_txt'], 'steps': t['steps'],
+            'who': {'you': t['who_you'], 'claude': t['who_claude'], 'both': t['who_claude'] + ' + ' + t['who_you']}, 'own': t['own_lbl'], 'acc': t['acc_lbl'], 'gate': t['gate_lbl'],
+            'sound_names': t['sound_names'], 'slow_name': t['slow_name'], 'slow': M.SLOW_PCT / 100, 'theme_to_dark': t['theme_to_dark'], 'theme_to_light': t['theme_to_light']}
+    other_href, other_lbl = t['other']
+    ld = {'@context': 'https://schema.org', '@type': 'SoftwareApplication', 'name': t['name'],
+          'description': t['desc'], 'url': SITE + ('en/' if L == 'en' else ''), 'inLanguage': L, 'softwareVersion': VERSION,
+          'applicationCategory': 'MultimediaApplication', 'operatingSystem': 'Claude (skill)', 'image': {'@type': 'ImageObject', 'url': SITE + 'img/og.png', 'width': 2400, 'height': 1260, 'caption': t['og_alt']},
+          'license': 'https://polyformproject.org/licenses/noncommercial/1.0.0', 'codeRepository': GH,
+          'downloadUrl': GH + '/releases/latest', 'author': {'@type': 'Person', 'name': 'vbth', 'url': PROFILE},
+          'offers': {'@type': 'Offer', 'price': '0', 'priceCurrency': 'EUR'}}
+    ld_json = json.dumps(ld, ensure_ascii=False, indent=1).replace('</', '<\\/')
+    return f'''<!doctype html>
+<html lang="{t['html']}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{esc(t['title'])}</title>
+<meta name="description" content="{esc(t['desc'])}">
+<meta name="color-scheme" content="light dark">
+<link rel="canonical" href="{SITE}{'en/' if L=='en' else ''}">
+<link rel="alternate" hreflang="de" href="{SITE}">
+<link rel="alternate" hreflang="en" href="{SITE}en/">
+<link rel="alternate" hreflang="x-default" href="{SITE}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="{esc(t['name'])}">
+<meta property="og:title" content="{esc(t['title'])}">
+<meta property="og:description" content="{esc(t['desc'])}">
+<meta property="og:url" content="{SITE}{'en/' if L=='en' else ''}">
+<meta property="og:locale" content="{'de_DE' if L=='de' else 'en_US'}">
+<meta property="og:locale:alternate" content="{'en_US' if L=='de' else 'de_DE'}">
+<meta property="og:image" content="{SITE}img/og.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="2400">
+<meta property="og:image:height" content="1260">
+<meta property="og:image:alt" content="{esc(t['og_alt'])}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{esc(t['title'])}">
+<meta name="twitter:description" content="{esc(t['desc'])}">
+<meta name="twitter:image" content="{SITE}img/og.png">
+<meta name="twitter:image:alt" content="{esc(t['og_alt'])}">
+<link rel="icon" href="{A}img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="{A}favicon.ico" sizes="32x32">
+<link rel="icon" href="{A}img/favicon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="{A}img/favicon-180.png">
+<link rel="preload" href="{A}img/header.png" as="image" type="image/png" media="(prefers-color-scheme: light)">
+<link rel="preload" href="{A}img/header-dark.png" as="image" type="image/png" media="(prefers-color-scheme: dark)">
+<script>try{{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}}catch(e){{}}</script>
+<link rel="stylesheet" href="{A}css/site.css?v={asset_version()}">
+<script type="application/ld+json">
+{ld_json}
+</script>
+</head>
+<body>
+<a class="skip" href="#start">{esc(t['skip'])}</a>
+<header class="bar">
+ <a class="brand" href="#start" aria-label="{esc(t['name'])}"><img src="{A}img/logo.png" alt="" width="46" height="46"><span class="bt"><span class="bn">{esc(t['name'].partition(' ')[0])}</span> {esc(t['name'].partition(' ')[2])}</span></a>
+ <button class="theme" type="button" aria-label="{esc(t['theme_to_dark'])}"><svg class="moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 14.6A8.6 8.6 0 0 1 9.4 4 8.6 8.6 0 1 0 20 14.6z"/></svg><svg class="sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></svg></button>
+ <a class="lang" href="{other_href}" hreflang="{'en' if L=='de' else 'de'}" lang="{'en' if L=='de' else 'de'}">{other_lbl}</a>
+ <button class="burger" type="button" aria-expanded="false" aria-controls="nav">{esc(t['menu_label'])}</button>
+ <nav id="nav" aria-label="{esc(t['menu_label'])}"><ul>{menu}<li class="navlang"><a href="{other_href}" hreflang="{'en' if L=='de' else 'de'}" lang="{'en' if L=='de' else 'de'}">{'English' if L=='de' else 'Deutsch'}</a></li></ul></nav>
+</header>
+<main>
+<figure class="banner"><picture><source media="(prefers-color-scheme: dark)" srcset="{A}img/header-dark.png"><img src="{A}img/header.png" alt="{esc(t['og_alt'])}" width="1280" height="640" fetchpriority="high" decoding="async"></picture>
+</figure>
+<section id="start" class="hero">
+ <h1>{esc(t['h1'])}</h1>
+ <p class="lead">{esc(t['lead'])}</p>
+ <p class="cta"><a href="#{I['loslegen']}">{esc(t['cta1'])}</a> <a href="#{I['paket']}">{esc(t['cta2'])}</a></p>
+ <dl class="facts">{facts}</dl>
+</section>
+<section id="{I['ablauf']}"><h2><span class="num">01</span>{esc(t['ablauf_h'])}</h2>
+ <p class="intro">{esc(t['ablauf_p'])}</p>
+ <div id="stepbox" class="panel" aria-live="polite"></div>
+ <ol class="chain">{steps}</ol>
+</section>
+<section id="{I['ueben']}"><h2><span class="num">02</span>{esc(t['ueben_h'])}</h2>
+ <p class="intro">{esc(t['ueben_p'])}</p>
+ <div class="listen" id="player" data-audio="{A}audio/" data-play="{esc(t['pl_play'])}" data-pause="{esc(t['pl_pause'])}">
+  <div class="pbox">
+   <img class="art" src="{A}img/cover-{L}.jpg" alt="{esc(t['pl_cover'])}" width="600" height="600" loading="lazy">
+   <div class="pl">
+    <p class="pt">{esc(t['pl_title'])}</p><p class="ps" id="plname" aria-live="polite"></p>
+    <div class="pc"><button type="button" class="pbtn" aria-label="{esc(t['pl_play'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path class="picon" d="M7 4l13 8-13 8z" fill="currentColor"/></svg></button>
+     <input type="range" id="plseek" min="0" max="1000" value="0" aria-label="{esc(t['pl_seek'])}"><span id="pltime" class="mono">0:00</span></div>
+   </div>
+  </div>
+  <div class="groups">{playlist(t)}</div>
+  <audio id="plaudio" preload="none"></audio>
+ </div>
+ <div class="mixer">
+  <figure><svg id="hp" viewBox="26 -53 588 419" role="img"></svg>
+  <figcaption id="hpcap" aria-live="polite"></figcaption></figure>
+  <div class="ctl"><span class="lbl" id="vlbl">{esc(t['voice_label'])}</span><div class="seg" id="voices" role="group" aria-labelledby="vlbl">{voices}</div></div>
+  <div class="ctl"><span class="lbl" id="slbl">{esc(t['stage_label'])}</span><div class="seg" id="stages" role="group" aria-labelledby="slbl">{stages}</div></div>
+  <div class="ctl2">
+   <div class="ctl"><span class="lbl" id="klbl">{esc(t['sound_label'])}</span><div class="seg" id="sounds" role="group" aria-labelledby="klbl">{sounds}</div></div>
+   <div class="ctl" id="tempoctl"><span class="lbl" id="tlbl">{esc(t['tempo_label'])}</span><div class="seg" id="tempos" role="group" aria-labelledby="tlbl">{tempos}</div></div>
+  </div>
+  <div class="nowplay"><button type="button" class="pbtn" aria-label="{esc(t['pl_play'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path class="picon" d="M7 4l13 8-13 8z" fill="currentColor"/></svg></button><p class="ps" id="hpname" aria-live="polite"></p></div>
+ </div>
+</section>
+<section id="{I['paket']}"><h2><span class="num">03</span>{esc(t['paket_h'])}</h2>
+ <div class="exrow">
+  <figure class="fan"><div class="pages">
+   {fan_img(A, L, 'cover', 'p0', t['alt_cover'])}
+   {fan_img(A, L, 'page-2', 'p2', t['alt_page2'])}
+   {fan_img(A, L, 'page-1', 'p1', t['alt_page1'])}
+  </div></figure>
+  <div class="dl"><p>{esc(t['dl_p'])}</p><p class="dlb"><a href="{REL}{ZIP_OF[L]}" download>{esc(t['dl_btn'])}</a></p></div>
+ </div>
+ <h3 class="sub">{esc(t['inh_h'])}</h3>
+ <p class="intro">{esc(t['paket_p'])}</p>
+ <div class="tree">{tree}</div>
+</section>
+<section id="{I['rechte']}"><h2><span class="num">04</span>{esc(t['rechte_h'])}</h2>
+ <div class="cols">{rights}</div>
+</section>
+<div class="duo">
+<section id="{I['loslegen']}"><h2><span class="num">05</span>{esc(t['los_h'])}</h2>
+ <ol class="steps">{los}</ol>
+ <p class="dlb"><a href="{A}choir-practice.skill" download>{esc(t['los_dl'])}</a></p>
+</section>
+<section id="{I['lizenz']}"><h2><span class="num">06</span>{esc(t['lic_h'])}</h2>
+ <p class="intro">{'<br>'.join(esc(x) for x in t['lic_p'].split(chr(10)))}</p>
+ <p><a href="{GH}/blob/main/LICENSE">{esc(t['lic_link'])}</a></p>
+</section>
+</div>
+</main>
+<footer><span class="aitag">{ai}<span>{esc(t['ai'])}</span></span><span class="fl"><a href="{PROFILE}" aria-label="{esc(t['foot_profile'])}">{GHICON}<span>vbth</span></a><span>,&nbsp;{esc(t['private'])}</span></span></footer>
+<script>window.PAGE={json.dumps(data, ensure_ascii=False)};</script>
+<script src="{A}js/site.js?v={asset_version()}"></script>
+</body>
+</html>
+'''
+
+CSS = r'''@font-face{font-family:"IBM Plex Sans";font-weight:400;font-style:normal;font-display:swap;src:url(../fonts/IBMPlexSans-Regular.woff2) format("woff2")}
+@font-face{font-family:"IBM Plex Sans";font-weight:700;font-style:normal;font-display:swap;src:url(../fonts/IBMPlexSans-Bold.woff2) format("woff2")}
+@font-face{font-family:"IBM Plex Sans Condensed";font-weight:400;font-style:normal;font-display:swap;src:url(../fonts/IBMPlexSansCondensed-Regular.woff2) format("woff2")}
+:root{--bg:#fff;--fg:#000;--mute:#000;--link:#d9251d;--line:#000;--gut:32px;--max:1152px;--fs:17px;--fs-s:15px;--fs-m:22px;--edge:max(var(--gut),calc((100% - var(--max))/2 + var(--gut)))}
+/* type scale: all running text 17 (lead, descriptions, notes too); one smaller size 15 for labels, captions, controls and the footer; one larger size 22 (h3, quote, folder names); h1, h2 and the key figures are display sizes. Bold only for headings (also the folder names), titles, numerals and the active menu item. No grey. */
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#000;--fg:#fff;--mute:#fff;--line:#fff}}
+:root[data-theme=dark]{--bg:#000;--fg:#fff;--mute:#fff;--line:#fff;color-scheme:dark}:root[data-theme=light]{color-scheme:light}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 var(--fs)/1.55 "IBM Plex Sans",Helvetica,Arial,sans-serif;-webkit-text-size-adjust:100%}
+a{color:var(--link);text-decoration:underline;text-underline-offset:.18em;text-decoration-thickness:1.5px}
+.mono{font-family:"IBM Plex Sans Condensed","IBM Plex Sans",sans-serif}
+.skip{position:absolute;left:-999px}.skip:focus{left:16px;top:8px;background:var(--bg);padding:8px;z-index:20}
+:focus-visible{outline:2px solid var(--fg);outline-offset:3px}
+.bar{position:relative;z-index:10;display:flex;align-items:center;gap:16px;padding:12px var(--edge);background:var(--bg);border-bottom:1.5px solid var(--line)}
+.brand{display:flex;align-items:center;gap:12px;color:var(--fg);text-decoration:none;font-weight:700;font-size:var(--fs-m);letter-spacing:.02em}
+.brand img{display:block;flex:none}.bn{white-space:nowrap}.bt{line-height:1.15}
+.bar nav{margin-left:auto}.bar nav ul{display:flex;gap:0;list-style:none;margin:0;padding:0}
+.bar nav a{display:block;padding:6px 9px;color:var(--fg);text-decoration:none;font-size:var(--fs-s);border-bottom:1.5px solid transparent}
+.navlang{display:none}
+.fl{display:flex;flex-wrap:wrap;align-items:center;gap:0}.fl a{display:flex;align-items:center;gap:8px;color:var(--fg);text-decoration:none}.fl .ghi{width:20px;height:20px}
+.theme{order:98;display:flex;align-items:center;background:none;border:0;color:var(--fg);padding:6px;cursor:pointer;line-height:0}
+.theme svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.theme .sun{display:none}.theme.is-dark .sun{display:block}.theme.is-dark .moon{display:none}
+.lang{order:99;color:var(--fg);text-decoration:none;padding:6px 9px;font-size:var(--fs-s)}.lang:hover{text-decoration:underline;text-underline-offset:.18em}
+.burger{display:none;margin-left:auto;background:none;color:var(--fg);border:1.5px solid var(--line);padding:6px 12px;font:inherit;font-size:var(--fs-s)}
+main{max-width:var(--max);margin:0 auto;padding:0 var(--gut)}
+section{padding:64px 0 56px;border-top:1.5px solid var(--line)}
+section.hero{border-top:0;padding-top:72px;padding-bottom:24px}
+@media (min-width:960px){.duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:64px;border-top:1.5px solid var(--line)}.duo>section{border-top:0}}
+h1{font-size:clamp(34px,5.2vw,64px);line-height:1.05;letter-spacing:-.02em;margin:8px 0 28px;font-weight:700;text-wrap:balance}
+h2{font-size:clamp(28px,4vw,44px);line-height:1.1;margin:0 0 20px;font-weight:700;display:flex;gap:20px;align-items:baseline}
+h2 .num{font-weight:400;font-size:.5em;color:var(--link);min-width:2ch}
+h3{margin:0 0 8px;font-size:var(--fs-m)}
+.lead{margin:0 0 30px}
+.input{margin:0 0 24px;color:var(--mute)}
+.intro{max-width:44em;margin:0 0 28px}
+.cta{display:flex;flex-wrap:wrap;gap:12px 28px;margin:0 0 36px}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:0;border-top:1.5px solid var(--line)}
+.facts div{padding:22px 12px 0 0}.facts dt{font-size:clamp(28px,4vw,44px);font-weight:700;line-height:1}.facts dd{margin:6px 0 0;color:var(--mute);font-size:var(--fs-s)}
+.aitag{display:flex;align-items:center;gap:10px;margin:0}
+.ailabel{height:1.6em;width:auto;flex:none}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .ailabel{filter:invert(1)}}
+:root[data-theme=dark] .ailabel{filter:invert(1)}
+.tree{display:grid;grid-template-columns:repeat(2,1fr);gap:0 32px}
+.folder{border-top:1.5px solid var(--line)}
+.folder button{all:unset;box-sizing:border-box;display:block;width:100%;padding:14px 28px 14px 0;cursor:pointer;position:relative}
+.folder button:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+.folder button::after{content:"+";position:absolute;right:4px;top:12px;font-size:24px;line-height:1}
+.folder button[aria-expanded=true]::after{content:"\2212"}
+.folder .fn{display:block;font-weight:700;font-size:var(--fs-m)}.folder .fd{display:block;color:var(--mute);margin-top:2px}
+.folder ul{list-style:none;margin:0 0 14px;padding:0 0 0 18px;border-left:1.5px solid var(--line)}.folder li{padding:2px 0;overflow-wrap:anywhere}.folder{min-width:0}.folder li{padding:2px 0 2px 10px}
+.note{color:var(--mute);font-size:var(--fs-s);max-width:44em;margin:20px 0 0}
+ul.note{padding-left:18px}
+.chain{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,1fr);gap:0;border-top:1.5px solid var(--line);border-left:1.5px solid var(--line)}
+.chain button{all:unset;box-sizing:border-box;display:flex;flex-direction:column;gap:6px;width:100%;height:100%;min-height:92px;padding:10px;cursor:pointer;border-right:1.5px solid var(--line);border-bottom:1.5px solid var(--line);font-size:var(--fs-s);line-height:1.25}
+.chain .n{font-size:var(--fs-m);font-weight:700}
+.chain button[aria-pressed=true]{background:var(--fg);color:var(--bg)}
+.chain button:focus-visible{outline:2px solid var(--fg);outline-offset:-4px}
+.panel{margin:0 0 20px;border:1.5px solid var(--line);padding:18px 20px;min-height:96px}
+.panel h3{display:flex;gap:12px;align-items:baseline}.panel .gate{margin:10px 0 0;color:var(--mute)}.panel .who{font-weight:400;font-size:var(--fs-s);color:var(--link);letter-spacing:.04em;text-transform:uppercase;font-family:"IBM Plex Sans Condensed",sans-serif}
+.panel p{margin:0}
+.banner{margin:72px 0 0}.banner img{display:block;width:100%;height:auto}
+.exrow{display:grid;grid-template-columns:minmax(0,420px) minmax(0,1fr);gap:32px 64px;align-items:center;margin:0 0 72px}
+h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
+.dl p{margin:0 0 20px;max-width:30em}.dl .dlb{margin:0}.steps+.dlb{margin:24px 0 16px}.dlb a{display:inline-block;border:1.5px solid var(--line);padding:12px 20px;font-weight:400;color:var(--fg);text-decoration:none}.dlb a:hover,.dlb a:focus-visible{background:var(--fg);color:var(--bg)}
+.fan{margin:80px 0 0}.fan{--pw:240px}.fan .pages{position:relative;height:calc(var(--pw)*1.62)}.fan img{position:absolute;bottom:calc(var(--pw)*.13);left:50%;width:var(--pw);height:auto;background:#fff;border:1.5px solid var(--line);transform-origin:50% 100%}
+.fan .p0{transform:translateX(-50%) rotate(-15deg)}.fan .p1{transform:translateX(-50%) rotate(0)}.fan .p2{transform:translateX(-50%) rotate(15deg)}
+
+@media (max-width:900px){.exrow{grid-template-columns:1fr}.fan{max-width:420px}}
+@media (max-width:520px){.fan{--pw:160px}}
+.mixer{display:grid;gap:28px;max-width:760px;margin-top:56px}
+.ctl2{display:flex;flex-wrap:wrap;gap:16px 32px}.ctl2 .ctl{flex:1 1 14em}.ctl2 .ctl[hidden]{display:none}
+.ctl{display:flex;flex-direction:column;gap:6px;align-items:stretch}.lbl{font:400 var(--fs-s)/1.2 "IBM Plex Sans Condensed",sans-serif;color:var(--link);letter-spacing:.04em;text-transform:uppercase}
+.seg{display:flex;flex-wrap:wrap}.seg button{flex:1 1 0;min-width:max-content;font:inherit;font-size:var(--fs-s);background:var(--bg);color:var(--fg);border:1.5px solid var(--line);margin:0 -1.5px -1.5px 0;padding:10px 16px;cursor:pointer}
+.seg button:focus-visible{outline:2px solid var(--fg);outline-offset:-5px;position:relative}
+.seg button[aria-pressed=true]{background:var(--fg);color:var(--bg)}
+.mixer figure{margin:0}
+.listen{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 56px;align-items:start}
+.pbox{display:grid;grid-template-columns:1fr;gap:20px;align-items:start;justify-self:start;width:100%;max-width:26em}
+.listen .art{width:100%;height:auto;display:block;border:1.5px solid var(--line)}
+.pt{margin:0;font-weight:700}.ps{margin:2px 0 12px;color:var(--mute);font-size:var(--fs-s);min-height:1.55em}
+.pc{display:flex;align-items:center;gap:14px}
+.pbtn{flex:none;width:44px;height:44px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg);display:grid;place-items:center;cursor:pointer;padding:0}
+.pbtn:focus-visible,#plseek:focus-visible,.groups summary:focus-visible,.trk button:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+#plseek{flex:1;min-width:0;accent-color:var(--fg);height:24px;cursor:pointer}
+#pltime{flex:none;font-size:var(--fs-s);min-width:3.2em;text-align:right}
+.nowplay{display:flex;align-items:center;gap:14px}.nowplay .ps{margin:0}
+.groups details{border-top:1.5px solid var(--line)}.groups details:last-child{border-bottom:1.5px solid var(--line)}
+.groups summary{list-style:none;cursor:pointer;padding:8px 28px 8px 0;position:relative}.groups summary::-webkit-details-marker{display:none}
+.groups summary::after{content:"+";position:absolute;right:4px;top:4px;font-size:24px;line-height:1.3}.groups details[open] summary::after{content:"\2212"}
+.trk{list-style:none;margin:0 0 10px;padding:0}
+.trk button{all:unset;box-sizing:border-box;display:block;position:relative;width:100%;padding:5px 0;font-size:var(--fs-s);cursor:pointer}
+.trk button[aria-pressed=true]::before{content:"";position:absolute;left:-18px;top:50%;transform:translateY(-50%);width:0;height:0;border-style:solid;border-width:5px 0 5px 9px;border-color:transparent transparent transparent var(--fg)}
+@media (max-width:900px){.listen{grid-template-columns:1fr}}
+#hp{width:100%;height:auto;display:block;max-width:760px;color:var(--fg)}
+#hp text{font-family:"IBM Plex Sans",sans-serif;fill:currentColor}
+.mixer figcaption{max-width:44em;margin:6px 0 0}
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:0 32px}.cols article{border-top:1.5px solid var(--line);padding-top:16px}
+.cols p{margin:0}
+.steps{padding-left:1.4em;max-width:44em}.steps li{margin:0 0 10px}
+footer{max-width:var(--max);margin:0 auto;padding:24px var(--gut) 48px;border-top:1.5px solid var(--line);display:flex;flex-wrap:wrap;gap:12px 32px;align-items:center;justify-content:space-between;font-size:var(--fs-s)}
+@media (max-width:900px){.chain{grid-template-columns:repeat(3,1fr)}.cols{grid-template-columns:1fr;row-gap:16px}.tree{grid-template-columns:1fr}}
+@media (max-width:760px){
+ .facts{grid-template-columns:repeat(2,1fr)}section{padding:48px 0 40px}h2{gap:12px}
+}
+@media (max-width:1100px){
+ .burger{display:block;order:100;margin-left:0}.bar>.lang{display:none}.navlang{display:block;border-top:1.5px solid var(--line);margin-top:4px}
+ .bar nav{display:none;position:absolute;left:0;right:0;top:100%;background:var(--bg);border-bottom:1.5px solid var(--line);margin:0}
+ .bar.open nav{display:block}.bar nav ul{flex-direction:column;gap:0;padding:8px var(--gut)}.bar nav a{padding:12px 0}
+}
+@media (max-width:420px){.chain{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.bar{gap:12px}.brand{font-size:var(--fs);gap:10px}.brand img{width:36px;height:36px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+'''
+
+JS = r'''(function(){
+var D=window.PAGE,$=function(s,r){return (r||document).querySelector(s)},$$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+// menu
+var bar=$('.bar'),bg=$('.burger');
+bg.addEventListener('click',function(){var o=bar.classList.toggle('open');bg.setAttribute('aria-expanded',o)});
+$$('#nav a').forEach(function(a){a.addEventListener('click',function(){bar.classList.remove('open');bg.setAttribute('aria-expanded',false)})});
+if('IntersectionObserver' in window){
+ var links={};$$('#nav a[href^="#"]').forEach(function(a){links[a.getAttribute('href').slice(1)]=a});
+ var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){$$('#nav a').forEach(function(a){a.removeAttribute('aria-current')});var a=links[e.target.id];if(a)a.setAttribute('aria-current','true')}})},{rootMargin:'-45% 0px -50% 0px'});
+ $$('main section').forEach(function(s){io.observe(s)});
+}
+// hero: the sub head wraps at the width of the headline (measured from its lines); on phones it keeps the full width
+function fitLead(){var h=$('.hero h1'),l=$('.hero .lead');if(!h||!l)return;l.style.maxWidth='';if(window.innerWidth<760)return;var r=document.createRange();r.selectNodeContents(h);var a=1e9,z=0;
+ Array.prototype.forEach.call(r.getClientRects(),function(q){if(q.width>1){a=Math.min(a,q.left);z=Math.max(z,q.right)}});if(z>a)l.style.maxWidth=Math.ceil(z-a)+'px'}
+fitLead();if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitLead);window.addEventListener('load',fitLead);
+// light / dark switch: system setting by default, the choice is kept in localStorage
+(function(){var root=document.documentElement,tb=$('.theme'),mq=window.matchMedia('(prefers-color-scheme: dark)');if(!tb)return;
+function dark(){var t=root.getAttribute('data-theme');return t?t==='dark':mq.matches}
+function apply(){var d=dark(),t=root.getAttribute('data-theme'),src=$('.banner picture source');tb.className='theme '+(d?'is-dark':'is-light');tb.setAttribute('aria-label',d?D.theme_to_light:D.theme_to_dark);
+ if(src)src.media=t==='dark'?'all':t==='light'?'not all':'(prefers-color-scheme: dark)'}
+tb.addEventListener('click',function(){var t=dark()?'light':'dark';root.setAttribute('data-theme',t);try{localStorage.setItem('theme',t)}catch(e){}apply()});
+if(mq.addEventListener)mq.addEventListener('change',apply);apply()})();
+// folder tree
+$$('.folder button').forEach(function(b){b.addEventListener('click',function(){var o=b.getAttribute('aria-expanded')==='true';b.setAttribute('aria-expanded',!o);document.getElementById(b.getAttribute('aria-controls')).hidden=o})});
+// workflow chain
+function showStep(i){
+ $$('.chain button').forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-step')==i)});
+ var s=D.steps[i],box=$('#stepbox');box.innerHTML='';
+ var h=document.createElement('h3');h.innerHTML='<span>'+(i+1)+' – '+s[0]+'</span><span class="who">'+D.who[s[1]]+'</span>';
+ var p=document.createElement('p');p.textContent=s[2];box.appendChild(h);box.appendChild(p);
+ if(s[3]){var g=document.createElement('p');g.className='gate';g.textContent=D.gate+': '+s[3];box.appendChild(g)}
+}
+$$('.chain button').forEach(function(b){b.addEventListener('click',function(){showStep(+b.getAttribute('data-step'))})});
+showStep(0);
+// headphone mix
+var NS='http://www.w3.org/2000/svg',svg=$('#hp'),cur={voice:'S',stage:'choir',sound:'choir',tempo:'normal'};
+function el(n,a,t){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);if(t!=null)e.textContent=t;return e}
+function rad(db){return Math.max(15,34+1.33*db)}
+function draw(){
+ while(svg.lastChild)svg.removeChild(svg.lastChild);
+ var sw=1.5,col='currentColor',x0=320,half=250,W=svg.getBoundingClientRect().width||640,FS=Math.round(10*15*588/W)/10;
+ // over-ear headphones seen from the front, line art: steel frame, mesh canopy, telescopic arms, cups with cushions facing in, crown on the right cup
+ var mob=W<600,oy=mob?200:230,ay=mob?338:312,py=mob?388:352;
+ svg.setAttribute('viewBox','26 -53 588 '+(mob?453:419));
+ function ln(d,w){svg.appendChild(el('path',{d:d,fill:'none',stroke:col,'stroke-width':w||sw*2,'stroke-linecap':'round','stroke-linejoin':'round'}))}
+ ln('M47 128 L47 120 A273 165 0 0 1 593 120 L593 128 L581 128 L581 120 A261 147 0 0 0 59 120 L59 128 Z');
+ ln('M47 128 h12 v8 h-12 Z M581 128 h12 v8 h-12 Z',sw*1.5);
+ ln('M30 160 C30 142 40 136 53 136 C66 136 76 142 76 160 L76 286 C76 304 66 310 53 310 C40 310 30 304 30 286 Z');
+ ln('M564 160 C564 142 574 136 587 136 C600 136 610 142 610 160 L610 286 C610 304 600 310 587 310 C574 310 564 304 564 286 Z');
+ ln('M76 156 C88 156 92 164 92 174 L92 272 C92 282 88 290 76 290',sw*1.5);
+ ln('M564 156 C552 156 548 164 548 174 L548 272 C548 282 552 290 564 290',sw*1.5);
+ var list=D.mix[cur.stage][cur.voice],own=[],acc=[];
+ list.forEach(function(e){(e[3]==='acc'?acc:own).push(e)});
+ function pos(e){return x0+e[1]*190}
+ own.forEach(function(e,i){var y=oy;
+  var g=el('g',{});var r=rad(e[2]);
+  g.appendChild(el('circle',{cx:pos(e),cy:y,r:r,fill:'none',stroke:col,'stroke-width':e[0]===cur.voice&&e[2]===0?sw*3:sw*1.5}));
+  g.appendChild(el('text',{x:pos(e),y:y+5,'font-size':FS,'text-anchor':'middle','font-weight':700},e[0]));
+  g.appendChild(el('text',{x:pos(e),y:y+r+(mob?FS*0.95+3:16),'font-size':FS,'text-anchor':'middle'},e[2]+(mob&&i>0?'':' dB')));
+  svg.appendChild(g);});
+ acc.forEach(function(e){var y=ay,r=rad(e[2]);
+  svg.appendChild(el('circle',{cx:pos(e),cy:y,r:r,fill:'none',stroke:col,'stroke-width':sw,'stroke-dasharray':'4 4'}));
+  svg.appendChild(el('text',{x:pos(e),y:y+4,'font-size':FS,'text-anchor':'middle'},e[0]));});
+ if(acc.length){svg.appendChild(el('text',{x:x0,y:py,'font-size':FS,'text-anchor':'middle'},D.acc+' ('+acc[0][2]+' dB)'))}
+ svg.setAttribute('aria-label',D.voices[cur.voice]+', '+D.stages[cur.stage]);   // no <title>: it would show a tooltip on hover
+ $('#hpcap').textContent=D.stage_txt[cur.stage];
+}
+// one state (voice, stage, sound, tempo) drives the headphones, the buttons, the playlist and the audio
+var pl=$('#player'),A=$('#plaudio'),sk=$('#plseek'),tm=$('#pltime'),base=pl.getAttribute('data-audio');
+function slowOk(){return cur.stage==='solo'||cur.stage==='accomp'}
+function isSlow(){return slowOk()&&cur.tempo==='slow'}
+function file(){return cur.stage==='tutti'?'tutti_'+cur.sound:cur.voice.toLowerCase()+'_'+cur.stage+'_'+cur.sound+(isSlow()?'_slow':'')}
+function label(){return (cur.stage==='tutti'?D.stages.tutti:D.voices[cur.voice]+', '+D.stages[cur.stage])+', '+D.sound_names[cur.sound]+(isSlow()?', '+D.slow_name:'')}
+function f(t){t=Math.floor(t||0);return Math.floor(t/60)+':'+('0'+t%60).slice(-2)}
+function ui(){var on=!A.paused;$$('.picon').forEach(function(i){i.setAttribute('d',on?'M6 4h4v16H6zM14 4h4v16h-4z':'M7 4l13 8-13 8z')});$$('.pbtn').forEach(function(b){b.setAttribute('aria-label',pl.getAttribute(on?'data-pause':'data-play'))})}
+function sync(){
+ draw();
+ $$('#voices button').forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-voice')===cur.voice)});
+ $$('#stages button').forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-stage')===cur.stage)});
+ $$('#sounds button').forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-sound')===cur.sound)});
+ $$('#tempos button').forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-tempo')===(slowOk()?cur.tempo:'normal'))});
+ $('#tempoctl').hidden=!slowOk();
+ var k=file();
+ $$('.trk button').forEach(function(b){var st=b.getAttribute('data-stage'),vo=b.getAttribute('data-voice')||cur.voice,sl=b.getAttribute('data-tempo')==='slow';
+  b.setAttribute('aria-pressed',st===cur.stage&&b.getAttribute('data-sound')===cur.sound&&(st==='tutti'||vo===cur.voice)&&sl===isSlow())});
+ $$('.groups details').forEach(function(d){d.open=cur.stage==='tutti'?d.hasAttribute('data-tutti'):d.getAttribute('data-voice')===cur.voice});   // only the group of the chosen voice is open
+ $('#plname').textContent=$('#hpname').textContent=label();
+ var u=base+k+'.mp3';if(A.getAttribute('src')!==u)A.setAttribute('src',u);
+}
+// change the selection; keep the playing position (scaled when the tempo changes), or start the chosen recording when asked
+function change(fn,restart){
+ var was=!A.paused,t=A.currentTime||0,ps=isSlow();fn();var ns=isSlow();sync();
+ if(restart){sk.value=0;tm.textContent='0:00';A.play().catch(function(){});return}
+ if(was){var sc=(ns?1/D.slow:1)/(ps?1/D.slow:1);A.addEventListener('loadedmetadata',function h(){A.removeEventListener('loadedmetadata',h);A.currentTime=Math.min(t*sc,Math.max(0,(A.duration||t*sc)-0.2))});A.play().catch(function(){})}
+ else{sk.value=0;tm.textContent='0:00'}
+}
+$$('#voices button').forEach(function(b){b.addEventListener('click',function(){change(function(){cur.voice=b.getAttribute('data-voice')},A.paused)})});
+$$('#stages button').forEach(function(b){b.addEventListener('click',function(){change(function(){cur.stage=b.getAttribute('data-stage')},A.paused)})});
+$$('#sounds button').forEach(function(b){b.addEventListener('click',function(){change(function(){cur.sound=b.getAttribute('data-sound')},A.paused)})});
+$$('#tempos button').forEach(function(b){b.addEventListener('click',function(){change(function(){cur.tempo=b.getAttribute('data-tempo')},A.paused)})});
+$$('.trk button').forEach(function(b){b.addEventListener('click',function(){change(function(){var v=b.getAttribute('data-voice');if(v)cur.voice=v;cur.stage=b.getAttribute('data-stage');cur.sound=b.getAttribute('data-sound');cur.tempo=b.getAttribute('data-tempo')},true)})});
+$$('.pbtn').forEach(function(b){b.addEventListener('click',function(){if(A.paused){A.play().catch(function(){})}else{A.pause()}})});
+A.addEventListener('play',ui);A.addEventListener('pause',ui);
+A.addEventListener('timeupdate',function(){if(A.duration)sk.value=Math.round(A.currentTime/A.duration*1000);tm.textContent=f(A.currentTime)});
+A.addEventListener('loadedmetadata',function(){tm.textContent=f(A.currentTime)});
+A.addEventListener('ended',function(){ui();sk.value=0});
+sk.addEventListener('input',function(){if(A.duration)A.currentTime=sk.value/1000*A.duration});
+sync();ui();
+window.addEventListener('resize',function(){clearTimeout(window.__rz);window.__rz=setTimeout(function(){draw();fitLead()},150)});
+})();
+'''
+
+def ai_labels():
+    """EU label for the website and the Markdown footers (common.MD_LABEL): copied from the skill assets, plus a white variant for dark mode."""
+    src = open(os.path.join(HERE, '..', 'choir-practice', 'assets', 'eu-ai-generated.svg'), encoding='utf-8').read()
+    open(os.path.join(OUT, 'img', 'ai-generated.svg'), 'w', encoding='utf-8').write(src)
+    dark = src.replace('fill="#000"', 'fill="#TMP"').replace('fill="#fff"', 'fill="#000"').replace('fill="#TMP"', 'fill="#fff"').replace('EU label "AI GENERATED", black', 'EU label "AI GENERATED", white (dark mode)')
+    open(os.path.join(OUT, 'img', 'ai-generated-dark.svg'), 'w', encoding='utf-8').write(dark)
+
+def skill_file():
+    """docs/choir-practice.skill: the skill folder as on main, served by the site itself.
+    Only tracked files, fixed timestamps, no compression, so the bytes are the same on every machine (CI compares docs/)."""
+    root = os.path.join(HERE, '..')
+    files = sorted(subprocess.run(['git', 'ls-files', '-z', 'choir-practice'], cwd=root, capture_output=True, check=True, text=True).stdout.split('\0')[:-1])
+    with zipfile.ZipFile(os.path.join(OUT, 'choir-practice.skill'), 'w', zipfile.ZIP_STORED) as z:
+        for f in files:
+            zi = zipfile.ZipInfo(f, (1980, 1, 1, 0, 0, 0))
+            zi.external_attr = (0o100755 if os.stat(os.path.join(root, f)).st_mode & 0o111 else 0o100644) << 16
+            z.writestr(zi, open(os.path.join(root, f), 'rb').read())
+
+def main():
+    os.makedirs(os.path.join(OUT, 'css'), exist_ok=True); os.makedirs(os.path.join(OUT, 'js'), exist_ok=True); os.makedirs(os.path.join(OUT, 'en'), exist_ok=True)
+    ai_labels()
+    skill_file()
+    open(os.path.join(OUT, 'css', 'site.css'), 'w', encoding='utf-8').write(CSS)
+    open(os.path.join(OUT, 'js', 'site.js'), 'w', encoding='utf-8').write(JS)
+    open(os.path.join(OUT, 'index.html'), 'w', encoding='utf-8').write(ext(page('de')))
+    open(os.path.join(OUT, 'en', 'index.html'), 'w', encoding='utf-8').write(ext(page('en')))
+    alt = ''.join(f'<xhtml:link rel="alternate" hreflang="{h}" href="{u}"/>' for h, u in (('de', SITE), ('en', SITE + 'en/'), ('x-default', SITE)))
+    open(os.path.join(OUT, 'sitemap.xml'), 'w', encoding='utf-8').write(
+        '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
+        + ''.join(f'<url><loc>{u}</loc>{alt}</url>\n' for u in (SITE, SITE + 'en/')) + '</urlset>\n')
+    print('site built')
+
+if __name__ == '__main__': main()

@@ -1,0 +1,52 @@
+name: Checks
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Install
+        run: pip install -q ruff==0.16.9 mido lxml
+      - name: Lint (undefined names, unused code)
+        run: ruff check --select F,E9 choir-practice/scripts site
+      - name: Compile all scripts
+        run: python -m py_compile choir-practice/scripts/*.py site/build_site.py
+      - name: Shell syntax and check mode of setup.sh
+        run: |
+          bash -n choir-practice/scripts/setup.sh
+          bash choir-practice/scripts/setup.sh --check | grep -q 'python state:'
+      - name: Language packs and handoff templates in step
+        run: python choir-practice/scripts/check_templates.py
+      - name: Website is up to date with build_site.py
+        run: |
+          python site/build_site.py
+          test -z "$(git status --porcelain -- docs)" || { git status --short -- docs; echo "docs/ differs from site/build_site.py output – run it and commit"; exit 1; }
+      - name: README copies in the skill folder match (without the header image)
+        run: |
+          for f in README.md README.de.md CHANGELOG.md LICENSE; do
+            python - "$f" <<'EOF'
+          import re, sys
+          f = sys.argv[1]
+          root = re.sub(r'^<p[^>]*>[^\n]*src(?:set)?="docs/img/[^\n]*\n\n?', '', open(f, encoding='utf-8').read(), flags=re.M)
+          skill = open('choir-practice/' + f, encoding='utf-8').read()
+          sys.exit(0 if root == skill else f'{f}: copy in choir-practice/ differs – run release.py or sync it')
+          EOF
+          done
+      - name: No Claude attribution in the commits of this PR
+        if: github.event_name == 'pull_request'
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          bad=$(git log --format='%h %ae %ce%n%B' "$BASE_SHA..$HEAD_SHA" | grep -inE 'noreply@anthropic\.com|^co-authored-by:.*claude|^claude-session:|claude\.ai/code|generated with .?claude' || true)
+          if [ -n "$bad" ]; then echo "Claude attribution found in commits (see CLAUDE.md):"; echo "$bad"; exit 1; fi

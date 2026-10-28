@@ -1,0 +1,20 @@
+version: 2
+updates:
+  # Pinned, tested versions of the skill (setup.sh --stable). Proposals only:
+  # re-test the whole pipeline before merging, then update CHANGELOG.md.
+  - package-ecosystem: pip
+    directory: /choir-practice/scripts
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 2
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+    groups:
+      python-tools:
+        update-types: ["minor", "patch"]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
