@@ -95,7 +95,7 @@ h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 #hp{width:100%;height:auto;display:block;max-width:760px;color:var(--fg)}
 #hp text{font-family:"IBM Plex Sans",sans-serif;fill:currentColor}
 .mixer figcaption{max-width:44em;margin:6px 0 0}
-.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:0 32px}.cols article{border-top:1.5px solid var(--line);padding-top:16px}
+.cols{display:grid;grid-template-columns:repeat(2,1fr);gap:0 32px}.cols article{border-top:1.5px solid var(--line);padding-top:16px}
 .cols p{margin:0}
 .steps{padding-left:1.4em;max-width:44em}.steps li{margin:0 0 10px}
 footer{max-width:var(--max);margin:0 auto;padding:24px var(--gut) 48px;border-top:1.5px solid var(--line);display:flex;flex-wrap:wrap;gap:12px 32px;align-items:center;justify-content:space-between;font-size:var(--fs-s)}

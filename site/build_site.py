@@ -85,7 +85,6 @@ T = {
   'rechte_items': [
    ('Rechte', 'Bevor Noten verarbeitet werden, fragt der Skill nach den Rechten. Die Antwort vermerkt er in der README des Pakets. Lizenzen für Noten müssen eingehalten werden. Der Skill ersetzt keine Rechtsberatung.'),
    ('Kennzeichnung', 'Alles, was der Skill erzeugt, ist als KI-Inhalt gekennzeichnet, sowohl mit dem EU-Label für KI-generierte Inhalte als auch im Text und in den Metadaten der Dokumente.'),
-   ('Grenzen', 'Die Dateien enthalten jeden Ton und jeden Einsatz „mechanisch exakt“, so wie er notiert ist, ohne Interpretation.'),
   ],
   'los_h': 'Loslegen',
   'los_steps': ['choir-practice.skill im Claude-Konto hochladen (Einstellungen).', 'Skill ohne Noten aufrufen und Stopp A beantworten (Rechte und Verwendungszweck).', 'Noten anhängen und Stopp B beantworten (Werkdaten).', 'ZIP am Ende herunterladen und Audio-Dateien an den Chor weitergeben.'],
@@ -155,7 +154,6 @@ T = {
   'rechte_items': [
    ('Rights', 'Before scores are processed, the skill asks about the rights. It records the answer in the pack’s README. The licences of the score must be observed. The skill is not a substitute for legal advice.'),
    ('Labelling', 'Everything the skill creates is labelled as AI content, both with the EU label for AI-generated content and in the text and metadata of the documents.'),
-   ('Limits', 'The files contain every note and every entry “mechanically exact”, just as it is written, without interpretation.'),
   ],
   'los_h': 'Get started',
   'los_steps': ['Upload choir-practice.skill in your Claude account (settings).', 'Call the skill without a score and answer stop A (rights and intended use).', 'Attach the score and answer stop B (work data).', 'Download the ZIP at the end and pass the audio files on to the choir.'],
@@ -447,7 +445,7 @@ h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 #hp{width:100%;height:auto;display:block;max-width:760px;color:var(--fg)}
 #hp text{font-family:"IBM Plex Sans",sans-serif;fill:currentColor}
 .mixer figcaption{max-width:44em;margin:6px 0 0}
-.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:0 32px}.cols article{border-top:1.5px solid var(--line);padding-top:16px}
+.cols{display:grid;grid-template-columns:repeat(2,1fr);gap:0 32px}.cols article{border-top:1.5px solid var(--line);padding-top:16px}
 .cols p{margin:0}
 .steps{padding-left:1.4em;max-width:44em}.steps li{margin:0 0 10px}
 footer{max-width:var(--max);margin:0 auto;padding:24px var(--gut) 48px;border-top:1.5px solid var(--line);display:flex;flex-wrap:wrap;gap:12px 32px;align-items:center;justify-content:space-between;font-size:var(--fs-s)}
