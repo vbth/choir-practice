@@ -6,7 +6,7 @@
 
 **Website mit Beispielpaket und Player:** https://vbth.github.io/choir-practice/
 
-**Beispielpaket (ZIP, aus dem Release):** [Alle meine Entchen](https://github.com/vbth/choir-rehearsal-pack/releases/download/v1.1.0/Chor_Uebungen_Alle_meine_Entchen.zip)
+**Beispielpaket (ZIP, aus dem Release):** [Alle meine Entchen](https://github.com/vbth/choir-practice/releases/download/v1.0.0/Chor_Uebungen_Alle_meine_Entchen.zip)
 
 **Inhalt**
 

@@ -10,7 +10,7 @@ English | [Deutsch](README.de.md)
 
 **Website with example pack and player:** https://vbth.github.io/choir-practice/
 
-**Example pack (ZIP, from the release):** [All My Ducklings](https://github.com/vbth/choir-rehearsal-pack/releases/download/v1.1.0/Choir_Practice_All_My_Ducklings.zip)
+**Example pack (ZIP, from the release):** [All My Ducklings](https://github.com/vbth/choir-practice/releases/download/v1.0.0/Choir_Practice_All_My_Ducklings.zip)
 
 **Contents**
 
