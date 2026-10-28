@@ -83,7 +83,7 @@ T = {
   'pl_cover': 'Albumcover des Beispielpakets',
   'rechte_h': 'Rechte und KI',
   'rechte_items': [
-   ('Rechte', 'Bevor Noten verarbeitet werden, fragt der Skill nach den Rechten. Die Antwort vermerkt er in der README des Pakets. Lizenzen für Noten müssen eingehalten werden. Der Skill ersetzt keine Rechtsberatung.'),
+   ('Rechte', 'Bevor Noten verarbeitet werden, fragt der Skill nach den Rechten. Die Antwort vermerkt er in der README des Pakets. Lizenzen für Noten müssen eingehalten werden.'),
    ('Kennzeichnung', 'Alles, was der Skill erzeugt, ist als KI-Inhalt gekennzeichnet, sowohl mit dem EU-Label für KI-generierte Inhalte als auch im Text und in den Metadaten der Dokumente.'),
   ],
   'los_h': 'Loslegen',
@@ -152,7 +152,7 @@ T = {
   'pl_cover': 'Album cover of the example pack',
   'rechte_h': 'Rights and AI',
   'rechte_items': [
-   ('Rights', 'Before scores are processed, the skill asks about the rights. It records the answer in the pack’s README. The licences of the score must be observed. The skill is not a substitute for legal advice.'),
+   ('Rights', 'Before scores are processed, the skill asks about the rights. It records the answer in the pack’s README. The licences of the score must be observed.'),
    ('Labelling', 'Everything the skill creates is labelled as AI content, both with the EU label for AI-generated content and in the text and metadata of the documents.'),
   ],
   'los_h': 'Get started',
