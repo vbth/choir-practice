@@ -6,7 +6,7 @@ English | [Deutsch](README.de.md)
 
 **Documentation of an agentic AI music workflow and skill developed for and with Claude Code as a private code experiment.**
 
-This is a proof of concept only. In the end, a choir score becomes an “AI-checked” ZIP containing several practice recordings for every voice.
+This is a “proof of concept” only. In the end, a choir score becomes an “AI-checked” ZIP containing several practice recordings for every voice.
 
 **Website with example pack and player:** https://vbth.github.io/choir-practice/
 
