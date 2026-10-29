@@ -68,12 +68,12 @@ T = {
   'html': 'de', 'name': 'choir-practice Skill', 'title': 'choir-practice Skill – Hören, üben, sicher singen.', 'other': ('en/', 'EN'), 'self_prefix': '', 'assets': '',
   'desc': 'Dokumentation eines agentischen KI-Musik-Workflows und -Skills als privates Code-Experiment, entwickelt für und mit Claude Code. Es handelt sich ausschließlich um einen Proof of Concept. Beispiel: choir-practice macht aus Chornoten ein geprüftes ZIP mit MP3 und MIDI zum Üben für jede Stimme.',
   'ids': {'start': 'start', 'ablauf': 'ablauf', 'ueben': 'ueben', 'paket': 'beispiel-zip', 'rechte': 'rechte-und-ki', 'lizenz': 'lizenz'},
-  'menu': [('start', 'Start'), ('ablauf', 'Ablauf'), ('ueben', 'Üben'), ('paket', 'Beispiel-ZIP'), ('rechte', 'Rechte und KI'), ('lizenz', 'Lizenzen')],
+  'menu': [('start', 'Start'), ('ablauf', 'Ablauf'), ('ueben', 'Üben'), ('paket', 'Beispiel-ZIP'), ('rechte', 'Rechte & KI'), ('lizenz', 'Lizenzen')],
   'menu_label': 'Menü', 'skip': 'Zum Inhalt', 'theme_to_dark': 'Zum dunklen Modus wechseln', 'theme_to_light': 'Zum hellen Modus wechseln',
   'h1': 'Hören, üben, sicher singen.',
   'lead': 'Dokumentation eines agentischen KI-Musik-Workflows und -Skills als privates Code-Experiment, entwickelt für und mit Claude Code. Es handelt sich ausschließlich um einen Proof of Concept. Das Beispiel hier: Aus Chornoten entsteht ein geprüftes ZIP, in dem jede Stimme ihre eigenen Aufnahmen zum Üben findet, fertig zum Weitergeben.',
   'cta': 'Beispiel-ZIP ansehen',
-  'ai': 'KI-generiert. Nutzung auf eigene Gefahr.', 'foot_note': 'choir-practice – KI-Musik-Workflow/-Skill für Claude Code.', 'foot_site': 'Startseite',
+  'ai': 'KI-generiert. Nutzung auf eigene Gefahr.', 'foot_note': 'choir-practice – KI-Musik-Workflow/-Skill für Claude.', 'foot_site': 'Startseite',
   'facts': [('4', 'Stufen je Stimme'), ('2', 'Klänge: Chor und Klavier'), ('2', 'Fassungen: normal und langsam'), ('42', 'Aufnahmen im Beispiel')],
   'inh_h': 'Inhalte', 'paket_h': 'Beispiel-ZIP', 'paket_p': 'Im ZIP liegen vier Ordner. Die Stimmen-ZIPs in 2_Ueben sind fertig zum Weitergeben, ihr Inhalt steht zuletzt. Einen Ordner anklicken.',
   'tree': [
@@ -123,7 +123,7 @@ T = {
   'rechte_h': 'Rechte und KI',
   'rechte_items': [
    ('Rechte', 'Bevor Noten verarbeitet werden, fragt der Skill nach den Rechten. Diese Angaben werden in der README-Datei vermerkt. Ob die Noten verarbeitet und weitergegeben werden dürfen, richtet sich nach dem Urheber- und Lizenzrecht.'),
-   ('Kennzeichnung', 'Alles, was der Skill erzeugt, ist als KI-Inhalt gekennzeichnet, sowohl mit dem EU-Label für KI-generierte Inhalte als auch im Text und in den Metadaten der Dokumente.'),
+   ('KI-Kennzeichnung', 'Alles, was der Skill erzeugt, ist als KI-Inhalt gekennzeichnet, sowohl mit dem EU-Label für KI-generierte Inhalte als auch im Text und in den Metadaten der Dokumente.'),
   ],
   'lic_h': 'Lizenzen', 'lic_p': 'PolyForm Noncommercial License 1.0.0,',
   'lic_link': 'Lizenztext lesen', 'lic_third': 'Lizenzen von Drittanbietern,', 'lic_third_link': 'Übersicht lesen', 'foot_profile': 'GitHub-Repository vbth/choir-practice', 'private': 'privates Projekt', 'og_alt': 'Ein Mann mit Kopfhörern steht in einer alten Badewanne und singt vom Notenblatt, neben ihm schwimmt eine Quietscheente, rote Noten schweben im Raum',
@@ -134,12 +134,12 @@ T = {
   'html': 'en', 'name': 'choir-practice Skill', 'title': 'choir-practice Skill – Listen, practise, sing with confidence.', 'other': ('../', 'DE'), 'self_prefix': '../', 'assets': '../',
   'desc': 'Documentation of an agentic AI music workflow and skill as a private code experiment, developed for and with Claude Code. This is a proof of concept only. Example: choir-practice turns a choir score into a checked ZIP with MP3 and MIDI practice files for every voice.',
   'ids': {'start': 'start', 'ablauf': 'workflow', 'ueben': 'practice', 'paket': 'example-zip', 'rechte': 'rights-and-ai', 'lizenz': 'licence'},
-  'menu': [('start', 'Start'), ('ablauf', 'Workflow'), ('ueben', 'Practice'), ('paket', 'Example ZIP'), ('rechte', 'Rights and AI'), ('lizenz', 'Licences')],
+  'menu': [('start', 'Start'), ('ablauf', 'Workflow'), ('ueben', 'Practice'), ('paket', 'Example ZIP'), ('rechte', 'Rights & AI'), ('lizenz', 'Licences')],
   'menu_label': 'Menu', 'skip': 'Skip to content', 'theme_to_dark': 'Switch to dark mode', 'theme_to_light': 'Switch to light mode',
   'h1': 'Listen, practise, sing with confidence.',
   'lead': 'Documentation of an agentic AI music workflow and skill as a private code experiment, developed for and with Claude Code. This is a proof of concept only. The example here: a choir score becomes a checked ZIP in which every voice finds its own recordings to practise with, ready to share.',
   'cta': 'See the example ZIP',
-  'ai': 'AI-generated. Use at your own risk.', 'foot_note': 'choir-practice – AI music workflow/skill for Claude Code.', 'foot_site': 'Home page',
+  'ai': 'AI-generated. Use at your own risk.', 'foot_note': 'choir-practice – AI music workflow/skill for Claude.', 'foot_site': 'Home page',
   'facts': [('4', 'stages per voice'), ('2', 'sounds: choir and piano'), ('2', 'versions: normal and slow'), ('42', 'recordings in the example')],
   'inh_h': 'Contents', 'paket_h': 'Example ZIP', 'paket_p': 'The ZIP holds four folders. The voice ZIPs in 2_Practice are ready to hand out, their contents are listed last. Click a folder.',
   'tree': [
@@ -189,7 +189,7 @@ T = {
   'rechte_h': 'Rights and AI',
   'rechte_items': [
    ('Rights', 'Before scores are processed, the skill asks about the rights. These details are recorded in the README file. Whether the scores may be processed and passed on depends on copyright and licence law.'),
-   ('Labelling', 'Everything the skill creates is labelled as AI content, both with the EU label for AI-generated content and in the text and metadata of the documents.'),
+   ('AI labelling', 'Everything the skill creates is labelled as AI content, both with the EU label for AI-generated content and in the text and metadata of the documents.'),
   ],
   'lic_h': 'Licences', 'lic_p': 'PolyForm Noncommercial License 1.0.0,',
   'lic_link': 'Read the licence text', 'lic_third': 'Licences of third parties,', 'lic_third_link': 'Read the overview', 'foot_profile': 'GitHub repository vbth/choir-practice', 'private': 'private project', 'og_alt': 'A man with headphones stands in an old bathtub and sings from a sheet of music, a rubber duck floats beside him, red notes drift through the room',
@@ -335,7 +335,7 @@ def page(L):
   <audio id="plaudio" preload="none"></audio>
  </div>
  <div class="mixer">
-  <figure><svg id="hp" viewBox="-8 -53 656 419" role="img"></svg>
+  <figure><svg id="hp" viewBox="-32 -53 704 419" role="img"></svg>
   <figcaption id="hpcap" aria-live="polite"></figcaption></figure>
   <div class="ctl"><span class="lbl" id="vlbl">{esc(t['voice_label'])}</span><div class="seg" id="voices" role="group" aria-labelledby="vlbl">{voices}</div></div>
   <div class="ctl"><span class="lbl" id="slbl">{esc(t['stage_label'])}</span><div class="seg" id="stages" role="group" aria-labelledby="slbl">{stages}</div></div>
@@ -536,21 +536,21 @@ function rad(db){return Math.max(15,34+1.33*db)}
 function mob0(W){return W<600}
 function draw(){
  while(svg.lastChild)svg.removeChild(svg.lastChild);
- var sw=1.5,col='currentColor',x0=320,half=250,W=svg.getBoundingClientRect().width||640,FS=Math.round(10*15*656/W)/10,LS=mob0(W)?FS:Math.round(FS*15)/10;
+ var sw=1.5,col='currentColor',x0=320,half=250,GAP=24,VW=656+2*GAP,W=svg.getBoundingClientRect().width||640,FS=Math.round(10*15*VW/W)/10,LS=mob0(W)?FS:Math.round(FS*15)/10;
  // over-ear headphones seen from the front, line art: steel frame, mesh canopy, telescopic arms, cups with cushions facing in, crown on the right cup
  var mob=mob0(W),oy=mob?200:230,ay=mob?338:312,py=mob?388:352;
- svg.setAttribute('viewBox','-8 -53 656 '+(mob?453:419));
- function ln(d,w){svg.appendChild(el('path',{d:d,fill:'none',stroke:col,'stroke-width':w||sw*2,'stroke-linecap':'round','stroke-linejoin':'round'}))}
- ln('M47 128 L47 120 A273 165 0 0 1 593 120 L593 128 L581 128 L581 120 A261 147 0 0 0 59 120 L59 128 Z');
- ln('M47 128 h12 v8 h-12 Z M581 128 h12 v8 h-12 Z',sw*1.5);
- ln('M30 160 C30 142 40 136 53 136 C66 136 76 142 76 160 L76 286 C76 304 66 310 53 310 C40 310 30 304 30 286 Z');
- ln('M564 160 C564 142 574 136 587 136 C600 136 610 142 610 160 L610 286 C610 304 600 310 587 310 C574 310 564 304 564 286 Z');
- ln('M76 156 C88 156 92 164 92 174 L92 272 C92 282 88 290 76 290',sw*1.5);
- ln('M564 156 C552 156 548 164 548 174 L548 272 C548 282 552 290 564 290',sw*1.5);
+ svg.setAttribute('viewBox',(-8-GAP)+' -53 '+VW+' '+(mob?453:419));
+ function ln(d,w,dx){svg.appendChild(el('path',{d:d,fill:'none',stroke:col,'stroke-width':w||sw*2,'stroke-linecap':'round','stroke-linejoin':'round',transform:'translate('+(dx||0)+' 0)'}))}   // dx: shifts a cup outwards
+ ln('M'+(47-GAP)+' 128 L'+(47-GAP)+' 120 A'+(273+GAP)+' 165 0 0 1 '+(593+GAP)+' 120 L'+(593+GAP)+' 128 L'+(581+GAP)+' 128 L'+(581+GAP)+' 120 A'+(261+GAP)+' 147 0 0 0 '+(59-GAP)+' 120 L'+(59-GAP)+' 128 Z');
+ ln('M47 128 h12 v8 h-12 Z',sw*1.5,-GAP);ln('M581 128 h12 v8 h-12 Z',sw*1.5,GAP);
+ ln('M30 160 C30 142 40 136 53 136 C66 136 76 142 76 160 L76 286 C76 304 66 310 53 310 C40 310 30 304 30 286 Z',null,-GAP);
+ ln('M564 160 C564 142 574 136 587 136 C600 136 610 142 610 160 L610 286 C610 304 600 310 587 310 C574 310 564 304 564 286 Z',null,GAP);
+ ln('M76 156 C88 156 92 164 92 174 L92 272 C92 282 88 290 76 290',sw*1.5,-GAP);
+ ln('M564 156 C552 156 548 164 548 174 L548 272 C548 282 552 290 564 290',sw*1.5,GAP);
  // sound waves between cup and ear, travelling inwards, red; only visible while a recording plays (class 'playing' on the svg).
- // The circles never reach further out than x=121 (or 519 on the right), the waves end at x=116 (8 units clear of the cushion at x=92 / 548): a gap of at least 5 units to the circles
+ // The circles never reach further out than x=121 (or 519 on the right); the whole headphones are GAP=24 units wider on each side, so the waves end at x=92 (or 548) and the gap to the circles is at least 29 units
  [0,1,2].forEach(function(i){var x=102+5*i,h=20+10*i,c=x+6;
-  [[x,c],[640-x,640-c]].forEach(function(p){svg.appendChild(el('path',{'class':'wave',d:'M'+p[0]+' '+(223-h)+' Q'+p[1]+' 223 '+p[0]+' '+(223+h),fill:'none',stroke:'var(--link)','stroke-width':sw*1.7,'stroke-linecap':'round',style:'animation-delay:'+(i*0.25)+'s'}))})});
+  [[x-GAP,c-GAP],[640-x+GAP,640-c+GAP]].forEach(function(p){svg.appendChild(el('path',{'class':'wave',d:'M'+p[0]+' '+(223-h)+' Q'+p[1]+' 223 '+p[0]+' '+(223+h),fill:'none',stroke:'var(--link)','stroke-width':sw*1.7,'stroke-linecap':'round',style:'animation-delay:'+(i*0.25)+'s'}))})});
  var list=D.mix[cur.stage][cur.voice],own=[],acc=[];
  list.forEach(function(e){(e[3]==='acc'?acc:own).push(e)});
  function pos(e){return x0+e[1]*(cur.stage==='tutti'?270:190)}   // tutti: circles further apart
