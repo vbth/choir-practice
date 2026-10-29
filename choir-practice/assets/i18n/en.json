@@ -270,10 +270,10 @@
       "tutti_note": "File 6 is the same for all voices and therefore lies in every voice ZIP."
     }
   },
-  "ai_note": "AI-generated. Copyright and licence rights reserved. No warranty.",
-  "ai_note_info": "AI-generated. Copyright and licence rights reserved. No warranty.",
+  "ai_note": "AI-generated. Observe copyright and licence rights. Use at your own risk.",
+  "ai_note_info": "AI-generated. Observe copyright and licence rights. Use at your own risk.",
   "ai_tag": "AI-generated",
-  "ai_meta": "AI-generated. Copyright and licence rights reserved. No warranty.",
+  "ai_meta": "AI-generated. Observe copyright and licence rights. Use at your own risk.",
   "skill_name": "choir-practice",
   "made_with": "Made with the skill \"{name}\".",
   "delivery": {
