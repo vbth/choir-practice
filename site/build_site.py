@@ -87,8 +87,8 @@ T = {
    ('Rechte', 'Bevor Noten verarbeitet werden, fragt der Skill nach den Rechten. Die Angaben des Nutzers vermerkt er in der README des Pakets. Lizenzen für Noten müssen eingehalten werden.'),
    ('Kennzeichnung', 'Alles, was der Skill erzeugt, ist als KI-Inhalt gekennzeichnet, sowohl mit dem EU-Label für KI-generierte Inhalte als auch im Text und in den Metadaten der Dokumente.'),
   ],
-  'lic_h': 'Lizenzen', 'lic_p': 'PolyForm Noncommercial License 1.0.0,\nfrei für nichtkommerzielle Nutzung.',
-  'lic_link': 'Lizenztext lesen', 'lic_third': 'Lizenzen von Drittanbietern müssen beachtet werden.', 'lic_third_link': 'Rechte der Drittanbieter-Lizenzen lesen', 'foot_profile': 'GitHub-Repository vbth/choir-practice', 'foot_note': 'Doku – agentischer KI-Musik-Workflow/-Skill entwickelt für/mit Claude Code', 'private': 'privates Projekt', 'og_alt': 'Ein Mann mit Kopfhörern steht in einer alten Badewanne und singt vom Notenblatt, neben ihm schwimmt eine Quietscheente, rote Noten schweben im Raum',
+  'lic_h': 'Lizenzen', 'lic_p': 'PolyForm Noncommercial License 1.0.0, frei für nichtkommerzielle Nutzung.',
+  'lic_link': 'Lizenztext lesen', 'lic_third': 'Lizenzen von Drittanbietern müssen beachtet werden.', 'lic_third_link': 'Rechte der Drittanbieter-Lizenzen lesen', 'foot_profile': 'GitHub-Repository vbth/choir-practice', 'foot_note': 'choir-practice – KI-Musik-Workflow/-Skill entwickelt für/mit Claude Code', 'private': 'privates Projekt', 'og_alt': 'Ein Mann mit Kopfhörern steht in einer alten Badewanne und singt vom Notenblatt, neben ihm schwimmt eine Quietscheente, rote Noten schweben im Raum',
   'alt_cover': 'Deckblatt des Beispielpakets', 'alt_page1': 'Erste Notenseite des Beispielpakets', 'alt_page2': 'Zweite Notenseite des Beispielpakets', 'alt_ai': 'EU-Label AI',
   'ai_label': 'AI', 'top': 'Nach oben',
  },
@@ -153,8 +153,8 @@ T = {
    ('Rights', 'Before scores are processed, the skill asks about the rights. It records the user’s details in the pack’s README. The licences of the score must be observed.'),
    ('Labelling', 'Everything the skill creates is labelled as AI content, both with the EU label for AI-generated content and in the text and metadata of the documents.'),
   ],
-  'lic_h': 'Licences', 'lic_p': 'PolyForm Noncommercial License 1.0.0,\nfree for non-commercial use.',
-  'lic_link': 'Read the licence text', 'lic_third': 'Licences of third parties must be observed.', 'lic_third_link': 'Read the third-party notices', 'foot_profile': 'GitHub repository vbth/choir-practice', 'foot_note': 'Docs – agentic AI music workflow/skill developed for/with Claude Code', 'private': 'private project', 'og_alt': 'A man with headphones stands in an old bathtub and sings from a sheet of music, a rubber duck floats beside him, red notes drift through the room',
+  'lic_h': 'Licences', 'lic_p': 'PolyForm Noncommercial License 1.0.0, free for non-commercial use.',
+  'lic_link': 'Read the licence text', 'lic_third': 'Licences of third parties must be observed.', 'lic_third_link': 'Read the third-party notices', 'foot_profile': 'GitHub repository vbth/choir-practice', 'foot_note': 'choir-practice – AI music workflow/skill developed for/with Claude Code', 'private': 'private project', 'og_alt': 'A man with headphones stands in an old bathtub and sings from a sheet of music, a rubber duck floats beside him, red notes drift through the room',
   'alt_cover': 'Title page of the example pack', 'alt_page1': 'First score page of the example pack', 'alt_page2': 'Second score page of the example pack', 'alt_ai': 'EU label AI',
   'ai_label': 'AI', 'top': 'Back to top',
  },
@@ -325,8 +325,7 @@ def page(L):
  <div class="cols">{rights}</div>
 </section>
 <section id="{I['lizenz']}"><h2><span class="num">05</span>{esc(t['lic_h'])}</h2>
- <p class="intro">{'<br>'.join(esc(x) for x in t['lic_p'].split(chr(10)))}</p>
- <p><a href="{GH}/blob/main/LICENSE">{esc(t['lic_link'])}</a></p>
+ <p class="intro">{esc(t['lic_p'])} <a href="{GH}/blob/main/LICENSE">{esc(t['lic_link'])}</a></p>
  <p class="intro">{esc(t['lic_third'])} <a href="{GH}/blob/main/choir-practice/THIRD_PARTY_NOTICES.md">{esc(t['lic_third_link'])}</a></p>
 </section>
 </main>
