@@ -363,7 +363,7 @@ def page(L):
  <div class="cols">{rights}</div>
 </section>
 <section id="{I['lizenz']}"><h2><span class="num">05</span>{esc(t['lic_h'])}</h2>
- <p class="intro">{esc(t['lic_p'])} <a href="{GH}/blob/main/LICENSE.md">{esc(t['lic_link'])}</a>, {esc(t['lic_third'])} <a href="{GH}/blob/main/choir-practice/THIRD_PARTY_NOTICES.md">{esc(t['lic_third_link'])}</a></p>
+ <p class="intro wide">{esc(t['lic_p'])} <a href="{GH}/blob/main/LICENSE.md">{esc(t['lic_link'])}</a>, {esc(t['lic_third'])} <a href="{GH}/blob/main/choir-practice/THIRD_PARTY_NOTICES.md">{esc(t['lic_third_link'])}</a></p>
 </section>
 </main>
 <footer><p class="fnote"><span class="fl"><a href="{GH}" aria-label="{esc(t['foot_profile'])}">{GHICON}</a></span><span>{esc(t['foot_note'])}</span></p><span class="aitag">{ai}<span>{YEAR} {esc(t['ai'])}</span></span></footer>
@@ -408,7 +408,7 @@ h2 .num{font-weight:400;font-size:.5em;color:var(--link);min-width:2ch}
 h3{margin:0 0 8px;font-size:var(--fs-m)}
 .lead{margin:0 0 30px}
 .input{margin:0 0 24px;color:var(--mute)}
-.intro{max-width:44em;margin:0 0 28px}
+.intro{max-width:44em;margin:0 0 28px}.intro.wide{max-width:none}
 .cta{display:flex;flex-wrap:wrap;gap:12px 28px;margin:0 0 36px}
 .facts{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:0;border-top:1.5px solid var(--line)}
 .facts div{padding:22px 12px 0 0}.facts dt{font-size:clamp(28px,4vw,44px);font-weight:700;line-height:1}.facts dd{margin:6px 0 0;color:var(--mute);font-size:var(--fs-s)}
