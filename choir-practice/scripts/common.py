@@ -28,20 +28,20 @@ FOOT_PT = 8                      # footer size in pt on every PDF: identical eve
 SEP = '\u00a0·\u00a0'              # one space before and after the middle dot
 
 def footer_parts(lang, iso=None, kind='info'):
-    """Footer as (text before the EU AI label, text after it): [label] + "KI-generiert, Urheber- und Lizenzrechte beachten, ohne Gewähr, YYYY-MM-DD" (no middle dot anywhere)."""
+    """Footer as (text before the EU AI label, text after it): [label] + "KI-generiert. Urheber- und Lizenzrechte vorbehalten. Ohne Gewähr. YYYY-MM-DD" (no middle dot anywhere)."""
     note = load_i18n(lang)['ai_note' if kind == 'score' else 'ai_note_info']   # no middle dot anywhere: comma
-    return '', f'{note}, {human_date(lang, iso)}', kind
+    return '', f'{note} {human_date(lang, iso)}', kind
 
 DASH = '\u2014'   # em dash: the separator of the footer, with a space on both sides
 
 MD_LABEL = 'https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/'   # EU label for Markdown, linked from the repo (black, white in dark mode)
 
 def md_footer(lang, title, iso=None):
-    """Footer line of the Markdown files = the PDF footer: [EU label, linked from the repo] "KI-generiert, Urheber- und Lizenzrechte beachten, ohne Gewähr, YYYY-MM-DD" (no title),
+    """Footer line of the Markdown files = the PDF footer: [EU label, linked from the repo] "KI-generiert. Urheber- und Lizenzrechte vorbehalten. Ohne Gewähr. YYYY-MM-DD" (no title),
     preceded and followed by one blank line (written by make_docs; the repo READMEs end the same way). Label height 18 px, proportional to ICON_H."""
     return (f'<picture><source media="(prefers-color-scheme: dark)" srcset="{MD_LABEL}ai-basic-dark.svg">'
             f'<img src="{MD_LABEL}ai-basic.svg" alt="AI" height="18" align="absmiddle"></picture> '
-            + load_i18n(lang)['ai_meta'] + f', {human_date(lang, iso)}')
+            + load_i18n(lang)['ai_meta'] + f' {human_date(lang, iso)}')
 
 def footer_left(lang, iso=None, kind='info'):
     """Plain-text form of the footer (label left out)."""
@@ -167,11 +167,11 @@ def register_plex():
 
 def rl_footer(c, left_x, right_x, y, size, page, title, lang, iso=None):
     """Footer of every PDF (reportlab), FOOT_PT on every PDF (`size` is ignored), IBM Plex Sans, 100 % black:
-    flush left "[EU label AI GENERATED] KI-generiert, Urheber- und Lizenzrechte beachten, ohne Gewähr, YYYY-MM-DD" (no title), page number flush right (page=None: none, cover page).
+    flush left "[EU label AI GENERATED] KI-generiert. Urheber- und Lizenzrechte vorbehalten. Ohne Gewähr. YYYY-MM-DD" (no title), page number flush right (page=None: none, cover page).
     `title` is accepted for compatibility and not printed."""
     from reportlab.lib.utils import ImageReader
     register_plex()
-    note = load_i18n(lang)['ai_note_info'] + ', ' + human_date(lang, iso)
+    note = load_i18n(lang)['ai_note_info'] + ' ' + human_date(lang, iso)
     def width(f): return icon_width(f, 'info') + f * 0.5 + text_width(note, f, 'PlexR') + (text_width(str(page), f, 'PlexR') + f * 3 if page else 0)
     size = FOOT_PT
     while width(size) > right_x - left_x and size > 6: size -= 0.25
