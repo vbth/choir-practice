@@ -55,11 +55,11 @@ def footer_problems(packs):
     for code, pack in packs.items():
         for k in ('ai_meta', 'ai_note', 'ai_note_info'):
             if '\u00b7' in pack.get(k, ''): out.append(f'language pack {code}: {k} contains a middle dot')
-    for f in ('eu-ai-generated.svg', 'eu-ai-modified.svg'):
+    for f in ('eu-ai-basic.svg', 'eu-ai-generated.svg', 'eu-ai-modified.svg'):
         if not os.path.exists(os.path.join(ASSETS, f)): out.append(f'footer label missing: assets/{f}')
     skill = os.path.join(HERE, '..'); repo = os.path.join(skill, '..')
     if os.path.isdir(os.path.join(repo, 'docs', 'img')):
-        for f in ('ai-generated.svg', 'ai-generated-dark.svg'):
+        for f in ('ai-basic.svg', 'ai-basic-dark.svg'):
             if not os.path.exists(os.path.join(repo, 'docs', 'img', f)): out.append(f'footer label for Markdown missing: docs/img/{f} (linked from {MD_LABEL})')
     for d in (skill, repo):
         for fn, lang in (('README.md', 'en'), ('README.de.md', 'de')):

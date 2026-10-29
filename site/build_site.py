@@ -586,11 +586,14 @@ window.addEventListener('resize',function(){clearTimeout(window.__rz);window.__r
 '''
 
 def ai_labels():
-    """EU label for the website and the Markdown footers (common.MD_LABEL): copied from the skill assets, plus a white variant for dark mode."""
-    src = open(os.path.join(HERE, '..', 'choir-practice', 'assets', 'eu-ai-generated.svg'), encoding='utf-8').read()
-    open(os.path.join(OUT, 'img', 'ai-generated.svg'), 'w', encoding='utf-8').write(src)
-    dark = src.replace('fill="#000"', 'fill="#TMP"').replace('fill="#fff"', 'fill="#000"').replace('fill="#TMP"', 'fill="#fff"').replace('EU label "AI GENERATED", black', 'EU label "AI GENERATED", white (dark mode)')
-    open(os.path.join(OUT, 'img', 'ai-generated-dark.svg'), 'w', encoding='utf-8').write(dark)
+    """EU labels for the website and the Markdown footers (common.MD_LABEL): copied from the skill assets, each plus a white variant for dark mode.
+    ai-generated(.svg|-dark.svg): "AI GENERATED" (website footer); ai-basic: "AI" (Markdown footers)."""
+    for name, asset in (('ai-generated', 'eu-ai-generated.svg'), ('ai-basic', 'eu-ai-basic.svg')):
+        src = open(os.path.join(HERE, '..', 'choir-practice', 'assets', asset), encoding='utf-8').read()
+        open(os.path.join(OUT, 'img', name + '.svg'), 'w', encoding='utf-8').write(src)
+        dark = src.replace('fill="#000"', 'fill="#TMP"').replace('fill="#fff"', 'fill="#000"').replace('fill="#TMP"', 'fill="#fff"')
+        dark = re.sub(r'(", )black', r'\1white (dark mode)', dark, count=1)
+        open(os.path.join(OUT, 'img', name + '-dark.svg'), 'w', encoding='utf-8').write(dark)
 
 def skill_file():
     """docs/choir-practice.skill: the skill folder as on main, served by the site itself.

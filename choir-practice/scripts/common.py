@@ -38,9 +38,9 @@ MD_LABEL = 'https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/
 
 def md_footer(lang, title, iso=None):
     """Footer line of the Markdown files = the PDF footer: [EU label, linked from the repo] "KI-generiert, ohne Gewähr, DD.MM.YYYY" (no title),
-    preceded and followed by one blank line (written by make_docs; the repo READMEs end the same way). Label height 30 px = 1.923 × 16 px text, see ICON_H."""
-    return (f'<picture><source media="(prefers-color-scheme: dark)" srcset="{MD_LABEL}ai-generated-dark.svg">'
-            f'<img src="{MD_LABEL}ai-generated.svg" alt="AI GENERATED" height="18" align="absmiddle"></picture> '
+    preceded and followed by one blank line (written by make_docs; the repo READMEs end the same way). Label height 14 px, proportional to ICON_H."""
+    return (f'<picture><source media="(prefers-color-scheme: dark)" srcset="{MD_LABEL}ai-basic-dark.svg">'
+            f'<img src="{MD_LABEL}ai-basic.svg" alt="AI" height="14" align="absmiddle"></picture> '
             + load_i18n(lang)['ai_meta'] + f', {human_date(lang, iso)}')
 
 def footer_left(lang, iso=None, kind='info'):
@@ -49,16 +49,16 @@ def footer_left(lang, iso=None, kind='info'):
     return pre + note
 
 def icon_path(kind):
-    """EU label for the footer: the score (human source transcribed/corrected with AI) = AI MODIFIED, all info PDFs = AI GENERATED."""
-    return os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'assets', 'eu-ai-modified.svg' if kind == 'score' else 'eu-ai-generated.svg')
+    """EU label for every PDF footer: the basic label "AI" (no GENERATED / MODIFIED). The album art keeps "AI GENERATED" (make_cover.py)."""
+    return os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'assets', 'eu-ai-basic.svg')
 # Footer rules (PDF and Markdown, checked by check_templates.py):
 #   [EU label] <ai_note_info>, <date>  - one line, flush left, no title, no middle dot; page number flush right where there is one
-#   size FOOT_PT on every PDF; the label is sized so that the capitals of its word (GENERATED / MODIFIED) are as high as the capitals
+#   size FOOT_PT on every PDF; the label is sized so that the capitals of its letters (AI) are as high as the capitals
 #   of the text and stand on the same baseline; Markdown: one blank line, md_footer(), one blank line (label linked from the repo)
 PLEX_CAP = 0.698         # cap height of IBM Plex Sans in em
-LABEL_WORD_CAP = 97 / 267.13   # cap height of the word in the EU label, in label heights (both label files)
-ICON_H = round(PLEX_CAP / LABEL_WORD_CAP, 3)   # label height in font sizes (1.922)
-ICON_BASE = 0.682   # baseline of that word, from the top of the label, in label heights: label and text share one baseline
+LABEL_WORD_CAP = 128.5 / 267.13   # cap height of the letters AI in the label, in label heights
+ICON_H = round(PLEX_CAP / LABEL_WORD_CAP, 3)   # label height in font sizes (1.451)
+ICON_BASE = 0.7375   # baseline of the letters, from the top of the label, in label heights: label and text share one baseline
 
 def _icon_vb(kind):
     import re
