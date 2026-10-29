@@ -6,6 +6,7 @@
 1. Text, layout, CSS or JS: edit [`site/build_site.py`](build_site.py), then run `python3 site/build_site.py`.
 2. Score templates changed (cover, header line, footer): run `python3 site/make_previews.py`, then [`site/build_site.py`](build_site.py). It renders the example previews from the release packages (`ZIPS` in [`build_site.py`](build_site.py)) with the current templates: greyscale PNG, rendered straight from the PDF in five widths (160, 240, 320, 480, 720 px) for `srcset`, so the staff lines stay black and sharp at 1x, 2x and 3x (retina optimised; never shrink a big image).
 2b. Example recordings changed (new example pack): `python3 site/make_web_audio.py <English example ZIP>` writes the 42 MP3s in `docs/audio/` (one set for both languages; needs ffmpeg).
+2c. After 2b: `python3 site/make_wave_timeline.py` writes `docs/audio/waves.json` (note onsets per recording for the pulsing sound waves at the headphones; needs ffmpeg and numpy), then `python3 site/build_site.py`.
 3. Header image changed: see [`site/header/README.md`](header/README.md).
 4. Always: `node site/render_test.js <out_dir>` (both languages, mobile 390, tablet portrait 820, tablet landscape 1180, desktop 1440). It must report `ok` everywhere; look at the screenshots.
 5. Commit `site/` and [`docs/`](../docs/) together.
