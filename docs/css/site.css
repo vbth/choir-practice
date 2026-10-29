@@ -97,7 +97,7 @@ h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 .mixer figcaption{max-width:44em;margin:6px auto 0;text-align:center}
 #hp .wave{opacity:0}#hp.playing .wave{animation:wave 1.4s ease-out infinite}
 @keyframes wave{0%{opacity:0}25%{opacity:1}100%{opacity:0}}
-#hp.live.playing .wave{animation:none}   /* opacity then comes from the script (level of the recording) */
+#hp.live.playing .wave{animation:none}   /* opacity then comes from the script (note onsets of the recording, audio/waves.json) */
 @media (prefers-reduced-motion:reduce){#hp.playing .wave{animation:none;opacity:1}}
 .cols{display:grid;grid-template-columns:repeat(2,1fr);gap:0 32px}.cols article{border-top:1.5px solid var(--line);padding-top:16px}
 .cols p{margin:0}

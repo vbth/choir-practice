@@ -472,7 +472,7 @@ h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 .mixer figcaption{max-width:44em;margin:6px auto 0;text-align:center}
 #hp .wave{opacity:0}#hp.playing .wave{animation:wave 1.4s ease-out infinite}
 @keyframes wave{0%{opacity:0}25%{opacity:1}100%{opacity:0}}
-#hp.live.playing .wave{animation:none}   /* opacity then comes from the script (level of the recording) */
+#hp.live.playing .wave{animation:none}   /* opacity then comes from the script (note onsets of the recording, audio/waves.json) */
 @media (prefers-reduced-motion:reduce){#hp.playing .wave{animation:none;opacity:1}}
 .cols{display:grid;grid-template-columns:repeat(2,1fr);gap:0 32px}.cols article{border-top:1.5px solid var(--line);padding-top:16px}
 .cols p{margin:0}
@@ -604,40 +604,26 @@ $$('#tempos button').forEach(function(b){b.addEventListener('click',function(){c
 $$('.trk button').forEach(function(b){b.addEventListener('click',function(){change(function(){var v=b.getAttribute('data-voice');if(v)cur.voice=v;cur.stage=b.getAttribute('data-stage');cur.sound=b.getAttribute('data-sound');cur.tempo=b.getAttribute('data-tempo')},true)})});
 $$('.pbtn').forEach(function(b){b.addEventListener('click',function(){if(A.paused){A.play().catch(function(){})}else{A.pause()}})});
 A.addEventListener('play',ui);A.addEventListener('pause',ui);
-// sound waves pulse with the rhythm of the recording: Web Audio analyser on the audio element; every note onset (level jumps more than 2.5 dB above its slow average) switches the three arcs per side on, they then go off again from the outside in; while it sounds the inner arc stays on (always full red, no fading).
-// Onset rate on the example recordings: 2 to 4 per second. Without Web Audio, with reduced motion or if the context cannot run, the fixed animation stays
-var live=null;
-function startLive(){
- if(live!==null||(window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches))return;
- live=false;
- var AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;
- try{
-  var cx=new AC();
-  var build=function(){
-   if(cx.state!=='running'){try{cx.close()}catch(e){}return}   // an element routed into a suspended context would be silent
-   var an=cx.createAnalyser();an.fftSize=1024;var sr=cx.createMediaElementSource(A);sr.connect(an);an.connect(cx.destination);
-   live={cx:cx,an:an,buf:new Uint8Array(an.fftSize),slow:null,pulse:0,last:0,t:0,raf:0,on:[false,false,false]};svg.classList.add('live');if(!A.paused)loop()};
-  if(cx.state==='running')build();else cx.resume().then(build,function(){})
- }catch(e){}
-}
-function stopLoop(){if(live&&live.raf){cancelAnimationFrame(live.raf);live.raf=0}if(live){live.on=[false,false,false];live.slow=null;live.pulse=0}$$('#hp .wave').forEach(function(w){w.style.opacity=''})}
-function loop(now){
- if(!live||A.paused){stopLoop();return}
- now=now||performance.now();
- var b=live.buf,q=0,i;live.an.getByteTimeDomainData(b);for(i=0;i<b.length;i++){var x=(b[i]-128)/128;q+=x*x}
- var db=20*Math.log10(Math.sqrt(q/b.length)+1e-6),dt=Math.min(100,live.t?now-live.t:16);live.t=now;
- if(live.slow===null)live.slow=db;
- var flux=db-live.slow;   // jump above the slow average = note onset
- if(flux>2.5&&db>-45&&now-live.last>110){live.pulse=Math.min(1,0.55+flux/10);live.last=now}
- live.pulse*=Math.pow(0.92,dt*0.06);live.slow+=(1-Math.pow(0.95,dt*0.06))*(db-live.slow);   // per 60 Hz frame: pulse x0.92, average 5 %
- var v=Math.max(live.pulse,db>-25?0.35:0);   // inner arc stays on while it sounds
- for(i=0;i<3;i++){var th=0.25*(i+1);if(live.on[i]?v<th-0.04:v>th+0.04)live.on[i]=!live.on[i]}   // thresholds 0.25 / 0.5 / 0.75 with hysteresis against flicker
- for(i=1;i<3;i++)if(!live.on[i-1])live.on[i]=false;   // an outer arc is only on while the inner one is
- var ws=svg.querySelectorAll('.wave');for(i=0;i<ws.length;i++)ws[i].style.opacity=live.on[Math.floor(i/2)]?1:0;   // order of creation: both sides of arc 0, then arc 1, arc 2
- live.raf=requestAnimationFrame(loop)}
-document.addEventListener('click',function(e){if(e.target.closest&&e.target.closest('button'))startLive()},true);   // created inside a click, so the context may run
-A.addEventListener('play',function(){if(live&&!live.raf){if(live.cx.state==='suspended')live.cx.resume();loop()}});
-A.addEventListener('pause',stopLoop);A.addEventListener('ended',stopLoop);
+// sound waves pulse with the rhythm of the recording. audio/waves.json (site/make_wave_timeline.py) holds per recording the note onsets [ms, strength 0..100] and a loudness flag every 50 ms;
+// the arcs follow A.currentTime: every onset switches the three arcs per side on, they go off again from the outside in (x0.92 per 60 Hz frame, thresholds 0.25 / 0.5 / 0.75 with hysteresis),
+// while it is loud the inner arc stays on. Always full red, no fading. No Web Audio needed. Without the data or with reduced motion the fixed animation stays
+var WV=null,wvRaf=0,wvOn=[false,false,false];
+function wvStop(){if(wvRaf){cancelAnimationFrame(wvRaf);wvRaf=0}wvOn=[false,false,false];svg.classList.remove('live');$$('#hp .wave').forEach(function(w){w.style.opacity=''})}
+function wvTick(){
+ var d=WV&&WV[file()];if(!d||A.paused){wvStop();return}
+ var ms=A.currentTime*1000,o=d.o,lo=0,hi=o.length/2-1,k=-1,i;
+ while(lo<=hi){var m=(lo+hi)>>1;if(o[2*m]<=ms){k=m;lo=m+1}else hi=m-1}   // last onset at or before now
+ var v=Math.max(k<0?0:o[2*k+1]/100*Math.pow(0.92,(ms-o[2*k])*0.06),d.l.charAt(Math.floor(ms/50))==='1'?0.35:0);
+ for(i=0;i<3;i++){var th=0.25*(i+1);if(wvOn[i]?v<th-0.04:v>th+0.04)wvOn[i]=!wvOn[i]}
+ for(i=1;i<3;i++)if(!wvOn[i-1])wvOn[i]=false;   // an outer arc is only on while the inner one is
+ var ws=svg.querySelectorAll('.wave');for(i=0;i<ws.length;i++)ws[i].style.opacity=wvOn[Math.floor(i/2)]?1:0;   // order of creation: both sides of arc 0, then arc 1, arc 2
+ wvRaf=requestAnimationFrame(wvTick)}
+function wvStart(){if(!wvRaf&&WV&&WV[file()]){svg.classList.add('live');wvTick()}}
+A.addEventListener('play',function(){
+ if(window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+ if(WV===null){WV=false;fetch(base+'waves.json').then(function(r){return r.json()}).then(function(j){WV=j;if(!A.paused)wvStart()}).catch(function(){})}
+ else wvStart()});
+A.addEventListener('pause',wvStop);A.addEventListener('ended',wvStop);
 A.addEventListener('timeupdate',function(){if(A.duration)sk.value=Math.round(A.currentTime/A.duration*1000);tm.textContent=f(A.currentTime)});
 A.addEventListener('loadedmetadata',function(){tm.textContent=f(A.currentTime)});
 A.addEventListener('ended',function(){ui();sk.value=0});
