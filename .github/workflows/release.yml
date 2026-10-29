@@ -15,13 +15,16 @@ jobs:
         run: |
           V="${GITHUB_REF_NAME#v}"
           zip -qr choir-practice.skill choir-practice -x '*/__pycache__/*'
+          # fonts are a system dependency (apt fonts-ibm-plex), not in git; the zip is the fallback for setup.sh without apt
+          sudo apt-get install -y -q fonts-ibm-plex >/dev/null
+          zip -qj choir-practice-fonts.zip /usr/share/fonts/truetype/ibm-plex/IBMPlexSans{,Condensed}-{Regular,Bold,Italic}.ttf choir-practice/assets/fonts/OFL-IBMPlexSans.txt
           awk -v v="$V" '$0 ~ "^## "v" " {p=1; next} /^## / {p=0} p' CHANGELOG.md > notes.md
       - name: Create GitHub release (or add the file to a release created in the web interface)
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
-            gh release upload "$GITHUB_REF_NAME" choir-practice.skill --clobber
+            gh release upload "$GITHUB_REF_NAME" choir-practice.skill choir-practice-fonts.zip --clobber
           else
-            gh release create "$GITHUB_REF_NAME" choir-practice.skill --title "$GITHUB_REF_NAME" --notes-file notes.md
+            gh release create "$GITHUB_REF_NAME" choir-practice.skill choir-practice-fonts.zip --title "$GITHUB_REF_NAME" --notes-file notes.md
           fi

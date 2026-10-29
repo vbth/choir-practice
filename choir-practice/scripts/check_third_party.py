@@ -4,7 +4,7 @@
 Usage: check_third_party.py [--brief]
 
 Reads three sources and compares them with THIRD_PARTY_NOTICES.md (next to the scripts folder):
-  bundled   files in assets/ (fonts, EU label SVGs) and, in the repository, the website fonts and label copies in docs/
+  bundled   files in assets/ (font licence text, EU label SVGs) and, in the repository, the website fonts and label copies in docs/
   run time  pip packages of requirements-stable.txt and apt packages of setup.sh (installed after the skill is installed)
 Exit 1 when a component is missing from the notices; entries marked "to check" are listed as a warning (exit 0).
 It checks that the notices are complete, not that the licences are right: it gives no legal advice.
@@ -21,7 +21,7 @@ low = text.lower()
 ALIAS = {'verovio': 'verovio', 'cairosvg': 'cairosvg', 'lxml': 'lxml', 'pypdf': 'pypdf', 'mido': 'mido', 'reportlab': 'reportlab',
          'pillow': 'pillow', 'numpy': 'numpy', 'scipy': 'scipy',
          'fluidsynth': 'fluidsynth', 'fluid-soundfont-gm': 'fluidr3', 'ffmpeg': 'ffmpeg', 'poppler-utils': 'poppler',
-         'fonts-dejavu-core': 'dejavu', 'musescore-general-soundfont': 'musescore general'}
+         'fonts-dejavu-core': 'dejavu', 'fonts-ibm-plex': 'fonts-ibm-plex', 'musescore-general-soundfont': 'musescore general'}
 
 pip = [l.split('#')[0].strip().partition('==')[0] for l in open(os.path.join(HERE, 'requirements-stable.txt'), encoding='utf-8')]
 pip = [p for p in pip if p]

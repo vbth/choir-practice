@@ -170,19 +170,23 @@ def derive_playback(spec):
     return out
 
 
-FONT_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'assets', 'fonts')
+PLEX_FILES = ('IBMPlexSans-Regular.ttf', 'IBMPlexSans-Bold.ttf', 'IBMPlexSans-Italic.ttf', 'IBMPlexSansCondensed-Regular.ttf', 'IBMPlexSansCondensed-Bold.ttf', 'IBMPlexSansCondensed-Italic.ttf')
+PLEX_DIRS = ('/usr/share/fonts/truetype/ibm-plex', '~/.fonts/ibm-plex')   # apt package fonts-ibm-plex, or the fonts zip of the release (setup.sh)
+
+def plex_dir():
+    """Folder with the six IBM Plex Sans TTFs (system dependency, installed by setup.sh); both folders are scanned by fontconfig, so cairosvg finds them too."""
+    for d in PLEX_DIRS:
+        d = os.path.expanduser(d)
+        if all(os.path.exists(os.path.join(d, fn)) for fn in PLEX_FILES): return d
+    raise RuntimeError('IBM Plex Sans is not installed – run scripts/setup.sh (apt package fonts-ibm-plex or the fonts zip of the release)')
 
 def register_plex():
-    """IBM Plex Sans (SIL OFL, assets/fonts) for reportlab (PlexR / PlexB / PlexI) and, via ~/.fonts, for cairosvg/fontconfig."""
-    import shutil, subprocess
+    """IBM Plex Sans (SIL OFL, system font) for reportlab (PlexR / PlexB / PlexI)."""
     from reportlab.pdfbase import pdfmetrics
     from reportlab.pdfbase.ttfonts import TTFont
-    ud = os.path.expanduser('~/.fonts'); os.makedirs(ud, exist_ok=True); new = False
-    for fn in ('IBMPlexSans-Regular.ttf', 'IBMPlexSans-Bold.ttf', 'IBMPlexSans-Italic.ttf', 'IBMPlexSansCondensed-Regular.ttf', 'IBMPlexSansCondensed-Bold.ttf', 'IBMPlexSansCondensed-Italic.ttf'):
-        if not os.path.exists(os.path.join(ud, fn)): shutil.copy(os.path.join(FONT_DIR, fn), ud); new = True
-    if new: subprocess.run(['fc-cache', '-f'], check=False, capture_output=True)
+    d = plex_dir()
     for nm, fn in (('PlexR', 'IBMPlexSans-Regular.ttf'), ('PlexB', 'IBMPlexSans-Bold.ttf'), ('PlexI', 'IBMPlexSans-Italic.ttf')):
-        if nm not in pdfmetrics.getRegisteredFontNames(): pdfmetrics.registerFont(TTFont(nm, os.path.join(FONT_DIR, fn)))
+        if nm not in pdfmetrics.getRegisteredFontNames(): pdfmetrics.registerFont(TTFont(nm, os.path.join(d, fn)))
 
 def rl_footer(c, left_x, right_x, y, size, page, title, lang, iso=None):
     """Footer of every PDF (reportlab), FOOT_PT on every PDF (`size` is ignored), IBM Plex Sans, 100 % black:
