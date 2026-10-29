@@ -329,7 +329,7 @@ def page(L):
  <p class="intro">{esc(t['lic_p'])} <a href="{GH}/blob/main/LICENSE">{esc(t['lic_link'])}</a></p>
 </section>
 </main>
-<footer><span class="aitag">{ai}<span>{esc(t['ai'])}, {YEAR}</span></span><p class="fnote"><span class="fl"><a href="{GH}" aria-label="{esc(t['foot_profile'])}">{GHICON}</a></span><span>{esc(t['foot_note'])}</span></p></footer>
+<footer><p class="fnote"><span class="fl"><a href="{GH}" aria-label="{esc(t['foot_profile'])}">{GHICON}</a></span><span>{esc(t['foot_note'])}</span></p><span class="aitag">{ai}<span>{esc(t['ai'])}, {YEAR}</span></span></footer>
 <script>window.PAGE={json.dumps(data, ensure_ascii=False)};</script>
 <script src="{A}js/site.js?v={asset_version()}"></script>
 </body>
