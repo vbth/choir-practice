@@ -2,7 +2,7 @@
 
 [English](README.md) | Deutsch
 
-**choir-practice ist ein praktischer Claude-Skill, der dir viel Zeit spart:** Aus deinen Chornoten entsteht ein geprüftes ZIP, in dem jede Stimme ihre eigenen Aufnahmen zum Üben findet, fertig zum Weitergeben.
+**Dokumentation agentischer KI-Musik-Workflows und Skills, entwickelt für und mit Claude Code.** Das Beispiel hier, choir-practice, macht aus Chornoten ein geprüftes ZIP, in dem jede Stimme ihre eigenen Aufnahmen zum Üben findet, fertig zum Weitergeben.
 
 **Website mit Beispielpaket und Player:** https://vbth.github.io/choir-practice/
 

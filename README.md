@@ -6,7 +6,7 @@
 
 English | [Deutsch](README.de.md)
 
-**choir-practice is a practical Claude skill that saves you a lot of time:** your choir score becomes a checked ZIP in which every voice finds its own recordings to practise with, ready to share.
+**Documentation of agentic AI music workflows and skills, developed for and with Claude Code.** The example here, choir-practice, turns a choir score into a checked ZIP in which every voice finds its own recordings to practise with, ready to share.
 
 **Website with example pack and player:** https://vbth.github.io/choir-practice/
 
