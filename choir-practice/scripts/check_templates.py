@@ -7,7 +7,7 @@
 * every language has a session handoff template in assets/templates (session_handoff.<lang>.md) with the same {{tokens}} and the same
   number of sections as the English one
 * footer rules (see common.py): the AI note texts have no middle dot, the label files exist, and the READMEs (skill folder and repo root)
-  end with a blank line, md_footer() and a blank line in their language
+  end with a blank line, md_project(), a blank line, md_footer() and a blank line in their language
 Used by make_layout.py (self-check) and runnable on its own."""
 import os, re, sys, json, glob
 
@@ -50,7 +50,7 @@ def problems():
     return out
 
 def footer_problems(packs):
-    sys.path.insert(0, HERE); from common import md_footer, MD_LABEL
+    sys.path.insert(0, HERE); from common import md_footer, md_project, MD_LABEL
     out = []
     for code, pack in packs.items():
         for k in ('ai_meta', 'ai_note', 'ai_note_info'):
@@ -69,6 +69,8 @@ def footer_problems(packs):
             iso = None if not date else date.group(1)
             if not m or not iso or m.group(1) != md_footer(lang, '', iso):
                 out.append(f'{os.path.relpath(p, repo)}: last line is not the footer (blank line, common.md_footer("{lang}"))')
+            elif not t.rstrip('\n').endswith(md_project(lang) + '\n\n' + m.group(1)):
+                out.append(f'{os.path.relpath(p, repo)}: the line above the footer is not the project line (common.md_project("{lang}"))')
     return out
 
 if __name__ == '__main__':

@@ -43,6 +43,17 @@ def md_footer(lang, title, iso=None):
             f'<img src="{MD_LABEL}ai-basic.svg" alt="AI" height="18" align="absmiddle"></picture> '
             + load_i18n(lang)['ai_meta'] + f' {human_date(lang, iso)}')
 
+REPO_URL = 'https://github.com/vbth/choir-practice'   # the GitHub mark in the project line links here
+
+def md_project(lang):
+    """Project line of the Markdown files, one paragraph above the AI footer: [GitHub mark, linked to the repo] "choir-practice – Proof of Concept: ..."."""
+    return (f'<a href="{REPO_URL}"><picture><source media="(prefers-color-scheme: dark)" srcset="{MD_LABEL}github-mark-dark.svg">'
+            f'<img src="{MD_LABEL}github-mark.svg" alt="GitHub" height="18" align="absmiddle"></picture></a> ' + load_i18n(lang)['proj_note'])
+
+def md_block(lang, title, iso=None):
+    """Last two paragraphs of every Markdown file: project line, blank line, AI footer (md_footer)."""
+    return md_project(lang) + '\n\n' + md_footer(lang, title, iso)
+
 def footer_left(lang, iso=None, kind='info'):
     """Plain-text form of the footer (label left out)."""
     pre, note, _ = footer_parts(lang, iso, kind)
@@ -77,6 +88,13 @@ def icon_markup(x, y_baseline, font_size, kind='info'):
     raw, vb = _icon_vb(kind); inner = re.search(r'<svg[^>]*>(.*)</svg>', raw, re.S).group(1)
     h = font_size * ICON_H; k = h / vb[3]
     return f'<g transform="translate({x:.2f},{y_baseline - h * ICON_BASE:.2f}) scale({k:.5f}) translate({-vb[0]},{-vb[1]})">{inner}</g>'
+
+def gh_icon_markup(x, y_baseline, font_size, col_w):
+    """GitHub mark as SVG group, 1.3 × font size high, centred in a column of width col_w (the width of the AI label below it), linked to the repo."""
+    import re
+    raw = open(os.path.join(os.path.dirname(icon_path('info')), 'github-mark.svg'), encoding='utf-8').read()
+    inner = re.search(r'<svg[^>]*>(.*)</svg>', raw, re.S).group(1); h = font_size * 1.3; k = h / 16
+    return (f'<a href="{REPO_URL}"><g transform="translate({x + (col_w - h) / 2:.2f},{y_baseline - h * 0.82:.2f}) scale({k:.5f})">{inner}</g></a>')
 
 def icon_png(font_size, px_h=200, kind='info'):
     import cairosvg
@@ -182,3 +200,11 @@ def rl_footer(c, left_x, right_x, y, size, page, title, lang, iso=None):
         h = size * ICON_H; wd = icon_width(size, 'info'); c.drawImage(ImageReader(io.BytesIO(png)), x, y - h * (1 - ICON_BASE), wd, h, mask='auto'); x += wd + size * 0.5
     c.drawString(x, y, note)
     if page: c.drawRightString(right_x, y, str(page))
+    # project line one line above: [GitHub mark, linked to the repo] choir-practice – Proof of Concept: ...; the text starts in the same column as the AI note
+    py = y + size * 1.9; col = icon_width(size, 'info'); pn = load_i18n(lang)['proj_note']
+    gh = ImageReader(io.BytesIO(__import__('cairosvg').svg2png(url=os.path.join(os.path.dirname(icon_path('info')), 'github-mark.svg'), output_height=200)))
+    g = size * 1.3; c.drawImage(gh, left_x + (col - g) / 2, py - g * 0.18, g, g, mask='auto')
+    c.linkURL(REPO_URL, (left_x, py - g * 0.18, left_x + col, py + g * 0.82), relative=0)
+    ps = size
+    while col + ps * 0.5 + text_width(pn, ps, 'PlexR') > right_x - left_x and ps > 6: ps -= 0.25   # long line: shrink instead of running off the page
+    c.setFont('PlexR', ps); c.drawString(left_x + col + size * 0.5, py, pn)

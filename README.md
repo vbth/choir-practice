@@ -151,5 +151,7 @@ PolyForm Noncommercial License 1.0.0 ([`LICENSE`](LICENSE)), free for non-commer
 - Dependabot (`.github/dependabot.yml`) proposes updates monthly: for the pinned package versions in `scripts/requirements-stable.txt` (minor and patch only, grouped, at most two open PRs) and for the GitHub Actions. CI does not run the skill pipeline with these packages: before merging a Python PR, run the whole pipeline with the new versions, then add to `CHANGELOG.md`; the new versions only apply from the next release.
 - To continue developing the skill in a new chat, attach `choir-practice/session-handoff.md` (open points and lessons of the current version).
 
+<a href="https://github.com/vbth/choir-practice"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/github-mark-dark.svg"><img src="https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/github-mark.svg" alt="GitHub" height="18" align="absmiddle"></picture></a> choir-practice – Proof of concept: AI music workflow/skill developed for/by Claude Code. Use at your own risk.
+
 <picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/ai-basic-dark.svg"><img src="https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/ai-basic.svg" alt="AI" height="18" align="absmiddle"></picture> AI-generated. Observe copyright and licence rights. Use at your own risk. 2026-10-28
 

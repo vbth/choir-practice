@@ -15,7 +15,7 @@ docs.json (written by Claude, see references/score-spec.md "docs.json"):
 """
 import json, os, sys, argparse, re
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from common import load_i18n, read_checks, safe, log_check, ACCENT, md_footer, rl_footer, register_plex
+from common import load_i18n, read_checks, safe, log_check, ACCENT, md_block, rl_footer, register_plex
 from reportlab.lib.pagesizes import A4, landscape
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, PageBreak
 from reportlab.lib.styles import ParagraphStyle
@@ -135,7 +135,7 @@ def main():
         md, fl = readme_section(L, spec, docs, mixes, layout)
         md_all.append(md); fl_all += fl
         if k < len(langs) - 1: fl_all.append(PageBreak()); md_all.append('\n---\n')
-    open(os.path.join(A.outdir, 'README.md'), 'w', encoding='utf-8').write('\n'.join(md_all).rstrip() + f'\n\n{md_footer(lang, title)}\n\n')
+    open(os.path.join(A.outdir, 'README.md'), 'w', encoding='utf-8').write('\n'.join(md_all).rstrip() + f'\n\n{md_block(lang, title)}\n\n')
     build_pdf(os.path.join(A.outdir, 'README.pdf'), fl_all, lang, title, pagesize=A4, leftMargin=MARGIN, rightMargin=MARGIN, topMargin=MARGIN,
               bottomMargin=22 * mm, title='README')
     # log this step first, so the check log below already shows the current run
@@ -160,7 +160,7 @@ def main():
         phase_, chk_ = key_[0], key_[1]
         rows.append([f"{phase_} {ph.get(str(phase_), '')}", chk_, Pr.get(c['result'], c['result']), note_(c['note'])])
     name = safe(i['files']['protocol'])
-    md = (f"# {Pr['title'].format(title=title)}\n\n{i['protocol_intro']}\n\n" + md_table(rows)).rstrip() + f"\n\n{md_footer(lang, title)}\n\n"
+    md = (f"# {Pr['title'].format(title=title)}\n\n{i['protocol_intro']}\n\n" + md_table(rows)).rstrip() + f"\n\n{md_block(lang, title)}\n\n"
     open(os.path.join(A.outdir, f'{name}.md'), 'w', encoding='utf-8').write(md)
     build_pdf(os.path.join(A.outdir, f'{name}.pdf'),
               [P(esc(Pr['title'].format(title=title)), H1), P(esc(i['protocol_intro']), S), Spacer(1, 6), table(rows, [36 * mm, 38 * mm, 28 * mm, 155 * mm])],
@@ -173,7 +173,7 @@ def main():
         rows.append([str(k), str(c.get('bar', '')), c.get('voice', ''), C['kinds'].get(c.get('kind'), c.get('kind', '')), c.get('source', ''),
                      c.get('result', ''), reason, C['status'].get(c.get('status'), c.get('status', ''))])
     cname = safe(i['files_more']['corrections'])
-    md = (f"# {C['title'].format(title=title)}\n\n{C['intro']}\n\n" + (md_table(rows) if corr else C['none'])).rstrip() + f"\n\n{md_footer(lang, title)}\n\n"
+    md = (f"# {C['title'].format(title=title)}\n\n{C['intro']}\n\n" + (md_table(rows) if corr else C['none'])).rstrip() + f"\n\n{md_block(lang, title)}\n\n"
     open(os.path.join(A.outdir, f'{cname}.md'), 'w', encoding='utf-8').write(md)
     body = [P(esc(C['title'].format(title=title)), H1), P(esc(C['intro']), S), Spacer(1, 6)]
     body.append(table(rows, [9 * mm, 13 * mm, 18 * mm, 22 * mm, 44 * mm, 44 * mm, 72 * mm, 35 * mm]) if corr else P(esc(C['none'])))

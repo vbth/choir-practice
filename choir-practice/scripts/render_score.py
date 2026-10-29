@@ -23,7 +23,7 @@ from lxml import etree
 from xml.sax.saxutils import escape as esc
 from pypdf import PdfReader, PdfWriter
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from common import log_check, human_date, today_iso, icon_markup, icon_width, text_width, ACCENT, FOOT_PT
+from common import log_check, human_date, today_iso, icon_markup, icon_width, text_width, ACCENT, FOOT_PT, gh_icon_markup
 
 DENSITY_MAX = 2950     # width estimate of widest system * scale; above this lyrics start to touch
 BASE_W, BASE_H = 2100, 2970
@@ -213,11 +213,13 @@ def add_footer(svg, lang, iso):
     note = load_i18n(lang)['ai_note_info'] + ' ' + human_date(lang, iso)
     def width(f): return icon_width(f, 'info') + f * 0.5 + text_width(note, f, 'PlexR') + f * 3
     while width(fs) > (xr - xl) and fs > 6: fs -= 1   # long titles: shrink instead of colliding
-    def t(x, anchor, txt):
+    def t(x, anchor, txt, y=y):
         return (f'<text x="{x}" y="{y}" font-family="{FONT_NAME}, sans-serif" font-size="0px" text-anchor="{anchor}" xml:space="preserve"><tspan class="text"><tspan font-size="{fs}px">{txt}</tspan></tspan></text>')
     x = xl
     out = icon_markup(x, y, fs, 'info'); x += icon_width(fs, 'info') + fs * 0.5
     out += t(x, 'start', note)
+    py = int(y - fs * 1.9); col = icon_width(fs, 'info'); pn = load_i18n(lang)['proj_note']   # project line one line above, same text column
+    out += gh_icon_markup(xl, py, fs, col) + t(xl + col + fs * 0.5, 'start', pn, py)
     k = svg.rfind('</svg>', 0, svg.rfind('</svg>'))   # closing tag of the inner svg
     return svg[:k] + out + svg[k:]
 

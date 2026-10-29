@@ -18,7 +18,7 @@ Audio file names: <stage>_<voice>_<Title>_<Chor|Klavier>_<content>.mp3 (a number
 """
 import os, sys, re, json, glob, shutil, zipfile, argparse, subprocess
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from common import load_i18n, safe, today_iso, log_check, TRANS, ACCENT, md_footer, rl_footer, register_plex
+from common import load_i18n, safe, today_iso, log_check, TRANS, ACCENT, md_block, rl_footer, register_plex
 from reportlab.lib.pagesizes import A4
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle
 from reportlab.lib.styles import ParagraphStyle
@@ -331,7 +331,7 @@ def main():
                 ms = [(e.type, getattr(e, 'text', '')) for e in mido.MidiFile(p).tracks[0] if e.is_meta]
                 if ('copyright', AI_META) not in ms or ('text', AI_META) not in ms: bad = 'MIDI copyright/text'
             elif f.endswith('.md') and rel.startswith(DL['docs']) and DL['handoff'] not in f:
-                if not open(p, encoding='utf-8').read().endswith('\n\n' + md_footer(lang, title, date) + '\n\n'): bad = 'footer line in Markdown (blank line before and after, date, comma, AI note)'
+                if not open(p, encoding='utf-8').read().endswith('\n\n' + md_block(lang, title, date) + '\n\n'): bad = 'project line and footer line in Markdown (blank line before and after, date, AI note)'
             if bad: fails.append(f'AI nomenclature missing ({bad}): {rel}')
     for h, ps in seen.items():
         if len(ps) > 1: fails.append('identical files stored twice: ' + ', '.join(ps))
