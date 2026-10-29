@@ -92,8 +92,8 @@ T = {
   'los_dl': 'Skill herunterladen',
   'lic_h': 'Lizenzen', 'lic_p': 'PolyForm Noncommercial License 1.0.0,\nfrei für nichtkommerzielle Nutzung.',
   'lic_link': 'Lizenztext lesen', 'lic_third': 'Lizenzen von Drittanbietern müssen beachtet werden.', 'lic_third_link': 'Rechte der Drittanbieter-Lizenzen lesen', 'foot_profile': 'GitHub-Repository vbth/choir-practice', 'private': 'privates Projekt', 'og_alt': 'Ein Mann mit Kopfhörern steht in einer alten Badewanne und singt vom Notenblatt, neben ihm schwimmt eine Quietscheente, rote Noten schweben im Raum',
-  'alt_cover': 'Deckblatt des Beispielpakets', 'alt_page1': 'Erste Notenseite des Beispielpakets', 'alt_page2': 'Zweite Notenseite des Beispielpakets', 'alt_ai': 'EU-Label AI GENERATED',
-  'ai_label': 'AI GENERATED', 'top': 'Nach oben',
+  'alt_cover': 'Deckblatt des Beispielpakets', 'alt_page1': 'Erste Notenseite des Beispielpakets', 'alt_page2': 'Zweite Notenseite des Beispielpakets', 'alt_ai': 'EU-Label AI',
+  'ai_label': 'AI', 'top': 'Nach oben',
  },
  'en': {
   'html': 'en', 'name': 'choir-practice Skill', 'title': 'choir-practice Skill – Practice MP3s per voice from a choir score', 'other': ('../', 'DE'), 'self_prefix': '../', 'assets': '../',
@@ -161,8 +161,8 @@ T = {
   'los_dl': 'Download the skill',
   'lic_h': 'Licences', 'lic_p': 'PolyForm Noncommercial License 1.0.0,\nfree for non-commercial use.',
   'lic_link': 'Read the licence text', 'lic_third': 'Licences of third parties must be observed.', 'lic_third_link': 'Read the third-party notices', 'foot_profile': 'GitHub repository vbth/choir-practice', 'private': 'private project', 'og_alt': 'A man with headphones stands in an old bathtub and sings from a sheet of music, a rubber duck floats beside him, red notes drift through the room',
-  'alt_cover': 'Title page of the example pack', 'alt_page1': 'First score page of the example pack', 'alt_page2': 'Second score page of the example pack', 'alt_ai': 'EU label AI GENERATED',
-  'ai_label': 'AI GENERATED', 'top': 'Back to top',
+  'alt_cover': 'Title page of the example pack', 'alt_page1': 'First score page of the example pack', 'alt_page2': 'Second score page of the example pack', 'alt_ai': 'EU label AI',
+  'ai_label': 'AI', 'top': 'Back to top',
  },
 }
 
@@ -212,7 +212,7 @@ def page(L):
     stages = ''.join(f'<button type="button" data-stage="{k}" aria-pressed="false">{esc(n)}</button>' for k, n in t['stages'].items())
     sounds = ''.join(f'<button type="button" data-sound="{k}" aria-pressed="false">{esc(n)}</button>' for k, n in t['sounds'].items())
     tempos = ''.join(f'<button type="button" data-tempo="{k}" aria-pressed="false">{esc(n)}</button>' for k, n in t['tempos'].items())
-    ai = open(os.path.join(OUT, 'img', 'ai-generated.svg'), encoding='utf-8').read()
+    ai = open(os.path.join(OUT, 'img', 'ai-basic.svg'), encoding='utf-8').read()
     ai = ai[ai.index('<svg'):].replace('role="img"', 'role="img" class="ailabel" focusable="false"', 1)
     data = {'lang': L, 'seat': SEAT, 'mix': ST, 'voices': t['voices'], 'stages': t['stages'], 'stage_txt': t['stage_txt'], 'steps': t['steps'],
             'who': {'you': t['who_you'], 'claude': t['who_claude'], 'both': t['who_claude'] + ' + ' + t['who_you']}, 'own': t['own_lbl'], 'acc': t['acc_lbl'], 'gate': t['gate_lbl'],
@@ -594,16 +594,16 @@ def inline_label(src, viewbox, title, note):
     return f'<?xml version="1.0" encoding="UTF-8"?>\n<!-- {note} -->\n<svg xmlns="http://www.w3.org/2000/svg" viewBox="{viewbox}" role="img"><title>{title}</title>{body.strip()}</svg>\n'
 
 def ai_labels():
-    """EU labels for the website and the Markdown footers (common.MD_LABEL): the black ones are the skill assets, the white ones for dark mode are the official
-    white files of the set (assets/eu-labels/) with the same crop. ai-generated: "AI GENERATED" (website footer); ai-basic: "AI" (Markdown footers)."""
+    """EU label "AI" for the website footer and the Markdown footers (common.MD_LABEL): black = the skill asset, white for dark mode = the official white file
+    of the set (assets/eu-labels/) with the same crop. The long label "AI GENERATED" stays only in the header image."""
     AS = os.path.join(HERE, '..', 'choir-practice', 'assets')
-    for name, black, white, title in (('ai-generated', 'eu-ai-generated.svg', 'LABEL_AI_GENERATED_white.svg', 'AI GENERATED'), ('ai-basic', 'eu-ai-basic.svg', 'LABEL_AI_white.svg', 'AI')):
-        src = open(os.path.join(AS, black), encoding='utf-8').read()
-        open(os.path.join(OUT, 'img', name + '.svg'), 'w', encoding='utf-8').write(src)
-        vb = re.search(r'viewBox="([^"]+)"', src).group(1)
-        dark = inline_label(open(os.path.join(AS, 'eu-labels', white), encoding='utf-8').read(), vb, title,
-                            f'EU label "{title}", white (dark mode): official file {white} of the EU icon set, viewBox cropped to the label, styles inlined, shapes unchanged')
-        open(os.path.join(OUT, 'img', name + '-dark.svg'), 'w', encoding='utf-8').write(dark)
+    name, black, white, title = 'ai-basic', 'eu-ai-basic.svg', 'LABEL_AI_white.svg', 'AI'
+    src = open(os.path.join(AS, black), encoding='utf-8').read()
+    open(os.path.join(OUT, 'img', name + '.svg'), 'w', encoding='utf-8').write(src)
+    vb = re.search(r'viewBox="([^"]+)"', src).group(1)
+    dark = inline_label(open(os.path.join(AS, 'eu-labels', white), encoding='utf-8').read(), vb, title,
+                        f'EU label "{title}", white (dark mode): official file {white} of the EU icon set, viewBox cropped to the label, styles inlined, shapes unchanged')
+    open(os.path.join(OUT, 'img', name + '-dark.svg'), 'w', encoding='utf-8').write(dark)
 
 def skill_file():
     """docs/choir-practice.skill: the skill folder as on main, served by the site itself.
