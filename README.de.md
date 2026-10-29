@@ -6,7 +6,7 @@
 
 [English](README.md) | Deutsch
 
-**Dokumentation eines privaten Code-Experiments zur Erstellung und Weiterentwicklung eines agentischen KI-Musik-Workflows und Claude Skills.** Das Beispiel hier, choir-practice, macht aus Chornoten ein geprüftes ZIP, in dem jede Stimme ihre eigenen Aufnahmen zum Üben findet, fertig zum Weitergeben.
+**Dokumentation eines agentischen KI-Musik-Workflows und -Skills als privates Code-Experiment, entwickelt für und mit Claude Code. Es handelt sich ausschließlich um einen Proof of Concept.** Das Beispiel hier, choir-practice, macht aus Chornoten ein geprüftes ZIP, in dem jede Stimme ihre eigenen Aufnahmen zum Üben findet, fertig zum Weitergeben.
 
 **Website mit Beispielpaket und Player:** https://vbth.github.io/choir-practice/
 

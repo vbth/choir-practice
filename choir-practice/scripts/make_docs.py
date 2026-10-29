@@ -65,6 +65,7 @@ def readme_section(lang, spec, docs, mixes, layout):
     i = load_i18n(lang); R = i['readme']; RM = i['readme_more']; meta = spec.get('meta', {})
     title = meta.get('title', ''); md = []; fl = []
     md.append(f"# {R['title'].format(title=title)}\n"); fl.append(P(esc(R['title'].format(title=title)), H1))
+    md.append(f"**{R['poc']}**\n"); fl += [Spacer(1, 4), P(esc(R['poc']))]
     intro = R['intro'].format(source=docs.get('source_file', ''))
     if i.get('skill_name'): intro += ' ' + i.get('made_with', 'Made with {name}.').format(name=i['skill_name'])
     md.append(intro + '\n'); fl += [Spacer(1, 4), P(esc(intro))]
