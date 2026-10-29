@@ -2,6 +2,8 @@
 
 English | [Deutsch](README.de.md)
 
+## Listen, practise, sing with confidence.
+
 **Documentation of an agentic AI music workflow and skill as a private code experiment, developed for and with Claude Code. This is a proof of concept only.** The example here, choir-practice, turns a choir score into a checked ZIP in which every voice finds its own recordings to practise with, ready to share.
 
 **Website with example pack and player:** https://vbth.github.io/choir-practice/
@@ -38,7 +40,7 @@ English | [Deutsch](README.de.md)
 MP3 titles, file names, PDFs and logs follow the language of the conversation (German and English built in, see [README.de.md](README.de.md)). One ZIP, named like the top folder:
 
 ```text
-<date>_Choir_Practice_<Title>/
+Choir_Practice_<Title>/
 ├─ 1_Scores/
 │  ├─ 1_Score_<Title>_Scan.pdf
 │  ├─ 2_Score_<Title>.pdf
@@ -117,7 +119,7 @@ Each voice gets its own mix; the own voice always sits centred. The other voices
 - The "Practice" module of the website shows the mixes live on a headphone graphic (dot size = level, position = left/right). The overview PDF generated for every piece (`2_Practice/1_Overview.pdf`) shows the same mixes.
 
 ## 5. AI marking – How is AI content marked?
-Everything the skill generates is marked as AI-generated: the EU label "AI" and the note "AI-generated. Observe copyright and licence rights. Use at your own risk." in the footer of every PDF, and the same note in the metadata of MP3, MIDI, MusicXML and PDF. The label follows the European Commission's icons for labelling AI-generated content (see [`THIRD_PARTY_NOTICES.md`](https://github.com/vbth/choir-practice/blob/main/choir-practice/THIRD_PARTY_NOTICES.md)).
+Everything the skill generates is marked as AI-generated: the EU label "AI" and the note "AI-generated. Use at your own risk." in the footer of every PDF, and the same note in the metadata of MP3, MIDI, MusicXML and PDF. The label follows the European Commission's icons for labelling AI-generated content (see [`THIRD_PARTY_NOTICES.md`](https://github.com/vbth/choir-practice/blob/main/choir-practice/THIRD_PARTY_NOTICES.md)).
 
 ## 6. Limits – What can’t it do?
 - Claude does not hear the audio; it is tested technically (duration against the MIDI, gaps, clipping, loudness, stereo). Sound and taste are not judged.
@@ -147,7 +149,7 @@ PolyForm Noncommercial License 1.0.0 ([`LICENSE.md`](LICENSE.md)), free for non-
 - Dependabot ([`.github/dependabot.yml`](https://github.com/vbth/choir-practice/blob/main/.github/dependabot.yml)) proposes updates monthly: for the pinned package versions in [`scripts/requirements-stable.txt`](https://github.com/vbth/choir-practice/blob/main/choir-practice/scripts/requirements-stable.txt) (minor and patch only, grouped, at most two open PRs) and for the GitHub Actions. CI does not run the skill pipeline with these packages: before merging a Python PR, run the whole pipeline with the new versions, then add to [`CHANGELOG.md`](CHANGELOG.md); the new versions only apply from the next release.
 - To continue developing the skill in a new chat, attach [`choir-practice/session-handoff.md`](https://github.com/vbth/choir-practice/blob/main/choir-practice/session-handoff.md) (open points and lessons of the current version).
 
-<a href="https://github.com/vbth/choir-practice"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/github-mark-dark.svg"><img src="https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/github-mark.svg" alt="GitHub" height="18" align="absmiddle"></picture></a> choir-practice – Proof of concept AI music workflow/skill developed for/by Claude Code.
+<a href="https://github.com/vbth/choir-practice"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/github-mark-dark.svg"><img src="https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/github-mark.svg" alt="GitHub" height="18" align="absmiddle"></picture></a> choir-practice – AI music workflow/skill for Claude Code.
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/ai-basic-dark.svg"><img src="https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/ai-basic.svg" alt="AI" height="18" align="absmiddle"></picture> 2026-10-29 AI-generated. Observe copyright and licence rights. Use at your own risk.
+<a href="https://vbth.github.io/choir-practice/"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/ai-basic-dark.svg"><img src="https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/ai-basic.svg" alt="AI" height="18" align="absmiddle"></picture></a> 2026-10-29 AI-generated. Use at your own risk.
 

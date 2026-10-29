@@ -38,7 +38,7 @@ def nobreak(html):
     a non-breaking space; the footer lines too. Applied to the body only. Texts set by the page script do the same (nb() in site.js)."""
     head, sep, body = html.partition('<body')
     body = NB_BLOCKS.sub(lambda m: f'<{m.group(1)}{m.group(2) or ""}>{_glue(m.group(3))}</{m.group(1)}>', body)
-    body = NB_FOOTER.sub(lambda m: re.sub(r'<span>([^<]*)</span>', lambda n: '<span>' + _glue(n.group(1)) + '</span>', m.group(1)), body)
+    body = NB_FOOTER.sub(lambda m: re.sub(r'<span>((?:(?!<span).)*?)</span>', lambda n: '<span>' + _glue(n.group(1)) + '</span>', m.group(1)), body)
     return head + sep + body
 
 IMG_REF = re.compile(r'(\bimg/([A-Za-z0-9_.-]+\.(?:png|jpg|svg)))(?=["\s,])')
@@ -65,15 +65,15 @@ ST['tutti'] = {own: [[v, spread[v], M.LV['tutti'], 'own'] for v in SEAT] for own
 
 T = {
  'de': {
-  'html': 'de', 'name': 'choir-practice Skill', 'title': 'choir-practice Skill – Übe-MP3s je Stimme aus Chornoten', 'other': ('en/', 'EN'), 'self_prefix': '', 'assets': '',
+  'html': 'de', 'name': 'choir-practice Skill', 'title': 'choir-practice Skill – Hören, üben, sicher singen.', 'other': ('en/', 'EN'), 'self_prefix': '', 'assets': '',
   'desc': 'Dokumentation eines agentischen KI-Musik-Workflows und -Skills als privates Code-Experiment, entwickelt für und mit Claude Code. Es handelt sich ausschließlich um einen Proof of Concept. Beispiel: choir-practice macht aus Chornoten ein geprüftes ZIP mit MP3 und MIDI zum Üben für jede Stimme.',
   'ids': {'start': 'start', 'ablauf': 'ablauf', 'ueben': 'ueben', 'paket': 'beispiel-zip', 'rechte': 'rechte-und-ki', 'lizenz': 'lizenz'},
   'menu': [('start', 'Start'), ('ablauf', 'Ablauf'), ('ueben', 'Üben'), ('paket', 'Beispiel-ZIP'), ('rechte', 'Rechte und KI'), ('lizenz', 'Lizenzen')],
   'menu_label': 'Menü', 'skip': 'Zum Inhalt', 'theme_to_dark': 'Zum dunklen Modus wechseln', 'theme_to_light': 'Zum hellen Modus wechseln',
-  'h1': 'Hören, mitsingen, sicher werden.',
+  'h1': 'Hören, üben, sicher singen.',
   'lead': 'Dokumentation eines agentischen KI-Musik-Workflows und -Skills als privates Code-Experiment, entwickelt für und mit Claude Code. Es handelt sich ausschließlich um einen Proof of Concept. Das Beispiel hier: Aus Chornoten entsteht ein geprüftes ZIP, in dem jede Stimme ihre eigenen Aufnahmen zum Üben findet, fertig zum Weitergeben.',
   'cta': 'Beispiel-ZIP ansehen',
-  'ai': 'KI-generiert. Urheber- und Lizenzrechte beachten. Nutzung auf eigene Gefahr.',
+  'ai': 'KI-generiert. Nutzung auf eigene Gefahr.', 'foot_note': 'choir-practice – KI-Musik-Workflow/-Skill für Claude Code.', 'foot_site': 'Startseite',
   'facts': [('4', 'Stufen je Stimme'), ('2', 'Klänge: Chor und Klavier'), ('2', 'Fassungen: normal und langsam'), ('42', 'Aufnahmen im Beispiel')],
   'inh_h': 'Inhalte', 'paket_h': 'Beispiel-ZIP', 'paket_p': 'Im ZIP liegen vier Ordner. Die Stimmen-ZIPs in 2_Ueben sind fertig zum Weitergeben, ihr Inhalt steht zuletzt. Einen Ordner anklicken.',
   'tree': [
@@ -122,24 +122,24 @@ T = {
   'pl_cover': 'Albumcover des Beispielpakets',
   'rechte_h': 'Rechte und KI',
   'rechte_items': [
-   ('Rechte', 'Bevor Noten verarbeitet werden, fragt der Skill nach den Rechten. Die Angaben des Nutzers vermerkt er in der README des Pakets. Ob die Noten verarbeitet und weitergegeben werden dürfen, richtet sich nach ihrer Lizenz.'),
+   ('Rechte', 'Bevor Noten verarbeitet werden, fragt der Skill nach den Rechten. Diese Angaben werden in der README-Datei vermerkt. Ob die Noten verarbeitet und weitergegeben werden dürfen, richtet sich nach dem Urheber- und Lizenzrecht.'),
    ('Kennzeichnung', 'Alles, was der Skill erzeugt, ist als KI-Inhalt gekennzeichnet, sowohl mit dem EU-Label für KI-generierte Inhalte als auch im Text und in den Metadaten der Dokumente.'),
   ],
   'lic_h': 'Lizenzen', 'lic_p': 'PolyForm Noncommercial License 1.0.0,',
-  'lic_link': 'Lizenztext lesen', 'lic_third': 'Lizenzen von Drittanbietern,', 'lic_third_link': 'Übersicht lesen', 'foot_profile': 'GitHub-Repository vbth/choir-practice', 'foot_note': 'choir-practice – Proof of Concept KI-Musik-Workflow/-Skill entwickelt für/von Claude Code.', 'private': 'privates Projekt', 'og_alt': 'Ein Mann mit Kopfhörern steht in einer alten Badewanne und singt vom Notenblatt, neben ihm schwimmt eine Quietscheente, rote Noten schweben im Raum',
+  'lic_link': 'Lizenztext lesen', 'lic_third': 'Lizenzen von Drittanbietern,', 'lic_third_link': 'Übersicht lesen', 'foot_profile': 'GitHub-Repository vbth/choir-practice', 'private': 'privates Projekt', 'og_alt': 'Ein Mann mit Kopfhörern steht in einer alten Badewanne und singt vom Notenblatt, neben ihm schwimmt eine Quietscheente, rote Noten schweben im Raum',
   'alt_cover': 'Deckblatt des Beispielpakets', 'alt_page1': 'Erste Notenseite des Beispielpakets', 'alt_page2': 'Zweite Notenseite des Beispielpakets', 'alt_ai': 'EU-Label AI',
   'ai_label': 'AI', 'top': 'Nach oben',
  },
  'en': {
-  'html': 'en', 'name': 'choir-practice Skill', 'title': 'choir-practice Skill – Practice MP3s per voice from a choir score', 'other': ('../', 'DE'), 'self_prefix': '../', 'assets': '../',
+  'html': 'en', 'name': 'choir-practice Skill', 'title': 'choir-practice Skill – Listen, practise, sing with confidence.', 'other': ('../', 'DE'), 'self_prefix': '../', 'assets': '../',
   'desc': 'Documentation of an agentic AI music workflow and skill as a private code experiment, developed for and with Claude Code. This is a proof of concept only. Example: choir-practice turns a choir score into a checked ZIP with MP3 and MIDI practice files for every voice.',
   'ids': {'start': 'start', 'ablauf': 'workflow', 'ueben': 'practice', 'paket': 'example-zip', 'rechte': 'rights-and-ai', 'lizenz': 'licence'},
   'menu': [('start', 'Start'), ('ablauf', 'Workflow'), ('ueben', 'Practice'), ('paket', 'Example ZIP'), ('rechte', 'Rights and AI'), ('lizenz', 'Licences')],
   'menu_label': 'Menu', 'skip': 'Skip to content', 'theme_to_dark': 'Switch to dark mode', 'theme_to_light': 'Switch to light mode',
-  'h1': 'Listen, sing along, get it right.',
+  'h1': 'Listen, practise, sing with confidence.',
   'lead': 'Documentation of an agentic AI music workflow and skill as a private code experiment, developed for and with Claude Code. This is a proof of concept only. The example here: a choir score becomes a checked ZIP in which every voice finds its own recordings to practise with, ready to share.',
   'cta': 'See the example ZIP',
-  'ai': 'AI-generated. Observe copyright and licence rights. Use at your own risk.',
+  'ai': 'AI-generated. Use at your own risk.', 'foot_note': 'choir-practice – AI music workflow/skill for Claude Code.', 'foot_site': 'Home page',
   'facts': [('4', 'stages per voice'), ('2', 'sounds: choir and piano'), ('2', 'versions: normal and slow'), ('42', 'recordings in the example')],
   'inh_h': 'Contents', 'paket_h': 'Example ZIP', 'paket_p': 'The ZIP holds four folders. The voice ZIPs in 2_Practice are ready to hand out, their contents are listed last. Click a folder.',
   'tree': [
@@ -188,11 +188,11 @@ T = {
   'pl_cover': 'Album cover of the example pack',
   'rechte_h': 'Rights and AI',
   'rechte_items': [
-   ('Rights', 'Before scores are processed, the skill asks about the rights. It records the user’s details in the pack’s README. Whether the scores may be processed and passed on depends on their licence.'),
+   ('Rights', 'Before scores are processed, the skill asks about the rights. These details are recorded in the README file. Whether the scores may be processed and passed on depends on copyright and licence law.'),
    ('Labelling', 'Everything the skill creates is labelled as AI content, both with the EU label for AI-generated content and in the text and metadata of the documents.'),
   ],
   'lic_h': 'Licences', 'lic_p': 'PolyForm Noncommercial License 1.0.0,',
-  'lic_link': 'Read the licence text', 'lic_third': 'Licences of third parties,', 'lic_third_link': 'Read the overview', 'foot_profile': 'GitHub repository vbth/choir-practice', 'foot_note': 'choir-practice – Proof of concept AI music workflow/skill developed for/by Claude Code.', 'private': 'private project', 'og_alt': 'A man with headphones stands in an old bathtub and sings from a sheet of music, a rubber duck floats beside him, red notes drift through the room',
+  'lic_link': 'Read the licence text', 'lic_third': 'Licences of third parties,', 'lic_third_link': 'Read the overview', 'foot_profile': 'GitHub repository vbth/choir-practice', 'private': 'private project', 'og_alt': 'A man with headphones stands in an old bathtub and sings from a sheet of music, a rubber duck floats beside him, red notes drift through the room',
   'alt_cover': 'Title page of the example pack', 'alt_page1': 'First score page of the example pack', 'alt_page2': 'Second score page of the example pack', 'alt_ai': 'EU label AI',
   'ai_label': 'AI', 'top': 'Back to top',
  },
@@ -366,7 +366,7 @@ def page(L):
  <p class="intro wide">{esc(t['lic_p'])} <a href="{GH}/blob/main/LICENSE.md">{esc(t['lic_link'])}</a>, {esc(t['lic_third'])} <a href="{GH}/blob/main/choir-practice/THIRD_PARTY_NOTICES.md">{esc(t['lic_third_link'])}</a></p>
 </section>
 </main>
-<footer><p class="fnote"><span class="fl"><a href="{GH}" aria-label="{esc(t['foot_profile'])}">{GHICON}</a></span><span>{esc(t['foot_note'])}</span></p><span class="aitag">{ai}<span>{YEAR} {esc(t['ai'])}</span></span></footer>
+<footer><p class="fnote"><a class="fl" href="{GH}" aria-label="{esc(t['foot_profile'])}">{GHICON}</a><span>{esc(t['foot_note']).replace('-Skill', '-&#8288;Skill')}</span></p><p class="fnote"><a class="fl" href="{SITE}{'en/' if L=='en' else ''}" aria-label="{esc(t['foot_site'])}">{ai}</a><span>{YEAR} {esc(t['ai'])}</span></p></footer>
 <script>window.PAGE={json.dumps(data, ensure_ascii=False)};</script>
 <script src="{A}js/site.js?v={asset_version()}"></script>
 </body>
@@ -476,7 +476,7 @@ h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 .cols{display:grid;grid-template-columns:repeat(2,1fr);gap:0 32px}.cols article{border-top:1.5px solid var(--line);padding-top:16px}
 .cols p{margin:0}
 .steps{padding-left:1.4em;max-width:44em}.steps li{margin:0 0 10px}
-footer .fnote{flex:0 0 100%;margin:0;display:flex;align-items:center;gap:10px}footer .fnote .fl{flex:none;width:1.6em;justify-content:center}
+footer .fnote{flex:0 0 100%;margin:0;display:flex;align-items:center;gap:10px}footer .fnote .fl{flex:none;display:flex;align-items:center;justify-content:center;width:1.6em;height:1.6em;color:var(--fg);text-decoration:none}footer .fnote .ghi{width:1.6em;height:1.6em}footer .fnote .ailabel{height:1.6em;width:1.6em}
 footer{max-width:var(--max);margin:0 auto;padding:24px var(--gut) 48px;border-top:1.5px solid var(--line);display:flex;flex-wrap:wrap;gap:12px 32px;align-items:center;justify-content:space-between;font-size:var(--fs-s)}
 @media (max-width:900px){.chain{grid-template-columns:repeat(3,1fr)}.cols{grid-template-columns:1fr;row-gap:16px}.tree{grid-template-columns:1fr}}
 @media (max-width:760px){
@@ -548,9 +548,9 @@ function draw(){
  ln('M76 156 C88 156 92 164 92 174 L92 272 C92 282 88 290 76 290',sw*1.5);
  ln('M564 156 C552 156 548 164 548 174 L548 272 C548 282 552 290 564 290',sw*1.5);
  // sound waves between cup and ear, travelling inwards, red; only visible while a recording plays (class 'playing' on the svg).
- // The circles never reach further out than x=121 (or 519 on the right), the waves end at x=111: a gap of at least 10 units to the circles
- [0,1,2].forEach(function(i){var x=97+5*i,h=20+10*i,c=x+8;
-  [[x,c],[640-x,640-c]].forEach(function(p){svg.appendChild(el('path',{'class':'wave',d:'M'+p[0]+' '+(223-h)+' Q'+p[1]+' 223 '+p[0]+' '+(223+h),fill:'none',stroke:'var(--link)','stroke-width':sw*2,'stroke-linecap':'round',style:'animation-delay:'+(i*0.25)+'s'}))})});
+ // The circles never reach further out than x=121 (or 519 on the right), the waves end at x=116 (8 units clear of the cushion at x=92 / 548): a gap of at least 5 units to the circles
+ [0,1,2].forEach(function(i){var x=102+5*i,h=20+10*i,c=x+6;
+  [[x,c],[640-x,640-c]].forEach(function(p){svg.appendChild(el('path',{'class':'wave',d:'M'+p[0]+' '+(223-h)+' Q'+p[1]+' 223 '+p[0]+' '+(223+h),fill:'none',stroke:'var(--link)','stroke-width':sw*1.7,'stroke-linecap':'round',style:'animation-delay:'+(i*0.25)+'s'}))})});
  var list=D.mix[cur.stage][cur.voice],own=[],acc=[];
  list.forEach(function(e){(e[3]==='acc'?acc:own).push(e)});
  function pos(e){return x0+e[1]*(cur.stage==='tutti'?270:190)}   // tutti: circles further apart
