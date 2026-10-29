@@ -48,4 +48,4 @@ Packages contain the engraved score, audio and documents derived from the user's
 
 ## Licence of the skill itself
 
-PolyForm Noncommercial License 1.0.0 (SPDX `PolyForm-Noncommercial-1.0.0`, see `LICENSE`, unmodified official text): free for any noncommercial purpose (personal use, hobby, charitable, educational, public bodies); commercial use needs a separate licence from the author. No author name is given on purpose, so there is no `Required Notice` line. The licences of the bundled assets above stay as stated and are not changed by this licence.
+PolyForm Noncommercial License 1.0.0 (SPDX `PolyForm-Noncommercial-1.0.0`, see `LICENSE.md`, unmodified official text): free for any noncommercial purpose (personal use, hobby, charitable, educational, public bodies); commercial use needs a separate licence from the author. No author name is given on purpose, so there is no `Required Notice` line. The licences of the bundled assets above stay as stated and are not changed by this licence.

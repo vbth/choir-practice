@@ -2,7 +2,7 @@
 
 [English](README.md) | Deutsch
 
-**Dokumentation eines agentischen KI-Musik-Workflows und -Skills als privates Code-Experiment, entwickelt für und mit Claude Code. Es handelt sich ausschließlich um einen Proof of Concept. Nutzung auf eigene Gefahr.** Das Beispiel hier, choir-practice, macht aus Chornoten ein geprüftes ZIP, in dem jede Stimme ihre eigenen Aufnahmen zum Üben findet, fertig zum Weitergeben.
+**Dokumentation eines agentischen KI-Musik-Workflows und -Skills als privates Code-Experiment, entwickelt für und mit Claude Code. Es handelt sich ausschließlich um einen Proof of Concept.** Das Beispiel hier, choir-practice, macht aus Chornoten ein geprüftes ZIP, in dem jede Stimme ihre eigenen Aufnahmen zum Üben findet, fertig zum Weitergeben.
 
 **Website mit Beispielpaket und Player:** https://vbth.github.io/choir-practice/
 
@@ -132,7 +132,7 @@ Python mit den Paketen aus `scripts/requirements-stable.txt`, FluidSynth, ffmpeg
 Der Skill gibt keine Rechtsberatung und räumt keine Rechte ein. Er fragt, ob die Noten gemeinfrei, lizenziert, eigenes Werk oder unklar sind und ob sie zum Proben oder kommerziell genutzt werden, und vermerkt die Antwort in der README. Unklare Rechte bei kommerzieller Nutzung bekommen eine deutliche Warnung. Die kommerzielle Nutzung des Skills selbst braucht eine Lizenz (siehe 9); die Lizenz sagt nichts über die Rechte an den Noten.
 
 ## 9. Lizenz – Was ist erlaubt?
-PolyForm Noncommercial License 1.0.0 ([`LICENSE`](LICENSE)), frei für nichtkommerzielle Nutzung. Komponenten Dritter: `THIRD_PARTY_NOTICES.md`.
+PolyForm Noncommercial License 1.0.0 ([`LICENSE.md`](LICENSE.md)), frei für nichtkommerzielle Nutzung. Komponenten Dritter: `THIRD_PARTY_NOTICES.md`.
 
 ## 10. Entwicklung – Wie arbeitet man weiter?
 `SKILL.md` Anweisungen · `references/` Formate und Leitfäden · `assets/` Sprachpakete und Vorlagen · `scripts/` Werkzeuge · [`CHANGELOG.md`](CHANGELOG.md).

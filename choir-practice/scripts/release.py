@@ -60,7 +60,7 @@ if h.exists():
     t = re.sub(r'\*\*Date:\*\* [\d-]+ · \*\*Skill version:\*\* [\d.]+', f'**Date:** {today} · **Skill version:** {new}', t, count=1)
     h.write_text(t, encoding='utf-8')
 if root != sk:
-    for fn in ('CHANGELOG.md', 'LICENSE'):
+    for fn in ('CHANGELOG.md', 'LICENSE.md'):
         if (root / fn).exists(): shutil.copy(root / fn, sk / fn)
     for fn in ('README.md', 'README.de.md'):
         # the repo header image (docs/img/...) does not exist inside the skill: drop it, including the blank line after it

@@ -48,7 +48,7 @@
   },
   "readme": {
     "title": "Scores and practice files",
-    "poc": "Documentation of an agentic AI music workflow and skill as a private code experiment, developed for and with Claude Code. This is a proof of concept only. Use at your own risk.",
+    "poc": "Documentation of an agentic AI music workflow and skill as a private code experiment, developed for and with Claude Code. This is a proof of concept only.",
     "intro": "This package contains the choir parts as scores with lyrics and practice files (audio). It is based on the supplied source {source}.",
     "folders_h": "Folders",
     "col_folder": "Folder",

@@ -2,7 +2,7 @@
 
 English | [Deutsch](README.de.md)
 
-**Documentation of an agentic AI music workflow and skill as a private code experiment, developed for and with Claude Code. This is a proof of concept only. Use at your own risk.** The example here, choir-practice, turns a choir score into a checked ZIP in which every voice finds its own recordings to practise with, ready to share.
+**Documentation of an agentic AI music workflow and skill as a private code experiment, developed for and with Claude Code. This is a proof of concept only.** The example here, choir-practice, turns a choir score into a checked ZIP in which every voice finds its own recordings to practise with, ready to share.
 
 **Website with example pack and player:** https://vbth.github.io/choir-practice/
 
@@ -132,7 +132,7 @@ Python with the packages from `scripts/requirements-stable.txt`, FluidSynth, ffm
 The skill gives no legal advice and grants no rights. It asks whether the score is public domain, licensed, your own work or unclear, and whether it is for rehearsal or commercial use, and notes the answer in the README. Unclear rights with commercial use get a clear warning. Commercial use of the skill itself needs a licence (see 9); the licence says nothing about the rights to the score.
 
 ## 9. Licence – What is allowed?
-PolyForm Noncommercial License 1.0.0 ([`LICENSE`](LICENSE)), free for non-commercial use. Third-party components: `THIRD_PARTY_NOTICES.md`.
+PolyForm Noncommercial License 1.0.0 ([`LICENSE.md`](LICENSE.md)), free for non-commercial use. Third-party components: `THIRD_PARTY_NOTICES.md`.
 
 ## 10. Development – How to continue?
 `SKILL.md` instructions · `references/` formats and guides · `assets/` language packs and templates · `scripts/` tools · [`CHANGELOG.md`](CHANGELOG.md).
