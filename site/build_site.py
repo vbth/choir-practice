@@ -41,6 +41,17 @@ def nobreak(html):
     body = NB_FOOTER.sub(lambda m: re.sub(r'<span>([^<]*)</span>', lambda n: '<span>' + _glue(n.group(1)) + '</span>', m.group(1)), body)
     return head + sep + body
 
+IMG_REF = re.compile(r'(\bimg/([A-Za-z0-9_.-]+\.(?:png|jpg|svg)))(?=["\s,])')
+
+def bust(html):
+    """Cache busting: every image reference of the page (src, srcset, preload, og:image) gets ?v=<hash of the file>, so a changed image
+    (new footer in the example pages, new header) is fetched again instead of served from the browser or CDN cache."""
+    def one(m):
+        f = os.path.join(OUT, 'img', m.group(2))
+        if not os.path.exists(f): return m.group(0)
+        return m.group(1) + '?v=' + hashlib.sha1(open(f, 'rb').read()).hexdigest()[:8]
+    return IMG_REF.sub(one, html)
+
 REL = GH + '/releases/download/v1.0.0/'   # example ZIPs: assets of the release v1.0.0
 ZIPS = [('Deutsch: Alle meine Entchen', 'Chor_Uebungen_Alle_meine_Entchen.zip'), ('English: All My Ducklings', 'Choir_Practice_All_My_Ducklings.zip')]   # make_previews.py renders both
 ZIP_OF = {'de': ZIPS[0][1], 'en': ZIPS[1][1]}   # each page links only the package of its own language
@@ -628,8 +639,8 @@ def main():
     ai_labels()
     open(os.path.join(OUT, 'css', 'site.css'), 'w', encoding='utf-8').write(CSS)
     open(os.path.join(OUT, 'js', 'site.js'), 'w', encoding='utf-8').write(JS)
-    open(os.path.join(OUT, 'index.html'), 'w', encoding='utf-8').write(ext(nobreak(page('de'))))
-    open(os.path.join(OUT, 'en', 'index.html'), 'w', encoding='utf-8').write(ext(nobreak(page('en'))))
+    open(os.path.join(OUT, 'index.html'), 'w', encoding='utf-8').write(ext(bust(nobreak(page('de')))))
+    open(os.path.join(OUT, 'en', 'index.html'), 'w', encoding='utf-8').write(ext(bust(nobreak(page('en')))))
     alt = ''.join(f'<xhtml:link rel="alternate" hreflang="{h}" href="{u}"/>' for h, u in (('de', SITE), ('en', SITE + 'en/'), ('x-default', SITE)))
     open(os.path.join(OUT, 'sitemap.xml'), 'w', encoding='utf-8').write(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
