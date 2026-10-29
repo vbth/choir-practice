@@ -120,7 +120,7 @@ T = {
   'dl_p': 'Das Ergebnis: Aufnahmen zum Üben für jede Stimme, Anleitungen und Protokolle.', 'dl_btn': 'Beispiel-ZIP herunterladen',
   'tutti_all': 'Tutti, alle Stimmen', 'pl_title': 'Alle meine Entchen', 'pl_play': 'Wiedergabe', 'pl_pause': 'Pause', 'pl_seek': 'Position',
   'pl_cover': 'Albumcover des Beispielpakets',
-  'rechte_h': 'Rechte und KI',
+  'rechte_h': 'Rechte & KI',
   'rechte_items': [
    ('Rechte', 'Bevor Noten verarbeitet werden, fragt der Skill nach den Rechten. Diese Angaben werden in der README-Datei vermerkt. Ob die Noten verarbeitet und weitergegeben werden dürfen, richtet sich nach dem Urheber- und Lizenzrecht.'),
    ('KI-Kennzeichnung', 'Alles, was der Skill erzeugt, ist als KI-Inhalt gekennzeichnet, sowohl mit dem EU-Label für KI-generierte Inhalte als auch im Text und in den Metadaten der Dokumente.'),
@@ -186,7 +186,7 @@ T = {
   'dl_p': 'The result: practice recordings for every voice, guides and logs.', 'dl_btn': 'Download the example ZIP',
   'tutti_all': 'Tutti, all voices', 'pl_title': 'All My Ducklings', 'pl_play': 'Play', 'pl_pause': 'Pause', 'pl_seek': 'Position',
   'pl_cover': 'Album cover of the example pack',
-  'rechte_h': 'Rights and AI',
+  'rechte_h': 'Rights & AI',
   'rechte_items': [
    ('Rights', 'Before scores are processed, the skill asks about the rights. These details are recorded in the README file. Whether the scores may be processed and passed on depends on copyright and licence law.'),
    ('AI labelling', 'Everything the skill creates is labelled as AI content, both with the EU label for AI-generated content and in the text and metadata of the documents.'),
@@ -484,7 +484,7 @@ footer{max-width:var(--max);margin:0 auto;padding:24px var(--gut) 48px;border-to
  /* same visible gap above the headline as between menu and header image (72 px; the headline box starts 13 px above its first ink) */
  section.hero{padding-top:59px}
 }
-@media (max-width:1100px){
+@media (max-width:960px){
  .burger{display:block;order:100;margin-left:0}.bar>.lang{display:none}.navlang{display:block;border-top:1.5px solid var(--line);margin-top:4px}
  .bar nav{display:none;position:absolute;left:0;right:0;top:100%;background:var(--bg);border-bottom:1.5px solid var(--line);margin:0}
  .bar.open nav{display:block}.bar nav ul{flex-direction:column;gap:0;padding:8px var(--gut)}.bar nav a{padding:12px 0}
