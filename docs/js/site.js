@@ -40,21 +40,21 @@ function rad(db){return Math.max(15,34+1.33*db)}
 function mob0(W){return W<600}
 function draw(){
  while(svg.lastChild)svg.removeChild(svg.lastChild);
- var sw=1.5,col='currentColor',x0=320,half=250,W=svg.getBoundingClientRect().width||640,FS=Math.round(10*15*656/W)/10,LS=mob0(W)?FS:Math.round(FS*15)/10;
+ var sw=1.5,col='currentColor',x0=320,half=250,GAP=24,VW=656+2*GAP,W=svg.getBoundingClientRect().width||640,FS=Math.round(10*15*VW/W)/10,LS=mob0(W)?FS:Math.round(FS*15)/10;
  // over-ear headphones seen from the front, line art: steel frame, mesh canopy, telescopic arms, cups with cushions facing in, crown on the right cup
  var mob=mob0(W),oy=mob?200:230,ay=mob?338:312,py=mob?388:352;
- svg.setAttribute('viewBox','-8 -53 656 '+(mob?453:419));
- function ln(d,w){svg.appendChild(el('path',{d:d,fill:'none',stroke:col,'stroke-width':w||sw*2,'stroke-linecap':'round','stroke-linejoin':'round'}))}
- ln('M47 128 L47 120 A273 165 0 0 1 593 120 L593 128 L581 128 L581 120 A261 147 0 0 0 59 120 L59 128 Z');
- ln('M47 128 h12 v8 h-12 Z M581 128 h12 v8 h-12 Z',sw*1.5);
- ln('M30 160 C30 142 40 136 53 136 C66 136 76 142 76 160 L76 286 C76 304 66 310 53 310 C40 310 30 304 30 286 Z');
- ln('M564 160 C564 142 574 136 587 136 C600 136 610 142 610 160 L610 286 C610 304 600 310 587 310 C574 310 564 304 564 286 Z');
- ln('M76 156 C88 156 92 164 92 174 L92 272 C92 282 88 290 76 290',sw*1.5);
- ln('M564 156 C552 156 548 164 548 174 L548 272 C548 282 552 290 564 290',sw*1.5);
+ svg.setAttribute('viewBox',(-8-GAP)+' -53 '+VW+' '+(mob?453:419));
+ function ln(d,w,dx){svg.appendChild(el('path',{d:d,fill:'none',stroke:col,'stroke-width':w||sw*2,'stroke-linecap':'round','stroke-linejoin':'round',transform:'translate('+(dx||0)+' 0)'}))}   // dx: shifts a cup outwards
+ ln('M'+(47-GAP)+' 128 L'+(47-GAP)+' 120 A'+(273+GAP)+' 165 0 0 1 '+(593+GAP)+' 120 L'+(593+GAP)+' 128 L'+(581+GAP)+' 128 L'+(581+GAP)+' 120 A'+(261+GAP)+' 147 0 0 0 '+(59-GAP)+' 120 L'+(59-GAP)+' 128 Z');
+ ln('M47 128 h12 v8 h-12 Z',sw*1.5,-GAP);ln('M581 128 h12 v8 h-12 Z',sw*1.5,GAP);
+ ln('M30 160 C30 142 40 136 53 136 C66 136 76 142 76 160 L76 286 C76 304 66 310 53 310 C40 310 30 304 30 286 Z',null,-GAP);
+ ln('M564 160 C564 142 574 136 587 136 C600 136 610 142 610 160 L610 286 C610 304 600 310 587 310 C574 310 564 304 564 286 Z',null,GAP);
+ ln('M76 156 C88 156 92 164 92 174 L92 272 C92 282 88 290 76 290',sw*1.5,-GAP);
+ ln('M564 156 C552 156 548 164 548 174 L548 272 C548 282 552 290 564 290',sw*1.5,GAP);
  // sound waves between cup and ear, travelling inwards, red; only visible while a recording plays (class 'playing' on the svg).
- // The circles never reach further out than x=121 (or 519 on the right), the waves end at x=116 (8 units clear of the cushion at x=92 / 548): a gap of at least 5 units to the circles
+ // The circles never reach further out than x=121 (or 519 on the right); the whole headphones are GAP=24 units wider on each side, so the waves end at x=92 (or 548) and the gap to the circles is at least 29 units
  [0,1,2].forEach(function(i){var x=102+5*i,h=20+10*i,c=x+6;
-  [[x,c],[640-x,640-c]].forEach(function(p){svg.appendChild(el('path',{'class':'wave',d:'M'+p[0]+' '+(223-h)+' Q'+p[1]+' 223 '+p[0]+' '+(223+h),fill:'none',stroke:'var(--link)','stroke-width':sw*1.7,'stroke-linecap':'round',style:'animation-delay:'+(i*0.25)+'s'}))})});
+  [[x-GAP,c-GAP],[640-x+GAP,640-c+GAP]].forEach(function(p){svg.appendChild(el('path',{'class':'wave',d:'M'+p[0]+' '+(223-h)+' Q'+p[1]+' 223 '+p[0]+' '+(223+h),fill:'none',stroke:'var(--link)','stroke-width':sw*1.7,'stroke-linecap':'round',style:'animation-delay:'+(i*0.25)+'s'}))})});
  var list=D.mix[cur.stage][cur.voice],own=[],acc=[];
  list.forEach(function(e){(e[3]==='acc'?acc:own).push(e)});
  function pos(e){return x0+e[1]*(cur.stage==='tutti'?270:190)}   // tutti: circles further apart
