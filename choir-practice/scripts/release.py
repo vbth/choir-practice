@@ -51,7 +51,7 @@ for fn in ('README.md', 'README.de.md'):
     if f.exists():
         t = f.read_text(encoding='utf-8')
         human = today   # ISO date in both languages
-        t = re.sub(r'(</picture></a> )[\d.-]+( (?:KI-generiert\. Urheber- und Lizenzrechte ohne Gewähr\.|AI-generated\. Copyright and licence rights without warranty\.)\n*)\Z', rf'\g<1>{human}\g<2>\n\n', t)   # date of the footer line = release date
+        t = re.sub(r'(</picture></a> )[\d.-]+( (?:KI-generiert\. Nutzung auf eigene Gefahr\.|AI-generated\. Use at your own risk\.)\n*)\Z', rf'\g<1>{human}\g<2>\n\n', t)   # date of the footer line = release date
         f.write_text(t, encoding='utf-8')
 h = sk / 'session-handoff.md'
 if h.exists():

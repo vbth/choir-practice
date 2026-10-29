@@ -82,7 +82,8 @@ def readme_section(lang, spec, docs, mixes, layout):
             [dl['scores']] + R['f_scores'], [dl['practice']] + R['f_practice'],
             [dl['docs']] + R['f_docs'], [dl['tools']] + R['f_tools']]
     pv = RM['per_voice'].format(practice=dl['practice'])
-    md.append(f"## {R['folders_h']}\n\n" + md_table(rows) + '\n\n' + pv + '\n')
+    mrows = [rows[0]] + [[f'[{r[0]}](../{r[0]}/)'] + r[1:] for r in rows[1:]]   # Markdown only: folder names link to the sibling folders of the package
+    md.append(f"## {R['folders_h']}\n\n" + md_table(mrows) + '\n\n' + pv + '\n')
     fl += [P(R['folders_h'], H2), table(rows, [36 * mm, 74 * mm, 60 * mm]), Spacer(1, 3), P(esc(pv), S)]
     if mixes:
         L = mixes['levels']; st = i['stages']
