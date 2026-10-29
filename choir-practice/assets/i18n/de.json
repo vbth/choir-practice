@@ -48,6 +48,7 @@
   },
   "readme": {
     "title": "Noten und Übe-Dateien",
+    "poc": "Dokumentation eines agentischen KI-Musik-Workflows und -Skills als privates Code-Experiment, entwickelt für und mit Claude Code. Es handelt sich ausschließlich um einen Proof of Concept. Nutzung auf eigene Gefahr.",
     "intro": "Dieses Paket enthält die Chorstimmen als Noten mit Text sowie Übe-Dateien (Audio). Grundlage ist die gelieferte Vorlage {source}.",
     "folders_h": "Ordner",
     "col_folder": "Ordner",
@@ -269,10 +270,10 @@
       "tutti_note": "Datei 6 ist für alle Stimmen gleich und liegt deshalb in jedem Stimmenordner."
     }
   },
-  "ai_note": "KI-generiert, Urheber- und Lizenzrechte ohne Gewähr",
-  "ai_note_info": "KI-generiert, Urheber- und Lizenzrechte ohne Gewähr",
+  "ai_note": "KI-generiert, Urheber- und Lizenzrechte beachten, ohne Gewähr",
+  "ai_note_info": "KI-generiert, Urheber- und Lizenzrechte beachten, ohne Gewähr",
   "ai_tag": "KI-generiert",
-  "ai_meta": "KI-generiert, Urheber- und Lizenzrechte ohne Gewähr",
+  "ai_meta": "KI-generiert, Urheber- und Lizenzrechte beachten, ohne Gewähr",
   "skill_name": "choir-practice",
   "made_with": "Erstellt mit dem Skill „{name}“.",
   "delivery": {

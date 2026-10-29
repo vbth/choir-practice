@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>choir-practice Skill – Übe-MP3s je Stimme aus Chornoten</title>
-<meta name="description" content="Dokumentation agentischer KI-Musik-Workflows und Skills, entwickelt für und mit Claude Code. Beispiel: choir-practice macht aus Chornoten ein geprüftes ZIP mit MP3 und MIDI zum Üben für jede Stimme.">
+<meta name="description" content="Dokumentation eines agentischen KI-Musik-Workflows und -Skills als privates Code-Experiment, entwickelt für und mit Claude Code. Es handelt sich ausschließlich um einen Proof of Concept. Nutzung auf eigene Gefahr. Beispiel: choir-practice macht aus Chornoten ein geprüftes ZIP mit MP3 und MIDI zum Üben für jede Stimme.">
 <meta name="color-scheme" content="light dark">
 <link rel="canonical" href="https://vbth.github.io/choir-practice/">
 <link rel="alternate" hreflang="de" href="https://vbth.github.io/choir-practice/">
@@ -13,7 +13,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="choir-practice Skill">
 <meta property="og:title" content="choir-practice Skill – Übe-MP3s je Stimme aus Chornoten">
-<meta property="og:description" content="Dokumentation agentischer KI-Musik-Workflows und Skills, entwickelt für und mit Claude Code. Beispiel: choir-practice macht aus Chornoten ein geprüftes ZIP mit MP3 und MIDI zum Üben für jede Stimme.">
+<meta property="og:description" content="Dokumentation eines agentischen KI-Musik-Workflows und -Skills als privates Code-Experiment, entwickelt für und mit Claude Code. Es handelt sich ausschließlich um einen Proof of Concept. Nutzung auf eigene Gefahr. Beispiel: choir-practice macht aus Chornoten ein geprüftes ZIP mit MP3 und MIDI zum Üben für jede Stimme.">
 <meta property="og:url" content="https://vbth.github.io/choir-practice/">
 <meta property="og:locale" content="de_DE">
 <meta property="og:locale:alternate" content="en_US">
@@ -24,7 +24,7 @@
 <meta property="og:image:alt" content="Ein Mann mit Kopfhörern steht in einer alten Badewanne und singt vom Notenblatt, neben ihm schwimmt eine Quietscheente, rote Noten schweben im Raum">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="choir-practice Skill – Übe-MP3s je Stimme aus Chornoten">
-<meta name="twitter:description" content="Dokumentation agentischer KI-Musik-Workflows und Skills, entwickelt für und mit Claude Code. Beispiel: choir-practice macht aus Chornoten ein geprüftes ZIP mit MP3 und MIDI zum Üben für jede Stimme.">
+<meta name="twitter:description" content="Dokumentation eines agentischen KI-Musik-Workflows und -Skills als privates Code-Experiment, entwickelt für und mit Claude Code. Es handelt sich ausschließlich um einen Proof of Concept. Nutzung auf eigene Gefahr. Beispiel: choir-practice macht aus Chornoten ein geprüftes ZIP mit MP3 und MIDI zum Üben für jede Stimme.">
 <meta name="twitter:image" content="https://vbth.github.io/choir-practice/img/og.png">
 <meta name="twitter:image:alt" content="Ein Mann mit Kopfhörern steht in einer alten Badewanne und singt vom Notenblatt, neben ihm schwimmt eine Quietscheente, rote Noten schweben im Raum">
 <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
@@ -34,13 +34,13 @@
 <link rel="preload" href="img/header.png" as="image" type="image/png" media="(prefers-color-scheme: light)">
 <link rel="preload" href="img/header-dark.png" as="image" type="image/png" media="(prefers-color-scheme: dark)">
 <script>try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
-<link rel="stylesheet" href="css/site.css?v=e9d826af">
+<link rel="stylesheet" href="css/site.css?v=6bcc1cac">
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
  "@type": "SoftwareApplication",
  "name": "choir-practice Skill",
- "description": "Dokumentation agentischer KI-Musik-Workflows und Skills, entwickelt für und mit Claude Code. Beispiel: choir-practice macht aus Chornoten ein geprüftes ZIP mit MP3 und MIDI zum Üben für jede Stimme.",
+ "description": "Dokumentation eines agentischen KI-Musik-Workflows und -Skills als privates Code-Experiment, entwickelt für und mit Claude Code. Es handelt sich ausschließlich um einen Proof of Concept. Nutzung auf eigene Gefahr. Beispiel: choir-practice macht aus Chornoten ein geprüftes ZIP mit MP3 und MIDI zum Üben für jede Stimme.",
  "url": "https://vbth.github.io/choir-practice/",
  "inLanguage": "de",
  "softwareVersion": "1.0.0",
@@ -82,7 +82,7 @@
 </figure>
 <section id="start" class="hero">
  <h1>Hören, mitsingen, sicher werden.</h1>
- <p class="lead">Dokumentation agentischer KI-Musik-Workflows und Skills, entwickelt für und mit Claude Code. Das Beispiel hier: Aus Chornoten entsteht ein geprüftes ZIP, in dem jede Stimme ihre eigenen Aufnahmen zum Üben findet, fertig zum Weitergeben.</p>
+ <p class="lead">Dokumentation eines agentischen KI-Musik-Workflows und -Skills als privates Code-Experiment, entwickelt für und mit Claude Code. Es handelt sich ausschließlich um einen Proof of Concept. Nutzung auf eigene Gefahr. Das Beispiel hier: Aus Chornoten entsteht ein geprüftes ZIP, in dem jede Stimme ihre eigenen Aufnahmen zum Üben findet, fertig zum Weitergeben.</p>
  <p class="cta"><a href="#beispiel-zip">Beispiel-ZIP ansehen</a></p>
  <dl class="facts"><div><dt>4</dt><dd>Stufen je Stimme</dd></div><div><dt>2</dt><dd>Klänge: Chor und Klavier</dd></div><div><dt>2</dt><dd>Fassungen: normal und langsam</dd></div><div><dt>42</dt><dd>Aufnahmen im Beispiel</dd></div></dl>
 </section>
@@ -134,18 +134,17 @@
  <div class="cols"><article><h3>Rechte</h3><p>Bevor Noten verarbeitet werden, fragt der Skill nach den Rechten. Die Angaben des Nutzers vermerkt er in der README des Pakets. Lizenzen für Noten müssen eingehalten werden.</p></article><article><h3>Kennzeichnung</h3><p>Alles, was der Skill erzeugt, ist als KI-Inhalt gekennzeichnet, sowohl mit dem EU-Label für KI-generierte Inhalte als auch im Text und in den Metadaten der Dokumente.</p></article></div>
 </section>
 <section id="lizenz"><h2><span class="num">05</span>Lizenzen</h2>
- <p class="intro">PolyForm Noncommercial License 1.0.0,<br>frei für nichtkommerzielle Nutzung.</p>
- <p><a href="https://github.com/vbth/choir-practice/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">Lizenztext lesen</a></p>
  <p class="intro">Lizenzen von Drittanbietern müssen beachtet werden. <a href="https://github.com/vbth/choir-practice/blob/main/choir-practice/THIRD_PARTY_NOTICES.md" target="_blank" rel="noopener noreferrer">Rechte der Drittanbieter-Lizenzen lesen</a></p>
+ <p class="intro">PolyForm Noncommercial License 1.0.0, frei für nichtkommerzielle Nutzung. <a href="https://github.com/vbth/choir-practice/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">Lizenztext lesen</a></p>
 </section>
 </main>
-<footer><span class="aitag"><svg xmlns="http://www.w3.org/2000/svg" viewBox="89.29 100.72 365.48 365.48" role="img" class="ailabel" focusable="false"><title>AI</title><path fill="#000" fill-rule="evenodd" d="M272.03,100.72c100.92,0,182.74,81.82,182.74,182.75s-81.82,182.74-182.74,182.74-182.75-81.82-182.75-182.74,81.82-182.75,182.75-182.75"/>
+<footer><p class="fnote"><span class="fl"><a href="https://github.com/vbth/choir-practice" aria-label="GitHub-Repository vbth/choir-practice" target="_blank" rel="noopener noreferrer"><svg class="ghi" viewBox="0 0 16 16" width="22" height="22" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a></span><span>choir-practice – KI-Musik-Workflow/-Skill entwickelt für/mit Claude Code. Proof of Concept, Nutzung auf eigene Gefahr.</span></p><span class="aitag"><svg xmlns="http://www.w3.org/2000/svg" viewBox="89.29 100.72 365.48 365.48" role="img" class="ailabel" focusable="false"><title>AI</title><path fill="#000" fill-rule="evenodd" d="M272.03,100.72c100.92,0,182.74,81.82,182.74,182.75s-81.82,182.74-182.74,182.74-182.75-81.82-182.75-182.74,81.82-182.75,182.75-182.75"/>
   <g>
     <path fill="#fff" d="M170.79,353.74c-1.08,0-2.05-.43-2.92-1.31-.88-.87-1.31-1.84-1.31-2.92,0-.67.07-1.27.2-1.81l47.34-129.32c.4-1.48,1.24-2.79,2.52-3.93,1.27-1.14,3.05-1.71,5.34-1.71h29.81c2.28,0,4.06.57,5.34,1.71,1.27,1.14,2.11,2.45,2.52,3.93l47.14,129.32c.27.54.4,1.14.4,1.81,0,1.08-.44,2.05-1.31,2.92s-1.91,1.31-3.12,1.31h-24.78c-2.01,0-3.52-.5-4.53-1.51-1.01-1.01-1.65-1.91-1.91-2.72l-7.86-20.55h-53.78l-7.65,20.55c-.27.81-.88,1.71-1.81,2.72-.94,1.01-2.55,1.51-4.83,1.51h-24.78ZM218.13,299.96h37.47l-18.93-53.18-18.53,53.18Z"/>
     <path fill="#fff" d="M328.11,353.74c-1.48,0-2.69-.47-3.63-1.41-.94-.94-1.41-2.15-1.41-3.63v-130.93c0-1.48.47-2.68,1.41-3.63s2.15-1.41,3.63-1.41h26.99c1.48,0,2.68.47,3.63,1.41.94.94,1.41,2.15,1.41,3.63v130.93c0,1.48-.47,2.69-1.41,3.63-.94.94-2.15,1.41-3.63,1.41h-26.99Z"/>
   </g></svg>
-<span>KI-generiert, Urheber- und Lizenzrechte ohne Gewähr, 2026</span></span><p class="fnote"><span class="fl"><a href="https://github.com/vbth/choir-practice" aria-label="GitHub-Repository vbth/choir-practice" target="_blank" rel="noopener noreferrer"><svg class="ghi" viewBox="0 0 16 16" width="22" height="22" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a></span> Doku – agentischer KI-Musik-Workflow/-Skill entwickelt für/mit Claude Code</p></footer>
+<span>KI-generiert, Urheber- und Lizenzrechte beachten, ohne Gewähr, 2026</span></span></footer>
 <script>window.PAGE={"lang": "de", "seat": ["S", "A", "T", "B"], "mix": {"solo": {"S": [["S", 0.0, 0, "own"]], "A": [["A", 0.0, 0, "own"]], "T": [["T", 0.0, 0, "own"]], "B": [["B", 0.0, 0, "own"]]}, "accomp": {"S": [["S", 0.0, 0, "own"], ["S", -0.5, -12, "acc"], ["A", -0.17, -12, "acc"], ["T", 0.17, -12, "acc"], ["B", 0.5, -12, "acc"]], "A": [["A", 0.0, 0, "own"], ["S", -0.45, -4, "own"], ["S", -0.5, -12, "acc"], ["A", -0.17, -12, "acc"], ["T", 0.17, -12, "acc"], ["B", 0.5, -12, "acc"]], "T": [["T", 0.0, 0, "own"], ["S", -0.45, -4, "own"], ["S", -0.5, -12, "acc"], ["A", -0.17, -12, "acc"], ["T", 0.17, -12, "acc"], ["B", 0.5, -12, "acc"]], "B": [["B", 0.0, 0, "own"], ["S", -0.45, -4, "own"], ["S", -0.5, -12, "acc"], ["A", -0.17, -12, "acc"], ["T", 0.17, -12, "acc"], ["B", 0.5, -12, "acc"]]}, "choir": {"S": [["S", 0.0, 0, "own"], ["A", 0.6, -7, "own"], ["T", -0.6, -9, "own"], ["B", 0.95, -12, "own"]], "A": [["A", 0.0, 0, "own"], ["S", -0.6, -7, "own"], ["T", 0.6, -7, "own"], ["B", 0.95, -12, "own"]], "T": [["T", 0.0, 0, "own"], ["S", -0.95, -12, "own"], ["A", -0.6, -7, "own"], ["B", 0.6, -7, "own"]], "B": [["B", 0.0, 0, "own"], ["S", -0.95, -12, "own"], ["A", 0.6, -9, "own"], ["T", -0.6, -7, "own"]]}, "tutti": {"S": [["S", -0.5, -3, "own"], ["A", -0.17, -3, "own"], ["T", 0.17, -3, "own"], ["B", 0.5, -3, "own"]], "A": [["S", -0.5, -3, "own"], ["A", -0.17, -3, "own"], ["T", 0.17, -3, "own"], ["B", 0.5, -3, "own"]], "T": [["S", -0.5, -3, "own"], ["A", -0.17, -3, "own"], ["T", 0.17, -3, "own"], ["B", 0.5, -3, "own"]], "B": [["S", -0.5, -3, "own"], ["A", -0.17, -3, "own"], ["T", 0.17, -3, "own"], ["B", 0.5, -3, "own"]]}}, "voices": {"S": "Sopran", "A": "Alt", "T": "Tenor", "B": "Bass"}, "stages": {"solo": "Allein", "accomp": "Mit Begleitung", "choir": "Im Chor", "tutti": "Tutti"}, "stage_txt": {"solo": "Nur die eigene Stimme, in der Mitte.", "accomp": "Eigene Stimme, die Melodie leiser, dazu die Klavierbegleitung aller Stimmen.", "choir": "Die anderen Stimmen sitzen wie im Chor: Nachbarn links und rechts etwas leiser, weiter entfernte noch leiser.", "tutti": "Alle Stimmen gleich laut."}, "steps": [["Aufruf", "you", "Skill in Claude starten, noch ohne Noten.", ""], ["Stopp A", "both", "Angaben über Rechte und Verwendungszweck.", "Alles bereit?"], ["Noten anhängen", "you", "Als PDF oder Foto.", ""], ["Sichtung", "claude", "Claude liest die Seiten und prüft die Qualität.", "Alles verstanden?"], ["Stopp B", "you", "Titel, Stimmen und Tempo bestätigen.", ""], ["Notenerfassung", "claude", "Claude überträgt die Noten.", "Fehlerfrei?"], ["Korrekturlesen", "claude", "Claude vergleicht das Ergebnis zweimal mit der Vorlage: erst Töne, dann Text.", "Alles sauber? Sonst zurück zu Schritt 6."], ["Endgültiger Notensatz", "claude", "Claude setzt die Noten sauber, mit Titelblatt.", "Gut lesbar?"], ["Audio", "claude", "Claude erzeugt für jede Stimme die Audio-Dateien zum Üben.", "Alles da?"], ["Paket", "claude", "Claude schreibt die Anleitungen und packt alles zusammen.", "Alle Inhalte vorhanden?"], ["Abschluss", "both", "Claude macht Verbesserungsvorschläge. Die Entscheidung über die Umsetzung liegt beim Nutzer.", ""], ["Herunterladen", "you", "ZIP herunterladen und die Audiodateien der einzelnen Stimmen an den Chor weitergeben.", ""]], "who": {"you": "Nutzer", "claude": "Claude", "both": "Claude + Nutzer"}, "own": "Gesang", "acc": "Klavier", "gate": "Prüfung am Ende", "sound_names": {"choir": "Chorklang", "piano": "Klavierklang"}, "slow_name": "langsam", "slow": 0.75, "theme_to_dark": "Zum dunklen Modus wechseln", "theme_to_light": "Zum hellen Modus wechseln"};</script>
-<script src="js/site.js?v=e9d826af"></script>
+<script src="js/site.js?v=6bcc1cac"></script>
 </body>
 </html>

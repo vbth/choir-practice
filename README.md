@@ -6,7 +6,7 @@
 
 English | [Deutsch](README.de.md)
 
-**Documentation of agentic AI music workflows and skills, developed for and with Claude Code.** The example here, choir-practice, turns a choir score into a checked ZIP in which every voice finds its own recordings to practise with, ready to share.
+**Documentation of an agentic AI music workflow and skill as a private code experiment, developed for and with Claude Code. This is a proof of concept only. Use at your own risk.** The example here, choir-practice, turns a choir score into a checked ZIP in which every voice finds its own recordings to practise with, ready to share.
 
 **Website with example pack and player:** https://vbth.github.io/choir-practice/
 
@@ -121,7 +121,7 @@ Each voice gets its own mix; the own voice always sits centred. The other voices
 - The "Practice" module of the website shows the mixes live on a headphone graphic (dot size = level, position = left/right). The overview PDF generated for every piece (`2_Practice/1_Overview.pdf`) shows the same mixes.
 
 ## 5. AI marking – How is AI content marked?
-Everything the skill generates is marked as AI-generated: the EU label "AI" and the note "AI-generated, no guarantee for copyright and licence rights" in the footer of every PDF, and the same note in the metadata of MP3, MIDI, MusicXML and PDF. The label follows the European Commission's icons for labelling AI-generated content (see `THIRD_PARTY_NOTICES.md`).
+Everything the skill generates is marked as AI-generated: the EU label "AI" and the note "AI-generated, observe copyright and licence rights, no warranty" in the footer of every PDF, and the same note in the metadata of MP3, MIDI, MusicXML and PDF. The label follows the European Commission's icons for labelling AI-generated content (see `THIRD_PARTY_NOTICES.md`).
 
 ## 6. Limits – What can’t it do?
 - Claude does not hear the audio; it is tested technically (duration against the MIDI, gaps, clipping, loudness, stereo). Sound and taste are not judged.
@@ -151,5 +151,5 @@ PolyForm Noncommercial License 1.0.0 ([`LICENSE`](LICENSE)), free for non-commer
 - Dependabot (`.github/dependabot.yml`) proposes updates monthly: for the pinned package versions in `scripts/requirements-stable.txt` (minor and patch only, grouped, at most two open PRs) and for the GitHub Actions. CI does not run the skill pipeline with these packages: before merging a Python PR, run the whole pipeline with the new versions, then add to `CHANGELOG.md`; the new versions only apply from the next release.
 - To continue developing the skill in a new chat, attach `choir-practice/session-handoff.md` (open points and lessons of the current version).
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/ai-basic-dark.svg"><img src="https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/ai-basic.svg" alt="AI" height="18" align="absmiddle"></picture> AI-generated, no guarantee for copyright and licence rights, 2026-10-28
+<picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/ai-basic-dark.svg"><img src="https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/ai-basic.svg" alt="AI" height="18" align="absmiddle"></picture> AI-generated, observe copyright and licence rights, no warranty, 2026-10-28
 

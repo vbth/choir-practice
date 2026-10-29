@@ -6,7 +6,7 @@
 
 [English](README.md) | Deutsch
 
-**Dokumentation agentischer KI-Musik-Workflows und Skills, entwickelt für und mit Claude Code.** Das Beispiel hier, choir-practice, macht aus Chornoten ein geprüftes ZIP, in dem jede Stimme ihre eigenen Aufnahmen zum Üben findet, fertig zum Weitergeben.
+**Dokumentation eines agentischen KI-Musik-Workflows und -Skills als privates Code-Experiment, entwickelt für und mit Claude Code. Es handelt sich ausschließlich um einen Proof of Concept. Nutzung auf eigene Gefahr.** Das Beispiel hier, choir-practice, macht aus Chornoten ein geprüftes ZIP, in dem jede Stimme ihre eigenen Aufnahmen zum Üben findet, fertig zum Weitergeben.
 
 **Website mit Beispielpaket und Player:** https://vbth.github.io/choir-practice/
 
@@ -121,7 +121,7 @@ Jede Stimme bekommt ihren eigenen Mix; die eigene Stimme liegt immer in der Mitt
 - Das Modul „Üben“ der Website zeigt die Mixe live am Kopfhörer (Punktgröße = Pegel, Position = links/rechts). Die Übersicht, die für jedes Stück erzeugt wird (`2_Ueben/1_Uebersicht.pdf`), zeigt dieselben Mixe.
 
 ## 5. KI-Kennzeichnung – Wie werden KI-Inhalte markiert?
-Alles, was der Skill erzeugt, ist als KI-generiert gekennzeichnet: das EU-Label „AI“ und der Hinweis „KI-generiert, Urheber- und Lizenzrechte ohne Gewähr“ in der Fußzeile jedes PDFs, derselbe Hinweis in den Metadaten von MP3, MIDI, MusicXML und PDF. Das Label folgt den Symbolen der Europäischen Kommission zur Kennzeichnung KI-generierter Inhalte (siehe `THIRD_PARTY_NOTICES.md`).
+Alles, was der Skill erzeugt, ist als KI-generiert gekennzeichnet: das EU-Label „AI“ und der Hinweis „KI-generiert, Urheber- und Lizenzrechte beachten, ohne Gewähr“ in der Fußzeile jedes PDFs, derselbe Hinweis in den Metadaten von MP3, MIDI, MusicXML und PDF. Das Label folgt den Symbolen der Europäischen Kommission zur Kennzeichnung KI-generierter Inhalte (siehe `THIRD_PARTY_NOTICES.md`).
 
 ## 6. Grenzen – Was kann er nicht?
 - Claude hört das Audio nicht; es wird technisch geprüft (Dauer gegen das MIDI, Lücken, Übersteuerung, Lautstärke, Stereo). Klang und Geschmack werden nicht beurteilt.
@@ -151,5 +151,5 @@ PolyForm Noncommercial License 1.0.0 ([`LICENSE`](LICENSE)), frei für nichtkomm
 - Dependabot (`.github/dependabot.yml`) schlägt monatlich Updates vor: für die festgelegten Paketversionen in `scripts/requirements-stable.txt` (nur Minor und Patch, gebündelt, höchstens zwei offene PRs) und für die GitHub Actions. Die CI testet die Skill-Pipeline nicht mit diesen Paketen: Vor dem Mergen eines Python-PRs die ganze Pipeline mit den neuen Versionen durchlaufen lassen, dann `CHANGELOG.md` ergänzen; die neuen Versionen gelten erst im nächsten Release.
 - Zum Weiterentwickeln des Skills in einem neuen Chat `choir-practice/session-handoff.md` anhängen (offene Punkte und Erkenntnisse der aktuellen Version).
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/ai-basic-dark.svg"><img src="https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/ai-basic.svg" alt="AI" height="18" align="absmiddle"></picture> KI-generiert, Urheber- und Lizenzrechte ohne Gewähr, 2026-10-28
+<picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/ai-basic-dark.svg"><img src="https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/ai-basic.svg" alt="AI" height="18" align="absmiddle"></picture> KI-generiert, Urheber- und Lizenzrechte beachten, ohne Gewähr, 2026-10-28
 

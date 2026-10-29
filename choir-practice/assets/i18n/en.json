@@ -48,6 +48,7 @@
   },
   "readme": {
     "title": "Scores and practice files",
+    "poc": "Documentation of an agentic AI music workflow and skill as a private code experiment, developed for and with Claude Code. This is a proof of concept only. Use at your own risk.",
     "intro": "This package contains the choir parts as scores with lyrics and practice files (audio). It is based on the supplied source {source}.",
     "folders_h": "Folders",
     "col_folder": "Folder",
@@ -269,10 +270,10 @@
       "tutti_note": "File 6 is the same for all voices and therefore lies in every voice ZIP."
     }
   },
-  "ai_note": "AI-generated, no guarantee for copyright and licence rights",
-  "ai_note_info": "AI-generated, no guarantee for copyright and licence rights",
+  "ai_note": "AI-generated, observe copyright and licence rights, no warranty",
+  "ai_note_info": "AI-generated, observe copyright and licence rights, no warranty",
   "ai_tag": "AI-generated",
-  "ai_meta": "AI-generated, no guarantee for copyright and licence rights",
+  "ai_meta": "AI-generated, observe copyright and licence rights, no warranty",
   "skill_name": "choir-practice",
   "made_with": "Made with the skill \"{name}\".",
   "delivery": {
