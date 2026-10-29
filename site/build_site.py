@@ -38,7 +38,7 @@ def nobreak(html):
     a non-breaking space; the footer lines too. Applied to the body only. Texts set by the page script do the same (nb() in site.js)."""
     head, sep, body = html.partition('<body')
     body = NB_BLOCKS.sub(lambda m: f'<{m.group(1)}{m.group(2) or ""}>{_glue(m.group(3))}</{m.group(1)}>', body)
-    body = NB_FOOTER.sub(lambda m: re.sub(r'<span>([^<]*)</span>', lambda n: '<span>' + _glue(n.group(1)) + '</span>', m.group(1)), body)
+    body = NB_FOOTER.sub(lambda m: re.sub(r'<span>((?:(?!<span).)*?)</span>', lambda n: '<span>' + _glue(n.group(1)) + '</span>', m.group(1)), body)
     return head + sep + body
 
 IMG_REF = re.compile(r'(\bimg/([A-Za-z0-9_.-]+\.(?:png|jpg|svg)))(?=["\s,])')
@@ -73,7 +73,7 @@ T = {
   'h1': 'Hören, üben, sicher singen.',
   'lead': 'Dokumentation eines agentischen KI-Musik-Workflows und -Skills als privates Code-Experiment, entwickelt für und mit Claude Code. Es handelt sich ausschließlich um einen Proof of Concept. Das Beispiel hier: Aus Chornoten entsteht ein geprüftes ZIP, in dem jede Stimme ihre eigenen Aufnahmen zum Üben findet, fertig zum Weitergeben.',
   'cta': 'Beispiel-ZIP ansehen',
-  'ai': 'KI-generiert. Urheber- und Lizenzrechte beachten. Nutzung auf eigene Gefahr.',
+  'foot_ai': 'KI-generiert.', 'foot_rest': 'KI-Musik-Workflow/-Skill, Nutzung auf eigene Gefahr', 'foot_site': 'Startseite',
   'facts': [('4', 'Stufen je Stimme'), ('2', 'Klänge: Chor und Klavier'), ('2', 'Fassungen: normal und langsam'), ('42', 'Aufnahmen im Beispiel')],
   'inh_h': 'Inhalte', 'paket_h': 'Beispiel-ZIP', 'paket_p': 'Im ZIP liegen vier Ordner. Die Stimmen-ZIPs in 2_Ueben sind fertig zum Weitergeben, ihr Inhalt steht zuletzt. Einen Ordner anklicken.',
   'tree': [
@@ -126,7 +126,7 @@ T = {
    ('Kennzeichnung', 'Alles, was der Skill erzeugt, ist als KI-Inhalt gekennzeichnet, sowohl mit dem EU-Label für KI-generierte Inhalte als auch im Text und in den Metadaten der Dokumente.'),
   ],
   'lic_h': 'Lizenzen', 'lic_p': 'PolyForm Noncommercial License 1.0.0,',
-  'lic_link': 'Lizenztext lesen', 'lic_third': 'Lizenzen von Drittanbietern,', 'lic_third_link': 'Übersicht lesen', 'foot_profile': 'GitHub-Repository vbth/choir-practice', 'foot_note': 'choir-practice – Proof of Concept KI-Musik-Workflow/-Skill entwickelt für/von Claude Code.', 'private': 'privates Projekt', 'og_alt': 'Ein Mann mit Kopfhörern steht in einer alten Badewanne und singt vom Notenblatt, neben ihm schwimmt eine Quietscheente, rote Noten schweben im Raum',
+  'lic_link': 'Lizenztext lesen', 'lic_third': 'Lizenzen von Drittanbietern,', 'lic_third_link': 'Übersicht lesen', 'foot_profile': 'GitHub-Repository vbth/choir-practice', 'private': 'privates Projekt', 'og_alt': 'Ein Mann mit Kopfhörern steht in einer alten Badewanne und singt vom Notenblatt, neben ihm schwimmt eine Quietscheente, rote Noten schweben im Raum',
   'alt_cover': 'Deckblatt des Beispielpakets', 'alt_page1': 'Erste Notenseite des Beispielpakets', 'alt_page2': 'Zweite Notenseite des Beispielpakets', 'alt_ai': 'EU-Label AI',
   'ai_label': 'AI', 'top': 'Nach oben',
  },
@@ -139,7 +139,7 @@ T = {
   'h1': 'Listen, practise, sing with confidence.',
   'lead': 'Documentation of an agentic AI music workflow and skill as a private code experiment, developed for and with Claude Code. This is a proof of concept only. The example here: a choir score becomes a checked ZIP in which every voice finds its own recordings to practise with, ready to share.',
   'cta': 'See the example ZIP',
-  'ai': 'AI-generated. Observe copyright and licence rights. Use at your own risk.',
+  'foot_ai': 'AI-generated.', 'foot_rest': 'AI music workflow/skill, use at your own risk', 'foot_site': 'Home page',
   'facts': [('4', 'stages per voice'), ('2', 'sounds: choir and piano'), ('2', 'versions: normal and slow'), ('42', 'recordings in the example')],
   'inh_h': 'Contents', 'paket_h': 'Example ZIP', 'paket_p': 'The ZIP holds four folders. The voice ZIPs in 2_Practice are ready to hand out, their contents are listed last. Click a folder.',
   'tree': [
@@ -192,7 +192,7 @@ T = {
    ('Labelling', 'Everything the skill creates is labelled as AI content, both with the EU label for AI-generated content and in the text and metadata of the documents.'),
   ],
   'lic_h': 'Licences', 'lic_p': 'PolyForm Noncommercial License 1.0.0,',
-  'lic_link': 'Read the licence text', 'lic_third': 'Licences of third parties,', 'lic_third_link': 'Read the overview', 'foot_profile': 'GitHub repository vbth/choir-practice', 'foot_note': 'choir-practice – Proof of concept AI music workflow/skill developed for/by Claude Code.', 'private': 'private project', 'og_alt': 'A man with headphones stands in an old bathtub and sings from a sheet of music, a rubber duck floats beside him, red notes drift through the room',
+  'lic_link': 'Read the licence text', 'lic_third': 'Licences of third parties,', 'lic_third_link': 'Read the overview', 'foot_profile': 'GitHub repository vbth/choir-practice', 'private': 'private project', 'og_alt': 'A man with headphones stands in an old bathtub and sings from a sheet of music, a rubber duck floats beside him, red notes drift through the room',
   'alt_cover': 'Title page of the example pack', 'alt_page1': 'First score page of the example pack', 'alt_page2': 'Second score page of the example pack', 'alt_ai': 'EU label AI',
   'ai_label': 'AI', 'top': 'Back to top',
  },
@@ -366,7 +366,7 @@ def page(L):
  <p class="intro wide">{esc(t['lic_p'])} <a href="{GH}/blob/main/LICENSE.md">{esc(t['lic_link'])}</a>, {esc(t['lic_third'])} <a href="{GH}/blob/main/choir-practice/THIRD_PARTY_NOTICES.md">{esc(t['lic_third_link'])}</a></p>
 </section>
 </main>
-<footer><p class="fnote"><span class="fl"><a href="{GH}" aria-label="{esc(t['foot_profile'])}">{GHICON}</a></span><span>{esc(t['foot_note'])}</span></p><span class="aitag">{ai}<span>{YEAR} {esc(t['ai'])}</span></span></footer>
+<footer><p class="fnote"><a class="ail" href="{SITE}{'en/' if L=='en' else ''}" aria-label="{esc(t['foot_site'])}">{ai}</a><span>{YEAR} {esc(t['foot_ai'])} <a href="{GH}">choir-practice</a> – {esc(t['foot_rest'])}</span><a class="fl" href="{GH}" aria-label="{esc(t['foot_profile'])}">{GHICON}</a></p></footer>
 <script>window.PAGE={json.dumps(data, ensure_ascii=False)};</script>
 <script src="{A}js/site.js?v={asset_version()}"></script>
 </body>
@@ -476,7 +476,7 @@ h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 .cols{display:grid;grid-template-columns:repeat(2,1fr);gap:0 32px}.cols article{border-top:1.5px solid var(--line);padding-top:16px}
 .cols p{margin:0}
 .steps{padding-left:1.4em;max-width:44em}.steps li{margin:0 0 10px}
-footer .fnote{flex:0 0 100%;margin:0;display:flex;align-items:center;gap:10px}footer .fnote .fl{flex:none;width:1.6em;justify-content:center}
+footer .fnote{flex:0 0 100%;margin:0;display:flex;align-items:center;gap:10px}footer .fnote .ail,footer .fnote .fl{flex:none;display:flex;align-items:center;color:var(--fg);text-decoration:none}footer .fnote .fl{width:1.6em;justify-content:center}footer .fnote span a{color:inherit}
 footer{max-width:var(--max);margin:0 auto;padding:24px var(--gut) 48px;border-top:1.5px solid var(--line);display:flex;flex-wrap:wrap;gap:12px 32px;align-items:center;justify-content:space-between;font-size:var(--fs-s)}
 @media (max-width:900px){.chain{grid-template-columns:repeat(3,1fr)}.cols{grid-template-columns:1fr;row-gap:16px}.tree{grid-template-columns:1fr}}
 @media (max-width:760px){
