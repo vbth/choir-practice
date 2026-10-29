@@ -122,7 +122,7 @@ T = {
   'pl_cover': 'Albumcover des Beispielpakets',
   'rechte_h': 'Rechte & KI',
   'rechte_items': [
-   ('Rechte', 'Bevor Noten verarbeitet werden, fragt der Skill nach den Rechten. Diese Angaben werden in der README-Datei vermerkt. Ob die Noten verarbeitet und weitergegeben werden dürfen, richtet sich nach dem Urheber- und Lizenzrecht.'),
+   ('Rechte', 'Bevor Noten verarbeitet werden, fragt der Skill nach den Rechten. Diese Angaben werden danach in der README-Datei vermerkt. Ob die Noten verarbeitet und weitergegeben werden dürfen, richtet sich nach dem Urheber- und Lizenzrecht, unter dem sie stehen.'),
    ('KI-Kennzeichnung', 'Alles, was der Skill erzeugt, ist als KI-Inhalt gekennzeichnet, sowohl mit dem EU-Label für KI-generierte Inhalte als auch im Text und in den Metadaten der Dokumente.'),
   ],
   'lic_h': 'Lizenzen', 'lic_p': 'PolyForm Noncommercial License 1.0.0,',
@@ -188,7 +188,7 @@ T = {
   'pl_cover': 'Album cover of the example pack',
   'rechte_h': 'Rights & AI',
   'rechte_items': [
-   ('Rights', 'Before scores are processed, the skill asks about the rights. These details are recorded in the README file. Whether the scores may be processed and passed on depends on copyright and licence law.'),
+   ('Rights', 'Before scores are processed, the skill asks about the rights. These details are then recorded in the README file. Whether the scores may be processed and passed on depends on the copyright and licence law they are subject to.'),
    ('AI labelling', 'Everything the skill creates is labelled as AI content, both with the EU label for AI-generated content and in the text and metadata of the documents.'),
   ],
   'lic_h': 'Licences', 'lic_p': 'PolyForm Noncommercial License 1.0.0,',

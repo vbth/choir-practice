@@ -3,6 +3,7 @@
 All notable changes to the skill. Newest first. Versions follow [SemVer](https://semver.org/); every release is a git tag `vX.Y.Z` with a GitHub release that carries the `.skill` file.
 
 ## Unreleased
+- Website, section "Rechte & KI": the rights text now says the details are recorded "danach" in the README file and that processing and passing on depend on "dem Urheber- und Lizenzrecht, unter dem sie stehen" (en: "the copyright and licence law they are subject to")
 - Website: menu entry, heading, link and download button say "Beispiel" / "Example" instead of "Beispiel-ZIP" / "Example ZIP"
 - Website: the red sound waves at the headphones pulse with the rhythm of the recording (Web Audio analyser): every note onset switches the three arcs per side on, they go off again from the outside in, and the inner arc stays on while it sounds; always full red, no fading. Without Web Audio, with reduced motion or if the audio context cannot start, the fixed animation stays as before
 - Website: heading of section 04 now reads "Rechte & KI" / "Rights & AI" (like the menu entry); the menu collapses into the burger button only below 960 px instead of 1100 px, so a desktop window shows the full navigation
