@@ -38,9 +38,9 @@ MD_LABEL = 'https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/
 
 def md_footer(lang, title, iso=None):
     """Footer line of the Markdown files = the PDF footer: [EU label, linked from the repo] "KI-generiert, ohne Gewähr, DD.MM.YYYY" (no title),
-    preceded and followed by one blank line (written by make_docs; the repo READMEs end the same way). Label height 14 px, proportional to ICON_H."""
+    preceded and followed by one blank line (written by make_docs; the repo READMEs end the same way). Label height 18 px, proportional to ICON_H."""
     return (f'<picture><source media="(prefers-color-scheme: dark)" srcset="{MD_LABEL}ai-basic-dark.svg">'
-            f'<img src="{MD_LABEL}ai-basic.svg" alt="AI" height="14" align="absmiddle"></picture> '
+            f'<img src="{MD_LABEL}ai-basic.svg" alt="AI" height="18" align="absmiddle"></picture> '
             + load_i18n(lang)['ai_meta'] + f', {human_date(lang, iso)}')
 
 def footer_left(lang, iso=None, kind='info'):
@@ -56,9 +56,9 @@ def icon_path(kind):
 #   size FOOT_PT on every PDF; the label is sized so that the capitals of its letters (AI) are as high as the capitals
 #   of the text and stand on the same baseline; Markdown: one blank line, md_footer(), one blank line (label linked from the repo)
 PLEX_CAP = 0.698         # cap height of IBM Plex Sans in em
-LABEL_WORD_CAP = 128.5 / 267.13   # cap height of the letters AI in the label, in label heights
-ICON_H = round(PLEX_CAP / LABEL_WORD_CAP, 3)   # label height in font sizes (1.451)
-ICON_BASE = 0.7375   # baseline of the letters, from the top of the label, in label heights: label and text share one baseline
+LABEL_WORD_CAP = 141 / 365.48   # cap height of the letters AI in the round label, in label heights
+ICON_H = round(PLEX_CAP / LABEL_WORD_CAP, 3)   # label height in font sizes (1.809)
+ICON_BASE = 0.6922   # baseline of the letters, from the top of the label, in label heights: label and text share one baseline
 
 def _icon_vb(kind):
     import re

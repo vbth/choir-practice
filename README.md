@@ -159,5 +159,5 @@ PolyForm Noncommercial License 1.0.0 ([`LICENSE`](LICENSE)), free for non-commer
 - Dependabot (`.github/dependabot.yml`) proposes updates monthly: for the pinned package versions in `scripts/requirements-stable.txt` (minor and patch only, grouped, at most two open PRs) and for the GitHub Actions. CI does not run the skill pipeline with these packages: before merging a Python PR, run the whole pipeline with the new versions, then add to `CHANGELOG.md`; the new versions only apply from the next release.
 - To continue developing the skill in a new chat, attach `choir-practice/session-handoff.md` (open points and lessons of the current version).
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/ai-basic-dark.svg"><img src="https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/ai-basic.svg" alt="AI" height="14" align="absmiddle"></picture> AI-generated, no guarantee, 2026-10-28
+<picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/ai-basic-dark.svg"><img src="https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/ai-basic.svg" alt="AI" height="18" align="absmiddle"></picture> AI-generated, no guarantee, 2026-10-28
 
