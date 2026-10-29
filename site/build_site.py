@@ -35,7 +35,7 @@ T = {
   'lead': 'choir-practice ist ein praktischer Claude-Skill, der viel Zeit spart: Aus Chornoten entsteht ein geprüftes ZIP, in dem man für jeden Sänger eigene Audio-Dateien zum Üben findet, fertig zum Weitergeben.',
   'cta1': 'Skill installieren', 'cta2': 'Beispiel-ZIP ansehen',
   'ai': 'KI-generiert, ohne Gewähr',
-  'facts': [('4', 'Stufen je Stimme'), ('2', 'Klänge: Chor und Klavier'), ('75 %', 'Tempo der langsamen Fassung'), ('42', 'Aufnahmen im Beispiel')],
+  'facts': [('4', 'Stufen je Stimme'), ('2', 'Klänge: Chor und Klavier'), ('2', 'Fassungen: normal und langsam'), ('42', 'Aufnahmen im Beispiel')],
   'inh_h': 'Inhalte', 'paket_h': 'Beispiel-ZIP', 'paket_p': 'Im ZIP liegen vier Ordner. Die Stimmen-ZIPs in 2_Ueben sind fertig zum Weitergeben, ihr Inhalt steht zuletzt. Einen Ordner anklicken.',
   'tree': [
    ('1_Noten', 'Noten (PDF), MusicXML und MIDI.', [
@@ -104,7 +104,7 @@ T = {
   'lead': 'choir-practice is a practical Claude skill that saves you a lot of time: your choir score becomes a checked ZIP in which every voice finds its own recordings to practise with, ready to share.',
   'cta1': 'Install the skill', 'cta2': 'See the example ZIP',
   'ai': 'AI-generated, no guarantee',
-  'facts': [('4', 'stages per voice'), ('2', 'sounds: choir and piano'), ('75%', 'tempo of the slow version'), ('42', 'recordings in the example')],
+  'facts': [('4', 'stages per voice'), ('2', 'sounds: choir and piano'), ('2', 'versions: normal and slow'), ('42', 'recordings in the example')],
   'inh_h': 'Contents', 'paket_h': 'Example ZIP', 'paket_p': 'The ZIP holds four folders. The voice ZIPs in 2_Practice are ready to hand out, their contents are listed last. Click a folder.',
   'tree': [
    ('1_Scores', 'Score (PDF), MusicXML and MIDI.', [

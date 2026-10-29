@@ -43,6 +43,7 @@ Unpack the .skill, run `scripts/setup.sh`, read this file. The skill in the user
 | O4 | Towel in `site/header/header-src.svg` (group `towel`): remove the black arc and the red dot (with its white glyph), then rebuild all assets for the website and the README (`site/header/build.sh` → `docs/img/header.png`, `site/make_previews.py`, `site/build_site.py`) | idea | open |
 | O5 | Logo on the website and in both READMEs links to the URL of the main page (site root, `/en/` for English), not to an anchor | idea | done in PR 4 |
 | O6 | Mobile website: gap between headline and header image equals the gap between menu and header image (72 px visible) | idea | done in PR 4 |
+| O7 | Website statistics block: "2 Fassungen: normal und langsam" instead of "75 % Tempo der langsamen Fassung", because the slow tempo is adjustable | idea | done in PR 4 |
 
 ## 5. How to continue
 Apply open points on request, add rows to sections 1 to 4 of the next handoff only, then release with `scripts/release.py` (see README section 11).
