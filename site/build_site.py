@@ -452,6 +452,8 @@ footer{max-width:var(--max);margin:0 auto;padding:24px var(--gut) 48px;border-to
 @media (max-width:900px){.chain{grid-template-columns:repeat(3,1fr)}.cols{grid-template-columns:1fr;row-gap:16px}.tree{grid-template-columns:1fr}}
 @media (max-width:760px){
  .facts{grid-template-columns:repeat(2,1fr)}section{padding:48px 0 40px}h2{gap:12px}
+ /* same visible gap above the headline as between menu and header image (72 px; the headline box starts 13 px above its first ink) */
+ section.hero{padding-top:59px}
 }
 @media (max-width:1100px){
  .burger{display:block;order:100;margin-left:0}.bar>.lang{display:none}.navlang{display:block;border-top:1.5px solid var(--line);margin-top:4px}
