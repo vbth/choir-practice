@@ -6,7 +6,7 @@
 
 [English](README.md) | Deutsch
 
-## Hören, üben, sicher singen.
+## Hören, üben, besser singen.
 
 **Dokumentation eines agentischen KI-Musik-Workflows und -Skills als privates Code-Experiment, entwickelt für und mit Claude Code. Es handelt sich ausschließlich um einen Proof of Concept.** Das Beispiel hier, choir-practice, macht aus Chornoten ein geprüftes ZIP, in dem jede Stimme ihre eigenen Aufnahmen zum Üben findet, fertig zum Weitergeben.
 
