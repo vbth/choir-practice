@@ -8,7 +8,9 @@ English | [Deutsch](README.de.md)
 
 ## Listen, practise, sing better.
 
-**Documentation of an agentic AI music workflow and skill as a private code experiment, developed for and with Claude Code. This is a proof of concept only.** The example here, choir-practice, turns a choir score into a checked ZIP in which every voice finds its own recordings to practise with, ready to share.
+**Documentation of an agentic AI music workflow and skill developed for and with Claude Code as a private code experiment.**
+
+This is a “proof of concept” only. In the end, a choir score becomes an “AI-checked” ZIP containing 10 practice recordings for every voice.
 
 **Website with example pack and player:** https://vbth.github.io/choir-practice/
 
