@@ -66,12 +66,12 @@ ST['tutti'] = {own: [[v, spread[v], M.LV['tutti'], 'own'] for v in SEAT] for own
 T = {
  'de': {
   'html': 'de', 'name': 'choir-practice Skill', 'title': 'choir-practice Skill – Hören, üben, besser singen.', 'other': ('en/', 'EN'), 'self_prefix': '', 'assets': '',
-  'desc': 'Dokumentation eines agentischen KI-Musik-Workflows und -Skills entwickelt für und mit Claude Code als privates Code-Experiment. Es handelt sich ausschließlich um einen Proof of Concept. Beispiel: choir-practice macht aus Chornoten ein geprüftes ZIP mit MP3 und MIDI zum Üben für jede Stimme.',
+  'desc': 'Dokumentation eines agentischen KI-Musik-Workflows und -Skills entwickelt für und mit Claude Code als privates Code-Experiment. Es handelt sich ausschließlich um einen Proof of Concept. Aus Chornoten entsteht am Ende ein KI-geprüftes ZIP, in dem sich für jede Stimme mehrere Aufnahmen zum Üben befinden.',
   'ids': {'start': 'start', 'ablauf': 'ablauf', 'ueben': 'ueben', 'paket': 'beispiel-zip', 'rechte': 'rechte-und-ki', 'lizenz': 'lizenz'},
   'menu': [('start', 'Start'), ('ablauf', 'Ablauf'), ('ueben', 'Üben'), ('paket', 'Beispiel-ZIP'), ('rechte', 'Rechte & KI'), ('lizenz', 'Lizenzen')],
   'menu_label': 'Menü', 'skip': 'Zum Inhalt', 'theme_to_dark': 'Zum dunklen Modus wechseln', 'theme_to_light': 'Zum hellen Modus wechseln',
   'h1': 'Hören, üben, besser singen.',
-  'lead': 'Dokumentation eines agentischen KI-Musik-Workflows und -Skills entwickelt für und mit Claude Code als privates Code-Experiment. Es handelt sich ausschließlich um einen Proof of Concept. Das Beispiel hier: Aus Chornoten entsteht ein geprüftes ZIP, in dem jede Stimme ihre eigenen Aufnahmen zum Üben findet, fertig zum Weitergeben.',
+  'lead': 'Dokumentation eines agentischen KI-Musik-Workflows und -Skills entwickelt für und mit Claude Code als privates Code-Experiment.\n\nEs handelt sich ausschließlich um einen Proof of Concept. Aus Chornoten entsteht am Ende ein KI-\u2060geprüftes ZIP, in dem sich für jede Stimme mehrere Aufnahmen zum Üben befinden.',
   'cta': 'Beispiel-ZIP ansehen',
   'ai': 'KI-generiert. Nutzung auf eigene Gefahr.', 'foot_note': 'choir-practice – KI-Musik-Workflow/-Skill für Claude.', 'foot_site': 'Startseite',
   'facts': [('4', 'Stufen je Stimme'), ('2', 'Klänge: Chor und Klavier'), ('2', 'Fassungen: normal und langsam'), ('42', 'Aufnahmen im Beispiel')],
@@ -132,12 +132,12 @@ T = {
  },
  'en': {
   'html': 'en', 'name': 'choir-practice Skill', 'title': 'choir-practice Skill – Listen, practise, sing better.', 'other': ('../', 'DE'), 'self_prefix': '../', 'assets': '../',
-  'desc': 'Documentation of an agentic AI music workflow and skill developed for and with Claude Code as a private code experiment. This is a proof of concept only. Example: choir-practice turns a choir score into a checked ZIP with MP3 and MIDI practice files for every voice.',
+  'desc': 'Documentation of an agentic AI music workflow and skill developed for and with Claude Code as a private code experiment. This is a proof of concept only. In the end, a choir score becomes an AI-checked ZIP containing several practice recordings for every voice.',
   'ids': {'start': 'start', 'ablauf': 'workflow', 'ueben': 'practice', 'paket': 'example-zip', 'rechte': 'rights-and-ai', 'lizenz': 'licence'},
   'menu': [('start', 'Start'), ('ablauf', 'Workflow'), ('ueben', 'Practice'), ('paket', 'Example ZIP'), ('rechte', 'Rights & AI'), ('lizenz', 'Licences')],
   'menu_label': 'Menu', 'skip': 'Skip to content', 'theme_to_dark': 'Switch to dark mode', 'theme_to_light': 'Switch to light mode',
   'h1': 'Listen, practise, sing better.',
-  'lead': 'Documentation of an agentic AI music workflow and skill developed for and with Claude Code as a private code experiment. This is a proof of concept only. The example here: a choir score becomes a checked ZIP in which every voice finds its own recordings to practise with, ready to share.',
+  'lead': 'Documentation of an agentic AI music workflow and skill developed for and with Claude Code as a private code experiment.\n\nThis is a proof of concept only. In the end, a choir score becomes an AI-checked ZIP containing several practice recordings for every voice.',
   'cta': 'See the example ZIP',
   'ai': 'AI-generated. Use at your own risk.', 'foot_note': 'choir-practice – AI music workflow/skill for Claude.', 'foot_site': 'Home page',
   'facts': [('4', 'stages per voice'), ('2', 'sounds: choir and piano'), ('2', 'versions: normal and slow'), ('42', 'recordings in the example')],
@@ -311,7 +311,7 @@ def page(L):
 </figure>
 <section id="start" class="hero">
  <h1>{esc(t['h1'])}</h1>
- <p class="lead">{esc(t['lead'])}</p>
+ <p class="lead">{'<br><br>'.join(esc(x) for x in t['lead'].split(chr(10) * 2))}</p>
  <p class="cta"><a href="#{I['paket']}">{esc(t['cta'])}</a></p>
  <dl class="facts">{facts}</dl>
 </section>
