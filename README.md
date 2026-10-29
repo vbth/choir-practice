@@ -6,6 +6,8 @@
 
 English | [Deutsch](README.de.md)
 
+## Listen, practise, sing with confidence.
+
 **Documentation of an agentic AI music workflow and skill as a private code experiment, developed for and with Claude Code. This is a proof of concept only.** The example here, choir-practice, turns a choir score into a checked ZIP in which every voice finds its own recordings to practise with, ready to share.
 
 **Website with example pack and player:** https://vbth.github.io/choir-practice/
@@ -42,7 +44,7 @@ English | [Deutsch](README.de.md)
 MP3 titles, file names, PDFs and logs follow the language of the conversation (German and English built in, see [README.de.md](README.de.md)). One ZIP, named like the top folder:
 
 ```text
-<date>_Choir_Practice_<Title>/
+Choir_Practice_<Title>/
 ├─ 1_Scores/
 │  ├─ 1_Score_<Title>_Scan.pdf
 │  ├─ 2_Score_<Title>.pdf
@@ -121,7 +123,7 @@ Each voice gets its own mix; the own voice always sits centred. The other voices
 - The "Practice" module of the website shows the mixes live on a headphone graphic (dot size = level, position = left/right). The overview PDF generated for every piece (`2_Practice/1_Overview.pdf`) shows the same mixes.
 
 ## 5. AI marking – How is AI content marked?
-Everything the skill generates is marked as AI-generated: the EU label "AI" and the note "AI-generated. Observe copyright and licence rights. Use at your own risk." in the footer of every PDF, and the same note in the metadata of MP3, MIDI, MusicXML and PDF. The label follows the European Commission's icons for labelling AI-generated content (see `THIRD_PARTY_NOTICES.md`).
+Everything the skill generates is marked as AI-generated: the EU label "AI" and the note "AI-generated. Observe copyright and licence rights. Use at your own risk." in the footer of every PDF, and the same note in the metadata of MP3, MIDI, MusicXML and PDF. The label follows the European Commission's icons for labelling AI-generated content (see [`THIRD_PARTY_NOTICES.md`](https://github.com/vbth/choir-practice/blob/main/choir-practice/THIRD_PARTY_NOTICES.md)).
 
 ## 6. Limits – What can’t it do?
 - Claude does not hear the audio; it is tested technically (duration against the MIDI, gaps, clipping, loudness, stereo). Sound and taste are not judged.
@@ -130,26 +132,26 @@ Everything the skill generates is marked as AI-generated: the EU label "AI" and 
 - DIN A4 only. US Letter is currently not supported.
 
 ## 7. Requirements – What is needed?
-Python with the packages from `scripts/requirements-stable.txt`, FluidSynth, ffmpeg, poppler and a soundfont (a fallback is used and reported). At the start the skill checks the installation (`setup.sh --check`). If something is missing or different, it lists what it would install and asks: the **tested versions** (recommended, listed in `scripts/requirements-stable.txt`) or the **newest versions**. The versions used are recorded in the check log; newest versions are marked as not tested.
+Python with the packages from [`scripts/requirements-stable.txt`](https://github.com/vbth/choir-practice/blob/main/choir-practice/scripts/requirements-stable.txt), FluidSynth, ffmpeg, poppler and a soundfont (a fallback is used and reported). At the start the skill checks the installation (`setup.sh --check`). If something is missing or different, it lists what it would install and asks: the **tested versions** (recommended, listed in [`scripts/requirements-stable.txt`](https://github.com/vbth/choir-practice/blob/main/choir-practice/scripts/requirements-stable.txt)) or the **newest versions**. The versions used are recorded in the check log; newest versions are marked as not tested.
 
 ## 8. Rights – What does the skill ask?
 The skill gives no legal advice and grants no rights. It asks whether the score is public domain, licensed, your own work or unclear, and whether it is for rehearsal or commercial use, and notes the answer in the README. Unclear rights with commercial use get a clear warning. Commercial use of the skill itself needs a licence (see 9); the licence says nothing about the rights to the score.
 
 ## 9. Licence – What is allowed?
-PolyForm Noncommercial License 1.0.0 ([`LICENSE.md`](LICENSE.md)), free for non-commercial use. Third-party components: `THIRD_PARTY_NOTICES.md`.
+PolyForm Noncommercial License 1.0.0 ([`LICENSE.md`](LICENSE.md)), free for non-commercial use. Third-party components: [`THIRD_PARTY_NOTICES.md`](https://github.com/vbth/choir-practice/blob/main/choir-practice/THIRD_PARTY_NOTICES.md).
 
 ## 10. Development – How to continue?
-`SKILL.md` instructions · `references/` formats and guides · `assets/` language packs and templates · `scripts/` tools · [`CHANGELOG.md`](CHANGELOG.md).
+[`SKILL.md`](https://github.com/vbth/choir-practice/blob/main/choir-practice/SKILL.md) instructions · [`references/`](https://github.com/vbth/choir-practice/tree/main/choir-practice/references) formats and guides · [`assets/`](https://github.com/vbth/choir-practice/tree/main/choir-practice/assets) language packs and templates · [`scripts/`](https://github.com/vbth/choir-practice/tree/main/choir-practice/scripts) tools · [`CHANGELOG.md`](CHANGELOG.md).
 
 **Versioning runs through GitHub and these Markdown files:**
-- `choir-practice/VERSION` is the single source of the version number (SemVer). `README.md`, `README.de.md` and `CHANGELOG.md` in the repository root are the documentation; the skill folder only holds copies.
-- Write changes as bullets under `## Unreleased` in `CHANGELOG.md` while you work.
+- [`choir-practice/VERSION`](https://github.com/vbth/choir-practice/blob/main/choir-practice/VERSION) is the single source of the version number (SemVer). [`README.md`](README.md), [`README.de.md`](README.de.md) and [`CHANGELOG.md`](CHANGELOG.md) in the repository root are the documentation; the skill folder only holds copies.
+- Write changes as bullets under `## Unreleased` in [`CHANGELOG.md`](CHANGELOG.md) while you work.
 - Release: `python3 choir-practice/scripts/release.py choir-practice --repo . --out ../release --bump patch|minor|major` bumps `VERSION`, moves the bullets into a dated section, updates the date of the footer line in both READMEs and builds `choir-practice.skill`. Then commit, tag `vX.Y.Z` and push the tag.
-- The workflow `.github/workflows/checks.yml` runs on every pull request: lint, compile, language packs and templates, website up to date with `site/build_site.py`, README copies in the skill folder in step.
-- The workflow `.github/workflows/release.yml` checks that tag and `VERSION` match and publishes a GitHub release with the `.skill` file and the changelog entry.
-- The landing page in `docs/` is built by `python3 site/build_site.py` and published by GitHub Pages (branch `main`, folder `/docs`). Previews, render test and rules: `site/README.md`.
-- Dependabot (`.github/dependabot.yml`) proposes updates monthly: for the pinned package versions in `scripts/requirements-stable.txt` (minor and patch only, grouped, at most two open PRs) and for the GitHub Actions. CI does not run the skill pipeline with these packages: before merging a Python PR, run the whole pipeline with the new versions, then add to `CHANGELOG.md`; the new versions only apply from the next release.
-- To continue developing the skill in a new chat, attach `choir-practice/session-handoff.md` (open points and lessons of the current version).
+- The workflow [`.github/workflows/checks.yml`](https://github.com/vbth/choir-practice/blob/main/.github/workflows/checks.yml) runs on every pull request: lint, compile, language packs and templates, website up to date with [`site/build_site.py`](https://github.com/vbth/choir-practice/blob/main/site/build_site.py), README copies in the skill folder in step.
+- The workflow [`.github/workflows/release.yml`](https://github.com/vbth/choir-practice/blob/main/.github/workflows/release.yml) checks that tag and `VERSION` match and publishes a GitHub release with the `.skill` file and the changelog entry.
+- The landing page in [`docs/`](https://github.com/vbth/choir-practice/tree/main/docs) is built by `python3 site/build_site.py` and published by GitHub Pages (branch `main`, folder `/docs`). Previews, render test and rules: [`site/README.md`](https://github.com/vbth/choir-practice/blob/main/site/README.md).
+- Dependabot ([`.github/dependabot.yml`](https://github.com/vbth/choir-practice/blob/main/.github/dependabot.yml)) proposes updates monthly: for the pinned package versions in [`scripts/requirements-stable.txt`](https://github.com/vbth/choir-practice/blob/main/choir-practice/scripts/requirements-stable.txt) (minor and patch only, grouped, at most two open PRs) and for the GitHub Actions. CI does not run the skill pipeline with these packages: before merging a Python PR, run the whole pipeline with the new versions, then add to [`CHANGELOG.md`](CHANGELOG.md); the new versions only apply from the next release.
+- To continue developing the skill in a new chat, attach [`choir-practice/session-handoff.md`](https://github.com/vbth/choir-practice/blob/main/choir-practice/session-handoff.md) (open points and lessons of the current version).
 
 <a href="https://github.com/vbth/choir-practice"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/github-mark-dark.svg"><img src="https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/github-mark.svg" alt="GitHub" height="18" align="absmiddle"></picture></a> choir-practice – Proof of concept AI music workflow/skill developed for/by Claude Code.
 

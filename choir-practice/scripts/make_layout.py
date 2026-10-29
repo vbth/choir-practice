@@ -6,7 +6,7 @@
 Delivery layout (names from i18n "delivery"; every folder is numbered without gaps, at most 3 folder levels,
 no file stored twice except guide/score/tutti, which make each voice folder complete on its own):
 
-  <date>_Chor_Uebungen_<Title>/     (the ZIP of the same name holds the numbered folders directly, no extra top folder)
+  Chor_Uebungen_<Title>/     (the ZIP of the same name holds the numbered folders directly, no extra top folder)
     1_Noten/         1_Noten_<T>_Scan.pdf  2_Noten_<T>.pdf  3/4_MusicXML (Chor, Klavier)  5_MIDI_<T>/<voice>_MIDI_<T>/ + Tutti_MIDI_<T>/
     2_Ueben/         1_Uebersicht_Overview.pdf  2_Anleitung_Guide.pdf  <abbr>_Ueben_<T>/   1_<abbr>_Anleitung_<T>.pdf  2_<abbr>_Noten_<T>.pdf (same full score everywhere)
                                     3_<abbr>_Audio_Chorklang_<T>/  4_<abbr>_Audio_Klavierklang_<T>/   stages 1-6, 6 = tutti
@@ -152,7 +152,7 @@ def main():
         it[k_] = disp
     tips = [t.format(choir_dir=DL['choir_dir'], piano_dir=DL['piano_dir']) for t in G['tips']]
     TITLE_FOR_FOOTER[0] = title; total = len(ORDER); AI_TAG = i18['ai_tag']; AI_META = i18['ai_meta']   # exact nomenclature, see SKILL.md "AI labelling"
-    root = os.path.join(A.outdir, f'{date}_{DL["package"]}_{T}'); shutil.rmtree(root, ignore_errors=True)
+    root = os.path.join(A.outdir, f'{DL["package"]}_{T}'); shutil.rmtree(root, ignore_errors=True)
     d02, d03, d04, d05 = (os.path.join(root, DL[k]) for k in ('scores', 'practice', 'docs', 'tools'))   # 1_Noten, 2_Ueben, 3_Dokumentation, 4_Werkzeuge
     for d in (d02, d03, d04, d05): os.makedirs(d)
     item_key = lambda k, vid: {'accomp_slow': 'accomp_mel_slow', 'accomp': 'accomp_mel'}.get(k, k) if vid == melody else k
