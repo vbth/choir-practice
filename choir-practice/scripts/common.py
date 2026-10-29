@@ -28,20 +28,20 @@ FOOT_PT = 8                      # footer size in pt on every PDF: identical eve
 SEP = '\u00a0·\u00a0'              # one space before and after the middle dot
 
 def footer_parts(lang, iso=None, kind='info'):
-    """Footer as (text before the EU AI label, text after it): [label] + "KI-generiert. Urheber- und Lizenzrechte beachten. Nutzung auf eigene Gefahr. YYYY-MM-DD" (no middle dot anywhere)."""
+    """Footer as (text before the EU AI label, text after it): [label] + "YYYY-MM-DD KI-generiert. Urheber- und Lizenzrechte beachten. Nutzung auf eigene Gefahr." (no middle dot anywhere)."""
     note = load_i18n(lang)['ai_note' if kind == 'score' else 'ai_note_info']   # no middle dot anywhere: comma
-    return '', f'{note} {human_date(lang, iso)}', kind
+    return '', f'{human_date(lang, iso)} {note}', kind
 
 DASH = '\u2014'   # em dash: the separator of the footer, with a space on both sides
 
 MD_LABEL = 'https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/'   # EU label for Markdown, linked from the repo (black, white in dark mode)
 
 def md_footer(lang, title, iso=None):
-    """Footer line of the Markdown files = the PDF footer: [EU label, linked from the repo] "KI-generiert. Urheber- und Lizenzrechte beachten. Nutzung auf eigene Gefahr. YYYY-MM-DD" (no title),
+    """Footer line of the Markdown files = the PDF footer: [EU label, linked from the repo] "YYYY-MM-DD KI-generiert. Urheber- und Lizenzrechte beachten. Nutzung auf eigene Gefahr." (no title),
     preceded and followed by one blank line (written by make_docs; the repo READMEs end the same way). Label height 18 px, proportional to ICON_H."""
     return (f'<picture><source media="(prefers-color-scheme: dark)" srcset="{MD_LABEL}ai-basic-dark.svg">'
             f'<img src="{MD_LABEL}ai-basic.svg" alt="AI" height="18" align="absmiddle"></picture> '
-            + load_i18n(lang)['ai_meta'] + f' {human_date(lang, iso)}')
+            + f'{human_date(lang, iso)} ' + load_i18n(lang)['ai_meta'])
 
 REPO_URL = 'https://github.com/vbth/choir-practice'   # the GitHub mark in the project line links here
 
@@ -63,7 +63,7 @@ def icon_path(kind):
     """EU label for every PDF footer: the basic label "AI" (no GENERATED / MODIFIED). The album art keeps "AI GENERATED" (make_cover.py)."""
     return os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'assets', 'eu-ai-basic.svg')
 # Footer rules (PDF and Markdown, checked by check_templates.py):
-#   [EU label] <ai_note_info>, <date>  - one line, flush left, no title, no middle dot; page number flush right where there is one
+#   [EU label] <date> <ai_note_info>  - one line, flush left, no title, no middle dot; page number flush right where there is one
 #   size FOOT_PT on every PDF; the label is sized so that the capitals of its letters (AI) are as high as the capitals
 #   of the text and stand on the same baseline; Markdown: one blank line, md_footer(), one blank line (label linked from the repo)
 PLEX_CAP = 0.698         # cap height of IBM Plex Sans in em
@@ -185,11 +185,11 @@ def register_plex():
 
 def rl_footer(c, left_x, right_x, y, size, page, title, lang, iso=None):
     """Footer of every PDF (reportlab), FOOT_PT on every PDF (`size` is ignored), IBM Plex Sans, 100 % black:
-    flush left "[EU label AI GENERATED] KI-generiert. Urheber- und Lizenzrechte beachten. Nutzung auf eigene Gefahr. YYYY-MM-DD" (no title), page number flush right (page=None: none, cover page).
+    flush left "[EU label AI GENERATED] YYYY-MM-DD KI-generiert. Urheber- und Lizenzrechte beachten. Nutzung auf eigene Gefahr." (no title), page number flush right (page=None: none, cover page).
     `title` is accepted for compatibility and not printed."""
     from reportlab.lib.utils import ImageReader
     register_plex()
-    note = load_i18n(lang)['ai_note_info'] + ' ' + human_date(lang, iso)
+    note = human_date(lang, iso) + ' ' + load_i18n(lang)['ai_note_info']
     def width(f): return icon_width(f, 'info') + f * 0.5 + text_width(note, f, 'PlexR') + (text_width(str(page), f, 'PlexR') + f * 3 if page else 0)
     size = FOOT_PT
     while width(size) > right_x - left_x and size > 6: size -= 0.25
