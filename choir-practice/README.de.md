@@ -2,7 +2,7 @@
 
 [English](README.md) | Deutsch
 
-## Hören, üben, besser singen.
+## Besser hören, alleine üben, überall singen.
 
 **Dokumentation eines agentischen KI-Musik-Workflows und -Skills entwickelt für und mit Claude Code als privates Code-Experiment.**
 
