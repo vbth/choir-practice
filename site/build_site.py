@@ -52,7 +52,7 @@ T = {
     '1_S_Anleitung.pdf', '2_S_Noten_<Titel>.pdf', '3_S_Audio_Chorklang_<Titel>/', '  1 bis 6_S_<Titel>_Chor_*.mp3  (allein, mit Klavier, jeweils langsam und normal; eigene Stimme lauter; alle gleich laut)',
     '4_S_Audio_Klavierklang_<Titel>/', '  1 bis 6_S_<Titel>_Klavier_*.mp3  (dieselben sechs)']),
   ],
-  'ablauf_h': 'Ablauf', 'ablauf_p': 'Zwölf Schritte, zwei Stopps mit Rückfragen. Einen Schritt anklicken.',
+  'ablauf_h': 'Ablauf', 'ablauf_p': 'Zwölf Schritte, zwei Stopps mit Rückfragen. Unten einen Schritt anklicken, hier erscheinen die Details.',
   'who_claude': 'Claude', 'who_you': 'Nutzer',
   'steps': [
    ('Aufruf', 'you', 'Skill in Claude starten, noch ohne Noten.', ''),
@@ -121,7 +121,7 @@ T = {
     '1_S_Guide.pdf', '2_S_Score_<Title>.pdf', '3_S_Audio_Choir_Sound_<Title>/', '  1 to 6_S_<Title>_Choir_*.mp3  (solo, with piano, each slow and normal; own voice louder; all voices equal)',
     '4_S_Audio_Piano_Sound_<Title>/', '  1 to 6_S_<Title>_Piano_*.mp3  (the same six)']),
   ],
-  'ablauf_h': 'Workflow', 'ablauf_p': 'Twelve steps, two stops with questions for you. Click a step.',
+  'ablauf_h': 'Workflow', 'ablauf_p': 'Twelve steps, two stops with questions for you. Click a step below, its details appear here.',
   'who_claude': 'Claude', 'who_you': 'You',
   'steps': [
    ('Call', 'you', 'Start the skill in Claude, still without a score.', ''),

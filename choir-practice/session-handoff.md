@@ -44,6 +44,7 @@ Unpack the .skill, run `scripts/setup.sh`, read this file. The skill in the user
 | O5 | Logo on the website and in both READMEs links to the URL of the main page (site root, `/en/` for English), not to an anchor | idea | done in PR 4 |
 | O6 | Mobile website: gap between headline and header image equals the gap between menu and header image (72 px visible) | idea | done in PR 4 |
 | O7 | Website statistics block: "2 Fassungen: normal und langsam" instead of "75 % Tempo der langsamen Fassung", because the slow tempo is adjustable | idea | done in PR 4 |
+| O8 | Website section 01 workflow: call to action "Unten einen Schritt anklicken, hier erscheinen die Details." / "Click a step below, its details appear here." instead of "Einen Schritt anklicken." (the detail box sits above the step row, so "here:" would point at the wrong element) | idea | done in PR 4 |
 
 ## 5. How to continue
 Apply open points on request, add rows to sections 1 to 4 of the next handoff only, then release with `scripts/release.py` (see README section 11).
