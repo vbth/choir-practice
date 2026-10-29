@@ -3,7 +3,8 @@
 All notable changes to the skill. Newest first. Versions follow [SemVer](https://semver.org/); every release is a git tag `vX.Y.Z` with a GitHub release that carries the `.skill` file.
 
 ## Unreleased
-- Website: the red sound waves at the headphones now follow the level of the recording (Web Audio analyser): up to three arcs per side light up as it gets louder and fade in quiet passages and pauses. Without Web Audio, with reduced motion or if the audio context cannot start, the fixed animation stays as before
+- Website: menu entry, heading, link and download button say "Beispiel" / "Example" instead of "Beispiel-ZIP" / "Example ZIP"
+- Website: the red sound waves at the headphones follow the level of the recording (Web Audio analyser): the three arcs per side are switched on one after the other as it gets louder and off again in reverse order, always in full red without fading. Without Web Audio, with reduced motion or if the audio context cannot start, the fixed animation stays as before
 - Website: heading of section 04 now reads "Rechte & KI" / "Rights & AI" (like the menu entry); the menu collapses into the burger button only below 960 px instead of 1100 px, so a desktop window shows the full navigation
 - Intro text of the website (lead, meta description) and of the READMEs: "Dokumentation eines agentischen KI-Musik-Workflows und -Skills entwickelt für und mit Claude Code als privates Code-Experiment." as its own paragraph, then "Es handelt sich ausschließlich um einen „Proof of Concept“. Aus Chornoten entsteht am Ende ein „KI-geprüftes“ ZIP, in dem sich für jede Stimme 10 Aufnahmen zum Üben befinden." (en equivalents); the README of the generated packages keeps its proof-of-concept statement
 - Headline "Besser hören, alleine üben, überall singen." (en: "Listen better, practise solo, sing anywhere.") instead of "… sicher singen." / "… sing with confidence." on the website, in the page title and in the READMEs
