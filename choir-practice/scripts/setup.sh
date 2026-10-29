@@ -60,7 +60,7 @@ else
     PK=$(sed 's/#.*//; s/==.*//' "$REQ" | tr '\n' ' ')
     pip install -q -U --break-system-packages $PK 2>/dev/null || pip install -q -U $PK || echo "pip install of the newest versions FAILED – see the report below"
   fi
-  python3 -c "import verovio,cairosvg,lxml,pypdf,mido,reportlab,PIL,numpy,scipy; print('python ok')" 2>/dev/null || echo "python MISSING: run setup.sh --check for the list"
+  python3 -c "import verovio,cairosvg,lxml,pypdf,mido,reportlab,PIL,numpy,scipy,pydantic; print('python ok')" 2>/dev/null || echo "python MISSING: run setup.sh --check for the list"
   echo "mode: ${MODE#--} $([ "$MODE" = "--stable" ] && echo '(tested versions)' || echo '(newest versions, not tested)')"
   pyreport
 fi

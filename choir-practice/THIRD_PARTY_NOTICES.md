@@ -30,6 +30,7 @@ Checked on 2026-10-26 and 2026-10-29 against the sources named below (summaries,
 | FluidR3_GM (fallback soundfont) | same | MIT, Copyright © 2000-2002, 2008 Frank Wen (Debian copyright file of `fluid-soundfont-gm`) | **confirmed** |
 | CairoSVG | SVG to PDF | LGPL-3.0-or-later | **confirmed** (package metadata) |
 | lxml, pypdf | XML, PDF | BSD-3-Clause | **confirmed** (package metadata) |
+| pydantic (with pydantic-core) | schema check of `score.json` (`score_schema.py`) | MIT | **confirmed** (package metadata) |
 | mido | MIDI | MIT | **confirmed** (package metadata) |
 | ReportLab | PDF documents | BSD | **confirmed** (package metadata) |
 | Pillow | images | MIT-CMU | **confirmed** (package metadata) |

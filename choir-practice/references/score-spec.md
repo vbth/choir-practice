@@ -10,6 +10,8 @@
 
 ## 1. score.json – top level
 
+The file is checked against a strict schema (`scripts/score_schema.py`, pydantic) by `build_score.py` and by `musicxml_to_spec.py` before it writes: unknown keys, wrong types, bad tokens, unknown voice ids and out-of-range bars stop with one line per problem. Run `python3 scripts/score_schema.py score.json` to check a file alone.
+
 | key | meaning |
 |---|---|
 | `language` | user language code, e.g. `"de"` – controls all names/texts |

@@ -12,6 +12,7 @@ import json, sys, re, argparse, os
 from lxml import etree
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from common import load_i18n, log_check, repeat_endings, repeat_times, skill_version
+from score_schema import load_spec
 
 CLEFS = {'treble': ('G', '2', None), 'treble8': ('G', '2', '-1'), 'bass': ('F', '4', None),
          'alto': ('C', '3', None), 'tenor': ('C', '4', None)}
@@ -277,7 +278,7 @@ def build(spec):
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument('spec'); ap.add_argument('out'); ap.add_argument('--workdir')
     A = ap.parse_args()
-    spec = json.load(open(A.spec, encoding='utf-8'))
+    spec = load_spec(A.spec)   # strict schema first (score_schema.py): clear errors instead of a KeyError deep in the build
     root, errors, warns = build(spec)
     for w in warns: print('note:', w)
     if errors:

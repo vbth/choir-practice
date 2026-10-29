@@ -19,7 +19,7 @@ low = text.lower()
 
 # name in the notices that identifies each component (the pip or apt name is often not the one used in prose)
 ALIAS = {'verovio': 'verovio', 'cairosvg': 'cairosvg', 'lxml': 'lxml', 'pypdf': 'pypdf', 'mido': 'mido', 'reportlab': 'reportlab',
-         'pillow': 'pillow', 'numpy': 'numpy', 'scipy': 'scipy',
+         'pillow': 'pillow', 'pydantic': 'pydantic', 'numpy': 'numpy', 'scipy': 'scipy',
          'fluidsynth': 'fluidsynth', 'fluid-soundfont-gm': 'fluidr3', 'ffmpeg': 'ffmpeg', 'poppler-utils': 'poppler',
          'fonts-dejavu-core': 'dejavu', 'fonts-ibm-plex': 'fonts-ibm-plex', 'musescore-general-soundfont': 'musescore general'}
 

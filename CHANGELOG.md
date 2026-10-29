@@ -3,6 +3,7 @@
 All notable changes to the skill. Newest first. Versions follow [SemVer](https://semver.org/); every release is a git tag `vX.Y.Z` with a GitHub release that carries the `.skill` file.
 
 ## Unreleased
+- `score.json` is validated against a strict pydantic schema (`scripts/score_schema.py`, pydantic 2.13.5 added to `requirements-stable.txt`): `build_score.py` checks its input and `musicxml_to_spec.py` its output before writing, with one clear line per problem (key, voice, bar, token); unknown keys such as a misspelled `key_fifth` are errors. CI validates the example scores
 - Website recordings (`docs/audio/`, 42 MP3, 9.9 MB) are no longer in git: the new workflow `pages.yml` builds them with `site/make_web_audio.py` from the example ZIP of the release v1.0.0 and deploys `docs/` to GitHub Pages (repository setting: Pages source "GitHub Actions")
 - IBM Plex Sans is a system dependency instead of six TTFs in git: `setup.sh` installs the apt package `fonts-ibm-plex` (or, without apt, the new release asset `choir-practice-fonts.zip` into `~/.fonts/ibm-plex`), `common.register_plex()` loads them from there; `release.yml` builds that zip and uploads it with the `.skill`. `assets/fonts/` keeps only the licence text; the `.skill` is about 1.4 MB smaller
 - Website, section "Rechte & KI": the rights text now says the details are recorded "danach" in the README file and that processing and passing on depend on "dem Urheber- und Lizenzrecht, unter dem sie stehen" (en: "the copyright and licence law they are subject to")

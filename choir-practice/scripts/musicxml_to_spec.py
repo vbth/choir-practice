@@ -9,6 +9,7 @@ The result is a DRAFT: always proofread it against the PDF (references/transcrip
 """
 import json, sys, argparse, re
 from lxml import etree
+from score_schema import validate_spec
 
 def pitch_str(n):
     p = n.find('pitch'); step = p.findtext('step'); alt = int(float(p.findtext('alter') or 0))
@@ -125,6 +126,7 @@ def main():
             'music': music,
             'lyrics': {'verses': {k: ' | '.join(f'{b}:{o}:{tx}' for b, o, tx in default[k]) for k in verses}, 'voice_overrides': overrides},
             'directions': dlist, 'barlines': barlines}
+    validate_spec(spec, A.out)   # never hand a malformed draft to build_score.py
     json.dump(spec, open(A.out, 'w'), ensure_ascii=False, indent=1)
     print('spec written:', A.out, '| voices:', [n[0] for n in names], '| bars:', nb, '| verses:', verses, '| overrides:', list(overrides))
 

@@ -16,7 +16,7 @@ jobs:
         with:
           python-version: '3.12'
       - name: Install
-        run: pip install -q ruff==0.16.9 mido lxml
+        run: pip install -q ruff==0.16.9 mido lxml pydantic==2.13.5
       - name: Lint (undefined names, unused code)
         run: ruff check --select F,E9 choir-practice/scripts site
       - name: Compile all scripts
@@ -25,6 +25,8 @@ jobs:
         run: |
           bash -n choir-practice/scripts/setup.sh
           bash choir-practice/scripts/setup.sh --check | grep -q 'python state:'
+      - name: Example scores match the score.json schema
+        run: for f in site/example/score.*.json; do python choir-practice/scripts/score_schema.py "$f"; done
       - name: Third-party notices cover every bundled and installed component
         run: python choir-practice/scripts/check_third_party.py --brief
       - name: Language packs and handoff templates in step
