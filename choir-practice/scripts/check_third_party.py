@@ -26,7 +26,7 @@ ALIAS = {'verovio': 'verovio', 'cairosvg': 'cairosvg', 'lxml': 'lxml', 'pypdf': 
 pip = [l.split('#')[0].strip().partition('==')[0] for l in open(os.path.join(HERE, 'requirements-stable.txt'), encoding='utf-8')]
 pip = [p for p in pip if p]
 apt = re.findall(r'need\+=\(([^)]+)\)', open(os.path.join(HERE, 'setup.sh'), encoding='utf-8').read())
-bundled = sorted(os.path.relpath(f, SKILL) for pat in ('assets/fonts/*', 'assets/*.svg') for f in glob.glob(os.path.join(SKILL, pat)))
+bundled = sorted(os.path.relpath(f, SKILL) for pat in ('assets/fonts/*', 'assets/*.svg', 'assets/eu-labels/*.svg') for f in glob.glob(os.path.join(SKILL, pat)))
 repo_only = sorted(os.path.relpath(f, REPO) for pat in ('docs/fonts/*', 'docs/img/ai-*.svg') for f in glob.glob(os.path.join(REPO, pat)))
 
 missing = []
@@ -36,7 +36,7 @@ def need(kind, name, token):
 for p in pip: need('run time (pip)', p, ALIAS.get(p, p))
 for a in apt: need('run time (apt)', a, ALIAS.get(a, a))
 for f in bundled:
-    need('bundled', f, 'assets/fonts/' if f.startswith('assets/fonts/') else os.path.basename(f))
+    need('bundled', f, 'assets/fonts/' if f.startswith('assets/fonts/') else 'assets/eu-labels/' if f.startswith('assets/eu-labels/') else os.path.basename(f))
 for f in repo_only:
     need('repository only', f, 'docs/fonts/' if f.startswith('docs/fonts/') else os.path.basename(f))
 

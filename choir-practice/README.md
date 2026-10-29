@@ -125,7 +125,7 @@ Each voice gets its own mix; the own voice always sits centred. The other voices
 - The "Practice" module of the website shows the mixes live on a headphone graphic (dot size = level, position = left/right). The overview PDF generated for every piece (`2_Practice/1_Overview.pdf`) shows the same mixes.
 
 ## 6. AI marking – How is AI content marked?
-Everything the skill generates is marked as AI-generated: the EU label "AI" and the note "AI-generated, no guarantee for copyright and usage rights" in the footer of every PDF, and the same note in the metadata of MP3, MIDI, MusicXML and PDF. The label follows the European Commission's icons for labelling AI-generated content (see `THIRD_PARTY_NOTICES.md`).
+Everything the skill generates is marked as AI-generated: the EU label "AI" and the note "AI-generated, no guarantee for copyright and licence rights" in the footer of every PDF, and the same note in the metadata of MP3, MIDI, MusicXML and PDF. The label follows the European Commission's icons for labelling AI-generated content (see `THIRD_PARTY_NOTICES.md`).
 
 ## 7. Limits – What can’t it do?
 - Claude does not hear the audio; it is tested technically (duration against the MIDI, gaps, clipping, loudness, stereo). Sound and taste are not judged.
@@ -155,5 +155,5 @@ PolyForm Noncommercial License 1.0.0 ([`LICENSE`](LICENSE)), free for non-commer
 - Dependabot (`.github/dependabot.yml`) proposes updates monthly: for the pinned package versions in `scripts/requirements-stable.txt` (minor and patch only, grouped, at most two open PRs) and for the GitHub Actions. CI does not run the skill pipeline with these packages: before merging a Python PR, run the whole pipeline with the new versions, then add to `CHANGELOG.md`; the new versions only apply from the next release.
 - To continue developing the skill in a new chat, attach `choir-practice/session-handoff.md` (open points and lessons of the current version).
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/ai-basic-dark.svg"><img src="https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/ai-basic.svg" alt="AI" height="18" align="absmiddle"></picture> AI-generated, no guarantee for copyright and usage rights, 2026-10-28
+<picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/ai-basic-dark.svg"><img src="https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/ai-basic.svg" alt="AI" height="18" align="absmiddle"></picture> AI-generated, no guarantee for copyright and licence rights, 2026-10-28
 

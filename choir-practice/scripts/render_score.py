@@ -202,7 +202,7 @@ def add_header(svg, title, rest, page=None):
     return svg[:k] + txt + svg[k:]
 
 def add_footer(svg, lang, iso):
-    """Footer of the music pages: flush left "[EU label] KI-generiert, Urheber- und Nutzungsrechte ohne Gewähr, DD.MM.YYYY" (the page number is in the header here),
+    """Footer of the music pages: flush left "[EU label] KI-generiert, Urheber- und Lizenzrechte ohne Gewähr, DD.MM.YYYY" (the page number is in the header here),
     FOOT_PT like every PDF footer, IBM Plex Sans. Placed inside Verovio's inner scaled SVG, aligned with the music margins."""
     vb = re.search(r'(<svg class="definition-scale"[^>]*viewBox="0 0 (\d+) (\d+)"[^>]*>)', svg)
     if not vb: return svg

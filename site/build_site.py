@@ -34,7 +34,7 @@ T = {
   'h1': 'Hören, mitsingen, sicher werden.',
   'lead': 'choir-practice ist ein praktischer Claude-Skill, der viel Zeit spart: Aus Chornoten entsteht ein geprüftes ZIP, in dem man für jeden Sänger eigene Audio-Dateien zum Üben findet, fertig zum Weitergeben.',
   'cta1': 'Skill installieren', 'cta2': 'Beispiel-ZIP ansehen',
-  'ai': 'KI-generiert, Urheber- und Nutzungsrechte ohne Gewähr',
+  'ai': 'KI-generiert, Urheber- und Lizenzrechte ohne Gewähr',
   'facts': [('4', 'Stufen je Stimme'), ('2', 'Klänge: Chor und Klavier'), ('2', 'Fassungen: normal und langsam'), ('42', 'Aufnahmen im Beispiel')],
   'inh_h': 'Inhalte', 'paket_h': 'Beispiel-ZIP', 'paket_p': 'Im ZIP liegen vier Ordner. Die Stimmen-ZIPs in 2_Ueben sind fertig zum Weitergeben, ihr Inhalt steht zuletzt. Einen Ordner anklicken.',
   'tree': [
@@ -103,7 +103,7 @@ T = {
   'h1': 'Listen, sing along, get it right.',
   'lead': 'choir-practice is a practical Claude skill that saves you a lot of time: your choir score becomes a checked ZIP in which every voice finds its own recordings to practise with, ready to share.',
   'cta1': 'Install the skill', 'cta2': 'See the example ZIP',
-  'ai': 'AI-generated, no guarantee for copyright and usage rights',
+  'ai': 'AI-generated, no guarantee for copyright and licence rights',
   'facts': [('4', 'stages per voice'), ('2', 'sounds: choir and piano'), ('2', 'versions: normal and slow'), ('42', 'recordings in the example')],
   'inh_h': 'Contents', 'paket_h': 'Example ZIP', 'paket_p': 'The ZIP holds four folders. The voice ZIPs in 2_Practice are ready to hand out, their contents are listed last. Click a folder.',
   'tree': [
@@ -585,14 +585,23 @@ window.addEventListener('resize',function(){clearTimeout(window.__rz);window.__r
 })();
 '''
 
+def inline_label(src, viewbox, title, note):
+    """Official EU label file (classes in <style>) -> one small SVG with the styles inlined and the viewBox cropped to the label; the shapes stay unchanged."""
+    rules = {m.group(1): [kv.strip().split(':', 1) for kv in m.group(2).split(';') if kv.strip()] for m in re.finditer(r'\.(cls-\d+)\s*\{([^}]*)\}', src)}
+    body = src[src.index('</defs>') + 7:src.rindex('</svg>')]
+    body = re.sub(r'class="(cls-\d+)"', lambda m: ' '.join(f'{k.strip()}="{v.strip()}"' for k, v in rules[m.group(1)]), body)
+    return f'<?xml version="1.0" encoding="UTF-8"?>\n<!-- {note} -->\n<svg xmlns="http://www.w3.org/2000/svg" viewBox="{viewbox}" role="img"><title>{title}</title>{body.strip()}</svg>\n'
+
 def ai_labels():
-    """EU labels for the website and the Markdown footers (common.MD_LABEL): copied from the skill assets, each plus a white variant for dark mode.
-    ai-generated(.svg|-dark.svg): "AI GENERATED" (website footer); ai-basic: "AI" (Markdown footers)."""
-    for name, asset in (('ai-generated', 'eu-ai-generated.svg'), ('ai-basic', 'eu-ai-basic.svg')):
-        src = open(os.path.join(HERE, '..', 'choir-practice', 'assets', asset), encoding='utf-8').read()
+    """EU labels for the website and the Markdown footers (common.MD_LABEL): the black ones are the skill assets, the white ones for dark mode are the official
+    white files of the set (assets/eu-labels/) with the same crop. ai-generated: "AI GENERATED" (website footer); ai-basic: "AI" (Markdown footers)."""
+    AS = os.path.join(HERE, '..', 'choir-practice', 'assets')
+    for name, black, white, title in (('ai-generated', 'eu-ai-generated.svg', 'LABEL_AI_GENERATED_white.svg', 'AI GENERATED'), ('ai-basic', 'eu-ai-basic.svg', 'LABEL_AI_white.svg', 'AI')):
+        src = open(os.path.join(AS, black), encoding='utf-8').read()
         open(os.path.join(OUT, 'img', name + '.svg'), 'w', encoding='utf-8').write(src)
-        dark = src.replace('fill="#000"', 'fill="#TMP"').replace('fill="#fff"', 'fill="#000"').replace('fill="#TMP"', 'fill="#fff"')
-        dark = re.sub(r'(", )black', r'\1white (dark mode)', dark, count=1)
+        vb = re.search(r'viewBox="([^"]+)"', src).group(1)
+        dark = inline_label(open(os.path.join(AS, 'eu-labels', white), encoding='utf-8').read(), vb, title,
+                            f'EU label "{title}", white (dark mode): official file {white} of the EU icon set, viewBox cropped to the label, styles inlined, shapes unchanged')
         open(os.path.join(OUT, 'img', name + '-dark.svg'), 'w', encoding='utf-8').write(dark)
 
 def skill_file():
