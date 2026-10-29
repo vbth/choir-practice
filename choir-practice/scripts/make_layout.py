@@ -364,7 +364,7 @@ def main():
             if tok not in tops: fails.append(f'text mentions a folder that does not exist ({tok}): {rel}')
         if re.search(r'mscz|MuseScore(?![_ ]General)', tx): fails.append(f'text mentions MuseScore files (removed): {rel}')
         if rel.startswith(DL['docs']) and DL['handoff'] not in rel:   # shared documents are neutral: no "you"/"du"
-            if re.search(r'\b(du|dir|dich|dein\w*|euch|euer|eure\w*|you|your|yours)\b', re.sub(r'„[^“]*“|"[^"]*"|“[^”]*”', ' ', tx), re.I): fails.append(f'shared document addresses the reader (du/you): {rel}')
+            if re.search(r'\b(du|dir|dich|dein\w*|euch|euer|eure\w*|you|your|yours)\b', re.sub(r'\s+'.join(map(re.escape, i18['ai_note'].split())), ' ', re.sub(r'„[^“]*“|"[^"]*"|“[^”]*”', ' ', tx)), re.I): fails.append(f'shared document addresses the reader (du/you): {rel}')
         if '{{' in tx: fails.append(f'unfilled token in {rel}')
     for rel, tx in docs_txt.items():   # one vocabulary in the guides (the same names as file names and MP3 titles)
         base = os.path.basename(rel)
