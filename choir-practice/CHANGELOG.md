@@ -3,6 +3,7 @@
 All notable changes to the skill. Newest first. Versions follow [SemVer](https://semver.org/); every release is a git tag `vX.Y.Z` with a GitHub release that carries the `.skill` file.
 
 ## Unreleased
+- Documents named in the READMEs (`SKILL.md`, workflows, `site/` files and others) are now links instead of plain code text
 
 ## 1.1.0 – 2026-10-29
 - Footer of every PDF and Markdown file: "KI-generiert. Urheber- und Lizenzrechte beachten. Nutzung auf eigene Gefahr." with the date (en: "AI-generated. Observe copyright and licence rights. Use at your own risk."), same wording in the metadata of PDF, MP3, MusicXML and MIDI
