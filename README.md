@@ -6,7 +6,7 @@
 
 English | [Deutsch](README.de.md)
 
-## Listen better, practise alone, sing anywhere.
+## Listen better, practise solo, sing anywhere.
 
 **Documentation of an agentic AI music workflow and skill developed for and with Claude Code as a private code experiment.**
 

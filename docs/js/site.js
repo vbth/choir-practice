@@ -107,7 +107,7 @@ $$('#tempos button').forEach(function(b){b.addEventListener('click',function(){c
 $$('.trk button').forEach(function(b){b.addEventListener('click',function(){change(function(){var v=b.getAttribute('data-voice');if(v)cur.voice=v;cur.stage=b.getAttribute('data-stage');cur.sound=b.getAttribute('data-sound');cur.tempo=b.getAttribute('data-tempo')},true)})});
 $$('.pbtn').forEach(function(b){b.addEventListener('click',function(){if(A.paused){A.play().catch(function(){})}else{A.pause()}})});
 A.addEventListener('play',ui);A.addEventListener('pause',ui);
-// sound waves follow the level of the recording: Web Audio analyser on the audio element, three arcs per side light up one after the other as it gets louder.
+// sound waves follow the level of the recording: Web Audio analyser on the audio element; the three arcs per side are switched on one after the other as it gets louder and off again in reverse order (always full red, no fading).
 // Level mapping from the example recordings: about -30 dB (quiet) to -16 dB (loud) RMS over 1024 samples. Without Web Audio, with reduced motion or if the context cannot run, the fixed animation stays
 var live=null;
 function startLive(){
@@ -119,17 +119,19 @@ function startLive(){
   var build=function(){
    if(cx.state!=='running'){try{cx.close()}catch(e){}return}   // an element routed into a suspended context would be silent
    var an=cx.createAnalyser();an.fftSize=1024;var sr=cx.createMediaElementSource(A);sr.connect(an);an.connect(cx.destination);
-   live={cx:cx,an:an,buf:new Uint8Array(an.fftSize),s:0,raf:0};svg.classList.add('live');if(!A.paused)loop()};
+   live={cx:cx,an:an,buf:new Uint8Array(an.fftSize),s:0,raf:0,on:[false,false,false]};svg.classList.add('live');if(!A.paused)loop()};
   if(cx.state==='running')build();else cx.resume().then(build,function(){})
  }catch(e){}
 }
-function stopLoop(){if(live&&live.raf){cancelAnimationFrame(live.raf);live.raf=0}$$('#hp .wave').forEach(function(w){w.style.opacity=''})}
+function stopLoop(){if(live&&live.raf){cancelAnimationFrame(live.raf);live.raf=0}if(live)live.on=[false,false,false];$$('#hp .wave').forEach(function(w){w.style.opacity=''})}
 function loop(){
  if(!live||A.paused){stopLoop();return}
  var b=live.buf,q=0,i;live.an.getByteTimeDomainData(b);for(i=0;i<b.length;i++){var v=(b[i]-128)/128;q+=v*v}
  var t=Math.max(0,Math.min(1,(20*Math.log10(Math.sqrt(q/b.length)+1e-6)+30)/14));
  live.s+=(t>live.s?0.5:0.12)*(t-live.s);   // fast attack, slower release
- var ws=svg.querySelectorAll('.wave');for(i=0;i<ws.length;i++)ws[i].style.opacity=Math.max(0,Math.min(1,live.s*3.2-Math.floor(i/2)*0.9));   // order of creation: both sides of arc 0, then arc 1, arc 2
+ for(i=0;i<3;i++){var th=0.25*(i+1);if(live.on[i]?live.s<th-0.06:live.s>th+0.06)live.on[i]=!live.on[i]}   // thresholds 0.25 / 0.5 / 0.75 with hysteresis against flicker
+ for(i=1;i<3;i++)if(!live.on[i-1])live.on[i]=false;   // an outer arc is only on while the inner one is
+ var ws=svg.querySelectorAll('.wave');for(i=0;i<ws.length;i++)ws[i].style.opacity=live.on[Math.floor(i/2)]?1:0;   // order of creation: both sides of arc 0, then arc 1, arc 2
  live.raf=requestAnimationFrame(loop)}
 document.addEventListener('click',function(e){if(e.target.closest&&e.target.closest('button'))startLive()},true);   // created inside a click, so the context may run
 A.addEventListener('play',function(){if(live&&!live.raf){if(live.cx.state==='suspended')live.cx.resume();loop()}});

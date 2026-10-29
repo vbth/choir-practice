@@ -65,17 +65,17 @@ ST['tutti'] = {own: [[v, spread[v], M.LV['tutti'], 'own'] for v in SEAT] for own
 
 T = {
  'de': {
-  'html': 'de', 'name': 'choir-practice Skill', 'title': 'choir-practice Skill – Besser hören, alleine üben, überall singen.', 'other': ('en/', 'EN'), 'self_prefix': '', 'assets': '',
+  'html': 'de', 'name': 'choir-practice Skill', 'title': 'choir-practice Skill – Alleine üben, besser hören, überall singen.', 'other': ('en/', 'EN'), 'self_prefix': '', 'assets': '',
   'desc': 'Dokumentation eines agentischen KI-Musik-Workflows und -Skills entwickelt für und mit Claude Code als privates Code-Experiment. Es handelt sich ausschließlich um einen „Proof of Concept“. Aus Chornoten entsteht am Ende ein „KI-geprüftes“ ZIP, in dem sich für jede Stimme 10 Aufnahmen zum Üben befinden.',
   'ids': {'start': 'start', 'ablauf': 'ablauf', 'ueben': 'ueben', 'paket': 'beispiel-zip', 'rechte': 'rechte-und-ki', 'lizenz': 'lizenz'},
-  'menu': [('start', 'Start'), ('ablauf', 'Ablauf'), ('ueben', 'Üben'), ('paket', 'Beispiel-ZIP'), ('rechte', 'Rechte & KI'), ('lizenz', 'Lizenzen')],
+  'menu': [('start', 'Start'), ('ablauf', 'Ablauf'), ('ueben', 'Üben'), ('paket', 'Beispiel'), ('rechte', 'Rechte & KI'), ('lizenz', 'Lizenzen')],
   'menu_label': 'Menü', 'skip': 'Zum Inhalt', 'theme_to_dark': 'Zum dunklen Modus wechseln', 'theme_to_light': 'Zum hellen Modus wechseln',
-  'h1': 'Besser hören, alleine üben, überall singen.',
+  'h1': 'Alleine üben, besser hören, überall singen.',
   'lead': 'Dokumentation eines agentischen KI-Musik-Workflows und -Skills entwickelt für und mit Claude Code als privates Code-Experiment.\n\nEs handelt sich ausschließlich um einen „Proof of Concept“. Aus Chornoten entsteht am Ende ein „KI-\u2060geprüftes“ ZIP, in dem sich für jede Stimme 10 Aufnahmen zum Üben befinden.',
-  'cta': 'Beispiel-ZIP ansehen',
+  'cta': 'Beispiel ansehen',
   'ai': 'KI-generiert. Nutzung auf eigene Gefahr.', 'foot_note': 'choir-practice – KI-Musik-Workflow/-Skill für Claude.', 'foot_site': 'Startseite',
   'facts': [('4', 'Stufen je Stimme'), ('2', 'Klänge: Chor und Klavier'), ('2', 'Fassungen: normal und langsam'), ('42', 'Aufnahmen im Beispiel')],
-  'inh_h': 'Inhalte', 'paket_h': 'Beispiel-ZIP', 'paket_p': 'Im ZIP liegen vier Ordner. Die Stimmen-ZIPs in 2_Ueben sind fertig zum Weitergeben, ihr Inhalt steht zuletzt. Einen Ordner anklicken.',
+  'inh_h': 'Inhalte', 'paket_h': 'Beispiel', 'paket_p': 'Im ZIP liegen vier Ordner. Die Stimmen-ZIPs in 2_Ueben sind fertig zum Weitergeben, ihr Inhalt steht zuletzt. Einen Ordner anklicken.',
   'tree': [
    ('1_Noten', 'Noten (PDF), MusicXML und MIDI.', [
     '1_Noten_<Titel>_Scan.pdf', '2_Noten_<Titel>.pdf', '3_MusicXML_<Titel>_Chor.musicxml', '4_MusicXML_<Titel>_Klavier.musicxml',
@@ -117,7 +117,7 @@ T = {
    'accomp': 'Die gewählte Stimme, die Melodie leiser, dazu die Klavierbegleitung aller Stimmen.',
    'choir': 'Die anderen Stimmen sitzen wie im Chor: Nachbarn links und rechts etwas leiser, weiter entfernte noch leiser.',
    'tutti': 'Alle Stimmen gleich laut.'}, 'own_lbl': 'Gesang', 'acc_lbl': 'Klavier',
-  'dl_p': 'Das Ergebnis: Aufnahmen zum Üben für jede Stimme, Anleitungen und Protokolle.', 'dl_btn': 'Beispiel-ZIP herunterladen',
+  'dl_p': 'Das Ergebnis: Aufnahmen zum Üben für jede Stimme, Anleitungen und Protokolle.', 'dl_btn': 'Beispiel herunterladen',
   'tutti_all': 'Tutti, alle Stimmen', 'pl_title': 'Alle meine Entchen', 'pl_play': 'Wiedergabe', 'pl_pause': 'Pause', 'pl_seek': 'Position',
   'pl_cover': 'Albumcover des Beispielpakets',
   'rechte_h': 'Rechte & KI',
@@ -131,17 +131,17 @@ T = {
   'ai_label': 'AI', 'top': 'Nach oben',
  },
  'en': {
-  'html': 'en', 'name': 'choir-practice Skill', 'title': 'choir-practice Skill – Listen better, practise alone, sing anywhere.', 'other': ('../', 'DE'), 'self_prefix': '../', 'assets': '../',
+  'html': 'en', 'name': 'choir-practice Skill', 'title': 'choir-practice Skill – Listen better, practise solo, sing anywhere.', 'other': ('../', 'DE'), 'self_prefix': '../', 'assets': '../',
   'desc': 'Documentation of an agentic AI music workflow and skill developed for and with Claude Code as a private code experiment. This is a “proof of concept” only. In the end, a choir score becomes an “AI-checked” ZIP containing 10 practice recordings for every voice.',
   'ids': {'start': 'start', 'ablauf': 'workflow', 'ueben': 'practice', 'paket': 'example-zip', 'rechte': 'rights-and-ai', 'lizenz': 'licence'},
-  'menu': [('start', 'Start'), ('ablauf', 'Workflow'), ('ueben', 'Practice'), ('paket', 'Example ZIP'), ('rechte', 'Rights & AI'), ('lizenz', 'Licences')],
+  'menu': [('start', 'Start'), ('ablauf', 'Workflow'), ('ueben', 'Practice'), ('paket', 'Example'), ('rechte', 'Rights & AI'), ('lizenz', 'Licences')],
   'menu_label': 'Menu', 'skip': 'Skip to content', 'theme_to_dark': 'Switch to dark mode', 'theme_to_light': 'Switch to light mode',
-  'h1': 'Listen better, practise alone, sing anywhere.',
+  'h1': 'Listen better, practise solo, sing anywhere.',
   'lead': 'Documentation of an agentic AI music workflow and skill developed for and with Claude Code as a private code experiment.\n\nThis is a “proof of concept” only. In the end, a choir score becomes an “AI-checked” ZIP containing 10 practice recordings for every voice.',
-  'cta': 'See the example ZIP',
+  'cta': 'See the example',
   'ai': 'AI-generated. Use at your own risk.', 'foot_note': 'choir-practice – AI music workflow/skill for Claude.', 'foot_site': 'Home page',
   'facts': [('4', 'stages per voice'), ('2', 'sounds: choir and piano'), ('2', 'versions: normal and slow'), ('42', 'recordings in the example')],
-  'inh_h': 'Contents', 'paket_h': 'Example ZIP', 'paket_p': 'The ZIP holds four folders. The voice ZIPs in 2_Practice are ready to hand out, their contents are listed last. Click a folder.',
+  'inh_h': 'Contents', 'paket_h': 'Example', 'paket_p': 'The ZIP holds four folders. The voice ZIPs in 2_Practice are ready to hand out, their contents are listed last. Click a folder.',
   'tree': [
    ('1_Scores', 'Score (PDF), MusicXML and MIDI.', [
     '1_Score_<Title>_Scan.pdf', '2_Score_<Title>.pdf', '3_MusicXML_<Title>_Choir.musicxml', '4_MusicXML_<Title>_Piano.musicxml',
@@ -183,7 +183,7 @@ T = {
    'accomp': 'The selected voice, the melody quieter, plus the piano accompaniment of all voices.',
    'choir': 'The other voices sit as in the choir: neighbours left and right a little quieter, voices further away quieter still.',
    'tutti': 'All voices equally loud.'}, 'own_lbl': 'Singing', 'acc_lbl': 'Piano',
-  'dl_p': 'The result: practice recordings for every voice, guides and logs.', 'dl_btn': 'Download the example ZIP',
+  'dl_p': 'The result: practice recordings for every voice, guides and logs.', 'dl_btn': 'Download the example',
   'tutti_all': 'Tutti, all voices', 'pl_title': 'All My Ducklings', 'pl_play': 'Play', 'pl_pause': 'Pause', 'pl_seek': 'Position',
   'pl_cover': 'Album cover of the example pack',
   'rechte_h': 'Rights & AI',
@@ -604,7 +604,7 @@ $$('#tempos button').forEach(function(b){b.addEventListener('click',function(){c
 $$('.trk button').forEach(function(b){b.addEventListener('click',function(){change(function(){var v=b.getAttribute('data-voice');if(v)cur.voice=v;cur.stage=b.getAttribute('data-stage');cur.sound=b.getAttribute('data-sound');cur.tempo=b.getAttribute('data-tempo')},true)})});
 $$('.pbtn').forEach(function(b){b.addEventListener('click',function(){if(A.paused){A.play().catch(function(){})}else{A.pause()}})});
 A.addEventListener('play',ui);A.addEventListener('pause',ui);
-// sound waves follow the level of the recording: Web Audio analyser on the audio element, three arcs per side light up one after the other as it gets louder.
+// sound waves follow the level of the recording: Web Audio analyser on the audio element; the three arcs per side are switched on one after the other as it gets louder and off again in reverse order (always full red, no fading).
 // Level mapping from the example recordings: about -30 dB (quiet) to -16 dB (loud) RMS over 1024 samples. Without Web Audio, with reduced motion or if the context cannot run, the fixed animation stays
 var live=null;
 function startLive(){
@@ -616,17 +616,19 @@ function startLive(){
   var build=function(){
    if(cx.state!=='running'){try{cx.close()}catch(e){}return}   // an element routed into a suspended context would be silent
    var an=cx.createAnalyser();an.fftSize=1024;var sr=cx.createMediaElementSource(A);sr.connect(an);an.connect(cx.destination);
-   live={cx:cx,an:an,buf:new Uint8Array(an.fftSize),s:0,raf:0};svg.classList.add('live');if(!A.paused)loop()};
+   live={cx:cx,an:an,buf:new Uint8Array(an.fftSize),s:0,raf:0,on:[false,false,false]};svg.classList.add('live');if(!A.paused)loop()};
   if(cx.state==='running')build();else cx.resume().then(build,function(){})
  }catch(e){}
 }
-function stopLoop(){if(live&&live.raf){cancelAnimationFrame(live.raf);live.raf=0}$$('#hp .wave').forEach(function(w){w.style.opacity=''})}
+function stopLoop(){if(live&&live.raf){cancelAnimationFrame(live.raf);live.raf=0}if(live)live.on=[false,false,false];$$('#hp .wave').forEach(function(w){w.style.opacity=''})}
 function loop(){
  if(!live||A.paused){stopLoop();return}
  var b=live.buf,q=0,i;live.an.getByteTimeDomainData(b);for(i=0;i<b.length;i++){var v=(b[i]-128)/128;q+=v*v}
  var t=Math.max(0,Math.min(1,(20*Math.log10(Math.sqrt(q/b.length)+1e-6)+30)/14));
  live.s+=(t>live.s?0.5:0.12)*(t-live.s);   // fast attack, slower release
- var ws=svg.querySelectorAll('.wave');for(i=0;i<ws.length;i++)ws[i].style.opacity=Math.max(0,Math.min(1,live.s*3.2-Math.floor(i/2)*0.9));   // order of creation: both sides of arc 0, then arc 1, arc 2
+ for(i=0;i<3;i++){var th=0.25*(i+1);if(live.on[i]?live.s<th-0.06:live.s>th+0.06)live.on[i]=!live.on[i]}   // thresholds 0.25 / 0.5 / 0.75 with hysteresis against flicker
+ for(i=1;i<3;i++)if(!live.on[i-1])live.on[i]=false;   // an outer arc is only on while the inner one is
+ var ws=svg.querySelectorAll('.wave');for(i=0;i<ws.length;i++)ws[i].style.opacity=live.on[Math.floor(i/2)]?1:0;   // order of creation: both sides of arc 0, then arc 1, arc 2
  live.raf=requestAnimationFrame(loop)}
 document.addEventListener('click',function(e){if(e.target.closest&&e.target.closest('button'))startLive()},true);   // created inside a click, so the context may run
 A.addEventListener('play',function(){if(live&&!live.raf){if(live.cx.state==='suspended')live.cx.resume();loop()}});
