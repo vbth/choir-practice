@@ -29,7 +29,7 @@ T = {
   'html': 'de', 'name': 'choir-practice Skill', 'title': 'choir-practice Skill – Übe-MP3s je Stimme aus Chornoten', 'other': ('en/', 'EN'), 'self_prefix': '', 'assets': '',
   'desc': 'Der Claude-Skill choir-practice macht aus Chornoten ein geprüftes ZIP: MP3 und MIDI zum Üben für jede Stimme, dazu eine Anleitung für die Chorleitung.',
   'ids': {'start': 'start', 'ablauf': 'ablauf', 'ueben': 'ueben', 'paket': 'beispiel-zip', 'rechte': 'rechte-und-ki', 'loslegen': 'loslegen', 'lizenz': 'lizenz'},
-  'menu': [('start', 'Start'), ('ablauf', 'Ablauf'), ('ueben', 'Üben'), ('paket', 'Beispiel-ZIP'), ('rechte', 'Rechte und KI'), ('loslegen', 'Loslegen'), ('lizenz', 'Lizenz')],
+  'menu': [('start', 'Start'), ('ablauf', 'Ablauf'), ('ueben', 'Üben'), ('paket', 'Beispiel-ZIP'), ('rechte', 'Rechte und KI'), ('loslegen', 'Loslegen'), ('lizenz', 'Lizenzen')],
   'menu_label': 'Menü', 'skip': 'Zum Inhalt', 'theme_to_dark': 'Zum dunklen Modus wechseln', 'theme_to_light': 'Zum hellen Modus wechseln',
   'h1': 'Hören, mitsingen, sicher werden.',
   'lead': 'choir-practice ist ein praktischer Claude-Skill, der viel Zeit spart: Aus Chornoten entsteht ein geprüftes ZIP, in dem man für jeden Sänger eigene Audio-Dateien zum Üben findet, fertig zum Weitergeben.',
@@ -89,8 +89,8 @@ T = {
   'los_h': 'Loslegen',
   'los_steps': ['choir-practice.skill im Claude-Konto hochladen (Einstellungen).', 'Skill ohne Noten aufrufen und Stopp A beantworten (Rechte und Verwendungszweck).', 'Noten anhängen und Stopp B beantworten (Werkdaten).', 'ZIP am Ende herunterladen und Audio-Dateien an den Chor weitergeben.'],
   'los_dl': 'Skill herunterladen',
-  'lic_h': 'Lizenz', 'lic_p': 'PolyForm Noncommercial License 1.0.0,\nfrei für nichtkommerzielle Nutzung.',
-  'lic_link': 'Lizenztext lesen', 'lic_third': 'Lizenzen von Drittanbietern müssen beachtet werden.', 'lic_third_link': 'Rechte der Drittanbieter-Lizenzen lesen', 'foot_profile': 'GitHub-Profil vbth', 'private': 'privates Projekt', 'og_alt': 'Ein Mann mit Kopfhörern steht in einer alten Badewanne und singt vom Notenblatt, neben ihm schwimmt eine Quietscheente, rote Noten schweben im Raum',
+  'lic_h': 'Lizenzen', 'lic_p': 'PolyForm Noncommercial License 1.0.0,\nfrei für nichtkommerzielle Nutzung.',
+  'lic_link': 'Lizenztext lesen', 'lic_third': 'Lizenzen von Drittanbietern müssen beachtet werden.', 'lic_third_link': 'Rechte der Drittanbieter-Lizenzen lesen', 'foot_profile': 'GitHub-Repository vbth/choir-practice', 'private': 'privates Projekt', 'og_alt': 'Ein Mann mit Kopfhörern steht in einer alten Badewanne und singt vom Notenblatt, neben ihm schwimmt eine Quietscheente, rote Noten schweben im Raum',
   'alt_cover': 'Deckblatt des Beispielpakets', 'alt_page1': 'Erste Notenseite des Beispielpakets', 'alt_page2': 'Zweite Notenseite des Beispielpakets', 'alt_ai': 'EU-Label AI GENERATED',
   'ai_label': 'AI GENERATED', 'top': 'Nach oben',
  },
@@ -98,7 +98,7 @@ T = {
   'html': 'en', 'name': 'choir-practice Skill', 'title': 'choir-practice Skill – Practice MP3s per voice from a choir score', 'other': ('../', 'DE'), 'self_prefix': '../', 'assets': '../',
   'desc': 'The Claude skill choir-practice turns a choir score into a checked ZIP: MP3 and MIDI practice files for every voice, plus a guide for the director.',
   'ids': {'start': 'start', 'ablauf': 'workflow', 'ueben': 'practice', 'paket': 'example-zip', 'rechte': 'rights-and-ai', 'loslegen': 'get-started', 'lizenz': 'licence'},
-  'menu': [('start', 'Start'), ('ablauf', 'Workflow'), ('ueben', 'Practice'), ('paket', 'Example ZIP'), ('rechte', 'Rights and AI'), ('loslegen', 'Get started'), ('lizenz', 'Licence')],
+  'menu': [('start', 'Start'), ('ablauf', 'Workflow'), ('ueben', 'Practice'), ('paket', 'Example ZIP'), ('rechte', 'Rights and AI'), ('loslegen', 'Get started'), ('lizenz', 'Licences')],
   'menu_label': 'Menu', 'skip': 'Skip to content', 'theme_to_dark': 'Switch to dark mode', 'theme_to_light': 'Switch to light mode',
   'h1': 'Listen, sing along, get it right.',
   'lead': 'choir-practice is a practical Claude skill that saves you a lot of time: your choir score becomes a checked ZIP in which every voice finds its own recordings to practise with, ready to share.',
@@ -158,8 +158,8 @@ T = {
   'los_h': 'Get started',
   'los_steps': ['Upload choir-practice.skill in your Claude account (settings).', 'Call the skill without a score and answer stop A (rights and intended use).', 'Attach the score and answer stop B (work data).', 'Download the ZIP at the end and pass the audio files on to the choir.'],
   'los_dl': 'Download the skill',
-  'lic_h': 'Licence', 'lic_p': 'PolyForm Noncommercial License 1.0.0,\nfree for non-commercial use.',
-  'lic_link': 'Read the licence text', 'lic_third': 'Licences of third parties must be observed.', 'lic_third_link': 'Read the third-party notices', 'foot_profile': 'GitHub profile vbth', 'private': 'private project', 'og_alt': 'A man with headphones stands in an old bathtub and sings from a sheet of music, a rubber duck floats beside him, red notes drift through the room',
+  'lic_h': 'Licences', 'lic_p': 'PolyForm Noncommercial License 1.0.0,\nfree for non-commercial use.',
+  'lic_link': 'Read the licence text', 'lic_third': 'Licences of third parties must be observed.', 'lic_third_link': 'Read the third-party notices', 'foot_profile': 'GitHub repository vbth/choir-practice', 'private': 'private project', 'og_alt': 'A man with headphones stands in an old bathtub and sings from a sheet of music, a rubber duck floats beside him, red notes drift through the room',
   'alt_cover': 'Title page of the example pack', 'alt_page1': 'First score page of the example pack', 'alt_page2': 'Second score page of the example pack', 'alt_ai': 'EU label AI GENERATED',
   'ai_label': 'AI GENERATED', 'top': 'Back to top',
  },
@@ -342,7 +342,7 @@ def page(L):
 </section>
 </div>
 </main>
-<footer><span class="aitag">{ai}<span>{esc(t['ai'])}</span></span><span class="fl"><a href="{PROFILE}" aria-label="{esc(t['foot_profile'])}">{GHICON}<span>vbth</span></a><span>,&nbsp;{esc(t['private'])}</span></span></footer>
+<footer><span class="aitag">{ai}<span>{esc(t['ai'])}</span></span><span class="fl"><a href="{GH}" aria-label="{esc(t['foot_profile'])}">{GHICON}<span>vbth,&nbsp;{esc(t['private'])}</span></a></span></footer>
 <script>window.PAGE={json.dumps(data, ensure_ascii=False)};</script>
 <script src="{A}js/site.js?v={asset_version()}"></script>
 </body>

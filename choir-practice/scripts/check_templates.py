@@ -44,6 +44,8 @@ def problems():
         t = open(f, encoding='utf-8').read()
         if tok(t) != tok(en): out.append(f'handoff template {code}: tokens differ from en ({sorted(tok(t) ^ tok(en))})')
         if sec(t) != sec(en): out.append(f'handoff template {code}: {sec(t)} sections, en has {sec(en)}')
+    sk = open(os.path.join(tdir, 'skill_handoff.en.md'), encoding='utf-8').read()
+    if '## 5. Third-party rights check' not in sk: out.append('skill_handoff.en.md: section "5. Third-party rights check" missing (mandatory)')
     out += footer_problems(packs)
     return out
 

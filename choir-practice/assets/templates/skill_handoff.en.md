@@ -32,5 +32,15 @@ Unpack the .skill, run `scripts/setup.sh`, read this file. The skill in the user
 |---|---|---|---|
 | | | | |
 
-## 5. How to continue
-Apply open points on request, add rows to sections 1 to 4 of the next handoff only, then release with `scripts/release.py` (see README section 11).
+## 5. Third-party rights check (mandatory for every release)
+Run `python3 scripts/check_third_party.py` and record the result. It lists what the skill bundles, what lives only in the repository and what is installed at run time, and fails when a component is missing from `THIRD_PARTY_NOTICES.md`. A release is not prepared while it fails (`release.py` stops).
+| ID | Check | Result | Action |
+|---|---|---|---|
+| T1 | Output of `check_third_party.py` (date, `ok` or missing components) | | |
+| T2 | New or changed components since the previous release (bundled, repository only, run time: pip, apt, fonts, images) and their licences | none / list | |
+| T3 | Entries marked "to check" in `THIRD_PARTY_NOTICES.md`: resolved or still open | | |
+| T4 | EU label SVGs: complete set in the bundle, terms of the official page unchanged | | |
+| T5 | Public documentation (README, website, `THIRD_PARTY_NOTICES.md`) matches the notices | | |
+
+## 6. How to continue
+Apply open points on request, add rows to sections 1 to 5 of the next handoff only, then release with `scripts/release.py` (see README section 11).

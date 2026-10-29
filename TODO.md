@@ -19,13 +19,14 @@ Arbeitsliste für Website, READMEs und Skill. Die IDs (O1 bis O26) entsprechen `
 | ID | Aufgabe |
 |---|---|
 | O4 | Handtuch in `site/header/header-src.svg` (Gruppe `towel`): schwarzen Bogen und roten Punkt entfernen. Danach alle Assets für Website und README neu bauen: `site/header/build.sh` (`docs/img/header.png`), `site/make_previews.py`, `site/build_site.py` |
+| O31 | EU-Label-SVGs vollständig? Im Bundle: „AI GENERATED“ und „AI MODIFIED“, nur schwarz. Laut Sekundärquellen gibt es drei Icons (Basis „AI“, generated, modified) je in Schwarz, Weiß und 50 % transparent, SVG und PNG. Offizielle Seite war nicht abrufbar (403): Set von Hand laden und vergleichen. Entscheidet auch O22 |
 | O25 | Markdown-Dateien im Paket: die grau hinterlegten Datei- und Ordnerverweise zusätzlich verlinken (Datei im Paket oder im Repo) |
 
 ## C. Später
 
 | ID | Aufgabe |
 |---|---|
-| O26 | Rechte-Review gemeinsam: jede Komponente (Schriften, EU-Label, Verovio, Leland, Soundfonts, Pakete, Website-Assets) durchgehen. Pro Komponente festlegen, wo dokumentiert wird und ob öffentlich. Prüfen, ob `THIRD_PARTY_NOTICES.md` einen eindeutigeren Namen braucht. Technische Prüfung gegen die Lizenztexte, keine Rechtsberatung |
+| O26 | Rechte-Review gemeinsam (offen sind die fünf Einträge „to check“ in `THIRD_PARTY_NOTICES.md`): jede Komponente (Schriften, EU-Label, Verovio, Leland, Soundfonts, Pakete, Website-Assets) durchgehen. Pro Komponente festlegen, wo dokumentiert wird und ob öffentlich. Prüfen, ob `THIRD_PARTY_NOTICES.md` einen eindeutigeren Namen braucht. Technische Prüfung gegen die Lizenztexte, keine Rechtsberatung |
 | O1 | Repo-Umzug nach `vbth/choir-practice-material`: `common.MD_LABEL`, `GH` und `SITE` in `site/build_site.py`, README-Links anpassen |
 | O2 | Website-Reihenfolge: Beispiel zuerst, dann Paket, Üben, Loslegen, Ablauf, Rechte, Lizenz |
 | O3 | Kopfhörer-Grafik: Melodiestimme auf Höhe der eigenen Stimme zeichnen, Unterschrift „Kopfhörer, aus deiner Sicht“ |
@@ -37,4 +38,4 @@ Arbeitsliste für Website, READMEs und Skill. Die IDs (O1 bis O26) entsprechen `
 
 ## E. Erledigt in PR 4
 
-O5 Logo-Link auf Hauptseiten-URL · O6 mobiler Abstand Headline zu Headerbild · O7 Statistik „2 Fassungen“ · O8 Call to Action im Ablauf · O9 Schritt 2 „Stopp A“ · O10 Ablauf-Texte (Schritte 2, 3, 10, 11, 12) · O12 Modul-2-Einleitung · O13 Kopfhörerblock und Bildunterschrift zentriert · O14 Neustart bei Stimmwechsel · O15 Schallwellen · O16 Buchstaben mittig und größer · O17 Tutti-Abstand · O18 Button ohne MB · O19 Rechtetext Modul 4 · O21 Drittanbieter-Lizenzen im Modul 6 verlinkt
+O5 Logo-Link auf Hauptseiten-URL · O6 mobiler Abstand Headline zu Headerbild · O7 Statistik „2 Fassungen“ · O8 Call to Action im Ablauf · O9 Schritt 2 „Stopp A“ · O10 Ablauf-Texte (Schritte 2, 3, 10, 11, 12) · O12 Modul-2-Einleitung · O13 Kopfhörerblock und Bildunterschrift zentriert · O14 Neustart bei Stimmwechsel · O15 Schallwellen · O16 Buchstaben mittig und größer · O17 Tutti-Abstand · O18 Button ohne MB · O19 Rechtetext Modul 4 · O21 Drittanbieter-Lizenzen im Modul 6 verlinkt · O27 „Lizenzen“ (Mehrzahl) in Menü und Modul 6 · O28 Footer-Link auf das Repo · O29 Drittanbieter-Prüfschritt (Skript `check_third_party.py`, `setup.sh`, SKILL.md, `release.py`, CI, Pflichtabschnitt 5 im Skill-Handoff) · O30 `THIRD_PARTY_NOTICES.md` vervollständigt

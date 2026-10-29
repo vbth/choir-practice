@@ -9,7 +9,7 @@ Notes come from --note and from the bullets under "## Unreleased" in CHANGELOG.m
 Writes OUT_DIR/choir-practice.skill (constant name, so an upload replaces the skill) and OUT_DIR/RELEASE_NOTES.md,
 and prints the git commands. It does not touch git and does not change the user's account skill.
 """
-import argparse, datetime, pathlib, re, shutil, zipfile
+import argparse, datetime, pathlib, re, shutil, subprocess, sys, zipfile
 
 ap = argparse.ArgumentParser()
 ap.add_argument('skill_dir'); ap.add_argument('--out', required=True); ap.add_argument('--repo')
@@ -19,6 +19,10 @@ a = ap.parse_args()
 sk = pathlib.Path(a.skill_dir).resolve(); root = pathlib.Path(a.repo).resolve() if a.repo else sk
 out = pathlib.Path(a.out); out.mkdir(parents=True, exist_ok=True)
 name = sk.name
+
+# third-party rights check (mandatory): no release while a component is missing from THIRD_PARTY_NOTICES.md
+if subprocess.run([sys.executable, str(sk / 'scripts' / 'check_third_party.py')]).returncode:
+    raise SystemExit('Third-party rights check failed: complete THIRD_PARTY_NOTICES.md first.')
 
 vf = sk / 'VERSION'
 cur = vf.read_text().strip() if vf.exists() else '0.0.0'

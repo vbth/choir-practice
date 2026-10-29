@@ -63,6 +63,21 @@ Unpack the .skill, run `scripts/setup.sh`, read this file. The skill in the user
 | O24 | Question whether `LICENSE` should be `LICENSE.md` (the PolyForm text is Markdown, GitHub shows a file without extension as plain text); touches release.py, checks.yml, READMEs, site | idea | open |
 | O25 | Markdown files in the package: the grey inline-code references to files and folders should also be links to the file in the package or the repository | idea | open |
 | O26 | Rights review together with the owner (later): walk through every right and every third-party component (fonts, EU label, Verovio, Leland, soundfonts, Python and apt packages, website assets), decide per item where use must be documented (package, README, website, `THIRD_PARTY_NOTICES.md`) and whether publicly; decide whether `THIRD_PARTY_NOTICES.md` needs a clearer name; confirm that no third-party right is infringed. No legal advice, a technical check against the licence texts | idea | open, scheduled by the owner for later |
+| O27 | Website: menu entry and section 06 heading "Lizenzen" / "Licences" (plural) | idea | done in PR 4 |
+| O28 | Website footer: GitHub icon with "vbth, privates Projekt" is one link to the repository (before: profile) | idea | done in PR 4 |
+| O29 | Third-party rights check built into installation and development: `scripts/check_third_party.py` (bundled vs repository only vs run time against `THIRD_PARTY_NOTICES.md`), called by `setup.sh`, SKILL.md first step, `release.py` (stops on failure), CI, mandatory section 5 in the skill handoff template | idea | done in PR 4 |
+| O30 | `THIRD_PARTY_NOTICES.md` made complete: added poppler-utils, DejaVu fonts and the repository label copies, new section "Repository only", removed OpenCV (not used); five entries still marked "to check" | idea | done in PR 4, "to check" entries open (see O26) |
+| O31 | EU label SVGs: bundle has two icons (generated, modified), black only. Secondary sources name three icons (basic "AI", generated, modified) in black, white and 50 % transparent, SVG and PNG. Official page could not be fetched (403): download the set by hand and compare. Also decides O22 | test | open |
 
-## 5. How to continue
-Apply open points on request, add rows to sections 1 to 4 of the next handoff only, then release with `scripts/release.py` (see README section 11).
+## 5. Third-party rights check (mandatory for every release)
+Run `python3 scripts/check_third_party.py` and record the result. It lists what the skill bundles, what lives only in the repository and what is installed at run time, and fails when a component is missing from `THIRD_PARTY_NOTICES.md`. A release is not prepared while it fails (`release.py` stops).
+| ID | Check | Result | Action |
+|---|---|---|---|
+| T1 | Output of `check_third_party.py` (date, `ok` or missing components) | | |
+| T2 | New or changed components since the previous release (bundled, repository only, run time: pip, apt, fonts, images) and their licences | none / list | |
+| T3 | Entries marked "to check" in `THIRD_PARTY_NOTICES.md`: resolved or still open | | |
+| T4 | EU label SVGs: complete set in the bundle, terms of the official page unchanged | | |
+| T5 | Public documentation (README, website, `THIRD_PARTY_NOTICES.md`) matches the notices | | |
+
+## 6. How to continue
+Apply open points on request, add rows to sections 1 to 5 of the next handoff only, then release with `scripts/release.py` (see README section 11).
