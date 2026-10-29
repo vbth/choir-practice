@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Builds docs/index.html (de), docs/en/index.html (en), css/site.css, js/site.js for the landing page.
 Level data comes from the skill itself (make_audio.stages), so the headphone graphic cannot drift from the audio."""
-import re, os, sys, json, hashlib, subprocess, zipfile
+import re, os, sys, json, hashlib
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, '..', 'choir-practice', 'scripts'))
 import make_audio as M
@@ -28,12 +28,12 @@ ST['tutti'] = {own: [[v, spread[v], M.LV['tutti'], 'own'] for v in SEAT] for own
 T = {
  'de': {
   'html': 'de', 'name': 'choir-practice Skill', 'title': 'choir-practice Skill – Übe-MP3s je Stimme aus Chornoten', 'other': ('en/', 'EN'), 'self_prefix': '', 'assets': '',
-  'desc': 'Dokumentation eines agentischen KI-Musik-Workflows und -Skills als privates Code-Experiment, entwickelt für und mit Claude Code. Es handelt sich ausschließlich um einen Proof of Concept. Nutzung auf eigene Gefahr. Beispiel: choir-practice macht aus Chornoten ein geprüftes ZIP mit MP3 und MIDI zum Üben für jede Stimme.',
+  'desc': 'Dokumentation eines agentischen KI-Musik-Workflows und -Skills als privates Code-Experiment, entwickelt für und mit Claude Code. Es handelt sich ausschließlich um einen Proof of Concept. Beispiel: choir-practice macht aus Chornoten ein geprüftes ZIP mit MP3 und MIDI zum Üben für jede Stimme.',
   'ids': {'start': 'start', 'ablauf': 'ablauf', 'ueben': 'ueben', 'paket': 'beispiel-zip', 'rechte': 'rechte-und-ki', 'lizenz': 'lizenz'},
   'menu': [('start', 'Start'), ('ablauf', 'Ablauf'), ('ueben', 'Üben'), ('paket', 'Beispiel-ZIP'), ('rechte', 'Rechte und KI'), ('lizenz', 'Lizenzen')],
   'menu_label': 'Menü', 'skip': 'Zum Inhalt', 'theme_to_dark': 'Zum dunklen Modus wechseln', 'theme_to_light': 'Zum hellen Modus wechseln',
   'h1': 'Hören, mitsingen, sicher werden.',
-  'lead': 'Dokumentation eines agentischen KI-Musik-Workflows und -Skills als privates Code-Experiment, entwickelt für und mit Claude Code. Es handelt sich ausschließlich um einen Proof of Concept. Nutzung auf eigene Gefahr. Das Beispiel hier: Aus Chornoten entsteht ein geprüftes ZIP, in dem jede Stimme ihre eigenen Aufnahmen zum Üben findet, fertig zum Weitergeben.',
+  'lead': 'Dokumentation eines agentischen KI-Musik-Workflows und -Skills als privates Code-Experiment, entwickelt für und mit Claude Code. Es handelt sich ausschließlich um einen Proof of Concept. Das Beispiel hier: Aus Chornoten entsteht ein geprüftes ZIP, in dem jede Stimme ihre eigenen Aufnahmen zum Üben findet, fertig zum Weitergeben.',
   'cta': 'Beispiel-ZIP ansehen',
   'ai': 'KI-generiert. Urheber- und Lizenzrechte beachten. Nutzung auf eigene Gefahr.',
   'facts': [('4', 'Stufen je Stimme'), ('2', 'Klänge: Chor und Klavier'), ('2', 'Fassungen: normal und langsam'), ('42', 'Aufnahmen im Beispiel')],
@@ -61,10 +61,10 @@ T = {
    ('Noten anhängen', 'you', 'Als PDF oder Foto.', ''),
    ('Sichtung', 'claude', 'Claude liest die Seiten und prüft die Qualität.', 'Alles verstanden?'),
    ('Stopp B', 'you', 'Titel, Stimmen und Tempo bestätigen.', ''),
-   ('Notenerfassung', 'claude', 'Claude überträgt die Noten.', 'Fehlerfrei?'),
-   ('Korrekturlesen', 'claude', 'Claude vergleicht das Ergebnis zweimal mit der Vorlage: erst Töne, dann Text.', 'Alles sauber? Sonst zurück zu Schritt 6.'),
+   ('Notenerfassung', 'claude', 'Claude überträgt die Noten.', 'Alle Takte und Stimmen erfasst?'),
+   ('Korrekturlesen', 'claude', 'Claude vergleicht das Ergebnis zweimal mit der Vorlage: erst Töne, dann Text.', 'Töne und Text wie in der Vorlage? Sonst zurück zu Schritt 6.'),
    ('Endgültiger Notensatz', 'claude', 'Claude setzt die Noten sauber, mit Titelblatt.', 'Gut lesbar?'),
-   ('Audio', 'claude', 'Claude erzeugt für jede Stimme die Audio-Dateien zum Üben.', 'Alles da?'),
+   ('Audio', 'claude', 'Claude erzeugt für jede Stimme die Audio-Dateien zum Üben.', 'Passt jede Stimme zu den Noten?'),
    ('Paket', 'claude', 'Claude schreibt die Anleitungen und packt alles zusammen.', 'Alle Inhalte vorhanden?'),
    ('Abschluss', 'both', 'Claude macht Verbesserungsvorschläge. Die Entscheidung über die Umsetzung liegt beim Nutzer.', ''),
    ('Herunterladen', 'you', 'ZIP herunterladen und die Audiodateien der einzelnen Stimmen an den Chor weitergeben.', ''),
@@ -75,8 +75,8 @@ T = {
   'stages': {'solo': 'Allein', 'accomp': 'Mit Begleitung', 'choir': 'Im Chor', 'tutti': 'Tutti'},
   'sound_label': 'Klang', 'sounds': {'choir': 'Chor', 'piano': 'Klavier'}, 'tempo_label': 'Tempo', 'tempos': {'normal': 'Normal', 'slow': 'Langsam'}, 'sound_names': {'choir': 'Chorklang', 'piano': 'Klavierklang'}, 'slow_name': 'langsam',
   'stage_txt': {
-   'solo': 'Nur die eigene Stimme, in der Mitte.',
-   'accomp': 'Eigene Stimme, die Melodie leiser, dazu die Klavierbegleitung aller Stimmen.',
+   'solo': 'Nur die gewählte Stimme, in der Mitte.',
+   'accomp': 'Die gewählte Stimme, die Melodie leiser, dazu die Klavierbegleitung aller Stimmen.',
    'choir': 'Die anderen Stimmen sitzen wie im Chor: Nachbarn links und rechts etwas leiser, weiter entfernte noch leiser.',
    'tutti': 'Alle Stimmen gleich laut.'}, 'own_lbl': 'Gesang', 'acc_lbl': 'Klavier',
   'dl_p': 'Das Ergebnis: Aufnahmen zum Üben für jede Stimme, Anleitungen und Protokolle.', 'dl_btn': 'Beispiel-ZIP herunterladen',
@@ -84,7 +84,7 @@ T = {
   'pl_cover': 'Albumcover des Beispielpakets',
   'rechte_h': 'Rechte und KI',
   'rechte_items': [
-   ('Rechte', 'Bevor Noten verarbeitet werden, fragt der Skill nach den Rechten. Die Angaben des Nutzers vermerkt er in der README des Pakets. Lizenzen für Noten müssen eingehalten werden.'),
+   ('Rechte', 'Bevor Noten verarbeitet werden, fragt der Skill nach den Rechten. Die Angaben des Nutzers vermerkt er in der README des Pakets. Ob die Noten verarbeitet und weitergegeben werden dürfen, richtet sich nach ihrer Lizenz.'),
    ('Kennzeichnung', 'Alles, was der Skill erzeugt, ist als KI-Inhalt gekennzeichnet, sowohl mit dem EU-Label für KI-generierte Inhalte als auch im Text und in den Metadaten der Dokumente.'),
   ],
   'lic_h': 'Lizenzen', 'lic_p': 'PolyForm Noncommercial License 1.0.0,',
@@ -94,12 +94,12 @@ T = {
  },
  'en': {
   'html': 'en', 'name': 'choir-practice Skill', 'title': 'choir-practice Skill – Practice MP3s per voice from a choir score', 'other': ('../', 'DE'), 'self_prefix': '../', 'assets': '../',
-  'desc': 'Documentation of an agentic AI music workflow and skill as a private code experiment, developed for and with Claude Code. This is a proof of concept only. Use at your own risk. Example: choir-practice turns a choir score into a checked ZIP with MP3 and MIDI practice files for every voice.',
+  'desc': 'Documentation of an agentic AI music workflow and skill as a private code experiment, developed for and with Claude Code. This is a proof of concept only. Example: choir-practice turns a choir score into a checked ZIP with MP3 and MIDI practice files for every voice.',
   'ids': {'start': 'start', 'ablauf': 'workflow', 'ueben': 'practice', 'paket': 'example-zip', 'rechte': 'rights-and-ai', 'lizenz': 'licence'},
   'menu': [('start', 'Start'), ('ablauf', 'Workflow'), ('ueben', 'Practice'), ('paket', 'Example ZIP'), ('rechte', 'Rights and AI'), ('lizenz', 'Licences')],
   'menu_label': 'Menu', 'skip': 'Skip to content', 'theme_to_dark': 'Switch to dark mode', 'theme_to_light': 'Switch to light mode',
   'h1': 'Listen, sing along, get it right.',
-  'lead': 'Documentation of an agentic AI music workflow and skill as a private code experiment, developed for and with Claude Code. This is a proof of concept only. Use at your own risk. The example here: a choir score becomes a checked ZIP in which every voice finds its own recordings to practise with, ready to share.',
+  'lead': 'Documentation of an agentic AI music workflow and skill as a private code experiment, developed for and with Claude Code. This is a proof of concept only. The example here: a choir score becomes a checked ZIP in which every voice finds its own recordings to practise with, ready to share.',
   'cta': 'See the example ZIP',
   'ai': 'AI-generated. Observe copyright and licence rights. Use at your own risk.',
   'facts': [('4', 'stages per voice'), ('2', 'sounds: choir and piano'), ('2', 'versions: normal and slow'), ('42', 'recordings in the example')],
@@ -127,10 +127,10 @@ T = {
    ('Attach score', 'you', 'As PDF or photo.', ''),
    ('Survey', 'claude', 'Claude reads the pages and checks the quality.', 'Everything understood?'),
    ('Stop B', 'you', 'Confirm title, voices and tempo.', ''),
-   ('Transcription', 'claude', 'Claude transcribes the score.', 'No errors?'),
-   ('Proofreading', 'claude', 'Claude compares the result twice with your original: notes first, then lyrics.', 'All clean? Otherwise back to step 6.'),
+   ('Transcription', 'claude', 'Claude transcribes the score.', 'All bars and voices captured?'),
+   ('Proofreading', 'claude', 'Claude compares the result twice with your original: notes first, then lyrics.', 'Notes and lyrics as in your original? Otherwise back to step 6.'),
    ('Final engraving', 'claude', 'Claude sets the score cleanly, with a title page.', 'Easy to read?'),
-   ('Audio', 'claude', 'Claude creates the practice recordings for every voice.', 'All there?'),
+   ('Audio', 'claude', 'Claude creates the practice recordings for every voice.', 'Does every voice match the score?'),
    ('Package', 'claude', 'Claude writes the guides and packs everything together.', 'All contents there?'),
    ('Closing', 'both', 'Claude suggests improvements. You decide how they are implemented.', ''),
    ('Download', 'you', 'Download the ZIP and pass the audio files of the individual voices on to the choir.', ''),
@@ -141,8 +141,8 @@ T = {
   'stages': {'solo': 'Solo', 'accomp': 'With accompaniment', 'choir': 'In the choir', 'tutti': 'Tutti'},
   'sound_label': 'Sound', 'sounds': {'choir': 'Choir', 'piano': 'Piano'}, 'tempo_label': 'Tempo', 'tempos': {'normal': 'Normal', 'slow': 'Slow'}, 'sound_names': {'choir': 'choir sound', 'piano': 'piano sound'}, 'slow_name': 'slow',
   'stage_txt': {
-   'solo': 'Only your own voice, in the middle.',
-   'accomp': 'Your own voice, the melody quieter, plus the piano accompaniment of all voices.',
+   'solo': 'Only the selected voice, in the middle.',
+   'accomp': 'The selected voice, the melody quieter, plus the piano accompaniment of all voices.',
    'choir': 'The other voices sit as in the choir: neighbours left and right a little quieter, voices further away quieter still.',
    'tutti': 'All voices equally loud.'}, 'own_lbl': 'Singing', 'acc_lbl': 'Piano',
   'dl_p': 'The result: practice recordings for every voice, guides and logs.', 'dl_btn': 'Download the example ZIP',
@@ -150,7 +150,7 @@ T = {
   'pl_cover': 'Album cover of the example pack',
   'rechte_h': 'Rights and AI',
   'rechte_items': [
-   ('Rights', 'Before scores are processed, the skill asks about the rights. It records the user’s details in the pack’s README. The licences of the score must be observed.'),
+   ('Rights', 'Before scores are processed, the skill asks about the rights. It records the user’s details in the pack’s README. Whether the scores may be processed and passed on depends on their licence.'),
    ('Labelling', 'Everything the skill creates is labelled as AI content, both with the EU label for AI-generated content and in the text and metadata of the documents.'),
   ],
   'lic_h': 'Licences', 'lic_p': 'PolyForm Noncommercial License 1.0.0,',
@@ -325,7 +325,7 @@ def page(L):
  <div class="cols">{rights}</div>
 </section>
 <section id="{I['lizenz']}"><h2><span class="num">05</span>{esc(t['lic_h'])}</h2>
- <p class="intro">{esc(t['lic_p'])} <a href="{GH}/blob/main/LICENSE">{esc(t['lic_link'])}</a></p>
+ <p class="intro">{esc(t['lic_p'])} <a href="{GH}/blob/main/LICENSE.md">{esc(t['lic_link'])}</a></p>
  <p class="intro">{esc(t['lic_third'])} <a href="{GH}/blob/main/choir-practice/THIRD_PARTY_NOTICES.md">{esc(t['lic_third_link'])}</a></p>
 </section>
 </main>
@@ -594,21 +594,9 @@ def ai_labels():
     open(os.path.join(OUT, 'img', 'github-mark.svg'), 'w', encoding='utf-8').write(gh)
     open(os.path.join(OUT, 'img', 'github-mark-dark.svg'), 'w', encoding='utf-8').write(gh.replace('#000000', '#ffffff'))
 
-def skill_file():
-    """docs/choir-practice.skill: the skill folder as on main, served by the site itself.
-    Only tracked files, fixed timestamps, no compression, so the bytes are the same on every machine (CI compares docs/)."""
-    root = os.path.join(HERE, '..')
-    files = sorted(subprocess.run(['git', 'ls-files', '-z', 'choir-practice'], cwd=root, capture_output=True, check=True, text=True).stdout.split('\0')[:-1])
-    with zipfile.ZipFile(os.path.join(OUT, 'choir-practice.skill'), 'w', zipfile.ZIP_STORED) as z:
-        for f in files:
-            zi = zipfile.ZipInfo(f, (1980, 1, 1, 0, 0, 0))
-            zi.external_attr = (0o100755 if os.stat(os.path.join(root, f)).st_mode & 0o111 else 0o100644) << 16
-            z.writestr(zi, open(os.path.join(root, f), 'rb').read())
-
 def main():
     os.makedirs(os.path.join(OUT, 'css'), exist_ok=True); os.makedirs(os.path.join(OUT, 'js'), exist_ok=True); os.makedirs(os.path.join(OUT, 'en'), exist_ok=True)
     ai_labels()
-    skill_file()
     open(os.path.join(OUT, 'css', 'site.css'), 'w', encoding='utf-8').write(CSS)
     open(os.path.join(OUT, 'js', 'site.js'), 'w', encoding='utf-8').write(JS)
     open(os.path.join(OUT, 'index.html'), 'w', encoding='utf-8').write(ext(page('de')))
