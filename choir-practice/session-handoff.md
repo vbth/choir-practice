@@ -48,6 +48,12 @@ Unpack the .skill, run `scripts/setup.sh`, read this file. The skill in the user
 | O9 | Website section 01 workflow, step 2: title "Stopp A" / "Stop A" without "Einrichtung" / "Setup" | idea | done in PR 4 |
 | O10 | Website section 01 workflow texts (dictated): step 2 "Angaben über Rechte und Verwendungszweck.", step 3 "Als PDF oder Foto.", step 10 check "Alle Inhalte vorhanden?", step 11 "Die Entscheidung über die Umsetzung liegt beim Nutzer.", step 12 "ZIP herunterladen und die Audiodateien der einzelnen Stimmen an den Chor weitergeben." (dictation read "Tipp" as "ZIP"); English equivalents | idea | done in PR 4 |
 | O11 | Website workflow: review the "Check at the end" lines of steps 6 to 10 as a whole. Step 6 "Fehlerfrei?" and step 7 "Alles sauber?" overlap; steps 8 and 9 are unclear from the dictation (keep or reword?) | idea | open |
+| O12 | Website section 02 intro: "Jeweils eine Stimme liegt in der Mitte" / "In each mix one voice sits in the middle" instead of "Die eigene Stimme ..." (the captions under the graphic still say "eigene Stimme") | idea | done in PR 4 |
+| O13 | Website section 02: whole headphone block incl. controls centred; caption under the graphic always centred | idea | done in PR 4 |
+| O14 | Website section 02: a click on a voice always restarts the recording from the beginning (stage, sound and tempo still keep the position) | idea | done in PR 4 |
+| O15 | Website section 02: sound waves at both ear cups while a recording plays, hidden when paused (static under reduced motion) | idea | done in PR 4 |
+| O16 | Website section 02: letters in the circles centred on the cap height (also on phones) and larger on wide screens | idea | done in PR 4 |
+| O17 | Website section 02: tutti circles further apart horizontally (spread factor 270 instead of 190) | idea | done in PR 4 |
 
 ## 5. How to continue
 Apply open points on request, add rows to sections 1 to 4 of the next handoff only, then release with `scripts/release.py` (see README section 11).
