@@ -65,12 +65,12 @@ ST['tutti'] = {own: [[v, spread[v], M.LV['tutti'], 'own'] for v in SEAT] for own
 
 T = {
  'de': {
-  'html': 'de', 'name': 'choir-practice Skill', 'title': 'choir-practice Skill – Hören, üben, besser singen.', 'other': ('en/', 'EN'), 'self_prefix': '', 'assets': '',
+  'html': 'de', 'name': 'choir-practice Skill', 'title': 'choir-practice Skill – Besser hören, alleine üben, überall singen.', 'other': ('en/', 'EN'), 'self_prefix': '', 'assets': '',
   'desc': 'Dokumentation eines agentischen KI-Musik-Workflows und -Skills entwickelt für und mit Claude Code als privates Code-Experiment. Es handelt sich ausschließlich um einen „Proof of Concept“. Aus Chornoten entsteht am Ende ein „KI-geprüftes“ ZIP, in dem sich für jede Stimme 10 Aufnahmen zum Üben befinden.',
   'ids': {'start': 'start', 'ablauf': 'ablauf', 'ueben': 'ueben', 'paket': 'beispiel-zip', 'rechte': 'rechte-und-ki', 'lizenz': 'lizenz'},
   'menu': [('start', 'Start'), ('ablauf', 'Ablauf'), ('ueben', 'Üben'), ('paket', 'Beispiel-ZIP'), ('rechte', 'Rechte & KI'), ('lizenz', 'Lizenzen')],
   'menu_label': 'Menü', 'skip': 'Zum Inhalt', 'theme_to_dark': 'Zum dunklen Modus wechseln', 'theme_to_light': 'Zum hellen Modus wechseln',
-  'h1': 'Hören, üben, besser singen.',
+  'h1': 'Besser hören, alleine üben, überall singen.',
   'lead': 'Dokumentation eines agentischen KI-Musik-Workflows und -Skills entwickelt für und mit Claude Code als privates Code-Experiment.\n\nEs handelt sich ausschließlich um einen „Proof of Concept“. Aus Chornoten entsteht am Ende ein „KI-\u2060geprüftes“ ZIP, in dem sich für jede Stimme 10 Aufnahmen zum Üben befinden.',
   'cta': 'Beispiel-ZIP ansehen',
   'ai': 'KI-generiert. Nutzung auf eigene Gefahr.', 'foot_note': 'choir-practice – KI-Musik-Workflow/-Skill für Claude.', 'foot_site': 'Startseite',
@@ -131,12 +131,12 @@ T = {
   'ai_label': 'AI', 'top': 'Nach oben',
  },
  'en': {
-  'html': 'en', 'name': 'choir-practice Skill', 'title': 'choir-practice Skill – Listen, practise, sing better.', 'other': ('../', 'DE'), 'self_prefix': '../', 'assets': '../',
+  'html': 'en', 'name': 'choir-practice Skill', 'title': 'choir-practice Skill – Listen better, practise alone, sing anywhere.', 'other': ('../', 'DE'), 'self_prefix': '../', 'assets': '../',
   'desc': 'Documentation of an agentic AI music workflow and skill developed for and with Claude Code as a private code experiment. This is a “proof of concept” only. In the end, a choir score becomes an “AI-checked” ZIP containing 10 practice recordings for every voice.',
   'ids': {'start': 'start', 'ablauf': 'workflow', 'ueben': 'practice', 'paket': 'example-zip', 'rechte': 'rights-and-ai', 'lizenz': 'licence'},
   'menu': [('start', 'Start'), ('ablauf', 'Workflow'), ('ueben', 'Practice'), ('paket', 'Example ZIP'), ('rechte', 'Rights & AI'), ('lizenz', 'Licences')],
   'menu_label': 'Menu', 'skip': 'Skip to content', 'theme_to_dark': 'Switch to dark mode', 'theme_to_light': 'Switch to light mode',
-  'h1': 'Listen, practise, sing better.',
+  'h1': 'Listen better, practise alone, sing anywhere.',
   'lead': 'Documentation of an agentic AI music workflow and skill developed for and with Claude Code as a private code experiment.\n\nThis is a “proof of concept” only. In the end, a choir score becomes an “AI-checked” ZIP containing 10 practice recordings for every voice.',
   'cta': 'See the example ZIP',
   'ai': 'AI-generated. Use at your own risk.', 'foot_note': 'choir-practice – AI music workflow/skill for Claude.', 'foot_site': 'Home page',
@@ -472,6 +472,7 @@ h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 .mixer figcaption{max-width:44em;margin:6px auto 0;text-align:center}
 #hp .wave{opacity:0}#hp.playing .wave{animation:wave 1.4s ease-out infinite}
 @keyframes wave{0%{opacity:0}25%{opacity:1}100%{opacity:0}}
+#hp.live.playing .wave{animation:none}   /* opacity then comes from the script (level of the recording) */
 @media (prefers-reduced-motion:reduce){#hp.playing .wave{animation:none;opacity:1}}
 .cols{display:grid;grid-template-columns:repeat(2,1fr);gap:0 32px}.cols article{border-top:1.5px solid var(--line);padding-top:16px}
 .cols p{margin:0}
@@ -603,6 +604,33 @@ $$('#tempos button').forEach(function(b){b.addEventListener('click',function(){c
 $$('.trk button').forEach(function(b){b.addEventListener('click',function(){change(function(){var v=b.getAttribute('data-voice');if(v)cur.voice=v;cur.stage=b.getAttribute('data-stage');cur.sound=b.getAttribute('data-sound');cur.tempo=b.getAttribute('data-tempo')},true)})});
 $$('.pbtn').forEach(function(b){b.addEventListener('click',function(){if(A.paused){A.play().catch(function(){})}else{A.pause()}})});
 A.addEventListener('play',ui);A.addEventListener('pause',ui);
+// sound waves follow the level of the recording: Web Audio analyser on the audio element, three arcs per side light up one after the other as it gets louder.
+// Level mapping from the example recordings: about -30 dB (quiet) to -16 dB (loud) RMS over 1024 samples. Without Web Audio, with reduced motion or if the context cannot run, the fixed animation stays
+var live=null;
+function startLive(){
+ if(live!==null||(window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches))return;
+ live=false;
+ var AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;
+ try{
+  var cx=new AC();
+  var build=function(){
+   if(cx.state!=='running'){try{cx.close()}catch(e){}return}   // an element routed into a suspended context would be silent
+   var an=cx.createAnalyser();an.fftSize=1024;var sr=cx.createMediaElementSource(A);sr.connect(an);an.connect(cx.destination);
+   live={cx:cx,an:an,buf:new Uint8Array(an.fftSize),s:0,raf:0};svg.classList.add('live');if(!A.paused)loop()};
+  if(cx.state==='running')build();else cx.resume().then(build,function(){})
+ }catch(e){}
+}
+function stopLoop(){if(live&&live.raf){cancelAnimationFrame(live.raf);live.raf=0}$$('#hp .wave').forEach(function(w){w.style.opacity=''})}
+function loop(){
+ if(!live||A.paused){stopLoop();return}
+ var b=live.buf,q=0,i;live.an.getByteTimeDomainData(b);for(i=0;i<b.length;i++){var v=(b[i]-128)/128;q+=v*v}
+ var t=Math.max(0,Math.min(1,(20*Math.log10(Math.sqrt(q/b.length)+1e-6)+30)/14));
+ live.s+=(t>live.s?0.5:0.12)*(t-live.s);   // fast attack, slower release
+ var ws=svg.querySelectorAll('.wave');for(i=0;i<ws.length;i++)ws[i].style.opacity=Math.max(0,Math.min(1,live.s*3.2-Math.floor(i/2)*0.9));   // order of creation: both sides of arc 0, then arc 1, arc 2
+ live.raf=requestAnimationFrame(loop)}
+document.addEventListener('click',function(e){if(e.target.closest&&e.target.closest('button'))startLive()},true);   // created inside a click, so the context may run
+A.addEventListener('play',function(){if(live&&!live.raf){if(live.cx.state==='suspended')live.cx.resume();loop()}});
+A.addEventListener('pause',stopLoop);A.addEventListener('ended',stopLoop);
 A.addEventListener('timeupdate',function(){if(A.duration)sk.value=Math.round(A.currentTime/A.duration*1000);tm.textContent=f(A.currentTime)});
 A.addEventListener('loadedmetadata',function(){tm.textContent=f(A.currentTime)});
 A.addEventListener('ended',function(){ui();sk.value=0});
