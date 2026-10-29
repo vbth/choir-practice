@@ -4,7 +4,7 @@ All notable changes to the skill. Newest first. Versions follow [SemVer](https:/
 
 ## Unreleased
 - Project line of every footer now reads "choir-practice – KI-Musik-Workflow/-Skill für Claude." (en: "choir-practice – AI music workflow/skill for Claude."), without "Code"; a word joiner keeps "-Skill" together in Markdown and on the website
-- Website: headphone graphic wider, so the red sound waves keep more distance to the circles; section "Rechte und KI" / "Rights and AI" renamed "KI-Kennzeichnung" / "AI labelling" (anchors `#ki-kennzeichnung`, `#ai-labelling`)
+- Website: headphone graphic wider, so the red sound waves keep more distance to the circles; menu entry "Rechte und KI" / "Rights and AI" now reads "Rechte & KI" / "Rights & AI", the second item of that section is headed "KI-Kennzeichnung" / "AI labelling"
 - `THIRD_PARTY_NOTICES.md`: all entries checked against the licence texts (GitHub mark/Octicons, poppler-utils, DejaVu, FluidSynth, FFmpeg); none is marked "to check" any more
 - Session handoff reset to the empty form, `TODO.md` removed
 - Self-check in `make_layout.py`: the mandatory AI note ("Use at your own risk") no longer counts as addressing the reader in shared documents of the English package
