@@ -46,6 +46,8 @@ Unpack the .skill, run `scripts/setup.sh`, read this file. The skill in the user
 | O7 | Website statistics block: "2 Fassungen: normal und langsam" instead of "75 % Tempo der langsamen Fassung", because the slow tempo is adjustable | idea | done in PR 4 |
 | O8 | Website section 01 workflow: call to action "Unten einen Schritt anklicken, hier erscheinen die Details." / "Click a step below, its details appear here." instead of "Einen Schritt anklicken." (the detail box sits above the step row, so "here:" would point at the wrong element) | idea | done in PR 4 |
 | O9 | Website section 01 workflow, step 2: title "Stopp A" / "Stop A" without "Einrichtung" / "Setup" | idea | done in PR 4 |
+| O10 | Website section 01 workflow texts (dictated): step 2 "Angaben über Rechte und Verwendungszweck.", step 3 "Als PDF oder Foto.", step 10 check "Alle Inhalte vorhanden?", step 11 "Die Entscheidung über die Umsetzung liegt beim Nutzer.", step 12 "ZIP herunterladen und die Audiodateien der einzelnen Stimmen an den Chor weitergeben." (dictation read "Tipp" as "ZIP"); English equivalents | idea | done in PR 4 |
+| O11 | Website workflow: review the "Check at the end" lines of steps 6 to 10 as a whole. Step 6 "Fehlerfrei?" and step 7 "Alles sauber?" overlap; steps 8 and 9 are unclear from the dictation (keep or reword?) | idea | open |
 
 ## 5. How to continue
 Apply open points on request, add rows to sections 1 to 4 of the next handoff only, then release with `scripts/release.py` (see README section 11).
