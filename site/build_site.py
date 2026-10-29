@@ -14,6 +14,33 @@ GHICON = '<svg class="ghi" viewBox="0 0 16 16" width="22" height="22" aria-hidde
 def ext(html):
     """External links open in a new tab."""
     return re.sub(r'<a ([^>]*href="https?://[^"]*"[^>]*)>', lambda m: '<a ' + m.group(1) + ' target="_blank" rel="noopener noreferrer">', html)
+NB_BLOCKS = re.compile(r'<(p|li|h1|h2|h3|h4|figcaption|dd|dt|summary|label)(\s[^>]*)?>(.*?)</\1>', re.S)
+NB_FOOTER = re.compile(r'(<footer>.*?</footer>)', re.S)
+
+def _glue(inner):
+    """Joins the last two words of an element (or of each line before a <br>) with a non-breaking space, so a line never ends with one word alone."""
+    if '<button' in inner or '<svg' in inner: return inner
+    out = []
+    for seg in re.split(r'(<br\s*/?>)', inner):
+        if seg.startswith('<br'): out.append(seg); continue
+        toks = re.split(r'(<[^>]+>)', seg)
+        for i in range(len(toks) - 1, -1, -1):
+            if toks[i].startswith('<') or ' ' not in toks[i]: continue
+            k = toks[i].rindex(' ')
+            if k == len(toks[i]) - 1 and not toks[i].strip(): k = len(toks[i]) - 1
+            if not ''.join(t for t in toks[:i] if not t.startswith('<')) + toks[i][:k]: break   # nothing before the space: leave it
+            toks[i] = toks[i][:k] + '&nbsp;' + toks[i][k + 1:]; break
+        out.append(''.join(toks))
+    return ''.join(out)
+
+def nobreak(html):
+    """Build rule: no line of the page ends with a single word. The last space of every text block (and of every line before a <br>) becomes
+    a non-breaking space; the footer lines too. Applied to the body only. Texts set by the page script do the same (nb() in site.js)."""
+    head, sep, body = html.partition('<body')
+    body = NB_BLOCKS.sub(lambda m: f'<{m.group(1)}{m.group(2) or ""}>{_glue(m.group(3))}</{m.group(1)}>', body)
+    body = NB_FOOTER.sub(lambda m: re.sub(r'<span>([^<]*)</span>', lambda n: '<span>' + _glue(n.group(1)) + '</span>', m.group(1)), body)
+    return head + sep + body
+
 REL = GH + '/releases/download/v1.0.0/'   # example ZIPs: assets of the release v1.0.0
 ZIPS = [('Deutsch: Alle meine Entchen', 'Chor_Uebungen_Alle_meine_Entchen.zip'), ('English: All My Ducklings', 'Choir_Practice_All_My_Ducklings.zip')]   # make_previews.py renders both
 ZIP_OF = {'de': ZIPS[0][1], 'en': ZIPS[1][1]}   # each page links only the package of its own language
@@ -344,6 +371,7 @@ CSS = r'''@font-face{font-family:"IBM Plex Sans";font-weight:400;font-style:norm
 :root[data-theme=dark]{--bg:#000;--fg:#fff;--mute:#fff;--line:#fff;color-scheme:dark}:root[data-theme=light]{color-scheme:light}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
+p,li,figcaption{text-wrap:pretty}
 body{margin:0;background:var(--bg);color:var(--fg);font:400 var(--fs)/1.55 "IBM Plex Sans",Helvetica,Arial,sans-serif;-webkit-text-size-adjust:100%}
 a{color:var(--link);text-decoration:underline;text-underline-offset:.18em;text-decoration-thickness:1.5px}
 .mono{font-family:"IBM Plex Sans Condensed","IBM Plex Sans",sans-serif}
@@ -480,12 +508,13 @@ if(mq.addEventListener)mq.addEventListener('change',apply);apply()})();
 // folder tree
 $$('.folder button').forEach(function(b){b.addEventListener('click',function(){var o=b.getAttribute('aria-expanded')==='true';b.setAttribute('aria-expanded',!o);document.getElementById(b.getAttribute('aria-controls')).hidden=o})});
 // workflow chain
+function nb(t){var i=t.lastIndexOf(' ');return i>0?t.slice(0,i)+String.fromCharCode(160)+t.slice(i+1):t}   // last two words stay together
 function showStep(i){
  $$('.chain button').forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-step')==i)});
  var s=D.steps[i],box=$('#stepbox');box.innerHTML='';
  var h=document.createElement('h3');h.innerHTML='<span>'+(i+1)+' – '+s[0]+'</span><span class="who">'+D.who[s[1]]+'</span>';
- var p=document.createElement('p');p.textContent=s[2];box.appendChild(h);box.appendChild(p);
- if(s[3]){var g=document.createElement('p');g.className='gate';g.textContent=D.gate+': '+s[3];box.appendChild(g)}
+ var p=document.createElement('p');p.textContent=nb(s[2]);box.appendChild(h);box.appendChild(p);
+ if(s[3]){var g=document.createElement('p');g.className='gate';g.textContent=nb(D.gate+': '+s[3]);box.appendChild(g)}
 }
 $$('.chain button').forEach(function(b){b.addEventListener('click',function(){showStep(+b.getAttribute('data-step'))})});
 showStep(0);
@@ -524,7 +553,7 @@ function draw(){
   svg.appendChild(el('text',{x:pos(e),y:y,dy:'.35em','font-size':FS,'text-anchor':'middle'},e[0]));});
  if(acc.length){svg.appendChild(el('text',{x:x0,y:py,'font-size':FS,'text-anchor':'middle'},D.acc+' ('+acc[0][2]+' dB)'))}
  svg.setAttribute('aria-label',D.voices[cur.voice]+', '+D.stages[cur.stage]);   // no <title>: it would show a tooltip on hover
- $('#hpcap').textContent=D.stage_txt[cur.stage];
+ $('#hpcap').textContent=nb(D.stage_txt[cur.stage]);
 }
 // one state (voice, stage, sound, tempo) drives the headphones, the buttons, the playlist and the audio
 var pl=$('#player'),A=$('#plaudio'),sk=$('#plseek'),tm=$('#pltime'),base=pl.getAttribute('data-audio');
@@ -598,8 +627,8 @@ def main():
     ai_labels()
     open(os.path.join(OUT, 'css', 'site.css'), 'w', encoding='utf-8').write(CSS)
     open(os.path.join(OUT, 'js', 'site.js'), 'w', encoding='utf-8').write(JS)
-    open(os.path.join(OUT, 'index.html'), 'w', encoding='utf-8').write(ext(page('de')))
-    open(os.path.join(OUT, 'en', 'index.html'), 'w', encoding='utf-8').write(ext(page('en')))
+    open(os.path.join(OUT, 'index.html'), 'w', encoding='utf-8').write(ext(nobreak(page('de'))))
+    open(os.path.join(OUT, 'en', 'index.html'), 'w', encoding='utf-8').write(ext(nobreak(page('en'))))
     alt = ''.join(f'<xhtml:link rel="alternate" hreflang="{h}" href="{u}"/>' for h, u in (('de', SITE), ('en', SITE + 'en/'), ('x-default', SITE)))
     open(os.path.join(OUT, 'sitemap.xml'), 'w', encoding='utf-8').write(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'

@@ -23,12 +23,13 @@ if(mq.addEventListener)mq.addEventListener('change',apply);apply()})();
 // folder tree
 $$('.folder button').forEach(function(b){b.addEventListener('click',function(){var o=b.getAttribute('aria-expanded')==='true';b.setAttribute('aria-expanded',!o);document.getElementById(b.getAttribute('aria-controls')).hidden=o})});
 // workflow chain
+function nb(t){var i=t.lastIndexOf(' ');return i>0?t.slice(0,i)+String.fromCharCode(160)+t.slice(i+1):t}   // last two words stay together
 function showStep(i){
  $$('.chain button').forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-step')==i)});
  var s=D.steps[i],box=$('#stepbox');box.innerHTML='';
  var h=document.createElement('h3');h.innerHTML='<span>'+(i+1)+' – '+s[0]+'</span><span class="who">'+D.who[s[1]]+'</span>';
- var p=document.createElement('p');p.textContent=s[2];box.appendChild(h);box.appendChild(p);
- if(s[3]){var g=document.createElement('p');g.className='gate';g.textContent=D.gate+': '+s[3];box.appendChild(g)}
+ var p=document.createElement('p');p.textContent=nb(s[2]);box.appendChild(h);box.appendChild(p);
+ if(s[3]){var g=document.createElement('p');g.className='gate';g.textContent=nb(D.gate+': '+s[3]);box.appendChild(g)}
 }
 $$('.chain button').forEach(function(b){b.addEventListener('click',function(){showStep(+b.getAttribute('data-step'))})});
 showStep(0);
@@ -67,7 +68,7 @@ function draw(){
   svg.appendChild(el('text',{x:pos(e),y:y,dy:'.35em','font-size':FS,'text-anchor':'middle'},e[0]));});
  if(acc.length){svg.appendChild(el('text',{x:x0,y:py,'font-size':FS,'text-anchor':'middle'},D.acc+' ('+acc[0][2]+' dB)'))}
  svg.setAttribute('aria-label',D.voices[cur.voice]+', '+D.stages[cur.stage]);   // no <title>: it would show a tooltip on hover
- $('#hpcap').textContent=D.stage_txt[cur.stage];
+ $('#hpcap').textContent=nb(D.stage_txt[cur.stage]);
 }
 // one state (voice, stage, sound, tempo) drives the headphones, the buttons, the playlist and the audio
 var pl=$('#player'),A=$('#plaudio'),sk=$('#plseek'),tm=$('#pltime'),base=pl.getAttribute('data-audio');
