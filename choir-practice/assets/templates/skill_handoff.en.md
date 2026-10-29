@@ -43,4 +43,4 @@ Run `python3 scripts/check_third_party.py` and record the result. It lists what 
 | T5 | Public documentation (README, website, `THIRD_PARTY_NOTICES.md`) matches the notices | | |
 
 ## 6. How to continue
-Apply open points on request, add rows to sections 1 to 5 of the next handoff only, then release with `scripts/release.py` (see README section 11).
+Apply open points on request, add rows to sections 1 to 5 of the next handoff only, then release with `scripts/release.py` (see README section 10).
