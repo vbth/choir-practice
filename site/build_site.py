@@ -122,7 +122,7 @@ T = {
   'pl_cover': 'Albumcover des Beispielpakets',
   'rechte_h': 'Rechte & KI',
   'rechte_items': [
-   ('Rechte', 'Bevor Noten verarbeitet werden, fragt der Skill nach den Rechten. Diese Angaben werden in der README-Datei vermerkt. Ob die Noten verarbeitet und weitergegeben werden dürfen, richtet sich nach dem Urheber- und Lizenzrecht.'),
+   ('Rechte', 'Bevor Noten verarbeitet werden, fragt der Skill nach den Rechten. Diese Angaben werden danach in der README-Datei vermerkt. Ob die Noten verarbeitet und weitergegeben werden dürfen, richtet sich nach dem Urheber- und Lizenzrecht, unter dem sie stehen.'),
    ('KI-Kennzeichnung', 'Alles, was der Skill erzeugt, ist als KI-Inhalt gekennzeichnet, sowohl mit dem EU-Label für KI-generierte Inhalte als auch im Text und in den Metadaten der Dokumente.'),
   ],
   'lic_h': 'Lizenzen', 'lic_p': 'PolyForm Noncommercial License 1.0.0,',
@@ -188,7 +188,7 @@ T = {
   'pl_cover': 'Album cover of the example pack',
   'rechte_h': 'Rights & AI',
   'rechte_items': [
-   ('Rights', 'Before scores are processed, the skill asks about the rights. These details are recorded in the README file. Whether the scores may be processed and passed on depends on copyright and licence law.'),
+   ('Rights', 'Before scores are processed, the skill asks about the rights. These details are then recorded in the README file. Whether the scores may be processed and passed on depends on the copyright and licence law they are subject to.'),
    ('AI labelling', 'Everything the skill creates is labelled as AI content, both with the EU label for AI-generated content and in the text and metadata of the documents.'),
   ],
   'lic_h': 'Licences', 'lic_p': 'PolyForm Noncommercial License 1.0.0,',
@@ -604,8 +604,8 @@ $$('#tempos button').forEach(function(b){b.addEventListener('click',function(){c
 $$('.trk button').forEach(function(b){b.addEventListener('click',function(){change(function(){var v=b.getAttribute('data-voice');if(v)cur.voice=v;cur.stage=b.getAttribute('data-stage');cur.sound=b.getAttribute('data-sound');cur.tempo=b.getAttribute('data-tempo')},true)})});
 $$('.pbtn').forEach(function(b){b.addEventListener('click',function(){if(A.paused){A.play().catch(function(){})}else{A.pause()}})});
 A.addEventListener('play',ui);A.addEventListener('pause',ui);
-// sound waves follow the level of the recording: Web Audio analyser on the audio element; the three arcs per side are switched on one after the other as it gets louder and off again in reverse order (always full red, no fading).
-// Level mapping from the example recordings: about -30 dB (quiet) to -16 dB (loud) RMS over 1024 samples. Without Web Audio, with reduced motion or if the context cannot run, the fixed animation stays
+// sound waves pulse with the rhythm of the recording: Web Audio analyser on the audio element; every note onset (level jumps more than 2.5 dB above its slow average) switches the three arcs per side on, they then go off again from the outside in; while it sounds the inner arc stays on (always full red, no fading).
+// Onset rate on the example recordings: 2 to 4 per second. Without Web Audio, with reduced motion or if the context cannot run, the fixed animation stays
 var live=null;
 function startLive(){
  if(live!==null||(window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches))return;
@@ -616,17 +616,22 @@ function startLive(){
   var build=function(){
    if(cx.state!=='running'){try{cx.close()}catch(e){}return}   // an element routed into a suspended context would be silent
    var an=cx.createAnalyser();an.fftSize=1024;var sr=cx.createMediaElementSource(A);sr.connect(an);an.connect(cx.destination);
-   live={cx:cx,an:an,buf:new Uint8Array(an.fftSize),s:0,raf:0,on:[false,false,false]};svg.classList.add('live');if(!A.paused)loop()};
+   live={cx:cx,an:an,buf:new Uint8Array(an.fftSize),slow:null,pulse:0,last:0,t:0,raf:0,on:[false,false,false]};svg.classList.add('live');if(!A.paused)loop()};
   if(cx.state==='running')build();else cx.resume().then(build,function(){})
  }catch(e){}
 }
-function stopLoop(){if(live&&live.raf){cancelAnimationFrame(live.raf);live.raf=0}if(live)live.on=[false,false,false];$$('#hp .wave').forEach(function(w){w.style.opacity=''})}
-function loop(){
+function stopLoop(){if(live&&live.raf){cancelAnimationFrame(live.raf);live.raf=0}if(live){live.on=[false,false,false];live.slow=null;live.pulse=0}$$('#hp .wave').forEach(function(w){w.style.opacity=''})}
+function loop(now){
  if(!live||A.paused){stopLoop();return}
- var b=live.buf,q=0,i;live.an.getByteTimeDomainData(b);for(i=0;i<b.length;i++){var v=(b[i]-128)/128;q+=v*v}
- var t=Math.max(0,Math.min(1,(20*Math.log10(Math.sqrt(q/b.length)+1e-6)+30)/14));
- live.s+=(t>live.s?0.5:0.12)*(t-live.s);   // fast attack, slower release
- for(i=0;i<3;i++){var th=0.25*(i+1);if(live.on[i]?live.s<th-0.06:live.s>th+0.06)live.on[i]=!live.on[i]}   // thresholds 0.25 / 0.5 / 0.75 with hysteresis against flicker
+ now=now||performance.now();
+ var b=live.buf,q=0,i;live.an.getByteTimeDomainData(b);for(i=0;i<b.length;i++){var x=(b[i]-128)/128;q+=x*x}
+ var db=20*Math.log10(Math.sqrt(q/b.length)+1e-6),dt=Math.min(100,live.t?now-live.t:16);live.t=now;
+ if(live.slow===null)live.slow=db;
+ var flux=db-live.slow;   // jump above the slow average = note onset
+ if(flux>2.5&&db>-45&&now-live.last>110){live.pulse=Math.min(1,0.55+flux/10);live.last=now}
+ live.pulse*=Math.pow(0.92,dt*0.06);live.slow+=(1-Math.pow(0.95,dt*0.06))*(db-live.slow);   // per 60 Hz frame: pulse x0.92, average 5 %
+ var v=Math.max(live.pulse,db>-25?0.35:0);   // inner arc stays on while it sounds
+ for(i=0;i<3;i++){var th=0.25*(i+1);if(live.on[i]?v<th-0.04:v>th+0.04)live.on[i]=!live.on[i]}   // thresholds 0.25 / 0.5 / 0.75 with hysteresis against flicker
  for(i=1;i<3;i++)if(!live.on[i-1])live.on[i]=false;   // an outer arc is only on while the inner one is
  var ws=svg.querySelectorAll('.wave');for(i=0;i<ws.length;i++)ws[i].style.opacity=live.on[Math.floor(i/2)]?1:0;   // order of creation: both sides of arc 0, then arc 1, arc 2
  live.raf=requestAnimationFrame(loop)}
