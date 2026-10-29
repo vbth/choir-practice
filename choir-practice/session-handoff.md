@@ -40,6 +40,7 @@ Unpack the .skill, run `scripts/setup.sh`, read this file. The skill in the user
 | O1 | Repo move to vbth/choir-practice-material: update common.MD_LABEL, GH/SITE in site/build_site.py and the README links | test | open |
 | O2 | Website block order: example first, then package, practice, get started, workflow, rights, licence | idea | open |
 | O3 | Headphone graphic: draw the melody voice at the height of the own voice (height reads as "front"); caption "Kopfhörer, aus deiner Sicht" | idea | open |
+| O4 | Towel in `site/header/header-src.svg` (group `towel`): remove the black arc and the red dot (with its white glyph), then rebuild all assets for the website and the README (`site/header/build.sh` → `docs/img/header.png`, `site/make_previews.py`, `site/build_site.py`) | idea | open |
 
 ## 5. How to continue
 Apply open points on request, add rows to sections 1 to 4 of the next handoff only, then release with `scripts/release.py` (see README section 11).
