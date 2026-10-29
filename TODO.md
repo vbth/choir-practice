@@ -25,7 +25,7 @@ Arbeitsliste für Website, READMEs und Skill. Die IDs (O1 bis O26) entsprechen `
 | ID | Aufgabe |
 |---|---|
 | O26 | Rechte-Review gemeinsam (offen sind die fünf Einträge „to check“ in `THIRD_PARTY_NOTICES.md`): jede Komponente (Schriften, EU-Label, Verovio, Leland, Soundfonts, Pakete, Website-Assets) durchgehen. Pro Komponente festlegen, wo dokumentiert wird und ob öffentlich. Prüfen, ob `THIRD_PARTY_NOTICES.md` einen eindeutigeren Namen braucht. Technische Prüfung gegen die Lizenztexte, keine Rechtsberatung |
-| O35 | Website-Footer „privates Projekt“: „nichtkommerziell“ ergänzen? Zusammen mit O26 klären, ob die Seite ein Impressum und eine Datenschutzerklärung braucht (Hosting auf GitHub Pages). Die Selbstbezeichnung allein entscheidet das nicht |
+| O35 | Website-Footer „privates Projekt“ und Impressum: Recherche vom 29.10.2026 (Beratungsportale, kein Gesetzestext, keine Urteile): Ausnahme von der Impressumspflicht nur für rein private Seiten (persönlich/familiär), nichtkommerzielle öffentliche Seiten sind unter Juristen umstritten; „geschäftsmäßig“ = nachhaltig, auch ohne Gewinnabsicht. Sichere Variante: Impressum (Name, ladungsfähige Anschrift, E-Mail) plus Datenschutzhinweis (GitHub Pages loggt IP-Adressen; Schriften sind selbst gehostet, keine Analytics). Entscheidung zusammen mit O26; „nichtkommerziell“ im Footer ändert nichts an der Pflicht |
 | O1 | Repo-Umzug nach `vbth/choir-practice-material`: `common.MD_LABEL`, `GH` und `SITE` in `site/build_site.py`, README-Links anpassen |
 | O2 | Website-Reihenfolge: Beispiel zuerst, dann Paket, Üben, Loslegen, Ablauf, Rechte, Lizenz |
 | O3 | Kopfhörer-Grafik: Melodiestimme auf Höhe der eigenen Stimme zeichnen, Unterschrift „Kopfhörer, aus deiner Sicht“ |
