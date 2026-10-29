@@ -6,7 +6,7 @@
 
 English | [Deutsch](README.de.md)
 
-## Listen, practise, sing with confidence.
+## Listen, practise, sing better.
 
 **Documentation of an agentic AI music workflow and skill as a private code experiment, developed for and with Claude Code. This is a proof of concept only.** The example here, choir-practice, turns a choir score into a checked ZIP in which every voice finds its own recordings to practise with, ready to share.
 
