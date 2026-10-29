@@ -35,7 +35,7 @@ T = {
   'h1': 'Hören, mitsingen, sicher werden.',
   'lead': 'Dokumentation eines agentischen KI-Musik-Workflows und -Skills als privates Code-Experiment, entwickelt für und mit Claude Code. Es handelt sich ausschließlich um einen Proof of Concept. Nutzung auf eigene Gefahr. Das Beispiel hier: Aus Chornoten entsteht ein geprüftes ZIP, in dem jede Stimme ihre eigenen Aufnahmen zum Üben findet, fertig zum Weitergeben.',
   'cta': 'Beispiel-ZIP ansehen',
-  'ai': 'KI-generiert, Urheber- und Lizenzrechte beachten, ohne Gewähr',
+  'ai': 'KI-generiert. Urheber- und Lizenzrechte beachten. Nutzung auf eigene Gefahr.',
   'facts': [('4', 'Stufen je Stimme'), ('2', 'Klänge: Chor und Klavier'), ('2', 'Fassungen: normal und langsam'), ('42', 'Aufnahmen im Beispiel')],
   'inh_h': 'Inhalte', 'paket_h': 'Beispiel-ZIP', 'paket_p': 'Im ZIP liegen vier Ordner. Die Stimmen-ZIPs in 2_Ueben sind fertig zum Weitergeben, ihr Inhalt steht zuletzt. Einen Ordner anklicken.',
   'tree': [
@@ -87,8 +87,8 @@ T = {
    ('Rechte', 'Bevor Noten verarbeitet werden, fragt der Skill nach den Rechten. Die Angaben des Nutzers vermerkt er in der README des Pakets. Lizenzen für Noten müssen eingehalten werden.'),
    ('Kennzeichnung', 'Alles, was der Skill erzeugt, ist als KI-Inhalt gekennzeichnet, sowohl mit dem EU-Label für KI-generierte Inhalte als auch im Text und in den Metadaten der Dokumente.'),
   ],
-  'lic_h': 'Lizenzen', 'lic_p': 'PolyForm Noncommercial License 1.0.0, frei für nichtkommerzielle Nutzung.',
-  'lic_link': 'Lizenztext lesen', 'lic_third': 'Lizenzen von Drittanbietern müssen beachtet werden.', 'lic_third_link': 'Rechte der Drittanbieter-Lizenzen lesen', 'foot_profile': 'GitHub-Repository vbth/choir-practice', 'foot_note': 'choir-practice – KI-Musik-Workflow/-Skill entwickelt für/mit Claude Code. Proof of Concept, Nutzung auf eigene Gefahr.', 'private': 'privates Projekt', 'og_alt': 'Ein Mann mit Kopfhörern steht in einer alten Badewanne und singt vom Notenblatt, neben ihm schwimmt eine Quietscheente, rote Noten schweben im Raum',
+  'lic_h': 'Lizenzen', 'lic_p': 'PolyForm Noncommercial License 1.0.0,',
+  'lic_link': 'Lizenztext lesen', 'lic_third': 'Lizenzen von Drittanbietern,', 'lic_third_link': 'Übersicht lesen', 'foot_profile': 'GitHub-Repository vbth/choir-practice', 'foot_note': 'choir-practice – Proof of Concept: KI-Musik-Workflow/-Skill entwickelt für/von Claude Code. Nutzung auf eigene Gefahr.', 'private': 'privates Projekt', 'og_alt': 'Ein Mann mit Kopfhörern steht in einer alten Badewanne und singt vom Notenblatt, neben ihm schwimmt eine Quietscheente, rote Noten schweben im Raum',
   'alt_cover': 'Deckblatt des Beispielpakets', 'alt_page1': 'Erste Notenseite des Beispielpakets', 'alt_page2': 'Zweite Notenseite des Beispielpakets', 'alt_ai': 'EU-Label AI',
   'ai_label': 'AI', 'top': 'Nach oben',
  },
@@ -101,7 +101,7 @@ T = {
   'h1': 'Listen, sing along, get it right.',
   'lead': 'Documentation of an agentic AI music workflow and skill as a private code experiment, developed for and with Claude Code. This is a proof of concept only. Use at your own risk. The example here: a choir score becomes a checked ZIP in which every voice finds its own recordings to practise with, ready to share.',
   'cta': 'See the example ZIP',
-  'ai': 'AI-generated, observe copyright and licence rights, no warranty',
+  'ai': 'AI-generated. Observe copyright and licence rights. Use at your own risk.',
   'facts': [('4', 'stages per voice'), ('2', 'sounds: choir and piano'), ('2', 'versions: normal and slow'), ('42', 'recordings in the example')],
   'inh_h': 'Contents', 'paket_h': 'Example ZIP', 'paket_p': 'The ZIP holds four folders. The voice ZIPs in 2_Practice are ready to hand out, their contents are listed last. Click a folder.',
   'tree': [
@@ -153,8 +153,8 @@ T = {
    ('Rights', 'Before scores are processed, the skill asks about the rights. It records the user’s details in the pack’s README. The licences of the score must be observed.'),
    ('Labelling', 'Everything the skill creates is labelled as AI content, both with the EU label for AI-generated content and in the text and metadata of the documents.'),
   ],
-  'lic_h': 'Licences', 'lic_p': 'PolyForm Noncommercial License 1.0.0, free for non-commercial use.',
-  'lic_link': 'Read the licence text', 'lic_third': 'Licences of third parties must be observed.', 'lic_third_link': 'Read the third-party notices', 'foot_profile': 'GitHub repository vbth/choir-practice', 'foot_note': 'choir-practice – AI music workflow/skill developed for/with Claude Code. Proof of concept, use at your own risk.', 'private': 'private project', 'og_alt': 'A man with headphones stands in an old bathtub and sings from a sheet of music, a rubber duck floats beside him, red notes drift through the room',
+  'lic_h': 'Licences', 'lic_p': 'PolyForm Noncommercial License 1.0.0,',
+  'lic_link': 'Read the licence text', 'lic_third': 'Licences of third parties,', 'lic_third_link': 'Read the overview', 'foot_profile': 'GitHub repository vbth/choir-practice', 'foot_note': 'choir-practice – Proof of concept: AI music workflow/skill developed for/by Claude Code. Use at your own risk.', 'private': 'private project', 'og_alt': 'A man with headphones stands in an old bathtub and sings from a sheet of music, a rubber duck floats beside him, red notes drift through the room',
   'alt_cover': 'Title page of the example pack', 'alt_page1': 'First score page of the example pack', 'alt_page2': 'Second score page of the example pack', 'alt_ai': 'EU label AI',
   'ai_label': 'AI', 'top': 'Back to top',
  },
@@ -325,11 +325,11 @@ def page(L):
  <div class="cols">{rights}</div>
 </section>
 <section id="{I['lizenz']}"><h2><span class="num">05</span>{esc(t['lic_h'])}</h2>
- <p class="intro">{esc(t['lic_third'])} <a href="{GH}/blob/main/choir-practice/THIRD_PARTY_NOTICES.md">{esc(t['lic_third_link'])}</a></p>
  <p class="intro">{esc(t['lic_p'])} <a href="{GH}/blob/main/LICENSE">{esc(t['lic_link'])}</a></p>
+ <p class="intro">{esc(t['lic_third'])} <a href="{GH}/blob/main/choir-practice/THIRD_PARTY_NOTICES.md">{esc(t['lic_third_link'])}</a></p>
 </section>
 </main>
-<footer><p class="fnote"><span class="fl"><a href="{GH}" aria-label="{esc(t['foot_profile'])}">{GHICON}</a></span><span>{esc(t['foot_note'])}</span></p><span class="aitag">{ai}<span>{esc(t['ai'])}, {YEAR}</span></span></footer>
+<footer><p class="fnote"><span class="fl"><a href="{GH}" aria-label="{esc(t['foot_profile'])}">{GHICON}</a></span><span>{esc(t['foot_note'])}</span></p><span class="aitag">{ai}<span>{esc(t['ai'])} {YEAR}</span></span></footer>
 <script>window.PAGE={json.dumps(data, ensure_ascii=False)};</script>
 <script src="{A}js/site.js?v={asset_version()}"></script>
 </body>
@@ -590,6 +590,9 @@ def ai_labels():
     dark = inline_label(open(os.path.join(AS, 'eu-labels', white), encoding='utf-8').read(), vb, title,
                         f'EU label "{title}", white (dark mode): official file {white} of the EU icon set, viewBox cropped to the label, styles inlined, shapes unchanged')
     open(os.path.join(OUT, 'img', name + '-dark.svg'), 'w', encoding='utf-8').write(dark)
+    gh = open(os.path.join(AS, 'github-mark.svg'), encoding='utf-8').read()   # GitHub mark (Octicons, MIT) for the Markdown footers
+    open(os.path.join(OUT, 'img', 'github-mark.svg'), 'w', encoding='utf-8').write(gh)
+    open(os.path.join(OUT, 'img', 'github-mark-dark.svg'), 'w', encoding='utf-8').write(gh.replace('#000000', '#ffffff'))
 
 def skill_file():
     """docs/choir-practice.skill: the skill folder as on main, served by the site itself.

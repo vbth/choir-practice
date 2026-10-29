@@ -7,7 +7,7 @@ diagram (own voice centred as a solid black dot, other voices as dots: position 
 import json, sys, os, argparse
 import cairosvg
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from common import load_i18n, log_check, ACCENT, icon_markup, icon_width, text_width, human_date, register_plex, FOOT_PT
+from common import load_i18n, log_check, ACCENT, icon_markup, icon_width, text_width, human_date, register_plex, FOOT_PT, gh_icon_markup
 register_plex()   # Swiss design: IBM Plex Sans, flush left (20 mm margin), 100 % black, no fills, no colour
 
 W, H = 1188, 840      # 4 px per mm
@@ -62,10 +62,12 @@ def main():
                 T(x, (y - r - 4) if (p == 0 or abs(p) > 0.9) else (y + r + 12), f'{db}', 10, 400, 'middle')
             o.append(f'<circle cx="{cx:.1f}" cy="{ay:.1f}" r="15" fill="{ACCENT}"/>'); T(cx, ay + 4, own, 10, 700, 'middle', 'white')
     # footer (identical on every PDF): [EU label] AI note, date flush left, FOOT_PT (4 px per mm)
-    lang = spec.get('language', 'en'); FS = FOOT_PT * 0.352778 * 4; dt = human_date(lang); note = i18['ai_note_info'] + ', ' + dt; yb = H - 46
+    lang = spec.get('language', 'en'); FS = FOOT_PT * 0.352778 * 4; dt = human_date(lang); note = i18['ai_note_info'] + ' ' + dt; yb = H - 46
     x = M
     o.append(icon_markup(x, yb, FS, 'info')); x += icon_width(FS, 'info') + FS * 0.5
     T(x, yb, note, FS)   # one page: no page number
+    py = yb - FS * 1.9; col = icon_width(FS, 'info')   # project line one line above, text in the same column as the AI note
+    o.append(gh_icon_markup(M, py, FS, col)); T(M + col + FS * 0.5, py, i18['proj_note'], FS)
     o.append('</svg>')
     svg = '\n'.join(o)
     cairosvg.svg2pdf(bytestring=svg.encode(), write_to=A.out, output_width=1123, output_height=794)

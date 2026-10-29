@@ -27,7 +27,7 @@ pip = [l.split('#')[0].strip().partition('==')[0] for l in open(os.path.join(HER
 pip = [p for p in pip if p]
 apt = re.findall(r'need\+=\(([^)]+)\)', open(os.path.join(HERE, 'setup.sh'), encoding='utf-8').read())
 bundled = sorted(os.path.relpath(f, SKILL) for pat in ('assets/fonts/*', 'assets/*.svg', 'assets/eu-labels/*.svg') for f in glob.glob(os.path.join(SKILL, pat)))
-repo_only = sorted(os.path.relpath(f, REPO) for pat in ('docs/fonts/*', 'docs/img/ai-*.svg') for f in glob.glob(os.path.join(REPO, pat)))
+repo_only = sorted(os.path.relpath(f, REPO) for pat in ('docs/fonts/*', 'docs/img/ai-*.svg', 'docs/img/github-*.svg') for f in glob.glob(os.path.join(REPO, pat)))
 
 missing = []
 def need(kind, name, token):
