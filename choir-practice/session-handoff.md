@@ -54,6 +54,14 @@ Unpack the .skill, run `scripts/setup.sh`, read this file. The skill in the user
 | O15 | Website section 02: sound waves at both ear cups while a recording plays, hidden when paused (static under reduced motion) | idea | done in PR 4 |
 | O16 | Website section 02: letters in the circles centred on the cap height (also on phones) and larger on wide screens | idea | done in PR 4 |
 | O17 | Website section 02: tutti circles further apart horizontally (spread factor 270 instead of 190) | idea | done in PR 4 |
+| O18 | Website section 03: example ZIP button without the size ("32 MB"), so it stays narrow | idea | done in PR 4 |
+| O19 | Website section 04, rights: "Die Angaben des Nutzers vermerkt er in der README" instead of "Die Antwort vermerkt er" | idea | done in PR 4 |
+| O20 | Website section 04, rights: replace "Lizenzen für Noten müssen eingehalten werden." Three alternatives were offered, the owner has not chosen | idea | open |
+| O21 | Website section 06 licence: sentence that third-party licences must be observed, linked to `choir-practice/THIRD_PARTY_NOTICES.md` in the repository (assumed: the dictated "kommerzielle" meant "nichtkommerzielle"; the licence stays PolyForm Noncommercial) | idea | done in PR 4 |
+| O22 | Labelling everywhere: shorter label "AI" instead of the EU label "AI GENERATED", with the text "KI-generiert" / "AI-generated" beside it. Touches PDFs, Markdown footers, cover art, website, language packs, checks; not started | idea | open, owner deciding |
+| O23 | Disclaimer wording: "ohne Gewähr" extended to "Copyright und Lizenzen ohne Gewähr" (or "Copyright und Lizenzrechte ohne Gewähr"); touches `ai_tag`, `ai_meta`, `ai_note_info` and the exact-string checks | idea | open, owner deciding |
+| O24 | Question whether `LICENSE` should be `LICENSE.md` (the PolyForm text is Markdown, GitHub shows a file without extension as plain text); touches release.py, checks.yml, READMEs, site | idea | open |
+| O25 | Markdown files in the package: the grey inline-code references to files and folders should also be links to the file in the package or the repository | idea | open |
 
 ## 5. How to continue
 Apply open points on request, add rows to sections 1 to 4 of the next handoff only, then release with `scripts/release.py` (see README section 11).

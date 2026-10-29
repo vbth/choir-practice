@@ -78,19 +78,19 @@ T = {
    'accomp': 'Eigene Stimme, die Melodie leiser, dazu die Klavierbegleitung aller Stimmen.',
    'choir': 'Die anderen Stimmen sitzen wie im Chor: Nachbarn links und rechts etwas leiser, weiter entfernte noch leiser.',
    'tutti': 'Alle Stimmen gleich laut.'}, 'own_lbl': 'Gesang', 'acc_lbl': 'Klavier',
-  'dl_p': 'Das Ergebnis: Aufnahmen zum Üben für jede Stimme, Anleitungen und Protokolle.', 'dl_btn': 'Beispiel-ZIP herunterladen (32 MB)',
+  'dl_p': 'Das Ergebnis: Aufnahmen zum Üben für jede Stimme, Anleitungen und Protokolle.', 'dl_btn': 'Beispiel-ZIP herunterladen',
   'tutti_all': 'Tutti, alle Stimmen', 'pl_title': 'Alle meine Entchen', 'pl_play': 'Wiedergabe', 'pl_pause': 'Pause', 'pl_seek': 'Position',
   'pl_cover': 'Albumcover des Beispielpakets',
   'rechte_h': 'Rechte und KI',
   'rechte_items': [
-   ('Rechte', 'Bevor Noten verarbeitet werden, fragt der Skill nach den Rechten. Die Antwort vermerkt er in der README des Pakets. Lizenzen für Noten müssen eingehalten werden.'),
+   ('Rechte', 'Bevor Noten verarbeitet werden, fragt der Skill nach den Rechten. Die Angaben des Nutzers vermerkt er in der README des Pakets. Lizenzen für Noten müssen eingehalten werden.'),
    ('Kennzeichnung', 'Alles, was der Skill erzeugt, ist als KI-Inhalt gekennzeichnet, sowohl mit dem EU-Label für KI-generierte Inhalte als auch im Text und in den Metadaten der Dokumente.'),
   ],
   'los_h': 'Loslegen',
   'los_steps': ['choir-practice.skill im Claude-Konto hochladen (Einstellungen).', 'Skill ohne Noten aufrufen und Stopp A beantworten (Rechte und Verwendungszweck).', 'Noten anhängen und Stopp B beantworten (Werkdaten).', 'ZIP am Ende herunterladen und Audio-Dateien an den Chor weitergeben.'],
   'los_dl': 'Skill herunterladen',
   'lic_h': 'Lizenz', 'lic_p': 'PolyForm Noncommercial License 1.0.0,\nfrei für nichtkommerzielle Nutzung.',
-  'lic_link': 'Lizenztext lesen', 'foot_profile': 'GitHub-Profil vbth', 'private': 'privates Projekt', 'og_alt': 'Ein Mann mit Kopfhörern steht in einer alten Badewanne und singt vom Notenblatt, neben ihm schwimmt eine Quietscheente, rote Noten schweben im Raum',
+  'lic_link': 'Lizenztext lesen', 'lic_third': 'Lizenzen von Drittanbietern müssen beachtet werden.', 'lic_third_link': 'Rechte der Drittanbieter-Lizenzen lesen', 'foot_profile': 'GitHub-Profil vbth', 'private': 'privates Projekt', 'og_alt': 'Ein Mann mit Kopfhörern steht in einer alten Badewanne und singt vom Notenblatt, neben ihm schwimmt eine Quietscheente, rote Noten schweben im Raum',
   'alt_cover': 'Deckblatt des Beispielpakets', 'alt_page1': 'Erste Notenseite des Beispielpakets', 'alt_page2': 'Zweite Notenseite des Beispielpakets', 'alt_ai': 'EU-Label AI GENERATED',
   'ai_label': 'AI GENERATED', 'top': 'Nach oben',
  },
@@ -147,19 +147,19 @@ T = {
    'accomp': 'Your own voice, the melody quieter, plus the piano accompaniment of all voices.',
    'choir': 'The other voices sit as in the choir: neighbours left and right a little quieter, voices further away quieter still.',
    'tutti': 'All voices equally loud.'}, 'own_lbl': 'Singing', 'acc_lbl': 'Piano',
-  'dl_p': 'The result: practice recordings for every voice, guides and logs.', 'dl_btn': 'Download the example ZIP (32 MB)',
+  'dl_p': 'The result: practice recordings for every voice, guides and logs.', 'dl_btn': 'Download the example ZIP',
   'tutti_all': 'Tutti, all voices', 'pl_title': 'All My Ducklings', 'pl_play': 'Play', 'pl_pause': 'Pause', 'pl_seek': 'Position',
   'pl_cover': 'Album cover of the example pack',
   'rechte_h': 'Rights and AI',
   'rechte_items': [
-   ('Rights', 'Before scores are processed, the skill asks about the rights. It records the answer in the pack’s README. The licences of the score must be observed.'),
+   ('Rights', 'Before scores are processed, the skill asks about the rights. It records the user’s details in the pack’s README. The licences of the score must be observed.'),
    ('Labelling', 'Everything the skill creates is labelled as AI content, both with the EU label for AI-generated content and in the text and metadata of the documents.'),
   ],
   'los_h': 'Get started',
   'los_steps': ['Upload choir-practice.skill in your Claude account (settings).', 'Call the skill without a score and answer stop A (rights and intended use).', 'Attach the score and answer stop B (work data).', 'Download the ZIP at the end and pass the audio files on to the choir.'],
   'los_dl': 'Download the skill',
   'lic_h': 'Licence', 'lic_p': 'PolyForm Noncommercial License 1.0.0,\nfree for non-commercial use.',
-  'lic_link': 'Read the licence text', 'foot_profile': 'GitHub profile vbth', 'private': 'private project', 'og_alt': 'A man with headphones stands in an old bathtub and sings from a sheet of music, a rubber duck floats beside him, red notes drift through the room',
+  'lic_link': 'Read the licence text', 'lic_third': 'Licences of third parties must be observed.', 'lic_third_link': 'Read the third-party notices', 'foot_profile': 'GitHub profile vbth', 'private': 'private project', 'og_alt': 'A man with headphones stands in an old bathtub and sings from a sheet of music, a rubber duck floats beside him, red notes drift through the room',
   'alt_cover': 'Title page of the example pack', 'alt_page1': 'First score page of the example pack', 'alt_page2': 'Second score page of the example pack', 'alt_ai': 'EU label AI GENERATED',
   'ai_label': 'AI GENERATED', 'top': 'Back to top',
  },
@@ -338,6 +338,7 @@ def page(L):
 <section id="{I['lizenz']}"><h2><span class="num">06</span>{esc(t['lic_h'])}</h2>
  <p class="intro">{'<br>'.join(esc(x) for x in t['lic_p'].split(chr(10)))}</p>
  <p><a href="{GH}/blob/main/LICENSE">{esc(t['lic_link'])}</a></p>
+ <p class="intro">{esc(t['lic_third'])} <a href="{GH}/blob/main/choir-practice/THIRD_PARTY_NOTICES.md">{esc(t['lic_third_link'])}</a></p>
 </section>
 </div>
 </main>
