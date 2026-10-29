@@ -20,14 +20,11 @@ Keine.
 
 ## D. Später
 
-| ID | Aufgabe |
-|---|---|
-| O1 | Repo-Umzug nach `vbth/choir-practice-material`: `common.MD_LABEL`, `GH` und `SITE` in `site/build_site.py`, README-Links anpassen |
-| O2 | Website-Reihenfolge: Beispiel zuerst, dann Paket, Üben, Loslegen, Ablauf, Rechte, Lizenz |
-| O3 | Kopfhörer-Grafik: Melodiestimme auf Höhe der eigenen Stimme zeichnen, Unterschrift „Kopfhörer, aus deiner Sicht“ |
+Keine.
 
 ## E. Bewusst nicht gemacht
 
+- O1 Repo-Umzug nach `vbth/choir-practice-material`, O2 neue Reihenfolge der Website-Blöcke und O3 Kopfhörer-Grafik mit Melodiestimme auf Höhe der eigenen Stimme: verworfen.
 - GitHub-Icon in den PDFs aus SVG (Notenseiten, Übersicht) anklickbar machen: verzichtet.
 - Rechte-Review O26 und Impressum O35: entfallen, 100 % privat. Die sechs Einträge „to check“ in `THIRD_PARTY_NOTICES.md` bleiben dort als Hinweis stehen.
 

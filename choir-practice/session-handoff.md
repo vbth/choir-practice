@@ -37,9 +37,9 @@ Unpack the .skill, run `scripts/setup.sh`, read this file. The skill in the user
 ## 4. Open points and ideas
 | ID | Point | Type (test / idea / bug) | Status (open / done in v1.0.0 / dropped) |
 |---|---|---|---|
-| O1 | Repo move to vbth/choir-practice-material: update common.MD_LABEL, GH/SITE in site/build_site.py and the README links | test | open |
-| O2 | Website block order: example first, then package, practice, get started, workflow, rights, licence | idea | open |
-| O3 | Headphone graphic: draw the melody voice at the height of the own voice (height reads as "front"); caption "Kopfhörer, aus deiner Sicht" | idea | open |
+| O1 | Repo move to vbth/choir-practice-material: update common.MD_LABEL, GH/SITE in site/build_site.py and the README links | test | dropped by the owner |
+| O2 | Website block order: example first, then package, practice, get started, workflow, rights, licence | idea | dropped by the owner |
+| O3 | Headphone graphic: draw the melody voice at the height of the own voice (height reads as "front"); caption "Kopfhörer, aus deiner Sicht" | idea | dropped by the owner |
 | O4 | Towel in `site/header/header-src.svg` (group `towel`): remove the black arc and the red dot (with its white glyph), then rebuild all assets for the website and the README (`site/header/build.sh` → `docs/img/header.png`, `site/make_previews.py`, `site/build_site.py`) | idea | open |
 | O5 | Logo on the website and in both READMEs links to the URL of the main page (site root, `/en/` for English), not to an anchor | idea | done in PR 4 |
 | O6 | Mobile website: gap between headline and header image equals the gap between menu and header image (72 px visible) | idea | done in PR 4 |
