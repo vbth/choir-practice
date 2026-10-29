@@ -1,0 +1,29 @@
+name: Visual references
+# Run by hand after an intended change of the engraving (templates, Verovio or font version) and after looking at the diff images of the failed check.
+# Writes the page PNGs of the example score to the release test-refs (asset visual-refs.zip); the check job downloads them.
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  refs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Install
+        run: |
+          sudo apt-get install -y -q libcairo2 poppler-utils >/dev/null
+          pip install -q -r choir-practice/scripts/requirements-stable.txt
+      - name: Render the reference pages
+        run: |
+          python tests/visual/visual_diff.py update refs
+          (cd refs && zip -q ../visual-refs.zip p*.png)
+      - name: Upload to the release test-refs
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release view test-refs >/dev/null 2>&1 || gh release create test-refs --prerelease --latest=false --title "test-refs" --notes "Reference pages for tests/visual (not a release of the skill)."
+          gh release upload test-refs visual-refs.zip --clobber

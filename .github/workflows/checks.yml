@@ -18,9 +18,9 @@ jobs:
       - name: Install
         run: pip install -q ruff==0.16.9 mido lxml
       - name: Lint (undefined names, unused code)
-        run: ruff check --select F,E9 choir-practice/scripts site
+        run: ruff check --select F,E9 choir-practice/scripts site tests
       - name: Compile all scripts
-        run: python -m py_compile choir-practice/scripts/*.py site/build_site.py
+        run: python -m py_compile choir-practice/scripts/*.py site/build_site.py tests/visual/*.py
       - name: Shell syntax and check mode of setup.sh
         run: |
           bash -n choir-practice/scripts/setup.sh
@@ -52,3 +52,39 @@ jobs:
         run: |
           bad=$(git log --format='%h %ae %ce%n%B' "$BASE_SHA..$HEAD_SHA" | grep -inE 'noreply@anthropic\.com|^co-authored-by:.*claude|^claude-session:|claude\.ai/code|generated with .?claude' || true)
           if [ -n "$bad" ]; then echo "Claude attribution found in commits (see CLAUDE.md):"; echo "$bad"; exit 1; fi
+  visual:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Install (tested package versions, poppler for pdftoppm, cairo for cairosvg)
+        run: |
+          sudo apt-get install -y -q libcairo2 poppler-utils >/dev/null
+          pip install -q -r choir-practice/scripts/requirements-stable.txt
+      - name: The comparison itself works (identical passes, shifted page fails)
+        run: python tests/visual/visual_diff.py selftest
+      - name: Download the reference pages (release test-refs)
+        id: refs
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if gh release download test-refs --pattern visual-refs.zip --dir "$RUNNER_TEMP"; then
+            unzip -q "$RUNNER_TEMP/visual-refs.zip" -d "$RUNNER_TEMP/refs"
+          else
+            echo "::warning::No reference pages yet (release test-refs). Run the workflow 'Visual references' once; until then the page comparison is skipped."
+            echo "skip=1" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Engraved pages match the references
+        if: steps.refs.outputs.skip != '1'
+        run: python tests/visual/visual_diff.py compare "$RUNNER_TEMP/refs" --out diff
+      - name: Diff images (differences in red)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-diff
+          path: diff
+          if-no-files-found: ignore
