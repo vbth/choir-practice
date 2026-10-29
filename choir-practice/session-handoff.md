@@ -62,6 +62,7 @@ Unpack the .skill, run `scripts/setup.sh`, read this file. The skill in the user
 | O23 | Disclaimer wording: "ohne Gewähr" extended to "Copyright und Lizenzen ohne Gewähr" (or "Copyright und Lizenzrechte ohne Gewähr"); touches `ai_tag`, `ai_meta`, `ai_note_info` and the exact-string checks | idea | open, owner deciding |
 | O24 | Question whether `LICENSE` should be `LICENSE.md` (the PolyForm text is Markdown, GitHub shows a file without extension as plain text); touches release.py, checks.yml, READMEs, site | idea | open |
 | O25 | Markdown files in the package: the grey inline-code references to files and folders should also be links to the file in the package or the repository | idea | open |
+| O26 | Rights review together with the owner (later): walk through every right and every third-party component (fonts, EU label, Verovio, Leland, soundfonts, Python and apt packages, website assets), decide per item where use must be documented (package, README, website, `THIRD_PARTY_NOTICES.md`) and whether publicly; decide whether `THIRD_PARTY_NOTICES.md` needs a clearer name; confirm that no third-party right is infringed. No legal advice, a technical check against the licence texts | idea | open, scheduled by the owner for later |
 
 ## 5. How to continue
 Apply open points on request, add rows to sections 1 to 4 of the next handoff only, then release with `scripts/release.py` (see README section 11).
