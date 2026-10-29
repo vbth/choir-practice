@@ -36,12 +36,13 @@ showStep(0);
 var NS='http://www.w3.org/2000/svg',svg=$('#hp'),cur={voice:'S',stage:'choir',sound:'choir',tempo:'normal'};
 function el(n,a,t){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);if(t!=null)e.textContent=t;return e}
 function rad(db){return Math.max(15,34+1.33*db)}
+function mob0(W){return W<600}
 function draw(){
  while(svg.lastChild)svg.removeChild(svg.lastChild);
- var sw=1.5,col='currentColor',x0=320,half=250,W=svg.getBoundingClientRect().width||640,FS=Math.round(10*15*588/W)/10;
+ var sw=1.5,col='currentColor',x0=320,half=250,W=svg.getBoundingClientRect().width||640,FS=Math.round(10*15*656/W)/10,LS=mob0(W)?FS:Math.round(FS*15)/10;
  // over-ear headphones seen from the front, line art: steel frame, mesh canopy, telescopic arms, cups with cushions facing in, crown on the right cup
- var mob=W<600,oy=mob?200:230,ay=mob?338:312,py=mob?388:352;
- svg.setAttribute('viewBox','26 -53 588 '+(mob?453:419));
+ var mob=mob0(W),oy=mob?200:230,ay=mob?338:312,py=mob?388:352;
+ svg.setAttribute('viewBox','-8 -53 656 '+(mob?453:419));
  function ln(d,w){svg.appendChild(el('path',{d:d,fill:'none',stroke:col,'stroke-width':w||sw*2,'stroke-linecap':'round','stroke-linejoin':'round'}))}
  ln('M47 128 L47 120 A273 165 0 0 1 593 120 L593 128 L581 128 L581 120 A261 147 0 0 0 59 120 L59 128 Z');
  ln('M47 128 h12 v8 h-12 Z M581 128 h12 v8 h-12 Z',sw*1.5);
@@ -49,18 +50,21 @@ function draw(){
  ln('M564 160 C564 142 574 136 587 136 C600 136 610 142 610 160 L610 286 C610 304 600 310 587 310 C574 310 564 304 564 286 Z');
  ln('M76 156 C88 156 92 164 92 174 L92 272 C92 282 88 290 76 290',sw*1.5);
  ln('M564 156 C552 156 548 164 548 174 L548 272 C548 282 552 290 564 290',sw*1.5);
+ // sound waves outside the cups; only visible while a recording plays (class 'playing' on the svg)
+ [0,1,2].forEach(function(i){var x=22-9*i,h=28+16*i,c=x-14;
+  [[x,c],[640-x,640-c]].forEach(function(p){svg.appendChild(el('path',{'class':'wave',d:'M'+p[0]+' '+(223-h)+' Q'+p[1]+' 223 '+p[0]+' '+(223+h),fill:'none',stroke:col,'stroke-width':sw*2,'stroke-linecap':'round',style:'animation-delay:'+(i*0.25)+'s'}))})});
  var list=D.mix[cur.stage][cur.voice],own=[],acc=[];
  list.forEach(function(e){(e[3]==='acc'?acc:own).push(e)});
- function pos(e){return x0+e[1]*190}
+ function pos(e){return x0+e[1]*(cur.stage==='tutti'?270:190)}   // tutti: circles further apart
  own.forEach(function(e,i){var y=oy;
   var g=el('g',{});var r=rad(e[2]);
   g.appendChild(el('circle',{cx:pos(e),cy:y,r:r,fill:'none',stroke:col,'stroke-width':e[0]===cur.voice&&e[2]===0?sw*3:sw*1.5}));
-  g.appendChild(el('text',{x:pos(e),y:y+5,'font-size':FS,'text-anchor':'middle','font-weight':700},e[0]));
+  g.appendChild(el('text',{x:pos(e),y:y,dy:'.35em','font-size':Math.min(LS,1.5*r),'text-anchor':'middle','font-weight':700},e[0]));   // dy: cap height centred in the circle
   g.appendChild(el('text',{x:pos(e),y:y+r+(mob?FS*0.95+3:16),'font-size':FS,'text-anchor':'middle'},e[2]+(mob&&i>0?'':' dB')));
   svg.appendChild(g);});
  acc.forEach(function(e){var y=ay,r=rad(e[2]);
   svg.appendChild(el('circle',{cx:pos(e),cy:y,r:r,fill:'none',stroke:col,'stroke-width':sw,'stroke-dasharray':'4 4'}));
-  svg.appendChild(el('text',{x:pos(e),y:y+4,'font-size':FS,'text-anchor':'middle'},e[0]));});
+  svg.appendChild(el('text',{x:pos(e),y:y,dy:'.35em','font-size':FS,'text-anchor':'middle'},e[0]));});
  if(acc.length){svg.appendChild(el('text',{x:x0,y:py,'font-size':FS,'text-anchor':'middle'},D.acc+' ('+acc[0][2]+' dB)'))}
  svg.setAttribute('aria-label',D.voices[cur.voice]+', '+D.stages[cur.stage]);   // no <title>: it would show a tooltip on hover
  $('#hpcap').textContent=D.stage_txt[cur.stage];
@@ -72,7 +76,7 @@ function isSlow(){return slowOk()&&cur.tempo==='slow'}
 function file(){return cur.stage==='tutti'?'tutti_'+cur.sound:cur.voice.toLowerCase()+'_'+cur.stage+'_'+cur.sound+(isSlow()?'_slow':'')}
 function label(){return (cur.stage==='tutti'?D.stages.tutti:D.voices[cur.voice]+', '+D.stages[cur.stage])+', '+D.sound_names[cur.sound]+(isSlow()?', '+D.slow_name:'')}
 function f(t){t=Math.floor(t||0);return Math.floor(t/60)+':'+('0'+t%60).slice(-2)}
-function ui(){var on=!A.paused;$$('.picon').forEach(function(i){i.setAttribute('d',on?'M6 4h4v16H6zM14 4h4v16h-4z':'M7 4l13 8-13 8z')});$$('.pbtn').forEach(function(b){b.setAttribute('aria-label',pl.getAttribute(on?'data-pause':'data-play'))})}
+function ui(){var on=!A.paused;svg.classList.toggle('playing',on);$$('.picon').forEach(function(i){i.setAttribute('d',on?'M6 4h4v16H6zM14 4h4v16h-4z':'M7 4l13 8-13 8z')});$$('.pbtn').forEach(function(b){b.setAttribute('aria-label',pl.getAttribute(on?'data-pause':'data-play'))})}
 function sync(){
  draw();
  $$('#voices button').forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-voice')===cur.voice)});
@@ -90,11 +94,11 @@ function sync(){
 // change the selection; keep the playing position (scaled when the tempo changes), or start the chosen recording when asked
 function change(fn,restart){
  var was=!A.paused,t=A.currentTime||0,ps=isSlow();fn();var ns=isSlow();sync();
- if(restart){sk.value=0;tm.textContent='0:00';A.play().catch(function(){});return}
+ if(restart){sk.value=0;tm.textContent='0:00';try{A.currentTime=0}catch(e){}A.play().catch(function(){});return}
  if(was){var sc=(ns?1/D.slow:1)/(ps?1/D.slow:1);A.addEventListener('loadedmetadata',function h(){A.removeEventListener('loadedmetadata',h);A.currentTime=Math.min(t*sc,Math.max(0,(A.duration||t*sc)-0.2))});A.play().catch(function(){})}
  else{sk.value=0;tm.textContent='0:00'}
 }
-$$('#voices button').forEach(function(b){b.addEventListener('click',function(){change(function(){cur.voice=b.getAttribute('data-voice')},A.paused)})});
+$$('#voices button').forEach(function(b){b.addEventListener('click',function(){change(function(){cur.voice=b.getAttribute('data-voice')},true)})});
 $$('#stages button').forEach(function(b){b.addEventListener('click',function(){change(function(){cur.stage=b.getAttribute('data-stage')},A.paused)})});
 $$('#sounds button').forEach(function(b){b.addEventListener('click',function(){change(function(){cur.sound=b.getAttribute('data-sound')},A.paused)})});
 $$('#tempos button').forEach(function(b){b.addEventListener('click',function(){change(function(){cur.tempo=b.getAttribute('data-tempo')},A.paused)})});

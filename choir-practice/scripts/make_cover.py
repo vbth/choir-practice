@@ -13,10 +13,10 @@ Rules (all deterministic, so the same piece always gets the same cover):
   softness     tempo in quarter notes per minute: slow = wide, soft radial transitions; fast = tighter, more contrast
   dark centre  metre: number of main beats per bar (6/8 = 2, 3/4 = 3, 4/4 = 4) moves the dark centre along the bottom edge
                (more beats = further left); the bottom right corner stays light for the EU label
-EU label: fixed in the template (LABEL_H, LABEL_MARGIN): height 9 % of the cover, right and bottom margin 5 %
+EU label "AI" (round basic icon, black): fixed in the template (LABEL_H, LABEL_MARGIN): height 14 % of the cover, right and bottom margin 5 %
 Four radial colour fields (light top left, saturated top right, mid bottom right, deep bottom centre) are blended, plus a little grain.
 Legibility is guaranteed by construction and checked on the pixels: the title box (top left) and the label box (bottom right,
-EU label "AI GENERATED" alone, the black pill must stay recognisable) must both reach contrast >= 7:1 with black
+EU label "AI" alone, the black circle must stay recognisable) must both reach contrast >= 7:1 with black
 (WCAG AAA). If the plain gradient is too dark there, a light feathered zone is blended in behind the boxes, step by step and
 only as strong as needed. The text is always black, IBM Plex Sans, title bold; the EU label stands alone, no words next to it.
 """
@@ -29,7 +29,7 @@ from common import log_check
 
 HERE = os.path.dirname(os.path.abspath(__file__)); ASSETS = os.path.join(HERE, '..', 'assets')
 SIZE = 600
-LABEL_H = 0.09        # EU label "AI GENERATED": height as a fraction of the cover side (fixed in the template)
+LABEL_H = 0.14        # EU label "AI" (round): height as a fraction of the cover side (fixed in the template)
 LABEL_MARGIN = 0.05   # distance of the label to the right and bottom edge, as a fraction of the cover side
 REG_SHIFT = 0.06      # largest lightness shift from the register (mean pitch), +- this value at +-12 semitones from middle C
 STEP = {'C': 0, 'D': 2, 'E': 4, 'F': 5, 'G': 7, 'A': 9, 'B': 11}
@@ -109,9 +109,9 @@ def make(spec, xml, out, workdir=None):
     tb = (m, m, int(m + max(ft.getlength(l) for l in lines)), int(m + size * 1.2 * len(lines)))   # title box
     ih = int(S * LABEL_H)
     import cairosvg
-    svg = open(os.path.join(ASSETS, 'eu-ai-generated.svg'), encoding='utf-8').read()
+    svg = open(os.path.join(ASSETS, 'eu-ai-basic.svg'), encoding='utf-8').read()
     icon = Image.open(io.BytesIO(cairosvg.svg2png(bytestring=svg.encode(), output_height=ih))).convert('RGBA')
-    lb = int(S * LABEL_MARGIN); lx0, ly1 = S - lb - icon.width, S - lb; lb2 = (lx0, ly1 - ih, lx0 + icon.width, ly1)   # label box = the icon only (no text next to it): the black pill must stay recognisable
+    lb = int(S * LABEL_MARGIN); lx0, ly1 = S - lb - icon.width, S - lb; lb2 = (lx0, ly1 - ih, lx0 + icon.width, ly1)   # label box = the icon only (no text next to it): the black circle must stay recognisable
     pad = int(S * 0.02); zones = [(tb[0] - pad, tb[1] - pad, tb[2] + pad, tb[3] + pad), (lb2[0] - pad, lb2[1] - pad, lb2[2] + pad, lb2[3] + pad)]
     cbk = lambda L, b: (L[b[1]:b[3], b[0]:b[2]].min() + 0.05) / 0.05   # contrast with black = (L + 0.05) / 0.05, worst pixel = darkest
     for k in range(0, 11):

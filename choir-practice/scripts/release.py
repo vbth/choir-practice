@@ -9,7 +9,7 @@ Notes come from --note and from the bullets under "## Unreleased" in CHANGELOG.m
 Writes OUT_DIR/choir-practice.skill (constant name, so an upload replaces the skill) and OUT_DIR/RELEASE_NOTES.md,
 and prints the git commands. It does not touch git and does not change the user's account skill.
 """
-import argparse, datetime, pathlib, re, shutil, zipfile
+import argparse, datetime, pathlib, re, shutil, subprocess, sys, zipfile
 
 ap = argparse.ArgumentParser()
 ap.add_argument('skill_dir'); ap.add_argument('--out', required=True); ap.add_argument('--repo')
@@ -19,6 +19,10 @@ a = ap.parse_args()
 sk = pathlib.Path(a.skill_dir).resolve(); root = pathlib.Path(a.repo).resolve() if a.repo else sk
 out = pathlib.Path(a.out); out.mkdir(parents=True, exist_ok=True)
 name = sk.name
+
+# third-party rights check (mandatory): no release while a component is missing from THIRD_PARTY_NOTICES.md
+if subprocess.run([sys.executable, str(sk / 'scripts' / 'check_third_party.py')]).returncode:
+    raise SystemExit('Third-party rights check failed: complete THIRD_PARTY_NOTICES.md first.')
 
 vf = sk / 'VERSION'
 cur = vf.read_text().strip() if vf.exists() else '0.0.0'
@@ -46,8 +50,8 @@ for fn in ('README.md', 'README.de.md'):
     f = root / fn
     if f.exists():
         t = f.read_text(encoding='utf-8')
-        d = datetime.date.fromisoformat(today); human = d.strftime('%d.%m.%Y') if fn.endswith('.de.md') else today
-        t = re.sub(r'((?:KI-generiert, ohne Gewähr|AI-generated, no guarantee), )[\d.-]+\n*\Z', rf'\g<1>{human}\n\n', t)   # date of the footer line = release date
+        human = today   # ISO date in both languages
+        t = re.sub(r'((?:KI-generiert, Urheber- und Lizenzrechte ohne Gewähr|AI-generated, no guarantee for copyright and licence rights), )[\d.-]+\n*\Z', rf'\g<1>{human}\n\n', t)   # date of the footer line = release date
         f.write_text(t, encoding='utf-8')
 h = sk / 'session-handoff.md'
 if h.exists():

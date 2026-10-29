@@ -7,8 +7,16 @@ Checked on 2026-10-26 against the sources named below (summaries, not legal advi
 | Component | Where | Licence | Status |
 |---|---|---|---|
 | IBM Plex Sans, Plex Sans Condensed (fonts) | `assets/fonts/` | SIL Open Font License 1.1, Copyright © 2017 IBM Corp., Reserved Font Name "Plex". Use, embedding in PDFs and redistribution are allowed; do not sell the fonts alone, keep the notice, do not use the name "Plex" for modified fonts. | **confirmed** (`assets/fonts/OFL-IBMPlexSans.txt`) |
-| IBM Plex Sans, Sans Condensed, Serif Light Italic (website fonts, WOFF2, self-hosted, no Google request) | `docs/fonts/` in the repository, not part of the `.skill` | SIL Open Font License 1.1, Copyright © 2017 IBM Corp., Reserved Font Name "Plex"; licence text in `docs/fonts/OFL-IBMPlexSans.txt`; WOFF2 files from the npm package `@fontsource/ibm-plex-serif` and `@fontsource/ibm-plex-sans` | **confirmed** (`docs/fonts/OFL-IBMPlexSans.txt`) |
-| EU label "AI GENERATED" / "AI MODIFIED" (SVG, black, cropped, styles inlined) | `assets/eu-ai-generated.svg`, `assets/eu-ai-modified.svg` | European Commission, [EU icons for labelling AI-generated content](https://digital-strategy.ec.europa.eu/en/policies/eu-icons-labelling-ai-generated-content) (page of 2026-09-24): "made publicly available for everyone to use freely", "without the need for attribution". Use is optional and does not by itself establish compliance with Article 50 AI Act. Non-signatories of the Code of Practice must not imply adherence to it. The page does not say anything about recolouring, cropping or commercial use; the skill uses the black variant, cropped to the label, unchanged in shape. | **confirmed** for free use without attribution; recolouring and cropping not addressed (low risk, ask the AI Act Service Desk if it matters) |
+| EU labels, complete official set (12 SVG: "AI", "AI GENERATED", "AI MODIFIED", each black and white, each also 50 % transparent): files supplied by the owner on 2026-10-29, content unchanged, spaces in the file names replaced by underscores | `assets/eu-labels/` | European Commission, [EU icons for labelling AI-generated content](https://digital-strategy.ec.europa.eu/en/policies/eu-icons-labelling-ai-generated-content) (page of 2026-09-24): "made publicly available for everyone to use freely", "without the need for attribution". Use is optional and does not by itself establish compliance with Article 50 AI Act. Non-signatories of the Code of Practice must not imply adherence to it. | **confirmed** for free use without attribution (the page text as recorded on 2026-10-26; the page could not be fetched again on 2026-10-29) |
+| Working copies of the black labels: viewBox cropped to the label, styles inlined, shapes unchanged (paths identical to the official files, checked). "AI" is the one label used everywhere: every PDF and Markdown footer, the album art and the website footer; "AI GENERATED" only in the header image of the website | `assets/eu-ai-basic.svg`, `assets/eu-ai-generated.svg`, `assets/eu-ai-modified.svg` (not used, kept for another policy) | as above; cropping and inlining only | **confirmed** |
+
+## Repository only (website and README images, not part of the `.skill`)
+
+| Component | Where | Licence | Status |
+|---|---|---|---|
+| IBM Plex Sans, Sans Condensed (website fonts, WOFF2, self-hosted, no Google request) | `docs/fonts/` | SIL Open Font License 1.1, Copyright © 2017 IBM Corp., Reserved Font Name "Plex"; licence text in `docs/fonts/OFL-IBMPlexSans.txt`; WOFF2 files from the npm package `@fontsource/ibm-plex-sans` | **confirmed** (`docs/fonts/OFL-IBMPlexSans.txt`) |
+| EU label copies for the website footer and the README footers: `ai-basic.svg` (black, from the working copy above) and `ai-basic-dark.svg` (white, built from the official white file of `assets/eu-labels/`, same crop, styles inlined) | `docs/img/` | as above | **confirmed** |
+
 
 ## Used at run time (installed by `scripts/setup.sh`, not bundled)
 
@@ -25,7 +33,8 @@ Checked on 2026-10-26 against the sources named below (summaries, not legal advi
 | Pillow | images | MIT-CMU | **confirmed** (package metadata) |
 | NumPy | audio analysis | BSD-3-Clause and others (0BSD, MIT, Zlib, CC0) | **confirmed** (package metadata) |
 | SciPy | signal processing | BSD-style | **confirmed** (package metadata, licence text not read) |
-| OpenCV | scan preflight | Apache-2.0 | **confirmed** (package metadata) |
+| poppler-utils (`pdftoppm`) | PDF pages to images | GPL-2.0-or-later (Debian package; recalled, not read) | **to check** |
+| fonts-dejavu-core (DejaVu Sans) | only for the debug images of `preflight.py`; not in any package | free Bitstream Vera / DejaVu licence (recalled, not read) | **to check** |
 | FluidSynth 2.3 | MIDI to audio | LGPL-2.1 | **to check** (not read) |
 | FFmpeg (with LAME) | audio mixing, MP3 encoding | the build used here is GPL-enabled (`--enable-gpl`, libmp3lame); applies to the programs, not to files made with them | **confirmed** for the build flags, **to check** for conditions of your own distribution |
 

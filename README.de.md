@@ -1,4 +1,4 @@
-<p><img src="docs/img/logo.png" alt="choir-practice Logo" width="72" height="72"></p>
+<p><a href="https://vbth.github.io/choir-practice/"><img src="docs/img/logo.png" alt="choir-practice Logo" width="72" height="72"></a></p>
 
 # choir-practice Skill
 
@@ -6,7 +6,7 @@
 
 [English](README.md) | Deutsch
 
-**choir-practice ist ein praktischer Claude-Skill, der dir viel Zeit spart:** Aus deinen Chornoten entsteht ein geprüftes ZIP, in dem jede Stimme ihre eigenen Aufnahmen zum Üben findet, fertig zum Weitergeben.
+**Dokumentation agentischer KI-Musik-Workflows und Skills, entwickelt für und mit Claude Code.** Das Beispiel hier, choir-practice, macht aus Chornoten ein geprüftes ZIP, in dem jede Stimme ihre eigenen Aufnahmen zum Üben findet, fertig zum Weitergeben.
 
 **Website mit Beispielpaket und Player:** https://vbth.github.io/choir-practice/
 
@@ -16,15 +16,14 @@
 
 [1. Überblick – Was macht der Skill?](#1-überblick--was-macht-der-skill)<br>
 [2. Ergebnis – Was kommt heraus?](#2-ergebnis--was-kommt-heraus)<br>
-[3. Benutzung – Wie geht man vor?](#3-benutzung--wie-geht-man-vor)<br>
-[4. Ablauf – Welche Schritte gibt es?](#4-ablauf--welche-schritte-gibt-es)<br>
-[5. Audio-Mix – Wie werden die Aufnahmen gemischt?](#5-audio-mix--wie-werden-die-aufnahmen-gemischt)<br>
-[6. KI-Kennzeichnung – Wie werden KI-Inhalte markiert?](#6-ki-kennzeichnung--wie-werden-ki-inhalte-markiert)<br>
-[7. Grenzen – Was kann er nicht?](#7-grenzen--was-kann-er-nicht)<br>
-[8. Voraussetzungen – Was wird benötigt?](#8-voraussetzungen--was-wird-benötigt)<br>
-[9. Rechte – Was fragt der Skill ab?](#9-rechte--was-fragt-der-skill-ab)<br>
-[10. Lizenz – Was ist erlaubt?](#10-lizenz--was-ist-erlaubt)<br>
-[11. Entwicklung – Wie arbeitet man weiter?](#11-entwicklung--wie-arbeitet-man-weiter)
+[3. Ablauf – Welche Schritte gibt es?](#3-ablauf--welche-schritte-gibt-es)<br>
+[4. Audio-Mix – Wie werden die Aufnahmen gemischt?](#4-audio-mix--wie-werden-die-aufnahmen-gemischt)<br>
+[5. KI-Kennzeichnung – Wie werden KI-Inhalte markiert?](#5-ki-kennzeichnung--wie-werden-ki-inhalte-markiert)<br>
+[6. Grenzen – Was kann er nicht?](#6-grenzen--was-kann-er-nicht)<br>
+[7. Voraussetzungen – Was wird benötigt?](#7-voraussetzungen--was-wird-benötigt)<br>
+[8. Rechte – Was fragt der Skill ab?](#8-rechte--was-fragt-der-skill-ab)<br>
+[9. Lizenz – Was ist erlaubt?](#9-lizenz--was-ist-erlaubt)<br>
+[10. Entwicklung – Wie arbeitet man weiter?](#10-entwicklung--wie-arbeitet-man-weiter)
 
 ## 1. Überblick – Was macht der Skill?
 
@@ -70,14 +69,7 @@ MP3-Titel, Dateinamen, PDFs und Protokolle folgen der Sprache der Unterhaltung (
    └─ 2_SKILL_choir_practice_v<Version>/      (choir_practice.skill, README.md, session_handoff.md)
 ```
 
-## 3. Benutzung – Wie geht man vor?
-1. `choir-practice.skill` im Claude-Konto hochladen (Einstellungen).
-2. Den Skill ohne Noten aufrufen, zum Beispiel „/choir-practice“. Zuerst Stopp A beantworten (Rechte und Verwendungszweck).
-3. Dann die Noten anhängen und Stopp B beantworten (Werkdaten). Jede Frage hat Auswahlmöglichkeiten und ein Freitextfeld; solange eine offen ist, läuft nichts.
-4. Herunterladen, entpacken, prüfen, dem Chor die Stimmen-ZIPs aus `2_Ueben` teilen.
-5. Später weiterarbeiten (Stück korrigieren, neu bauen): neuen Chat beginnen, `3_Dokumentation/4_Session_Handoff_<Titel>.md` und die Projektdaten aus `4_Werkzeuge` anhängen und den Skill nennen. Das Handoff enthält Entscheidungen, Daten und offene Punkte des Stücks.
-
-## 4. Ablauf – Welche Schritte gibt es?
+## 3. Ablauf – Welche Schritte gibt es?
 ```mermaid
 flowchart TD
     U1(["1 – Skill in Claude aufrufen"]) --> A{{"2 – Einrichtung, Stopp A: Rechte und Verwendungszweck"}}
@@ -117,7 +109,7 @@ Besteht eine Prüfung nicht, behebt Claude den Fehler und prüft erneut, bis zu 
 | 11 | Abschluss | Claude schlägt Verbesserungen für den Skill vor, wenn nützlich. Du entscheidest. | – |
 | 12 | Herunterladen | Du lädst das ZIP herunter, entpackst und prüfst es und teilst die Stimmen-ZIPs mit dem Chor. | – |
 
-## 5. Audio-Mix – Wie werden die Aufnahmen gemischt?
+## 4. Audio-Mix – Wie werden die Aufnahmen gemischt?
 Jede Stimme bekommt ihren eigenen Mix; die eigene Stimme liegt immer in der Mitte. Die anderen Stimmen sind nach der Chorsitzordnung im Stereobild verteilt, der Kopfhörer bildet also die Reihe nach. Mit Kopfhörern klingt es am besten.
 
 - **Allein:** nur die eigene Stimme.
@@ -128,25 +120,25 @@ Jede Stimme bekommt ihren eigenen Mix; die eigene Stimme liegt immer in der Mitt
 - Lautheit −19 LUFS, leichter Raumhall; die MIDI-Dateien tragen dieselben Lautstärke- und Pan-Werte.
 - Das Modul „Üben“ der Website zeigt die Mixe live am Kopfhörer (Punktgröße = Pegel, Position = links/rechts). Die Übersicht, die für jedes Stück erzeugt wird (`2_Ueben/1_Uebersicht.pdf`), zeigt dieselben Mixe.
 
-## 6. KI-Kennzeichnung – Wie werden KI-Inhalte markiert?
-Alles, was der Skill erzeugt, ist als KI-generiert gekennzeichnet: das EU-Label „AI GENERATED“ und der Hinweis „KI-generiert, ohne Gewähr“ in der Fußzeile jedes PDFs, derselbe Hinweis in den Metadaten von MP3, MIDI, MusicXML und PDF. Das Label folgt den Symbolen der Europäischen Kommission zur Kennzeichnung KI-generierter Inhalte (siehe `THIRD_PARTY_NOTICES.md`).
+## 5. KI-Kennzeichnung – Wie werden KI-Inhalte markiert?
+Alles, was der Skill erzeugt, ist als KI-generiert gekennzeichnet: das EU-Label „AI“ und der Hinweis „KI-generiert, Urheber- und Lizenzrechte ohne Gewähr“ in der Fußzeile jedes PDFs, derselbe Hinweis in den Metadaten von MP3, MIDI, MusicXML und PDF. Das Label folgt den Symbolen der Europäischen Kommission zur Kennzeichnung KI-generierter Inhalte (siehe `THIRD_PARTY_NOTICES.md`).
 
-## 7. Grenzen – Was kann er nicht?
+## 6. Grenzen – Was kann er nicht?
 - Claude hört das Audio nicht; es wird technisch geprüft (Dauer gegen das MIDI, Lücken, Übersteuerung, Lautstärke, Stereo). Klang und Geschmack werden nicht beurteilt.
 - Vorzeichen und Rhythmus werden aus Bildausschnitten gelesen und zweimal korrigiert, nicht gemessen.
 - Wiederholungen, Klammern und Spielreihenfolge sind nur mit kleinen Testnoten erprobt; echte Stücke stichprobenartig prüfen. D.C./D.S./Coda werden nicht als Zeichen gesetzt.
 - Nur DIN A4. US Letter wird aktuell nicht unterstützt.
 
-## 8. Voraussetzungen – Was wird benötigt?
+## 7. Voraussetzungen – Was wird benötigt?
 Python mit den Paketen aus `scripts/requirements-stable.txt`, FluidSynth, ffmpeg, poppler und eine Soundfont (ein Ersatz wird verwendet und gemeldet). Zu Beginn prüft der Skill die Installation (`setup.sh --check`). Fehlt etwas oder weicht etwas ab, listet er auf, was er installieren würde, und fragt: die **getesteten Versionen** (empfohlen, aufgeführt in `scripts/requirements-stable.txt`) oder die **neuesten Versionen**. Die verwendeten Versionen stehen im Prüfprotokoll; neueste Versionen sind als nicht getestet gekennzeichnet.
 
-## 9. Rechte – Was fragt der Skill ab?
-Der Skill gibt keine Rechtsberatung und räumt keine Rechte ein. Er fragt, ob die Noten gemeinfrei, lizenziert, eigenes Werk oder unklar sind und ob sie zum Proben oder kommerziell genutzt werden, und vermerkt die Antwort in der README. Unklare Rechte bei kommerzieller Nutzung bekommen eine deutliche Warnung. Die kommerzielle Nutzung des Skills selbst braucht eine Lizenz (siehe 10); die Lizenz sagt nichts über die Rechte an den Noten.
+## 8. Rechte – Was fragt der Skill ab?
+Der Skill gibt keine Rechtsberatung und räumt keine Rechte ein. Er fragt, ob die Noten gemeinfrei, lizenziert, eigenes Werk oder unklar sind und ob sie zum Proben oder kommerziell genutzt werden, und vermerkt die Antwort in der README. Unklare Rechte bei kommerzieller Nutzung bekommen eine deutliche Warnung. Die kommerzielle Nutzung des Skills selbst braucht eine Lizenz (siehe 9); die Lizenz sagt nichts über die Rechte an den Noten.
 
-## 10. Lizenz – Was ist erlaubt?
+## 9. Lizenz – Was ist erlaubt?
 PolyForm Noncommercial License 1.0.0 ([`LICENSE`](LICENSE)), frei für nichtkommerzielle Nutzung. Komponenten Dritter: `THIRD_PARTY_NOTICES.md`.
 
-## 11. Entwicklung – Wie arbeitet man weiter?
+## 10. Entwicklung – Wie arbeitet man weiter?
 `SKILL.md` Anweisungen · `references/` Formate und Leitfäden · `assets/` Sprachpakete und Vorlagen · `scripts/` Werkzeuge · [`CHANGELOG.md`](CHANGELOG.md).
 
 **Die Versionierung läuft über GitHub und diese Markdown-Dateien:**
@@ -154,10 +146,10 @@ PolyForm Noncommercial License 1.0.0 ([`LICENSE`](LICENSE)), frei für nichtkomm
 - Änderungen während der Arbeit als Stichpunkte unter `## Unreleased` in `CHANGELOG.md` eintragen.
 - Release: `python3 choir-practice/scripts/release.py choir-practice --repo . --out ../release --bump patch|minor|major` erhöht `VERSION`, verschiebt die Stichpunkte in einen datierten Abschnitt, setzt das Datum der Fußzeile in beiden READMEs und baut `choir-practice.skill`. Danach committen, Tag `vX.Y.Z` setzen und den Tag pushen.
 - Der Workflow `.github/workflows/checks.yml` läuft bei jedem Pull Request: Lint, Kompilieren, Sprachpakete und Vorlagen, Website passend zu `site/build_site.py`, README-Kopien im Skill-Ordner gleich.
-- Der Workflow `.github/workflows/release.yml` prüft, ob Tag und `VERSION` übereinstimmen, und veröffentlicht ein GitHub-Release mit der `.skill`-Datei und dem Changelog-Eintrag. Die `.skill` unter **Releases** herunterladen und in den Claude-Account hochladen.
+- Der Workflow `.github/workflows/release.yml` prüft, ob Tag und `VERSION` übereinstimmen, und veröffentlicht ein GitHub-Release mit der `.skill`-Datei und dem Changelog-Eintrag.
 - Die Seite in `docs/` entsteht mit `python3 site/build_site.py` und wird über GitHub Pages ausgeliefert (Branch `main`, Ordner `/docs`). Vorschaubilder, Render-Test und Regeln: `site/README.md`.
 - Dependabot (`.github/dependabot.yml`) schlägt monatlich Updates vor: für die festgelegten Paketversionen in `scripts/requirements-stable.txt` (nur Minor und Patch, gebündelt, höchstens zwei offene PRs) und für die GitHub Actions. Die CI testet die Skill-Pipeline nicht mit diesen Paketen: Vor dem Mergen eines Python-PRs die ganze Pipeline mit den neuen Versionen durchlaufen lassen, dann `CHANGELOG.md` ergänzen; die neuen Versionen gelten erst im nächsten Release.
 - Zum Weiterentwickeln des Skills in einem neuen Chat `choir-practice/session-handoff.md` anhängen (offene Punkte und Erkenntnisse der aktuellen Version).
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/ai-generated-dark.svg"><img src="https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/ai-generated.svg" alt="AI GENERATED" height="18" align="absmiddle"></picture> KI-generiert, ohne Gewähr, 28.10.2026
+<picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/ai-basic-dark.svg"><img src="https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/ai-basic.svg" alt="AI" height="18" align="absmiddle"></picture> KI-generiert, Urheber- und Lizenzrechte ohne Gewähr, 2026-10-28
 

@@ -18,6 +18,7 @@ REL = GH + '/releases/download/v1.0.0/'   # example ZIPs: assets of the release 
 ZIPS = [('Deutsch: Alle meine Entchen', 'Chor_Uebungen_Alle_meine_Entchen.zip'), ('English: All My Ducklings', 'Choir_Practice_All_My_Ducklings.zip')]   # make_previews.py renders both
 ZIP_OF = {'de': ZIPS[0][1], 'en': ZIPS[1][1]}   # each page links only the package of its own language
 VERSION = open(os.path.join(HERE, '..', 'choir-practice', 'VERSION'), encoding='utf-8').read().strip()
+YEAR = re.search(r'\*\*Date:\*\* (\d{4})', open(os.path.join(HERE, '..', 'choir-practice', 'session-handoff.md'), encoding='utf-8').read()).group(1)   # year of the last release (release.py rewrites the date there), shown in the footer
 
 SEAT = ['S', 'A', 'T', 'B']
 ST = M.stages(SEAT, 'S')
@@ -27,15 +28,15 @@ ST['tutti'] = {own: [[v, spread[v], M.LV['tutti'], 'own'] for v in SEAT] for own
 T = {
  'de': {
   'html': 'de', 'name': 'choir-practice Skill', 'title': 'choir-practice Skill – Übe-MP3s je Stimme aus Chornoten', 'other': ('en/', 'EN'), 'self_prefix': '', 'assets': '',
-  'desc': 'Der Claude-Skill choir-practice macht aus Chornoten ein geprüftes ZIP: MP3 und MIDI zum Üben für jede Stimme, dazu eine Anleitung für die Chorleitung.',
-  'ids': {'start': 'start', 'ablauf': 'ablauf', 'ueben': 'ueben', 'paket': 'beispiel-zip', 'rechte': 'rechte-und-ki', 'loslegen': 'loslegen', 'lizenz': 'lizenz'},
-  'menu': [('start', 'Start'), ('ablauf', 'Ablauf'), ('ueben', 'Üben'), ('paket', 'Beispiel-ZIP'), ('rechte', 'Rechte und KI'), ('loslegen', 'Loslegen'), ('lizenz', 'Lizenz')],
+  'desc': 'Dokumentation agentischer KI-Musik-Workflows und Skills, entwickelt für und mit Claude Code. Beispiel: choir-practice macht aus Chornoten ein geprüftes ZIP mit MP3 und MIDI zum Üben für jede Stimme.',
+  'ids': {'start': 'start', 'ablauf': 'ablauf', 'ueben': 'ueben', 'paket': 'beispiel-zip', 'rechte': 'rechte-und-ki', 'lizenz': 'lizenz'},
+  'menu': [('start', 'Start'), ('ablauf', 'Ablauf'), ('ueben', 'Üben'), ('paket', 'Beispiel-ZIP'), ('rechte', 'Rechte und KI'), ('lizenz', 'Lizenzen')],
   'menu_label': 'Menü', 'skip': 'Zum Inhalt', 'theme_to_dark': 'Zum dunklen Modus wechseln', 'theme_to_light': 'Zum hellen Modus wechseln',
   'h1': 'Hören, mitsingen, sicher werden.',
-  'lead': 'choir-practice ist ein praktischer Claude-Skill, der viel Zeit spart: Aus Chornoten entsteht ein geprüftes ZIP, in dem man für jeden Sänger eigene Audio-Dateien zum Üben findet, fertig zum Weitergeben.',
-  'cta1': 'Skill installieren', 'cta2': 'Beispiel-ZIP ansehen',
-  'ai': 'KI-generiert, ohne Gewähr',
-  'facts': [('4', 'Stufen je Stimme'), ('2', 'Klänge: Chor und Klavier'), ('75 %', 'Tempo der langsamen Fassung'), ('42', 'Aufnahmen im Beispiel')],
+  'lead': 'Dokumentation agentischer KI-Musik-Workflows und Skills, entwickelt für und mit Claude Code. Das Beispiel hier: Aus Chornoten entsteht ein geprüftes ZIP, in dem jede Stimme ihre eigenen Aufnahmen zum Üben findet, fertig zum Weitergeben.',
+  'cta': 'Beispiel-ZIP ansehen',
+  'ai': 'KI-generiert, Urheber- und Lizenzrechte ohne Gewähr',
+  'facts': [('4', 'Stufen je Stimme'), ('2', 'Klänge: Chor und Klavier'), ('2', 'Fassungen: normal und langsam'), ('42', 'Aufnahmen im Beispiel')],
   'inh_h': 'Inhalte', 'paket_h': 'Beispiel-ZIP', 'paket_p': 'Im ZIP liegen vier Ordner. Die Stimmen-ZIPs in 2_Ueben sind fertig zum Weitergeben, ihr Inhalt steht zuletzt. Einen Ordner anklicken.',
   'tree': [
    ('1_Noten', 'Noten (PDF), MusicXML und MIDI.', [
@@ -52,23 +53,23 @@ T = {
     '1_S_Anleitung.pdf', '2_S_Noten_<Titel>.pdf', '3_S_Audio_Chorklang_<Titel>/', '  1 bis 6_S_<Titel>_Chor_*.mp3  (allein, mit Klavier, jeweils langsam und normal; eigene Stimme lauter; alle gleich laut)',
     '4_S_Audio_Klavierklang_<Titel>/', '  1 bis 6_S_<Titel>_Klavier_*.mp3  (dieselben sechs)']),
   ],
-  'ablauf_h': 'Ablauf', 'ablauf_p': 'Zwölf Schritte, zwei Stopps mit Rückfragen. Einen Schritt anklicken.',
+  'ablauf_h': 'Ablauf', 'ablauf_p': 'Zwölf Schritte, zwei Stopps mit Rückfragen. Unten einen Schritt anklicken, hier erscheinen die Details.',
   'who_claude': 'Claude', 'who_you': 'Nutzer',
   'steps': [
    ('Aufruf', 'you', 'Skill in Claude starten, noch ohne Noten.', ''),
-   ('Einrichtung, Stopp A', 'both', 'Angabe der Rechte und des Verwendungszwecks.', 'Alles bereit?'),
-   ('Noten anhängen', 'you', 'Als PDF, Foto oder Scan.', ''),
+   ('Stopp A', 'both', 'Angaben über Rechte und Verwendungszweck.', 'Alles bereit?'),
+   ('Noten anhängen', 'you', 'Als PDF oder Foto.', ''),
    ('Sichtung', 'claude', 'Claude liest die Seiten und prüft die Qualität.', 'Alles verstanden?'),
    ('Stopp B', 'you', 'Titel, Stimmen und Tempo bestätigen.', ''),
    ('Notenerfassung', 'claude', 'Claude überträgt die Noten.', 'Fehlerfrei?'),
    ('Korrekturlesen', 'claude', 'Claude vergleicht das Ergebnis zweimal mit der Vorlage: erst Töne, dann Text.', 'Alles sauber? Sonst zurück zu Schritt 6.'),
    ('Endgültiger Notensatz', 'claude', 'Claude setzt die Noten sauber, mit Titelblatt.', 'Gut lesbar?'),
    ('Audio', 'claude', 'Claude erzeugt für jede Stimme die Audio-Dateien zum Üben.', 'Alles da?'),
-   ('Paket', 'claude', 'Claude schreibt die Anleitungen und packt alles zusammen.', 'Alles geprüft?'),
-   ('Abschluss', 'both', 'Claude macht Verbesserungsvorschläge. Die Entscheidung liegt beim Nutzer.', ''),
-   ('Herunterladen', 'you', 'Herunterladen und die Stimmen-ZIPs an den Chor weitergeben.', ''),
+   ('Paket', 'claude', 'Claude schreibt die Anleitungen und packt alles zusammen.', 'Alle Inhalte vorhanden?'),
+   ('Abschluss', 'both', 'Claude macht Verbesserungsvorschläge. Die Entscheidung über die Umsetzung liegt beim Nutzer.', ''),
+   ('Herunterladen', 'you', 'ZIP herunterladen und die Audiodateien der einzelnen Stimmen an den Chor weitergeben.', ''),
   ],
-  'ueben_h': 'Üben', 'ueben_p': 'Jede Stimme bekommt ihren eigenen Mix. Die eigene Stimme liegt in der Mitte, die anderen sind nach der Chorsitzordnung im Stereobild verteilt. Stimme, Stufe, Klang und Tempo sind wählbar: Der Kopfhörer zeigt die Verteilung, und zu hören ist genau dieser Mix. Mit Kopfhörern klingt es am besten. Die Aufnahmen sind mechanisch exakt, ohne Interpretation.',
+  'ueben_h': 'Üben', 'ueben_p': 'Jede Stimme bekommt ihren eigenen Mix. Jeweils eine Stimme liegt in der Mitte, die anderen sind nach der Chorsitzordnung im Stereobild verteilt. Stimme, Stufe, Klang und Tempo sind wählbar: Der Kopfhörer zeigt die Verteilung, und zu hören ist genau dieser Mix. Mit Kopfhörern klingt es am besten. Die Aufnahmen sind mechanisch exakt, ohne Interpretation.',
   'gate_lbl': 'Prüfung am Ende', 'voice_label': 'Stimme', 'stage_label': 'Stufe',
   'voices': {'S': 'Sopran', 'A': 'Alt', 'T': 'Tenor', 'B': 'Bass'},
   'stages': {'solo': 'Allein', 'accomp': 'Mit Begleitung', 'choir': 'Im Chor', 'tutti': 'Tutti'},
@@ -78,33 +79,30 @@ T = {
    'accomp': 'Eigene Stimme, die Melodie leiser, dazu die Klavierbegleitung aller Stimmen.',
    'choir': 'Die anderen Stimmen sitzen wie im Chor: Nachbarn links und rechts etwas leiser, weiter entfernte noch leiser.',
    'tutti': 'Alle Stimmen gleich laut.'}, 'own_lbl': 'Gesang', 'acc_lbl': 'Klavier',
-  'dl_p': 'Das Ergebnis: Aufnahmen zum Üben für jede Stimme, Anleitungen und Protokolle.', 'dl_btn': 'Beispiel-ZIP herunterladen (32 MB)',
+  'dl_p': 'Das Ergebnis: Aufnahmen zum Üben für jede Stimme, Anleitungen und Protokolle.', 'dl_btn': 'Beispiel-ZIP herunterladen',
   'tutti_all': 'Tutti, alle Stimmen', 'pl_title': 'Alle meine Entchen', 'pl_play': 'Wiedergabe', 'pl_pause': 'Pause', 'pl_seek': 'Position',
   'pl_cover': 'Albumcover des Beispielpakets',
   'rechte_h': 'Rechte und KI',
   'rechte_items': [
-   ('Rechte', 'Bevor Noten verarbeitet werden, fragt der Skill nach den Rechten. Die Antwort vermerkt er in der README des Pakets. Lizenzen für Noten müssen eingehalten werden.'),
+   ('Rechte', 'Bevor Noten verarbeitet werden, fragt der Skill nach den Rechten. Die Angaben des Nutzers vermerkt er in der README des Pakets. Lizenzen für Noten müssen eingehalten werden.'),
    ('Kennzeichnung', 'Alles, was der Skill erzeugt, ist als KI-Inhalt gekennzeichnet, sowohl mit dem EU-Label für KI-generierte Inhalte als auch im Text und in den Metadaten der Dokumente.'),
   ],
-  'los_h': 'Loslegen',
-  'los_steps': ['choir-practice.skill im Claude-Konto hochladen (Einstellungen).', 'Skill ohne Noten aufrufen und Stopp A beantworten (Rechte und Verwendungszweck).', 'Noten anhängen und Stopp B beantworten (Werkdaten).', 'ZIP am Ende herunterladen und Audio-Dateien an den Chor weitergeben.'],
-  'los_dl': 'Skill herunterladen',
-  'lic_h': 'Lizenz', 'lic_p': 'PolyForm Noncommercial License 1.0.0,\nfrei für nichtkommerzielle Nutzung.',
-  'lic_link': 'Lizenztext lesen', 'foot_profile': 'GitHub-Profil vbth', 'private': 'privates Projekt', 'og_alt': 'Ein Mann mit Kopfhörern steht in einer alten Badewanne und singt vom Notenblatt, neben ihm schwimmt eine Quietscheente, rote Noten schweben im Raum',
-  'alt_cover': 'Deckblatt des Beispielpakets', 'alt_page1': 'Erste Notenseite des Beispielpakets', 'alt_page2': 'Zweite Notenseite des Beispielpakets', 'alt_ai': 'EU-Label AI GENERATED',
-  'ai_label': 'AI GENERATED', 'top': 'Nach oben',
+  'lic_h': 'Lizenzen', 'lic_p': 'PolyForm Noncommercial License 1.0.0,\nfrei für nichtkommerzielle Nutzung.',
+  'lic_link': 'Lizenztext lesen', 'lic_third': 'Lizenzen von Drittanbietern müssen beachtet werden.', 'lic_third_link': 'Rechte der Drittanbieter-Lizenzen lesen', 'foot_profile': 'GitHub-Repository vbth/choir-practice', 'foot_note': 'Doku – agentischer KI-Musik-Workflow/-Skill entwickelt für/mit Claude Code', 'private': 'privates Projekt', 'og_alt': 'Ein Mann mit Kopfhörern steht in einer alten Badewanne und singt vom Notenblatt, neben ihm schwimmt eine Quietscheente, rote Noten schweben im Raum',
+  'alt_cover': 'Deckblatt des Beispielpakets', 'alt_page1': 'Erste Notenseite des Beispielpakets', 'alt_page2': 'Zweite Notenseite des Beispielpakets', 'alt_ai': 'EU-Label AI',
+  'ai_label': 'AI', 'top': 'Nach oben',
  },
  'en': {
   'html': 'en', 'name': 'choir-practice Skill', 'title': 'choir-practice Skill – Practice MP3s per voice from a choir score', 'other': ('../', 'DE'), 'self_prefix': '../', 'assets': '../',
-  'desc': 'The Claude skill choir-practice turns a choir score into a checked ZIP: MP3 and MIDI practice files for every voice, plus a guide for the director.',
-  'ids': {'start': 'start', 'ablauf': 'workflow', 'ueben': 'practice', 'paket': 'example-zip', 'rechte': 'rights-and-ai', 'loslegen': 'get-started', 'lizenz': 'licence'},
-  'menu': [('start', 'Start'), ('ablauf', 'Workflow'), ('ueben', 'Practice'), ('paket', 'Example ZIP'), ('rechte', 'Rights and AI'), ('loslegen', 'Get started'), ('lizenz', 'Licence')],
+  'desc': 'Documentation of agentic AI music workflows and skills, developed for and with Claude Code. Example: choir-practice turns a choir score into a checked ZIP with MP3 and MIDI practice files for every voice.',
+  'ids': {'start': 'start', 'ablauf': 'workflow', 'ueben': 'practice', 'paket': 'example-zip', 'rechte': 'rights-and-ai', 'lizenz': 'licence'},
+  'menu': [('start', 'Start'), ('ablauf', 'Workflow'), ('ueben', 'Practice'), ('paket', 'Example ZIP'), ('rechte', 'Rights and AI'), ('lizenz', 'Licences')],
   'menu_label': 'Menu', 'skip': 'Skip to content', 'theme_to_dark': 'Switch to dark mode', 'theme_to_light': 'Switch to light mode',
   'h1': 'Listen, sing along, get it right.',
-  'lead': 'choir-practice is a practical Claude skill that saves you a lot of time: your choir score becomes a checked ZIP in which every voice finds its own recordings to practise with, ready to share.',
-  'cta1': 'Install the skill', 'cta2': 'See the example ZIP',
-  'ai': 'AI-generated, no guarantee',
-  'facts': [('4', 'stages per voice'), ('2', 'sounds: choir and piano'), ('75%', 'tempo of the slow version'), ('42', 'recordings in the example')],
+  'lead': 'Documentation of agentic AI music workflows and skills, developed for and with Claude Code. The example here: a choir score becomes a checked ZIP in which every voice finds its own recordings to practise with, ready to share.',
+  'cta': 'See the example ZIP',
+  'ai': 'AI-generated, no guarantee for copyright and licence rights',
+  'facts': [('4', 'stages per voice'), ('2', 'sounds: choir and piano'), ('2', 'versions: normal and slow'), ('42', 'recordings in the example')],
   'inh_h': 'Contents', 'paket_h': 'Example ZIP', 'paket_p': 'The ZIP holds four folders. The voice ZIPs in 2_Practice are ready to hand out, their contents are listed last. Click a folder.',
   'tree': [
    ('1_Scores', 'Score (PDF), MusicXML and MIDI.', [
@@ -121,23 +119,23 @@ T = {
     '1_S_Guide.pdf', '2_S_Score_<Title>.pdf', '3_S_Audio_Choir_Sound_<Title>/', '  1 to 6_S_<Title>_Choir_*.mp3  (solo, with piano, each slow and normal; own voice louder; all voices equal)',
     '4_S_Audio_Piano_Sound_<Title>/', '  1 to 6_S_<Title>_Piano_*.mp3  (the same six)']),
   ],
-  'ablauf_h': 'Workflow', 'ablauf_p': 'Twelve steps, two stops with questions for you. Click a step.',
+  'ablauf_h': 'Workflow', 'ablauf_p': 'Twelve steps, two stops with questions for you. Click a step below, its details appear here.',
   'who_claude': 'Claude', 'who_you': 'You',
   'steps': [
    ('Call', 'you', 'Start the skill in Claude, still without a score.', ''),
-   ('Setup, Stop A', 'both', 'You say how the rights stand and what the material is for.', 'All set?'),
-   ('Attach score', 'you', 'As PDF, photo or scan.', ''),
+   ('Stop A', 'both', 'Details on rights and intended use.', 'All set?'),
+   ('Attach score', 'you', 'As PDF or photo.', ''),
    ('Survey', 'claude', 'Claude reads the pages and checks the quality.', 'Everything understood?'),
    ('Stop B', 'you', 'Confirm title, voices and tempo.', ''),
    ('Transcription', 'claude', 'Claude transcribes the score.', 'No errors?'),
    ('Proofreading', 'claude', 'Claude compares the result twice with your original: notes first, then lyrics.', 'All clean? Otherwise back to step 6.'),
    ('Final engraving', 'claude', 'Claude sets the score cleanly, with a title page.', 'Easy to read?'),
    ('Audio', 'claude', 'Claude creates the practice recordings for every voice.', 'All there?'),
-   ('Package', 'claude', 'Claude writes the guides and packs everything together.', 'Everything checked?'),
-   ('Closing', 'both', 'Claude suggests improvements. You decide.', ''),
-   ('Download', 'you', 'Download it and pass the voice ZIPs on to the choir.', ''),
+   ('Package', 'claude', 'Claude writes the guides and packs everything together.', 'All contents there?'),
+   ('Closing', 'both', 'Claude suggests improvements. You decide how they are implemented.', ''),
+   ('Download', 'you', 'Download the ZIP and pass the audio files of the individual voices on to the choir.', ''),
   ],
-  'ueben_h': 'Practice', 'ueben_p': 'Every voice gets its own mix. Your own voice sits in the middle, the others are spread across the stereo image like the choir stands. Pick a voice, a stage, a sound and a tempo: the headphones show the distribution, and you hear exactly that mix. It sounds best on headphones. The recordings are mechanically exact, without interpretation.',
+  'ueben_h': 'Practice', 'ueben_p': 'Every voice gets its own mix. In each mix one voice sits in the middle, the others are spread across the stereo image like the choir stands. Pick a voice, a stage, a sound and a tempo: the headphones show the distribution, and you hear exactly that mix. It sounds best on headphones. The recordings are mechanically exact, without interpretation.',
   'gate_lbl': 'Check at the end', 'voice_label': 'Voice', 'stage_label': 'Stage',
   'voices': {'S': 'Soprano', 'A': 'Alto', 'T': 'Tenor', 'B': 'Bass'},
   'stages': {'solo': 'Solo', 'accomp': 'With accompaniment', 'choir': 'In the choir', 'tutti': 'Tutti'},
@@ -147,21 +145,18 @@ T = {
    'accomp': 'Your own voice, the melody quieter, plus the piano accompaniment of all voices.',
    'choir': 'The other voices sit as in the choir: neighbours left and right a little quieter, voices further away quieter still.',
    'tutti': 'All voices equally loud.'}, 'own_lbl': 'Singing', 'acc_lbl': 'Piano',
-  'dl_p': 'The result: practice recordings for every voice, guides and logs.', 'dl_btn': 'Download the example ZIP (32 MB)',
+  'dl_p': 'The result: practice recordings for every voice, guides and logs.', 'dl_btn': 'Download the example ZIP',
   'tutti_all': 'Tutti, all voices', 'pl_title': 'All My Ducklings', 'pl_play': 'Play', 'pl_pause': 'Pause', 'pl_seek': 'Position',
   'pl_cover': 'Album cover of the example pack',
   'rechte_h': 'Rights and AI',
   'rechte_items': [
-   ('Rights', 'Before scores are processed, the skill asks about the rights. It records the answer in the pack’s README. The licences of the score must be observed.'),
+   ('Rights', 'Before scores are processed, the skill asks about the rights. It records the user’s details in the pack’s README. The licences of the score must be observed.'),
    ('Labelling', 'Everything the skill creates is labelled as AI content, both with the EU label for AI-generated content and in the text and metadata of the documents.'),
   ],
-  'los_h': 'Get started',
-  'los_steps': ['Upload choir-practice.skill in your Claude account (settings).', 'Call the skill without a score and answer stop A (rights and intended use).', 'Attach the score and answer stop B (work data).', 'Download the ZIP at the end and pass the audio files on to the choir.'],
-  'los_dl': 'Download the skill',
-  'lic_h': 'Licence', 'lic_p': 'PolyForm Noncommercial License 1.0.0,\nfree for non-commercial use.',
-  'lic_link': 'Read the licence text', 'foot_profile': 'GitHub profile vbth', 'private': 'private project', 'og_alt': 'A man with headphones stands in an old bathtub and sings from a sheet of music, a rubber duck floats beside him, red notes drift through the room',
-  'alt_cover': 'Title page of the example pack', 'alt_page1': 'First score page of the example pack', 'alt_page2': 'Second score page of the example pack', 'alt_ai': 'EU label AI GENERATED',
-  'ai_label': 'AI GENERATED', 'top': 'Back to top',
+  'lic_h': 'Licences', 'lic_p': 'PolyForm Noncommercial License 1.0.0,\nfree for non-commercial use.',
+  'lic_link': 'Read the licence text', 'lic_third': 'Licences of third parties must be observed.', 'lic_third_link': 'Read the third-party notices', 'foot_profile': 'GitHub repository vbth/choir-practice', 'foot_note': 'Docs – agentic AI music workflow/skill developed for/with Claude Code', 'private': 'private project', 'og_alt': 'A man with headphones stands in an old bathtub and sings from a sheet of music, a rubber duck floats beside him, red notes drift through the room',
+  'alt_cover': 'Title page of the example pack', 'alt_page1': 'First score page of the example pack', 'alt_page2': 'Second score page of the example pack', 'alt_ai': 'EU label AI',
+  'ai_label': 'AI', 'top': 'Back to top',
  },
 }
 
@@ -206,12 +201,11 @@ def page(L):
         for i, (n, d, ch) in enumerate(t['tree']))
     steps = ''.join(f'<li><button type="button" data-step="{i}" aria-pressed="false"><span class="n">{i+1}</span><span class="s">{esc(s[0])}</span></button></li>' for i, s in enumerate(t['steps']))
     rights = ''.join(f'<article><h3>{esc(h)}</h3><p>{esc(p)}</p></article>' for h, p in t['rechte_items'])
-    los = ''.join(f'<li>{esc(s)}</li>' for s in t['los_steps'])
     voices = ''.join(f'<button type="button" data-voice="{v}" aria-pressed="false">{esc(n)}</button>' for v, n in t['voices'].items())
     stages = ''.join(f'<button type="button" data-stage="{k}" aria-pressed="false">{esc(n)}</button>' for k, n in t['stages'].items())
     sounds = ''.join(f'<button type="button" data-sound="{k}" aria-pressed="false">{esc(n)}</button>' for k, n in t['sounds'].items())
     tempos = ''.join(f'<button type="button" data-tempo="{k}" aria-pressed="false">{esc(n)}</button>' for k, n in t['tempos'].items())
-    ai = open(os.path.join(OUT, 'img', 'ai-generated.svg'), encoding='utf-8').read()
+    ai = open(os.path.join(OUT, 'img', 'ai-basic.svg'), encoding='utf-8').read()
     ai = ai[ai.index('<svg'):].replace('role="img"', 'role="img" class="ailabel" focusable="false"', 1)
     data = {'lang': L, 'seat': SEAT, 'mix': ST, 'voices': t['voices'], 'stages': t['stages'], 'stage_txt': t['stage_txt'], 'steps': t['steps'],
             'who': {'you': t['who_you'], 'claude': t['who_claude'], 'both': t['who_claude'] + ' + ' + t['who_you']}, 'own': t['own_lbl'], 'acc': t['acc_lbl'], 'gate': t['gate_lbl'],
@@ -221,7 +215,7 @@ def page(L):
           'description': t['desc'], 'url': SITE + ('en/' if L == 'en' else ''), 'inLanguage': L, 'softwareVersion': VERSION,
           'applicationCategory': 'MultimediaApplication', 'operatingSystem': 'Claude (skill)', 'image': {'@type': 'ImageObject', 'url': SITE + 'img/og.png', 'width': 2400, 'height': 1260, 'caption': t['og_alt']},
           'license': 'https://polyformproject.org/licenses/noncommercial/1.0.0', 'codeRepository': GH,
-          'downloadUrl': GH + '/releases/latest', 'author': {'@type': 'Person', 'name': 'vbth', 'url': PROFILE},
+          'author': {'@type': 'Person', 'name': 'vbth', 'url': PROFILE},
           'offers': {'@type': 'Offer', 'price': '0', 'priceCurrency': 'EUR'}}
     ld_json = json.dumps(ld, ensure_ascii=False, indent=1).replace('</', '<\\/')
     return f'''<!doctype html>
@@ -268,7 +262,7 @@ def page(L):
 <body>
 <a class="skip" href="#start">{esc(t['skip'])}</a>
 <header class="bar">
- <a class="brand" href="#start" aria-label="{esc(t['name'])}"><img src="{A}img/logo.png" alt="" width="46" height="46"><span class="bt"><span class="bn">{esc(t['name'].partition(' ')[0])}</span> {esc(t['name'].partition(' ')[2])}</span></a>
+ <a class="brand" href="{SITE}{'en/' if L=='en' else ''}" aria-label="{esc(t['name'])}"><img src="{A}img/logo.png" alt="" width="46" height="46"><span class="bt"><span class="bn">{esc(t['name'].partition(' ')[0])}</span> {esc(t['name'].partition(' ')[2])}</span></a>
  <button class="theme" type="button" aria-label="{esc(t['theme_to_dark'])}"><svg class="moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 14.6A8.6 8.6 0 0 1 9.4 4 8.6 8.6 0 1 0 20 14.6z"/></svg><svg class="sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></svg></button>
  <a class="lang" href="{other_href}" hreflang="{'en' if L=='de' else 'de'}" lang="{'en' if L=='de' else 'de'}">{other_lbl}</a>
  <button class="burger" type="button" aria-expanded="false" aria-controls="nav">{esc(t['menu_label'])}</button>
@@ -280,7 +274,7 @@ def page(L):
 <section id="start" class="hero">
  <h1>{esc(t['h1'])}</h1>
  <p class="lead">{esc(t['lead'])}</p>
- <p class="cta"><a href="#{I['loslegen']}">{esc(t['cta1'])}</a> <a href="#{I['paket']}">{esc(t['cta2'])}</a></p>
+ <p class="cta"><a href="#{I['paket']}">{esc(t['cta'])}</a></p>
  <dl class="facts">{facts}</dl>
 </section>
 <section id="{I['ablauf']}"><h2><span class="num">01</span>{esc(t['ablauf_h'])}</h2>
@@ -303,7 +297,7 @@ def page(L):
   <audio id="plaudio" preload="none"></audio>
  </div>
  <div class="mixer">
-  <figure><svg id="hp" viewBox="26 -53 588 419" role="img"></svg>
+  <figure><svg id="hp" viewBox="-8 -53 656 419" role="img"></svg>
   <figcaption id="hpcap" aria-live="polite"></figcaption></figure>
   <div class="ctl"><span class="lbl" id="vlbl">{esc(t['voice_label'])}</span><div class="seg" id="voices" role="group" aria-labelledby="vlbl">{voices}</div></div>
   <div class="ctl"><span class="lbl" id="slbl">{esc(t['stage_label'])}</span><div class="seg" id="stages" role="group" aria-labelledby="slbl">{stages}</div></div>
@@ -330,18 +324,13 @@ def page(L):
 <section id="{I['rechte']}"><h2><span class="num">04</span>{esc(t['rechte_h'])}</h2>
  <div class="cols">{rights}</div>
 </section>
-<div class="duo">
-<section id="{I['loslegen']}"><h2><span class="num">05</span>{esc(t['los_h'])}</h2>
- <ol class="steps">{los}</ol>
- <p class="dlb"><a href="{A}choir-practice.skill" download>{esc(t['los_dl'])}</a></p>
-</section>
-<section id="{I['lizenz']}"><h2><span class="num">06</span>{esc(t['lic_h'])}</h2>
+<section id="{I['lizenz']}"><h2><span class="num">05</span>{esc(t['lic_h'])}</h2>
  <p class="intro">{'<br>'.join(esc(x) for x in t['lic_p'].split(chr(10)))}</p>
  <p><a href="{GH}/blob/main/LICENSE">{esc(t['lic_link'])}</a></p>
+ <p class="intro">{esc(t['lic_third'])} <a href="{GH}/blob/main/choir-practice/THIRD_PARTY_NOTICES.md">{esc(t['lic_third_link'])}</a></p>
 </section>
-</div>
 </main>
-<footer><span class="aitag">{ai}<span>{esc(t['ai'])}</span></span><span class="fl"><a href="{PROFILE}" aria-label="{esc(t['foot_profile'])}">{GHICON}<span>vbth</span></a><span>,&nbsp;{esc(t['private'])}</span></span></footer>
+<footer><span class="aitag">{ai}<span>{esc(t['ai'])}, {YEAR}</span></span><p class="fnote"><span class="fl"><a href="{GH}" aria-label="{esc(t['foot_profile'])}">{GHICON}</a></span> {esc(t['foot_note'])}</p></footer>
 <script>window.PAGE={json.dumps(data, ensure_ascii=False)};</script>
 <script src="{A}js/site.js?v={asset_version()}"></script>
 </body>
@@ -376,7 +365,6 @@ a{color:var(--link);text-decoration:underline;text-underline-offset:.18em;text-d
 main{max-width:var(--max);margin:0 auto;padding:0 var(--gut)}
 section{padding:64px 0 56px;border-top:1.5px solid var(--line)}
 section.hero{border-top:0;padding-top:72px;padding-bottom:24px}
-@media (min-width:960px){.duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:64px;border-top:1.5px solid var(--line)}.duo>section{border-top:0}}
 h1{font-size:clamp(34px,5.2vw,64px);line-height:1.05;letter-spacing:-.02em;margin:8px 0 28px;font-weight:700;text-wrap:balance}
 h2{font-size:clamp(28px,4vw,44px);line-height:1.1;margin:0 0 20px;font-weight:700;display:flex;gap:20px;align-items:baseline}
 h2 .num{font-weight:400;font-size:.5em;color:var(--link);min-width:2ch}
@@ -418,7 +406,7 @@ h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 
 @media (max-width:900px){.exrow{grid-template-columns:1fr}.fan{max-width:420px}}
 @media (max-width:520px){.fan{--pw:160px}}
-.mixer{display:grid;gap:28px;max-width:760px;margin-top:56px}
+.mixer{display:grid;gap:28px;max-width:760px;margin:56px auto 0}
 .ctl2{display:flex;flex-wrap:wrap;gap:16px 32px}.ctl2 .ctl{flex:1 1 14em}.ctl2 .ctl[hidden]{display:none}
 .ctl{display:flex;flex-direction:column;gap:6px;align-items:stretch}.lbl{font:400 var(--fs-s)/1.2 "IBM Plex Sans Condensed",sans-serif;color:var(--link);letter-spacing:.04em;text-transform:uppercase}
 .seg{display:flex;flex-wrap:wrap}.seg button{flex:1 1 0;min-width:max-content;font:inherit;font-size:var(--fs-s);background:var(--bg);color:var(--fg);border:1.5px solid var(--line);margin:0 -1.5px -1.5px 0;padding:10px 16px;cursor:pointer}
@@ -444,14 +432,20 @@ h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 @media (max-width:900px){.listen{grid-template-columns:1fr}}
 #hp{width:100%;height:auto;display:block;max-width:760px;color:var(--fg)}
 #hp text{font-family:"IBM Plex Sans",sans-serif;fill:currentColor}
-.mixer figcaption{max-width:44em;margin:6px 0 0}
+.mixer figcaption{max-width:44em;margin:6px auto 0;text-align:center}
+#hp .wave{opacity:0}#hp.playing .wave{animation:wave 1.4s ease-out infinite}
+@keyframes wave{0%{opacity:0}25%{opacity:1}100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){#hp.playing .wave{animation:none;opacity:1}}
 .cols{display:grid;grid-template-columns:repeat(2,1fr);gap:0 32px}.cols article{border-top:1.5px solid var(--line);padding-top:16px}
 .cols p{margin:0}
 .steps{padding-left:1.4em;max-width:44em}.steps li{margin:0 0 10px}
+footer .fnote{flex:0 0 100%;margin:0}footer .fnote .fl{display:inline-flex;vertical-align:middle;margin-right:.5em}
 footer{max-width:var(--max);margin:0 auto;padding:24px var(--gut) 48px;border-top:1.5px solid var(--line);display:flex;flex-wrap:wrap;gap:12px 32px;align-items:center;justify-content:space-between;font-size:var(--fs-s)}
 @media (max-width:900px){.chain{grid-template-columns:repeat(3,1fr)}.cols{grid-template-columns:1fr;row-gap:16px}.tree{grid-template-columns:1fr}}
 @media (max-width:760px){
  .facts{grid-template-columns:repeat(2,1fr)}section{padding:48px 0 40px}h2{gap:12px}
+ /* same visible gap above the headline as between menu and header image (72 px; the headline box starts 13 px above its first ink) */
+ section.hero{padding-top:59px}
 }
 @media (max-width:1100px){
  .burger{display:block;order:100;margin-left:0}.bar>.lang{display:none}.navlang{display:block;border-top:1.5px solid var(--line);margin-top:4px}
@@ -501,12 +495,13 @@ showStep(0);
 var NS='http://www.w3.org/2000/svg',svg=$('#hp'),cur={voice:'S',stage:'choir',sound:'choir',tempo:'normal'};
 function el(n,a,t){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);if(t!=null)e.textContent=t;return e}
 function rad(db){return Math.max(15,34+1.33*db)}
+function mob0(W){return W<600}
 function draw(){
  while(svg.lastChild)svg.removeChild(svg.lastChild);
- var sw=1.5,col='currentColor',x0=320,half=250,W=svg.getBoundingClientRect().width||640,FS=Math.round(10*15*588/W)/10;
+ var sw=1.5,col='currentColor',x0=320,half=250,W=svg.getBoundingClientRect().width||640,FS=Math.round(10*15*656/W)/10,LS=mob0(W)?FS:Math.round(FS*15)/10;
  // over-ear headphones seen from the front, line art: steel frame, mesh canopy, telescopic arms, cups with cushions facing in, crown on the right cup
- var mob=W<600,oy=mob?200:230,ay=mob?338:312,py=mob?388:352;
- svg.setAttribute('viewBox','26 -53 588 '+(mob?453:419));
+ var mob=mob0(W),oy=mob?200:230,ay=mob?338:312,py=mob?388:352;
+ svg.setAttribute('viewBox','-8 -53 656 '+(mob?453:419));
  function ln(d,w){svg.appendChild(el('path',{d:d,fill:'none',stroke:col,'stroke-width':w||sw*2,'stroke-linecap':'round','stroke-linejoin':'round'}))}
  ln('M47 128 L47 120 A273 165 0 0 1 593 120 L593 128 L581 128 L581 120 A261 147 0 0 0 59 120 L59 128 Z');
  ln('M47 128 h12 v8 h-12 Z M581 128 h12 v8 h-12 Z',sw*1.5);
@@ -514,18 +509,21 @@ function draw(){
  ln('M564 160 C564 142 574 136 587 136 C600 136 610 142 610 160 L610 286 C610 304 600 310 587 310 C574 310 564 304 564 286 Z');
  ln('M76 156 C88 156 92 164 92 174 L92 272 C92 282 88 290 76 290',sw*1.5);
  ln('M564 156 C552 156 548 164 548 174 L548 272 C548 282 552 290 564 290',sw*1.5);
+ // sound waves outside the cups; only visible while a recording plays (class 'playing' on the svg)
+ [0,1,2].forEach(function(i){var x=22-9*i,h=28+16*i,c=x-14;
+  [[x,c],[640-x,640-c]].forEach(function(p){svg.appendChild(el('path',{'class':'wave',d:'M'+p[0]+' '+(223-h)+' Q'+p[1]+' 223 '+p[0]+' '+(223+h),fill:'none',stroke:col,'stroke-width':sw*2,'stroke-linecap':'round',style:'animation-delay:'+(i*0.25)+'s'}))})});
  var list=D.mix[cur.stage][cur.voice],own=[],acc=[];
  list.forEach(function(e){(e[3]==='acc'?acc:own).push(e)});
- function pos(e){return x0+e[1]*190}
+ function pos(e){return x0+e[1]*(cur.stage==='tutti'?270:190)}   // tutti: circles further apart
  own.forEach(function(e,i){var y=oy;
   var g=el('g',{});var r=rad(e[2]);
   g.appendChild(el('circle',{cx:pos(e),cy:y,r:r,fill:'none',stroke:col,'stroke-width':e[0]===cur.voice&&e[2]===0?sw*3:sw*1.5}));
-  g.appendChild(el('text',{x:pos(e),y:y+5,'font-size':FS,'text-anchor':'middle','font-weight':700},e[0]));
+  g.appendChild(el('text',{x:pos(e),y:y,dy:'.35em','font-size':Math.min(LS,1.5*r),'text-anchor':'middle','font-weight':700},e[0]));   // dy: cap height centred in the circle
   g.appendChild(el('text',{x:pos(e),y:y+r+(mob?FS*0.95+3:16),'font-size':FS,'text-anchor':'middle'},e[2]+(mob&&i>0?'':' dB')));
   svg.appendChild(g);});
  acc.forEach(function(e){var y=ay,r=rad(e[2]);
   svg.appendChild(el('circle',{cx:pos(e),cy:y,r:r,fill:'none',stroke:col,'stroke-width':sw,'stroke-dasharray':'4 4'}));
-  svg.appendChild(el('text',{x:pos(e),y:y+4,'font-size':FS,'text-anchor':'middle'},e[0]));});
+  svg.appendChild(el('text',{x:pos(e),y:y,dy:'.35em','font-size':FS,'text-anchor':'middle'},e[0]));});
  if(acc.length){svg.appendChild(el('text',{x:x0,y:py,'font-size':FS,'text-anchor':'middle'},D.acc+' ('+acc[0][2]+' dB)'))}
  svg.setAttribute('aria-label',D.voices[cur.voice]+', '+D.stages[cur.stage]);   // no <title>: it would show a tooltip on hover
  $('#hpcap').textContent=D.stage_txt[cur.stage];
@@ -537,7 +535,7 @@ function isSlow(){return slowOk()&&cur.tempo==='slow'}
 function file(){return cur.stage==='tutti'?'tutti_'+cur.sound:cur.voice.toLowerCase()+'_'+cur.stage+'_'+cur.sound+(isSlow()?'_slow':'')}
 function label(){return (cur.stage==='tutti'?D.stages.tutti:D.voices[cur.voice]+', '+D.stages[cur.stage])+', '+D.sound_names[cur.sound]+(isSlow()?', '+D.slow_name:'')}
 function f(t){t=Math.floor(t||0);return Math.floor(t/60)+':'+('0'+t%60).slice(-2)}
-function ui(){var on=!A.paused;$$('.picon').forEach(function(i){i.setAttribute('d',on?'M6 4h4v16H6zM14 4h4v16h-4z':'M7 4l13 8-13 8z')});$$('.pbtn').forEach(function(b){b.setAttribute('aria-label',pl.getAttribute(on?'data-pause':'data-play'))})}
+function ui(){var on=!A.paused;svg.classList.toggle('playing',on);$$('.picon').forEach(function(i){i.setAttribute('d',on?'M6 4h4v16H6zM14 4h4v16h-4z':'M7 4l13 8-13 8z')});$$('.pbtn').forEach(function(b){b.setAttribute('aria-label',pl.getAttribute(on?'data-pause':'data-play'))})}
 function sync(){
  draw();
  $$('#voices button').forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-voice')===cur.voice)});
@@ -555,11 +553,11 @@ function sync(){
 // change the selection; keep the playing position (scaled when the tempo changes), or start the chosen recording when asked
 function change(fn,restart){
  var was=!A.paused,t=A.currentTime||0,ps=isSlow();fn();var ns=isSlow();sync();
- if(restart){sk.value=0;tm.textContent='0:00';A.play().catch(function(){});return}
+ if(restart){sk.value=0;tm.textContent='0:00';try{A.currentTime=0}catch(e){}A.play().catch(function(){});return}
  if(was){var sc=(ns?1/D.slow:1)/(ps?1/D.slow:1);A.addEventListener('loadedmetadata',function h(){A.removeEventListener('loadedmetadata',h);A.currentTime=Math.min(t*sc,Math.max(0,(A.duration||t*sc)-0.2))});A.play().catch(function(){})}
  else{sk.value=0;tm.textContent='0:00'}
 }
-$$('#voices button').forEach(function(b){b.addEventListener('click',function(){change(function(){cur.voice=b.getAttribute('data-voice')},A.paused)})});
+$$('#voices button').forEach(function(b){b.addEventListener('click',function(){change(function(){cur.voice=b.getAttribute('data-voice')},true)})});
 $$('#stages button').forEach(function(b){b.addEventListener('click',function(){change(function(){cur.stage=b.getAttribute('data-stage')},A.paused)})});
 $$('#sounds button').forEach(function(b){b.addEventListener('click',function(){change(function(){cur.sound=b.getAttribute('data-sound')},A.paused)})});
 $$('#tempos button').forEach(function(b){b.addEventListener('click',function(){change(function(){cur.tempo=b.getAttribute('data-tempo')},A.paused)})});
@@ -575,12 +573,24 @@ window.addEventListener('resize',function(){clearTimeout(window.__rz);window.__r
 })();
 '''
 
+def inline_label(src, viewbox, title, note):
+    """Official EU label file (classes in <style>) -> one small SVG with the styles inlined and the viewBox cropped to the label; the shapes stay unchanged."""
+    rules = {m.group(1): [kv.strip().split(':', 1) for kv in m.group(2).split(';') if kv.strip()] for m in re.finditer(r'\.(cls-\d+)\s*\{([^}]*)\}', src)}
+    body = src[src.index('</defs>') + 7:src.rindex('</svg>')]
+    body = re.sub(r'class="(cls-\d+)"', lambda m: ' '.join(f'{k.strip()}="{v.strip()}"' for k, v in rules[m.group(1)]), body)
+    return f'<?xml version="1.0" encoding="UTF-8"?>\n<!-- {note} -->\n<svg xmlns="http://www.w3.org/2000/svg" viewBox="{viewbox}" role="img"><title>{title}</title>{body.strip()}</svg>\n'
+
 def ai_labels():
-    """EU label for the website and the Markdown footers (common.MD_LABEL): copied from the skill assets, plus a white variant for dark mode."""
-    src = open(os.path.join(HERE, '..', 'choir-practice', 'assets', 'eu-ai-generated.svg'), encoding='utf-8').read()
-    open(os.path.join(OUT, 'img', 'ai-generated.svg'), 'w', encoding='utf-8').write(src)
-    dark = src.replace('fill="#000"', 'fill="#TMP"').replace('fill="#fff"', 'fill="#000"').replace('fill="#TMP"', 'fill="#fff"').replace('EU label "AI GENERATED", black', 'EU label "AI GENERATED", white (dark mode)')
-    open(os.path.join(OUT, 'img', 'ai-generated-dark.svg'), 'w', encoding='utf-8').write(dark)
+    """EU label "AI" for the website footer and the Markdown footers (common.MD_LABEL): black = the skill asset, white for dark mode = the official white file
+    of the set (assets/eu-labels/) with the same crop. The long label "AI GENERATED" stays only in the header image."""
+    AS = os.path.join(HERE, '..', 'choir-practice', 'assets')
+    name, black, white, title = 'ai-basic', 'eu-ai-basic.svg', 'LABEL_AI_white.svg', 'AI'
+    src = open(os.path.join(AS, black), encoding='utf-8').read()
+    open(os.path.join(OUT, 'img', name + '.svg'), 'w', encoding='utf-8').write(src)
+    vb = re.search(r'viewBox="([^"]+)"', src).group(1)
+    dark = inline_label(open(os.path.join(AS, 'eu-labels', white), encoding='utf-8').read(), vb, title,
+                        f'EU label "{title}", white (dark mode): official file {white} of the EU icon set, viewBox cropped to the label, styles inlined, shapes unchanged')
+    open(os.path.join(OUT, 'img', name + '-dark.svg'), 'w', encoding='utf-8').write(dark)
 
 def skill_file():
     """docs/choir-practice.skill: the skill folder as on main, served by the site itself.

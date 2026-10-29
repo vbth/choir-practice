@@ -44,6 +44,8 @@ def problems():
         t = open(f, encoding='utf-8').read()
         if tok(t) != tok(en): out.append(f'handoff template {code}: tokens differ from en ({sorted(tok(t) ^ tok(en))})')
         if sec(t) != sec(en): out.append(f'handoff template {code}: {sec(t)} sections, en has {sec(en)}')
+    sk = open(os.path.join(tdir, 'skill_handoff.en.md'), encoding='utf-8').read()
+    if '## 5. Third-party rights check' not in sk: out.append('skill_handoff.en.md: section "5. Third-party rights check" missing (mandatory)')
     out += footer_problems(packs)
     return out
 
@@ -53,18 +55,18 @@ def footer_problems(packs):
     for code, pack in packs.items():
         for k in ('ai_meta', 'ai_note', 'ai_note_info'):
             if '\u00b7' in pack.get(k, ''): out.append(f'language pack {code}: {k} contains a middle dot')
-    for f in ('eu-ai-generated.svg', 'eu-ai-modified.svg'):
+    for f in ('eu-ai-basic.svg', 'eu-ai-generated.svg', 'eu-ai-modified.svg'):
         if not os.path.exists(os.path.join(ASSETS, f)): out.append(f'footer label missing: assets/{f}')
     skill = os.path.join(HERE, '..'); repo = os.path.join(skill, '..')
     if os.path.isdir(os.path.join(repo, 'docs', 'img')):
-        for f in ('ai-generated.svg', 'ai-generated-dark.svg'):
+        for f in ('ai-basic.svg', 'ai-basic-dark.svg'):
             if not os.path.exists(os.path.join(repo, 'docs', 'img', f)): out.append(f'footer label for Markdown missing: docs/img/{f} (linked from {MD_LABEL})')
     for d in (skill, repo):
         for fn, lang in (('README.md', 'en'), ('README.de.md', 'de')):
             p = os.path.join(d, fn)
             if not os.path.exists(p): continue
-            t = open(p, encoding='utf-8').read(); m = re.search(r'\n\n([^\n]+)\n\n\Z', t); date = re.search(r'(\d{4}-\d{2}-\d{2}|\d{2}\.\d{2}\.\d{4})\n\n\Z', t)
-            iso = None if not date else (date.group(1) if '-' in date.group(1) else '-'.join(reversed(date.group(1).split('.'))))
+            t = open(p, encoding='utf-8').read(); m = re.search(r'\n\n([^\n]+)\n\n\Z', t); date = re.search(r'(\d{4}-\d{2}-\d{2})\n\n\Z', t)
+            iso = None if not date else date.group(1)
             if not m or not iso or m.group(1) != md_footer(lang, '', iso):
                 out.append(f'{os.path.relpath(p, repo)}: last line is not the footer (blank line, common.md_footer("{lang}"))')
     return out

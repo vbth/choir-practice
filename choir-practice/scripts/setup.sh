@@ -58,4 +58,5 @@ else
   pyreport
 fi
 for c in fluidsynth ffmpeg pdftoppm; do command -v $c >/dev/null && echo "$c ok" || echo "$c MISSING"; done
+python3 "$HERE/check_third_party.py" --brief 2>&1 | tail -3   # third-party rights: every installed component must be named in THIRD_PARTY_NOTICES.md
 ([ -f /usr/share/sounds/sf3/MuseScore_General_Full.sf3 ] && echo "soundfont ok (MuseScore General Full)") || ([ -f /usr/share/sounds/sf2/FluidR3_GM.sf2 ] && echo "soundfont fallback FluidR3_GM (lower quality – report this)") || echo "soundfont MISSING"
