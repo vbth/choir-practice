@@ -48,7 +48,7 @@
   },
   "readme": {
     "title": "Noten und Übe-Dateien",
-    "poc": "Dokumentation eines agentischen KI-Musik-Workflows und -Skills als privates Code-Experiment, entwickelt für und mit Claude Code. Es handelt sich ausschließlich um einen Proof of Concept.",
+    "poc": "Dokumentation eines agentischen KI-Musik-Workflows und -Skills als privates Code-Experiment, entwickelt für und mit Claude Code. Es handelt sich ausschließlich um einen Proof of Concept. Nutzung auf eigene Gefahr.",
     "intro": "Dieses Paket enthält die Chorstimmen als Noten mit Text sowie Übe-Dateien (Audio). Grundlage ist die gelieferte Vorlage {source}.",
     "folders_h": "Ordner",
     "col_folder": "Ordner",
