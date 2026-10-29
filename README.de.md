@@ -153,5 +153,5 @@ PolyForm Noncommercial License 1.0.0 ([`LICENSE.md`](LICENSE.md)), frei für nic
 
 <a href="https://github.com/vbth/choir-practice"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/github-mark-dark.svg"><img src="https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/github-mark.svg" alt="GitHub" height="18" align="absmiddle"></picture></a> choir-practice – Proof of Concept: KI-Musik-Workflow/-Skill entwickelt für/von Claude Code. Nutzung auf eigene Gefahr.
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/ai-basic-dark.svg"><img src="https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/ai-basic.svg" alt="AI" height="18" align="absmiddle"></picture> KI-generiert. Urheber- und Lizenzrechte beachten. Nutzung auf eigene Gefahr. 2026-10-28
+<picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/ai-basic-dark.svg"><img src="https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/ai-basic.svg" alt="AI" height="18" align="absmiddle"></picture> KI-generiert. Urheber- und Lizenzrechte beachten. Nutzung auf eigene Gefahr. 2026-10-29
 
