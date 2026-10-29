@@ -41,6 +41,17 @@ def nobreak(html):
     body = NB_FOOTER.sub(lambda m: re.sub(r'<span>([^<]*)</span>', lambda n: '<span>' + _glue(n.group(1)) + '</span>', m.group(1)), body)
     return head + sep + body
 
+IMG_REF = re.compile(r'(\bimg/([A-Za-z0-9_.-]+\.(?:png|jpg|svg)))(?=["\s,])')
+
+def bust(html):
+    """Cache busting: every image reference of the page (src, srcset, preload, og:image) gets ?v=<hash of the file>, so a changed image
+    (new footer in the example pages, new header) is fetched again instead of served from the browser or CDN cache."""
+    def one(m):
+        f = os.path.join(OUT, 'img', m.group(2))
+        if not os.path.exists(f): return m.group(0)
+        return m.group(1) + '?v=' + hashlib.sha1(open(f, 'rb').read()).hexdigest()[:8]
+    return IMG_REF.sub(one, html)
+
 REL = GH + '/releases/download/v1.0.0/'   # example ZIPs: assets of the release v1.0.0
 ZIPS = [('Deutsch: Alle meine Entchen', 'Chor_Uebungen_Alle_meine_Entchen.zip'), ('English: All My Ducklings', 'Choir_Practice_All_My_Ducklings.zip')]   # make_previews.py renders both
 ZIP_OF = {'de': ZIPS[0][1], 'en': ZIPS[1][1]}   # each page links only the package of its own language
@@ -352,7 +363,7 @@ def page(L):
  <div class="cols">{rights}</div>
 </section>
 <section id="{I['lizenz']}"><h2><span class="num">05</span>{esc(t['lic_h'])}</h2>
- <p class="intro">{esc(t['lic_p'])} <a href="{GH}/blob/main/LICENSE.md">{esc(t['lic_link'])}</a>, {esc(t['lic_third'])} <a href="{GH}/blob/main/choir-practice/THIRD_PARTY_NOTICES.md">{esc(t['lic_third_link'])}</a></p>
+ <p class="intro wide">{esc(t['lic_p'])} <a href="{GH}/blob/main/LICENSE.md">{esc(t['lic_link'])}</a>, {esc(t['lic_third'])} <a href="{GH}/blob/main/choir-practice/THIRD_PARTY_NOTICES.md">{esc(t['lic_third_link'])}</a></p>
 </section>
 </main>
 <footer><p class="fnote"><span class="fl"><a href="{GH}" aria-label="{esc(t['foot_profile'])}">{GHICON}</a></span><span>{esc(t['foot_note'])}</span></p><span class="aitag">{ai}<span>{YEAR} {esc(t['ai'])}</span></span></footer>
@@ -397,7 +408,7 @@ h2 .num{font-weight:400;font-size:.5em;color:var(--link);min-width:2ch}
 h3{margin:0 0 8px;font-size:var(--fs-m)}
 .lead{margin:0 0 30px}
 .input{margin:0 0 24px;color:var(--mute)}
-.intro{max-width:44em;margin:0 0 28px}
+.intro{max-width:44em;margin:0 0 28px}.intro.wide{max-width:none}
 .cta{display:flex;flex-wrap:wrap;gap:12px 28px;margin:0 0 36px}
 .facts{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:0;border-top:1.5px solid var(--line)}
 .facts div{padding:22px 12px 0 0}.facts dt{font-size:clamp(28px,4vw,44px);font-weight:700;line-height:1}.facts dd{margin:6px 0 0;color:var(--mute);font-size:var(--fs-s)}
@@ -536,9 +547,10 @@ function draw(){
  ln('M564 160 C564 142 574 136 587 136 C600 136 610 142 610 160 L610 286 C610 304 600 310 587 310 C574 310 564 304 564 286 Z');
  ln('M76 156 C88 156 92 164 92 174 L92 272 C92 282 88 290 76 290',sw*1.5);
  ln('M564 156 C552 156 548 164 548 174 L548 272 C548 282 552 290 564 290',sw*1.5);
- // sound waves outside the cups; only visible while a recording plays (class 'playing' on the svg)
- [0,1,2].forEach(function(i){var x=22-9*i,h=28+16*i,c=x-14;
-  [[x,c],[640-x,640-c]].forEach(function(p){svg.appendChild(el('path',{'class':'wave',d:'M'+p[0]+' '+(223-h)+' Q'+p[1]+' 223 '+p[0]+' '+(223+h),fill:'none',stroke:col,'stroke-width':sw*2,'stroke-linecap':'round',style:'animation-delay:'+(i*0.25)+'s'}))})});
+ // sound waves between cup and ear, travelling inwards, red; only visible while a recording plays (class 'playing' on the svg).
+ // The circles never reach further out than x=121 (or 519 on the right), the waves end at x=111: a gap of at least 10 units to the circles
+ [0,1,2].forEach(function(i){var x=97+5*i,h=20+10*i,c=x+8;
+  [[x,c],[640-x,640-c]].forEach(function(p){svg.appendChild(el('path',{'class':'wave',d:'M'+p[0]+' '+(223-h)+' Q'+p[1]+' 223 '+p[0]+' '+(223+h),fill:'none',stroke:'var(--link)','stroke-width':sw*2,'stroke-linecap':'round',style:'animation-delay:'+(i*0.25)+'s'}))})});
  var list=D.mix[cur.stage][cur.voice],own=[],acc=[];
  list.forEach(function(e){(e[3]==='acc'?acc:own).push(e)});
  function pos(e){return x0+e[1]*(cur.stage==='tutti'?270:190)}   // tutti: circles further apart
@@ -627,8 +639,8 @@ def main():
     ai_labels()
     open(os.path.join(OUT, 'css', 'site.css'), 'w', encoding='utf-8').write(CSS)
     open(os.path.join(OUT, 'js', 'site.js'), 'w', encoding='utf-8').write(JS)
-    open(os.path.join(OUT, 'index.html'), 'w', encoding='utf-8').write(ext(nobreak(page('de'))))
-    open(os.path.join(OUT, 'en', 'index.html'), 'w', encoding='utf-8').write(ext(nobreak(page('en'))))
+    open(os.path.join(OUT, 'index.html'), 'w', encoding='utf-8').write(ext(bust(nobreak(page('de')))))
+    open(os.path.join(OUT, 'en', 'index.html'), 'w', encoding='utf-8').write(ext(bust(nobreak(page('en')))))
     alt = ''.join(f'<xhtml:link rel="alternate" hreflang="{h}" href="{u}"/>' for h, u in (('de', SITE), ('en', SITE + 'en/'), ('x-default', SITE)))
     open(os.path.join(OUT, 'sitemap.xml'), 'w', encoding='utf-8').write(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'

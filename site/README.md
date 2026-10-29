@@ -33,3 +33,7 @@ Deterministic; `--seed N` changes the texture, `--preview FILE` writes a large p
 
 ## Line breaks
 No text block may end with a single word on its last line. `nobreak()` in `build_site.py` replaces the last space of every `p`, `li`, `h1` to `h4`, `figcaption`, `dd`, `dt`, `summary`, `label` (and of every line before a `<br>`, and of the footer spans) with `&nbsp;` at every build; texts that the page script sets use `nb()` in the script. New block elements or new script-set texts must be added there. Blocks with buttons or SVG are skipped on purpose.
+
+## Cache busting
+`bust()` in `build_site.py` appends `?v=<hash of the file>` to every `img/...` reference (src, srcset, preload, og:image) at every build. A changed image therefore gets a new URL; run `make_previews.py` and `build_site.py` after any template change and the page shows the new example pages without a hard reload.
+

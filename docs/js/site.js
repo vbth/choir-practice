@@ -51,9 +51,10 @@ function draw(){
  ln('M564 160 C564 142 574 136 587 136 C600 136 610 142 610 160 L610 286 C610 304 600 310 587 310 C574 310 564 304 564 286 Z');
  ln('M76 156 C88 156 92 164 92 174 L92 272 C92 282 88 290 76 290',sw*1.5);
  ln('M564 156 C552 156 548 164 548 174 L548 272 C548 282 552 290 564 290',sw*1.5);
- // sound waves outside the cups; only visible while a recording plays (class 'playing' on the svg)
- [0,1,2].forEach(function(i){var x=22-9*i,h=28+16*i,c=x-14;
-  [[x,c],[640-x,640-c]].forEach(function(p){svg.appendChild(el('path',{'class':'wave',d:'M'+p[0]+' '+(223-h)+' Q'+p[1]+' 223 '+p[0]+' '+(223+h),fill:'none',stroke:col,'stroke-width':sw*2,'stroke-linecap':'round',style:'animation-delay:'+(i*0.25)+'s'}))})});
+ // sound waves between cup and ear, travelling inwards, red; only visible while a recording plays (class 'playing' on the svg).
+ // The circles never reach further out than x=121 (or 519 on the right), the waves end at x=111: a gap of at least 10 units to the circles
+ [0,1,2].forEach(function(i){var x=97+5*i,h=20+10*i,c=x+8;
+  [[x,c],[640-x,640-c]].forEach(function(p){svg.appendChild(el('path',{'class':'wave',d:'M'+p[0]+' '+(223-h)+' Q'+p[1]+' 223 '+p[0]+' '+(223+h),fill:'none',stroke:'var(--link)','stroke-width':sw*2,'stroke-linecap':'round',style:'animation-delay:'+(i*0.25)+'s'}))})});
  var list=D.mix[cur.stage][cur.voice],own=[],acc=[];
  list.forEach(function(e){(e[3]==='acc'?acc:own).push(e)});
  function pos(e){return x0+e[1]*(cur.stage==='tutti'?270:190)}   // tutti: circles further apart
