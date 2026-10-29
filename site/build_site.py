@@ -18,6 +18,7 @@ REL = GH + '/releases/download/v1.0.0/'   # example ZIPs: assets of the release 
 ZIPS = [('Deutsch: Alle meine Entchen', 'Chor_Uebungen_Alle_meine_Entchen.zip'), ('English: All My Ducklings', 'Choir_Practice_All_My_Ducklings.zip')]   # make_previews.py renders both
 ZIP_OF = {'de': ZIPS[0][1], 'en': ZIPS[1][1]}   # each page links only the package of its own language
 VERSION = open(os.path.join(HERE, '..', 'choir-practice', 'VERSION'), encoding='utf-8').read().strip()
+YEAR = re.search(r'\*\*Date:\*\* (\d{4})', open(os.path.join(HERE, '..', 'choir-practice', 'session-handoff.md'), encoding='utf-8').read()).group(1)   # year of the last release (release.py rewrites the date there), shown in the footer
 
 SEAT = ['S', 'A', 'T', 'B']
 ST = M.stages(SEAT, 'S')
@@ -342,7 +343,7 @@ def page(L):
 </section>
 </div>
 </main>
-<footer><span class="aitag">{ai}<span>{esc(t['ai'])}</span></span><span class="fl"><a href="{GH}" aria-label="{esc(t['foot_profile'])}">{GHICON}<span>vbth,&nbsp;{esc(t['private'])}</span></a></span></footer>
+<footer><span class="aitag">{ai}<span>{esc(t['ai'])}, {YEAR}</span></span><span class="fl"><a href="{GH}" aria-label="{esc(t['foot_profile'])}">{GHICON}<span>vbth,&nbsp;{esc(t['private'])}</span></a></span></footer>
 <script>window.PAGE={json.dumps(data, ensure_ascii=False)};</script>
 <script src="{A}js/site.js?v={asset_version()}"></script>
 </body>

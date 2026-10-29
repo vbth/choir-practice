@@ -65,8 +65,8 @@ def footer_problems(packs):
         for fn, lang in (('README.md', 'en'), ('README.de.md', 'de')):
             p = os.path.join(d, fn)
             if not os.path.exists(p): continue
-            t = open(p, encoding='utf-8').read(); m = re.search(r'\n\n([^\n]+)\n\n\Z', t); date = re.search(r'(\d{4}-\d{2}-\d{2}|\d{2}\.\d{2}\.\d{4})\n\n\Z', t)
-            iso = None if not date else (date.group(1) if '-' in date.group(1) else '-'.join(reversed(date.group(1).split('.'))))
+            t = open(p, encoding='utf-8').read(); m = re.search(r'\n\n([^\n]+)\n\n\Z', t); date = re.search(r'(\d{4}-\d{2}-\d{2})\n\n\Z', t)
+            iso = None if not date else date.group(1)
             if not m or not iso or m.group(1) != md_footer(lang, '', iso):
                 out.append(f'{os.path.relpath(p, repo)}: last line is not the footer (blank line, common.md_footer("{lang}"))')
     return out

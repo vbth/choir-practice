@@ -50,7 +50,7 @@ for fn in ('README.md', 'README.de.md'):
     f = root / fn
     if f.exists():
         t = f.read_text(encoding='utf-8')
-        d = datetime.date.fromisoformat(today); human = d.strftime('%d.%m.%Y') if fn.endswith('.de.md') else today
+        human = today   # ISO date in both languages
         t = re.sub(r'((?:KI-generiert, Urheber- und Lizenzrechte ohne Gewähr|AI-generated, no guarantee for copyright and licence rights), )[\d.-]+\n*\Z', rf'\g<1>{human}\n\n', t)   # date of the footer line = release date
         f.write_text(t, encoding='utf-8')
 h = sk / 'session-handoff.md'
