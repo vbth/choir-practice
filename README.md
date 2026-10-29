@@ -6,6 +6,8 @@
 
 English | [Deutsch](README.de.md)
 
+## Listen, practise, sing with confidence.
+
 **Documentation of an agentic AI music workflow and skill as a private code experiment, developed for and with Claude Code. This is a proof of concept only.** The example here, choir-practice, turns a choir score into a checked ZIP in which every voice finds its own recordings to practise with, ready to share.
 
 **Website with example pack and player:** https://vbth.github.io/choir-practice/
@@ -42,7 +44,7 @@ English | [Deutsch](README.de.md)
 MP3 titles, file names, PDFs and logs follow the language of the conversation (German and English built in, see [README.de.md](README.de.md)). One ZIP, named like the top folder:
 
 ```text
-<date>_Choir_Practice_<Title>/
+Choir_Practice_<Title>/
 ├─ 1_Scores/
 │  ├─ 1_Score_<Title>_Scan.pdf
 │  ├─ 2_Score_<Title>.pdf

@@ -4,9 +4,9 @@
   python3 package.py PKG score.json --source original.pdf --workdir WORK [--docs docs.json] [--date YYYY-MM-DD] [--out DIR]
 
 * PKG is the work package built in phases 5-7 (raw layout, checked by verify.py); it is not delivered as is.
-* make_layout.py builds <date>_<package>_<Title>/ from it: 1 scores (+MusicXML, MIDI), 2 practice (overview,
+* make_layout.py builds <package>_<Title>/ from it: 1 scores (+MusicXML, MIDI), 2 practice (overview,
   director guide, one complete ZIP per voice), 3 documentation, 4 tools (project data + the skill) – see its docstring.
-* ONE delivery ZIP <date>_Chor_Uebungen_<Title>.zip holding the numbered folders directly (no extra top folder); CRC test; result logged.
+* ONE delivery ZIP Chor_Uebungen_<Title>.zip holding the numbered folders directly (no extra top folder); CRC test; result logged.
 """
 import os, sys, json, shutil, zipfile, argparse, glob, subprocess
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -35,7 +35,7 @@ def main():
     ok = subprocess.run(cmd).returncode == 0
     if ok:   # second pass: regenerate the check log (now with this run's delivery check) and build the delivery folder again
         if dcmd: subprocess.run(dcmd, check=True); ok = subprocess.run(cmd).returncode == 0
-    top = f'{date}_{load_i18n(spec.get("language", "en"))["delivery"]["package"]}_{slug}'; folder = os.path.join(outdir, top); zpath = os.path.join(outdir, f'{top}.zip')
+    top = f'{load_i18n(spec.get("language", "en"))["delivery"]["package"]}_{slug}'; folder = os.path.join(outdir, top); zpath = os.path.join(outdir, f'{top}.zip')   # no date in folder or ZIP name
     pkg_word = load_i18n(spec.get('language', 'en'))['delivery']['package']
     for old in glob.glob(os.path.join(outdir, f'*_{pkg_word}_{slug}.zip')): os.remove(old)   # no stray ZIPs of THIS piece from earlier runs (exact title, so 'Ave' never removes 'Ave_Maria')
     bad, n = 'no delivery folder', 0

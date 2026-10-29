@@ -2,6 +2,8 @@
 
 [English](README.md) | Deutsch
 
+## Hören, üben, sicher singen.
+
 **Dokumentation eines agentischen KI-Musik-Workflows und -Skills als privates Code-Experiment, entwickelt für und mit Claude Code. Es handelt sich ausschließlich um einen Proof of Concept.** Das Beispiel hier, choir-practice, macht aus Chornoten ein geprüftes ZIP, in dem jede Stimme ihre eigenen Aufnahmen zum Üben findet, fertig zum Weitergeben.
 
 **Website mit Beispielpaket und Player:** https://vbth.github.io/choir-practice/
@@ -38,7 +40,7 @@
 MP3-Titel, Dateinamen, PDFs und Protokolle folgen der Sprache der Unterhaltung (Deutsch und Englisch eingebaut, siehe [README.md](README.md)). Ein ZIP, benannt wie der oberste Ordner:
 
 ```text
-<Datum>_Chor_Uebungen_<Titel>/
+Chor_Uebungen_<Titel>/
 ├─ 1_Noten/
 │  ├─ 1_Noten_<Titel>_Scan.pdf
 │  ├─ 2_Noten_<Titel>.pdf
