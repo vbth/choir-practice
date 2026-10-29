@@ -325,8 +325,8 @@ def page(L):
  <div class="cols">{rights}</div>
 </section>
 <section id="{I['lizenz']}"><h2><span class="num">05</span>{esc(t['lic_h'])}</h2>
- <p class="intro">{esc(t['lic_p'])} <a href="{GH}/blob/main/LICENSE">{esc(t['lic_link'])}</a></p>
  <p class="intro">{esc(t['lic_third'])} <a href="{GH}/blob/main/choir-practice/THIRD_PARTY_NOTICES.md">{esc(t['lic_third_link'])}</a></p>
+ <p class="intro">{esc(t['lic_p'])} <a href="{GH}/blob/main/LICENSE">{esc(t['lic_link'])}</a></p>
 </section>
 </main>
 <footer><span class="aitag">{ai}<span>{esc(t['ai'])}, {YEAR}</span></span><p class="fnote"><span class="fl"><a href="{GH}" aria-label="{esc(t['foot_profile'])}">{GHICON}</a></span> {esc(t['foot_note'])}</p></footer>
