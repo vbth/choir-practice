@@ -270,11 +270,11 @@
       "tutti_note": "File 6 is the same for all voices and therefore lies in every voice ZIP."
     }
   },
-  "proj_note": "choir-practice – Proof of concept AI music workflow/skill developed for/by Claude Code.",
-  "ai_note": "AI-generated. Observe copyright and licence rights. Use at your own risk.",
-  "ai_note_info": "AI-generated. Observe copyright and licence rights. Use at your own risk.",
+  "proj_note": "choir-practice – AI music workflow and skill for Claude Code.",
+  "ai_note": "AI-generated. Copyright and licence rights without warranty.",
+  "ai_note_info": "AI-generated. Copyright and licence rights without warranty.",
   "ai_tag": "AI-generated",
-  "ai_meta": "AI-generated. Observe copyright and licence rights. Use at your own risk.",
+  "ai_meta": "AI-generated. Copyright and licence rights without warranty.",
   "skill_name": "choir-practice",
   "made_with": "Made with the skill \"{name}\".",
   "delivery": {

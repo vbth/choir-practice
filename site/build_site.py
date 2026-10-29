@@ -73,7 +73,7 @@ T = {
   'h1': 'Hören, üben, sicher singen.',
   'lead': 'Dokumentation eines agentischen KI-Musik-Workflows und -Skills als privates Code-Experiment, entwickelt für und mit Claude Code. Es handelt sich ausschließlich um einen Proof of Concept. Das Beispiel hier: Aus Chornoten entsteht ein geprüftes ZIP, in dem jede Stimme ihre eigenen Aufnahmen zum Üben findet, fertig zum Weitergeben.',
   'cta': 'Beispiel-ZIP ansehen',
-  'foot_ai': 'KI-generiert.', 'foot_rest': 'KI-Musik-Workflow/-Skill, Nutzung auf eigene Gefahr', 'foot_site': 'Startseite',
+  'ai': 'KI-generiert. Urheber- und Lizenzrechte ohne Gewähr.', 'foot_note': 'choir-practice – KI-Musik-Workflow und -Skill für Claude Code.', 'foot_site': 'Startseite',
   'facts': [('4', 'Stufen je Stimme'), ('2', 'Klänge: Chor und Klavier'), ('2', 'Fassungen: normal und langsam'), ('42', 'Aufnahmen im Beispiel')],
   'inh_h': 'Inhalte', 'paket_h': 'Beispiel-ZIP', 'paket_p': 'Im ZIP liegen vier Ordner. Die Stimmen-ZIPs in 2_Ueben sind fertig zum Weitergeben, ihr Inhalt steht zuletzt. Einen Ordner anklicken.',
   'tree': [
@@ -139,7 +139,7 @@ T = {
   'h1': 'Listen, practise, sing with confidence.',
   'lead': 'Documentation of an agentic AI music workflow and skill as a private code experiment, developed for and with Claude Code. This is a proof of concept only. The example here: a choir score becomes a checked ZIP in which every voice finds its own recordings to practise with, ready to share.',
   'cta': 'See the example ZIP',
-  'foot_ai': 'AI-generated.', 'foot_rest': 'AI music workflow/skill, use at your own risk', 'foot_site': 'Home page',
+  'ai': 'AI-generated. Copyright and licence rights without warranty.', 'foot_note': 'choir-practice – AI music workflow and skill for Claude Code.', 'foot_site': 'Home page',
   'facts': [('4', 'stages per voice'), ('2', 'sounds: choir and piano'), ('2', 'versions: normal and slow'), ('42', 'recordings in the example')],
   'inh_h': 'Contents', 'paket_h': 'Example ZIP', 'paket_p': 'The ZIP holds four folders. The voice ZIPs in 2_Practice are ready to hand out, their contents are listed last. Click a folder.',
   'tree': [
@@ -366,7 +366,7 @@ def page(L):
  <p class="intro wide">{esc(t['lic_p'])} <a href="{GH}/blob/main/LICENSE.md">{esc(t['lic_link'])}</a>, {esc(t['lic_third'])} <a href="{GH}/blob/main/choir-practice/THIRD_PARTY_NOTICES.md">{esc(t['lic_third_link'])}</a></p>
 </section>
 </main>
-<footer><p class="fnote"><a class="ail" href="{SITE}{'en/' if L=='en' else ''}" aria-label="{esc(t['foot_site'])}">{ai}</a><span>{YEAR} {esc(t['foot_ai'])} <a href="{GH}">choir-practice</a> – {esc(t['foot_rest'])}</span><a class="fl" href="{GH}" aria-label="{esc(t['foot_profile'])}">{GHICON}</a></p></footer>
+<footer><p class="fnote"><a class="fl" href="{GH}" aria-label="{esc(t['foot_profile'])}">{GHICON}</a><span>{esc(t['foot_note']).replace('-Skill', '-&#8288;Skill')}</span></p><p class="fnote"><a class="fl" href="{SITE}{'en/' if L=='en' else ''}" aria-label="{esc(t['foot_site'])}">{ai}</a><span>{YEAR} {esc(t['ai'])}</span></p></footer>
 <script>window.PAGE={json.dumps(data, ensure_ascii=False)};</script>
 <script src="{A}js/site.js?v={asset_version()}"></script>
 </body>
@@ -476,7 +476,7 @@ h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 .cols{display:grid;grid-template-columns:repeat(2,1fr);gap:0 32px}.cols article{border-top:1.5px solid var(--line);padding-top:16px}
 .cols p{margin:0}
 .steps{padding-left:1.4em;max-width:44em}.steps li{margin:0 0 10px}
-footer .fnote{flex:0 0 100%;margin:0;display:flex;align-items:center;gap:10px}footer .fnote .ail,footer .fnote .fl{flex:none;display:flex;align-items:center;color:var(--fg);text-decoration:none}footer .fnote .fl{width:1.6em;justify-content:center}footer .fnote span a{color:inherit}
+footer .fnote{flex:0 0 100%;margin:0;display:flex;align-items:center;gap:10px}footer .fnote .fl{flex:none;display:flex;align-items:center;justify-content:center;width:1.6em;height:1.6em;color:var(--fg);text-decoration:none}footer .fnote .ghi{width:1.6em;height:1.6em}footer .fnote .ailabel{height:1.6em;width:1.6em}
 footer{max-width:var(--max);margin:0 auto;padding:24px var(--gut) 48px;border-top:1.5px solid var(--line);display:flex;flex-wrap:wrap;gap:12px 32px;align-items:center;justify-content:space-between;font-size:var(--fs-s)}
 @media (max-width:900px){.chain{grid-template-columns:repeat(3,1fr)}.cols{grid-template-columns:1fr;row-gap:16px}.tree{grid-template-columns:1fr}}
 @media (max-width:760px){
