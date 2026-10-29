@@ -46,7 +46,7 @@ def md_footer(lang, title, iso=None):
 REPO_URL = 'https://github.com/vbth/choir-practice'   # the GitHub mark in the project line links here
 
 def md_project(lang):
-    """Project line of the Markdown files, one paragraph above the AI footer: [GitHub mark, linked to the repo] "choir-practice – Proof of Concept: ..."."""
+    """Project line of the Markdown files, one paragraph above the AI footer: [GitHub mark, linked to the repo] "choir-practice – Proof of Concept ..."."""
     return (f'<a href="{REPO_URL}"><picture><source media="(prefers-color-scheme: dark)" srcset="{MD_LABEL}github-mark-dark.svg">'
             f'<img src="{MD_LABEL}github-mark.svg" alt="GitHub" height="18" align="absmiddle"></picture></a> ' + load_i18n(lang)['proj_note'])
 
@@ -200,7 +200,7 @@ def rl_footer(c, left_x, right_x, y, size, page, title, lang, iso=None):
         h = size * ICON_H; wd = icon_width(size, 'info'); c.drawImage(ImageReader(io.BytesIO(png)), x, y - h * (1 - ICON_BASE), wd, h, mask='auto'); x += wd + size * 0.5
     c.drawString(x, y, note)
     if page: c.drawRightString(right_x, y, str(page))
-    # project line one line above: [GitHub mark, linked to the repo] choir-practice – Proof of Concept: ...; the text starts in the same column as the AI note
+    # project line one line above: [GitHub mark, linked to the repo] choir-practice – Proof of Concept ...; the text starts in the same column as the AI note
     py = y + size * 1.9; col = icon_width(size, 'info'); pn = load_i18n(lang)['proj_note']
     gh = ImageReader(io.BytesIO(__import__('cairosvg').svg2png(url=os.path.join(os.path.dirname(icon_path('info')), 'github-mark.svg'), output_height=200)))
     g = size * 1.3; c.drawImage(gh, left_x + (col - g) / 2, py - g * 0.18, g, g, mask='auto')
