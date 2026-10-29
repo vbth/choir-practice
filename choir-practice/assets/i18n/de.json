@@ -270,10 +270,10 @@
       "tutti_note": "Datei 6 ist für alle Stimmen gleich und liegt deshalb in jedem Stimmenordner."
     }
   },
-  "ai_note": "KI-generiert, Urheber- und Lizenzrechte beachten, ohne Gewähr",
-  "ai_note_info": "KI-generiert, Urheber- und Lizenzrechte beachten, ohne Gewähr",
+  "ai_note": "KI-generiert. Urheber- und Lizenzrechte vorbehalten. Ohne Gewähr.",
+  "ai_note_info": "KI-generiert. Urheber- und Lizenzrechte vorbehalten. Ohne Gewähr.",
   "ai_tag": "KI-generiert",
-  "ai_meta": "KI-generiert, Urheber- und Lizenzrechte beachten, ohne Gewähr",
+  "ai_meta": "KI-generiert. Urheber- und Lizenzrechte vorbehalten. Ohne Gewähr.",
   "skill_name": "choir-practice",
   "made_with": "Erstellt mit dem Skill „{name}“.",
   "delivery": {

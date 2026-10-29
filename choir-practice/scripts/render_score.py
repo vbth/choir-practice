@@ -202,7 +202,7 @@ def add_header(svg, title, rest, page=None):
     return svg[:k] + txt + svg[k:]
 
 def add_footer(svg, lang, iso):
-    """Footer of the music pages: flush left "[EU label] KI-generiert, Urheber- und Lizenzrechte beachten, ohne Gewähr, YYYY-MM-DD" (the page number is in the header here),
+    """Footer of the music pages: flush left "[EU label] KI-generiert. Urheber- und Lizenzrechte vorbehalten. Ohne Gewähr. YYYY-MM-DD" (the page number is in the header here),
     FOOT_PT like every PDF footer, IBM Plex Sans. Placed inside Verovio's inner scaled SVG, aligned with the music margins."""
     vb = re.search(r'(<svg class="definition-scale"[^>]*viewBox="0 0 (\d+) (\d+)"[^>]*>)', svg)
     if not vb: return svg
@@ -210,7 +210,7 @@ def add_footer(svg, lang, iso):
     VW, VH = int(vb.group(2)), int(vb.group(3))
     fs = int(round(FOOT_PT * 0.352778 * VW / 210))   # FOOT_PT, like every PDF footer
     y = int(VH - VH * FOOT_Y / BASE_H); xl = int(VW * MARG_L / BASE_W); xr = VW - int(VW * MARG_R / BASE_W)
-    note = load_i18n(lang)['ai_note_info'] + ', ' + human_date(lang, iso)
+    note = load_i18n(lang)['ai_note_info'] + ' ' + human_date(lang, iso)
     def width(f): return icon_width(f, 'info') + f * 0.5 + text_width(note, f, 'PlexR') + f * 3
     while width(fs) > (xr - xl) and fs > 6: fs -= 1   # long titles: shrink instead of colliding
     def t(x, anchor, txt):

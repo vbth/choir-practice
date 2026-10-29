@@ -62,7 +62,7 @@ def main():
                 T(x, (y - r - 4) if (p == 0 or abs(p) > 0.9) else (y + r + 12), f'{db}', 10, 400, 'middle')
             o.append(f'<circle cx="{cx:.1f}" cy="{ay:.1f}" r="15" fill="{ACCENT}"/>'); T(cx, ay + 4, own, 10, 700, 'middle', 'white')
     # footer (identical on every PDF): [EU label] AI note, date flush left, FOOT_PT (4 px per mm)
-    lang = spec.get('language', 'en'); FS = FOOT_PT * 0.352778 * 4; dt = human_date(lang); note = i18['ai_note_info'] + ', ' + dt; yb = H - 46
+    lang = spec.get('language', 'en'); FS = FOOT_PT * 0.352778 * 4; dt = human_date(lang); note = i18['ai_note_info'] + ' ' + dt; yb = H - 46
     x = M
     o.append(icon_markup(x, yb, FS, 'info')); x += icon_width(FS, 'info') + FS * 0.5
     T(x, yb, note, FS)   # one page: no page number
