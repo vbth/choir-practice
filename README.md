@@ -1,4 +1,4 @@
-<p><img src="docs/img/logo.png" alt="choir-practice logo" width="72" height="72"></p>
+<p><a href="https://vbth.github.io/choir-practice/en/"><img src="docs/img/logo.png" alt="choir-practice logo" width="72" height="72"></a></p>
 
 # choir-practice Skill
 

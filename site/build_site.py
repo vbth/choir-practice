@@ -268,7 +268,7 @@ def page(L):
 <body>
 <a class="skip" href="#start">{esc(t['skip'])}</a>
 <header class="bar">
- <a class="brand" href="#start" aria-label="{esc(t['name'])}"><img src="{A}img/logo.png" alt="" width="46" height="46"><span class="bt"><span class="bn">{esc(t['name'].partition(' ')[0])}</span> {esc(t['name'].partition(' ')[2])}</span></a>
+ <a class="brand" href="{SITE}{'en/' if L=='en' else ''}" aria-label="{esc(t['name'])}"><img src="{A}img/logo.png" alt="" width="46" height="46"><span class="bt"><span class="bn">{esc(t['name'].partition(' ')[0])}</span> {esc(t['name'].partition(' ')[2])}</span></a>
  <button class="theme" type="button" aria-label="{esc(t['theme_to_dark'])}"><svg class="moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 14.6A8.6 8.6 0 0 1 9.4 4 8.6 8.6 0 1 0 20 14.6z"/></svg><svg class="sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></svg></button>
  <a class="lang" href="{other_href}" hreflang="{'en' if L=='de' else 'de'}" lang="{'en' if L=='de' else 'de'}">{other_lbl}</a>
  <button class="burger" type="button" aria-expanded="false" aria-controls="nav">{esc(t['menu_label'])}</button>
