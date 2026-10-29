@@ -35,6 +35,8 @@ command -v fluidsynth >/dev/null || need+=(fluidsynth)
 command -v ffmpeg >/dev/null || need+=(ffmpeg)
 command -v pdftoppm >/dev/null || need+=(poppler-utils)
 [ -f /usr/share/fonts/truetype/dejavu/DejaVuSans.ttf ] || need+=(fonts-dejavu-core)
+PLEX=/usr/share/fonts/truetype/ibm-plex/IBMPlexSans-Regular.ttf; PLEX_USER="$HOME/.fonts/ibm-plex/IBMPlexSans-Regular.ttf"
+[ -f "$PLEX" ] || [ -f "$PLEX_USER" ] || need+=(fonts-ibm-plex)
 [ -f /usr/share/sounds/sf3/MuseScore_General_Full.sf3 ] || need+=(musescore-general-soundfont)
 
 if [ "$MODE" = "--check" ]; then
@@ -46,6 +48,11 @@ else
     ($SUDO apt-get install -y -q "${need[@]}" >/dev/null 2>&1) || ($SUDO apt-get update -q >/dev/null 2>&1 && $SUDO apt-get install -y -q "${need[@]}" >/dev/null 2>&1) || \
       echo "apt install failed (no apt, no rights or no network) – see the report below"
   fi
+  if [ ! -f "$PLEX" ] && [ ! -f "$PLEX_USER" ]; then   # no apt: the fonts zip that every release carries (no fonts in git)
+    FZ="$(mktemp -d)/fonts.zip"
+    (curl -fsSL -o "$FZ" https://github.com/vbth/choir-practice/releases/latest/download/choir-practice-fonts.zip && mkdir -p "$HOME/.fonts/ibm-plex" && python3 -c "import sys,zipfile; zipfile.ZipFile(sys.argv[1]).extractall(sys.argv[2])" "$FZ" "$HOME/.fonts/ibm-plex" && fc-cache -f >/dev/null 2>&1) || \
+      echo "IBM Plex Sans could not be installed (apt package fonts-ibm-plex or the fonts zip of the release) – see the report below"
+  fi
   if [ "$MODE" = "--stable" ]; then
     pip install -q --break-system-packages -r "$REQ" 2>/dev/null || pip install -q -r "$REQ" || \
       echo "pip install of the tested versions FAILED (for example no ready-made package for this Python) – see the report below"
@@ -53,10 +60,11 @@ else
     PK=$(sed 's/#.*//; s/==.*//' "$REQ" | tr '\n' ' ')
     pip install -q -U --break-system-packages $PK 2>/dev/null || pip install -q -U $PK || echo "pip install of the newest versions FAILED – see the report below"
   fi
-  python3 -c "import verovio,cairosvg,lxml,pypdf,mido,reportlab,PIL,numpy,scipy; print('python ok')" 2>/dev/null || echo "python MISSING: run setup.sh --check for the list"
+  python3 -c "import verovio,cairosvg,lxml,pypdf,mido,reportlab,PIL,numpy,scipy,pydantic; print('python ok')" 2>/dev/null || echo "python MISSING: run setup.sh --check for the list"
   echo "mode: ${MODE#--} $([ "$MODE" = "--stable" ] && echo '(tested versions)' || echo '(newest versions, not tested)')"
   pyreport
 fi
+([ -f "$PLEX" ] || [ -f "$PLEX_USER" ]) && echo "fonts ok (IBM Plex Sans)" || echo "fonts MISSING (IBM Plex Sans: the PDFs cannot be built)"
 for c in fluidsynth ffmpeg pdftoppm; do command -v $c >/dev/null && echo "$c ok" || echo "$c MISSING"; done
 python3 "$HERE/check_third_party.py" --brief 2>&1 | tail -3   # third-party rights: every installed component must be named in THIRD_PARTY_NOTICES.md
 ([ -f /usr/share/sounds/sf3/MuseScore_General_Full.sf3 ] && echo "soundfont ok (MuseScore General Full)") || ([ -f /usr/share/sounds/sf2/FluidR3_GM.sf2 ] && echo "soundfont fallback FluidR3_GM (lower quality – report this)") || echo "soundfont MISSING"
