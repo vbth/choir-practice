@@ -4,9 +4,7 @@
 
 ## Deine Chorstimme. Deine Noten.<br>Überall lesen, hören und singen.
 
-**Dokumentation eines agentischen KI-Musik-Workflows und -Skills entwickelt für und mit Claude Code als privates Code-Experiment.**
-
-Es handelt sich ausschließlich um einen „Proof of Concept“. Aus Chornoten entsteht am Ende ein „KI-⁠geprüftes“ ZIP, in dem sich für jede Stimme 10 Aufnahmen zum Üben befinden.
+**Dokumentation eines agentischen KI-Musik-Workflows und -Skills entwickelt für und mit Claude Code als privates Code-Experiment.** Es handelt sich ausschließlich um einen „Proof of Concept“. Aus Chornoten entsteht am Ende ein „KI-⁠geprüftes“ ZIP, in dem sich für jede Stimme 10 Aufnahmen zum Üben befinden.
 
 **Website mit Beispielpaket und Player:** https://vbth.github.io/choir-practice/
 

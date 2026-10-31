@@ -4,9 +4,7 @@ English | [Deutsch](README.de.md)
 
 ## Your voice. Your sheet music.<br>Read, listen, and sing anywhere.
 
-**Documentation of an agentic AI music workflow and skill developed for and with Claude Code as a private code experiment.**
-
-This is a “proof of concept” only. In the end, a choir score becomes an “AI-checked” ZIP containing 10 practice recordings for every voice.
+**Documentation of an agentic AI music workflow and skill developed for and with Claude Code as a private code experiment.** This is a “proof of concept” only. In the end, a choir score becomes an “AI-checked” ZIP containing 10 practice recordings for every voice.
 
 **Website with example pack and player:** https://vbth.github.io/choir-practice/
 
