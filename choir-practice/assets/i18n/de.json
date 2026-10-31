@@ -98,6 +98,7 @@
       "Die eigene Stimme steht immer in der Mitte; die MIDI-Dateien enthalten dieselben Lautstärke- und Panoramawerte.",
       "Solo und Mit Begleitung (Nr. 1 bis 4) gibt es zusätzlich langsam ({slow_pct} % Tempo, im Dateinamen „{slow}“). Vor der Musik erklingt der eigene Anfangston, danach eine kurze Pause; Datei 6 (Tutti) beginnt mit den Anfangstönen aller Stimmen nacheinander (von unten nach oben). Zwischen den Strophen liegt eine kurze Pause."
     ],
+    "sound_choir_sf": "Chorklang: Soundfont {choir_sf}, vom Nutzer hinzugefügt und nicht Teil des Skills; die Lizenz ist nicht geprüft.",
     "ai_h": "Hinweis zur Entstehung",
     "ai_text": "Die Noten wurden aus der Vorlage (Scan) mit KI-Unterstützung transkribiert, zweifach gegen die Vorlage korrigiert und mit Verovio (verovio.org) gesetzt. Die Korrekturen stehen im Korrekturprotokoll. Der Klang entsteht durch Software-Synthese mit einem Soundfont, nicht durch generative KI. Die Übe-Dateien sind rein mechanisch und notengetreu; sie ersetzen keine Interpretation. Vorlage, Entscheidungen und Freigaben liegen bei Menschen. Ohne Gewähr: im Zweifel gilt die Vorlage.",
     "score_h": "Noten",
@@ -366,6 +367,10 @@
     [
       "^(\\d+) files$",
       "\\1 Dateien"
+    ],
+    [
+      "^(\\d+) audio/MIDI files, soundfont (\\S+), (-?\\d+) LUFS \\(choir soundfont (\\S+)\\)$",
+      "\\1 Audio- und MIDI-Dateien, Soundfont \\2, \\3 LUFS (Chor-Soundfont \\4)"
     ],
     [
       "^(\\d+) audio/MIDI files, soundfont (\\S+), (-?\\d+) LUFS",
