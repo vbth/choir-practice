@@ -125,8 +125,8 @@ T = {
    ('Rechte', 'Bevor Noten verarbeitet werden, fragt der Skill nach den Rechten. Diese Angaben werden danach in der README-Datei vermerkt. Ob die Noten verarbeitet und weitergegeben werden dürfen, richtet sich nach dem Urheber- und Lizenzrecht, unter dem sie stehen.'),
    ('KI-Kennzeichnung', 'Alles, was der Skill erzeugt, ist als KI-Inhalt gekennzeichnet, sowohl mit dem EU-Label für KI-generierte Inhalte als auch im Text und in den Metadaten der Dokumente.'),
   ],
-  'lic_h': 'Lizenzen', 'lic_p': 'Der Skill steht unter der', 'lic_link': 'PolyForm Noncommercial License 1.0.0',
-  'lic_third': 'und nutzt Inhalte von', 'lic_third_link': 'Drittanbietern', 'foot_profile': 'GitHub-Repository vbth/choir-practice', 'private': 'privates Projekt', 'og_alt': 'Ein Mann mit Kopfhörern steht in einer alten Badewanne und singt vom Notenblatt, neben ihm schwimmt eine Quietscheente, rote Noten schweben im Raum',
+  'lic_h': 'Lizenzen', 'lic_link': 'PolyForm Noncommercial License 1.0.0', 'lic_p': ', frei für nichtkommerzielle Nutzung.',
+  'lic_third_link': 'Komponenten von Drittanbietern', 'foot_profile': 'GitHub-Repository vbth/choir-practice', 'private': 'privates Projekt', 'og_alt': 'Ein Mann mit Kopfhörern steht in einer alten Badewanne und singt vom Notenblatt, neben ihm schwimmt eine Quietscheente, rote Noten schweben im Raum',
   'alt_cover': 'Deckblatt des Beispielpakets', 'alt_page1': 'Erste Notenseite des Beispielpakets', 'alt_page2': 'Zweite Notenseite des Beispielpakets', 'alt_ai': 'EU-Label AI',
   'ai_label': 'AI', 'top': 'Nach oben',
  },
@@ -191,8 +191,8 @@ T = {
    ('Rights', 'Before scores are processed, the skill asks about the rights. These details are then recorded in the README file. Whether the scores may be processed and passed on depends on the copyright and licence law they are subject to.'),
    ('AI labelling', 'Everything the skill creates is labelled as AI content, both with the EU label for AI-generated content and in the text and metadata of the documents.'),
   ],
-  'lic_h': 'Licences', 'lic_p': 'The skill is licensed under the', 'lic_link': 'PolyForm Noncommercial License 1.0.0',
-  'lic_third': 'and uses content from', 'lic_third_link': 'third parties', 'foot_profile': 'GitHub repository vbth/choir-practice', 'private': 'private project', 'og_alt': 'A man with headphones stands in an old bathtub and sings from a sheet of music, a rubber duck floats beside him, red notes drift through the room',
+  'lic_h': 'Licences', 'lic_link': 'PolyForm Noncommercial License 1.0.0', 'lic_p': ', free for non-commercial use.',
+  'lic_third_link': 'Third-party components', 'foot_profile': 'GitHub repository vbth/choir-practice', 'private': 'private project', 'og_alt': 'A man with headphones stands in an old bathtub and sings from a sheet of music, a rubber duck floats beside him, red notes drift through the room',
   'alt_cover': 'Title page of the example pack', 'alt_page1': 'First score page of the example pack', 'alt_page2': 'Second score page of the example pack', 'alt_ai': 'EU label AI',
   'ai_label': 'AI', 'top': 'Back to top',
  },
@@ -363,7 +363,7 @@ def page(L):
  <div class="cols">{rights}</div>
 </section>
 <section id="{I['lizenz']}"><h2><span class="num">05</span>{esc(t['lic_h'])}</h2>
- <p class="intro wide">{esc(t['lic_p'])} <a href="{GH}/blob/main/LICENSE.md">{esc(t['lic_link'])}</a> {esc(t['lic_third'])} <a href="{GH}/blob/main/choir-practice/THIRD_PARTY_NOTICES.md">{esc(t['lic_third_link'])}</a>.</p>
+ <p class="intro wide"><a href="{GH}/blob/main/LICENSE.md">{esc(t['lic_link'])}</a>{esc(t['lic_p'])} <a href="{GH}/blob/main/choir-practice/THIRD_PARTY_NOTICES.md">{esc(t['lic_third_link'])}</a>.</p>
 </section>
 </main>
 <footer><p class="fnote"><a class="fl" href="{GH}" aria-label="{esc(t['foot_profile'])}">{GHICON}</a><span>{esc(t['foot_note']).replace('-Skill', '-&#8288;Skill')}</span></p><p class="fnote"><a class="fl" href="{SITE}{'en/' if L=='en' else ''}" aria-label="{esc(t['foot_site'])}">{ai}</a><span>{YEAR} {esc(t['ai'])}</span></p></footer>
