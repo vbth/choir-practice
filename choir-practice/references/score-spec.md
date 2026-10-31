@@ -23,7 +23,7 @@
 | `voices` | list of `{"id", "name", "clef", "abbr"?, "voice_type"?}`; clef: `treble`, `treble8` (tenor), `bass`, `alto`, `tenor`; voice_type for range checks if the name is unusual |
 | `seating` | voice IDs left → right as the choir stands (default: order of voices) |
 | `melody` | ID of the voice carrying the melody (stage 2) |
-| `rights` | `{"status": "public_domain"\|"licensed"\|"own"\|"unclear", "use": "rehearsal"\|"commercial", "reference"?, "note"?, "notice"?}` – asked at Stop A; `notice` = © line printed in the source, unchanged; commercial use with `unclear` (or `licensed` without `reference`) is allowed but triggers a clear warning |
+| `rights` | `{"status": "public_domain"\|"licensed"\|"own"\|"unclear", "reference"?, "note"?, "notice"?, "permission"?: {"by", "date" (ISO)}, "licence"?: {"name", "url"}}` – asked at Stop A (`permission` only for `licensed`, `licence` only for `public_domain`); `notice` = © line printed in the source, unchanged; `unclear` with no `reference`, `note` or `notice` = no information: nothing about rights is written anywhere |
 | `music` | `{voice id: [bar strings]}` – one string per bar, same number of bars for every voice |
 | `lyrics` | see 3 |
 | `directions` | see 4 |
