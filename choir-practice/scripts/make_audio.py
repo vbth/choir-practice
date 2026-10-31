@@ -28,7 +28,6 @@ import mido
 from lxml import etree
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from common import load_i18n, safe, log_check, derive_playback
-from check_music import voice_type
 
 SF_CANDIDATES = ['/usr/share/sounds/sf3/MuseScore_General_Full.sf3', '/usr/share/sounds/sf3/MuseScore_General.sf3',
                  '/usr/share/sounds/sf2/FluidR3_GM.sf2']
@@ -38,13 +37,6 @@ REVERB = {'on': True, 'rt': 1.3, 'wet': 0.30}
 LUFS = -19
 SLOW_PCT = 75
 PROG = {'choir': 52, 'piano': 0}            # GM program, 0-based
-# Optional choir soundfonts the user adds by hand (--choir-soundfont); they are not shipped with the skill. Recognised by the name
-# stored inside the file (INAM). Program numbers (0-based) of the presets for each voice type; the MIDI files for the user keep GM
-# program 52, the presets are only used to render the MP3 stems.
-CHOIR_SF = None
-CHOIR_SF_PRESETS = {
-    'chorMaleFem': {'soprano': 2, 'mezzo': 2, 'alto': 2, 'tenor': 0, 'baritone': 0, 'bass': 0},    # 0 male, 1 mix, 2 female
-    'VocalsPapel': {'soprano': 0, 'mezzo': 0, 'alto': 1, 'tenor': 2, 'baritone': 3, 'bass': 3}}    # one preset per voice
 TPQ = 480
 VEL = {'ppp': 35, 'pp': 45, 'p': 58, 'mp': 70, 'mf': 82, 'f': 96, 'ff': 110, 'fff': 120}
 STEP = {'C': 0, 'D': 2, 'E': 4, 'F': 5, 'G': 7, 'A': 9, 'B': 11}
@@ -188,12 +180,10 @@ def write_midi(path, score, tracks, tempo_q, clicks, start, intro=None):
     msgs0 = []
     if intro:
         keys, prog_ = intro
-        progs = prog_ if isinstance(prog_, list) else [prog_] * len(keys)       # one program per note (tutti with per-voice presets)
         n_len = sec2ticks(INTRO['note_s'], tempo_q); g_len = sec2ticks(INTRO['note_gap_s'], tempo_q); t = 0
-        if not keys: msgs0 += [(0, 1, mido.Message('program_change', channel=14, program=progs[0] if progs else 0))]
-        for k, pg in zip(keys, progs):
-            msgs0 += [(t, 1, mido.Message('program_change', channel=14, program=pg)),
-                      (t, 2, mido.Message('note_on', channel=14, note=k, velocity=85)), (t + n_len, 0, mido.Message('note_off', channel=14, note=k, velocity=0))]
+        msgs0 += [(0, 1, mido.Message('program_change', channel=14, program=prog_))]
+        for k in keys:
+            msgs0 += [(t, 2, mido.Message('note_on', channel=14, note=k, velocity=85)), (t + n_len, 0, mido.Message('note_off', channel=14, note=k, velocity=0))]
             t += n_len + g_len
         shift = (t - g_len if keys else 0) + sec2ticks(INTRO['gap_s'], tempo_q)
     for k, c in enumerate(clicks):
@@ -216,16 +206,9 @@ def write_midi(path, score, tracks, tempo_q, clicks, start, intro=None):
     return shift
 
 # ---------- audio -----------------------------------------------------------------------------------
-def sf2_name(path):
-    """Name (INAM) stored in the INFO block of an .sf2 file, or '' if there is none."""
-    with open(path, 'rb') as f:
-        head = f.read(1 << 16)
-    i = head.find(b'INAM')
-    return head[i + 8:i + 8 + int.from_bytes(head[i + 4:i + 8], 'little')].split(b'\0')[0].decode('latin1').strip() if i >= 0 else ''
-
-def render(mid, wav, mono=False, sf=None):
+def render(mid, wav, mono=False):
     tmp = wav + '.st.wav' if mono else wav
-    subprocess.run(['fluidsynth', '-ni', '-r', '44100', '-F', tmp, sf or SF, mid], check=True, capture_output=True)
+    subprocess.run(['fluidsynth', '-ni', '-r', '44100', '-F', tmp, SF, mid], check=True, capture_output=True)
     if mono:
         subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', tmp, '-af', 'pan=mono|c0=0.5*c0+0.5*c1', wav], check=True); os.remove(tmp)
 
@@ -286,14 +269,11 @@ def stages(seat, melody):
     return out
 
 def main():
-    global SF, IR, SLOW_PCT, CHOIR_SF
-    sfn = None
+    global SF, IR, SLOW_PCT
     ap = argparse.ArgumentParser(); ap.add_argument('xml'); ap.add_argument('spec'); ap.add_argument('outdir')
     ap.add_argument('--slug', required=True); ap.add_argument('--workdir'); ap.add_argument('--no-reverb', action='store_true')
     ap.add_argument('--slow-pct', type=int, default=SLOW_PCT, help='tempo of the slow versions in %% of the normal tempo (10 to 95, default %(default)s)')
     ap.add_argument('--soundfont'); ap.add_argument('--only', help='trial run: stage:voice, e.g. accomp:B2 (no tutti, normal tempo)')
-    ap.add_argument('--choir-soundfont', help='optional soundfont for the choir sound: chorMaleFem.sf2 or VocalsPapel.sf2 (not shipped, see README); '
-                    'the piano sound keeps the normal soundfont')
     A = ap.parse_args()
     if A.no_reverb: REVERB['on'] = False
     if not 10 <= A.slow_pct <= 95: sys.exit('--slow-pct must be between 10 and 95')
@@ -301,17 +281,6 @@ def main():
     if A.soundfont: SF = A.soundfont
     spec = json.load(open(A.spec, encoding='utf-8')); i18 = load_i18n(spec.get('language', 'en'))
     vids = [v['id'] for v in spec['voices']]; vname = {v['id']: v['name'] for v in spec['voices']}
-    if A.choir_soundfont:
-        if not os.path.isfile(A.choir_soundfont): sys.exit(f'--choir-soundfont: file not found: {A.choir_soundfont}')
-        sfn = sf2_name(A.choir_soundfont)
-        if sfn not in CHOIR_SF_PRESETS: sys.exit(f'--choir-soundfont: "{sfn or os.path.basename(A.choir_soundfont)}" is not supported; supported: ' + ', '.join(CHOIR_SF_PRESETS))
-        CHOIR_SF = A.choir_soundfont
-        vtype = {v['id']: voice_type(v) for v in spec['voices']}
-        bad = [i for i in vids if vtype[i] not in CHOIR_SF_PRESETS[sfn]]
-        if bad: sys.exit(f'--choir-soundfont {sfn}: voice type unknown for {", ".join(bad)} – set "voice_type" (soprano, mezzo, alto, tenor, baritone, bass) in score.json')
-        choir_prog = {i: CHOIR_SF_PRESETS[sfn][vtype[i]] for i in vids}
-    rprog = lambda sk, v: choir_prog[v] if (sk == 'choir' and CHOIR_SF) else PROG[sk]    # program for rendering the stems
-    sf_of = lambda sk: CHOIR_SF if (sk == 'choir' and CHOIR_SF) else SF
     seat = spec.get('seating') or vids; melody = spec.get('melody'); idx = {v: k for k, v in enumerate(vids)}
     tempo = spec.get('tempo', {}); bpm = tempo.get('bpm'); beat = tempo.get('beat') or 'quarter'
     if not bpm: sys.exit('tempo.bpm missing in score.json – decide it (references/musical-defaults.md) and get it approved')
@@ -334,9 +303,8 @@ def main():
     for tname, tq in tempos.items():
         # mono stems per sound (with intro shift so that all stems line up), click and intro stems
         stems = {}
-        for sk in PROG:
+        for sk, prog in PROG.items():
             for v in vids:
-                prog = rprog(sk, v)
                 m = os.path.join(work, f'{tname}_{sk}_{v}.mid')
                 write_midi(m, score, [(idx[v], 127, 64, prog)], tq, [], start, intro=(own_keys(v), prog))
                 # remove intro notes from the voice stem (intro is rendered separately)
@@ -345,7 +313,7 @@ def main():
                     for j, msg in enumerate(tr):
                         if msg.type in ('note_on', 'note_off') and msg.channel in (14, 15): tr[j] = msg.copy(velocity=0)
                 mm.save(m)
-                w = os.path.join(work, f'{tname}_{sk}_{v}.wav'); render(m, w, mono=True, sf=sf_of(sk)); stems[(sk, v)] = w
+                w = os.path.join(work, f'{tname}_{sk}_{v}.wav'); render(m, w, mono=True); stems[(sk, v)] = w
         # the click stem must use the SAME intro length as the voice stems (one starting note + gap), otherwise
         # the count-in starts too early; the intro notes themselves are muted below
         click_in = []   # click stem only when COUNT_IN is on (an empty MIDI would render a useless silent stem)
@@ -358,13 +326,11 @@ def main():
             mm.save(cm); click = os.path.join(work, f'{tname}_click.wav'); render(cm, click, mono=True)
             click_in = [(click, 0.0, -6)]
         intro_w = {}
-        for sk in PROG:
-            key_prog = {first[v]: rprog(sk, v) for v in reversed(vids) if first[v]}     # starting note -> program (tutti intro, per-voice presets)
+        for sk, prog in PROG.items():
             for v in vids + [None]:
                 im_ = os.path.join(work, f'{tname}_intro_{sk}_{v}.mid')
-                intro = (own_keys(v), rprog(sk, v)) if v else (tutti_keys, [key_prog[k] for k in tutti_keys])
-                write_midi(im_, score, [], tq, [], start, intro=intro)
-                w = os.path.join(work, f'{tname}_intro_{sk}_{v}.wav'); render(im_, w, mono=True, sf=sf_of(sk)); intro_w[(sk, v)] = w
+                write_midi(im_, score, [], tq, [], start, intro=(own_keys(v) if v else tutti_keys, prog))
+                w = os.path.join(work, f'{tname}_intro_{sk}_{v}.wav'); render(im_, w, mono=True); intro_w[(sk, v)] = w
         for sk, prog in PROG.items():
             for stage, table in V.items():
                 if tname == 'slow' and stage == 'choir': continue
@@ -393,11 +359,11 @@ def main():
     json.dump({'seating': seat, 'melody': melody, 'names': vname,
                'stages': {k: {o: [list(x) for x in lay] for o, lay in t.items()} for k, t in V.items()},
                'tempo': {'bpm': bpm, 'beat': beat, 'text': tempo.get('text'), 'slow_pct': SLOW_PCT},
-               'levels': LV, 'lufs': LUFS, 'soundfont': os.path.basename(SF), 'choir_soundfont': sfn if CHOIR_SF else None, 'reverb': REVERB,
+               'levels': LV, 'lufs': LUFS, 'soundfont': os.path.basename(SF), 'reverb': REVERB,
                'intro': INTRO, 'files': made}, open(os.path.join(out, 'mixes.json'), 'w'), ensure_ascii=False, indent=1)
     shutil.rmtree(work, ignore_errors=True)
-    print(f'{made} files | tempo {bpm} {beat} (slow {SLOW_PCT} %) | soundfont {os.path.basename(SF)}' + (f' + choir soundfont {sfn}' if CHOIR_SF else '') + f' | {LUFS} LUFS')
-    if A.workdir: log_check(A.workdir, 5, 'make_audio', 'pass', f'{made} audio/MIDI files, soundfont {os.path.basename(SF)}, {LUFS} LUFS' + (f' (choir soundfont {sfn})' if CHOIR_SF else ''))
+    print(f'{made} files | tempo {bpm} {beat} (slow {SLOW_PCT} %) | soundfont {os.path.basename(SF)} | {LUFS} LUFS')
+    if A.workdir: log_check(A.workdir, 5, 'make_audio', 'pass', f'{made} audio/MIDI files, soundfont {os.path.basename(SF)}, {LUFS} LUFS')
 
 if __name__ == '__main__':
     main()
