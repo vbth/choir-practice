@@ -3,6 +3,7 @@
 All notable changes to the skill. Newest first. Versions follow [SemVer](https://semver.org/); every release is a git tag `vX.Y.Z` with a GitHub release that carries the `.skill` file.
 
 ## Unreleased
+- Website: links are no longer underlined (also the language link in the header on hover); on mouse-over a link turns black (white in dark mode, i.e. the text colour)
 - Website: German example previews (cover and both music pages) re-rendered with the current footer "KI-generiert. Nutzung auf eigene Verantwortung."; only the footer line differs, the English previews are unchanged
 - `site/README.md`: section "Hosting (GitHub Pages)" (source `main` `/docs`, no Pages or Jekyll workflow, why)
 - Website: the menu collapses into the burger button only below 900 px (was 960 px; the full navigation fits down to about 860 px in German and 900 px in English); in the collapsed header the theme switch and the burger button sit at the right edge instead of next to the title

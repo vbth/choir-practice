@@ -384,7 +384,7 @@ CSS = r'''@font-face{font-family:"IBM Plex Sans";font-weight:400;font-style:norm
 html{scroll-behavior:smooth}
 p,li,figcaption{text-wrap:pretty}
 body{margin:0;background:var(--bg);color:var(--fg);font:400 var(--fs)/1.55 "IBM Plex Sans",Helvetica,Arial,sans-serif;-webkit-text-size-adjust:100%}
-a{color:var(--link);text-decoration:underline;text-underline-offset:.18em;text-decoration-thickness:1.5px}
+a{color:var(--link);text-decoration:none}a:hover{color:var(--fg)}
 .mono{font-family:"IBM Plex Sans Condensed","IBM Plex Sans",sans-serif}
 .skip{position:absolute;left:-999px}.skip:focus{left:16px;top:8px;background:var(--bg);padding:8px;z-index:20}
 :focus-visible{outline:2px solid var(--fg);outline-offset:3px}
@@ -397,7 +397,7 @@ a{color:var(--link);text-decoration:underline;text-underline-offset:.18em;text-d
 .fl{display:flex;flex-wrap:wrap;align-items:center;gap:0}.fl a{display:flex;align-items:center;gap:8px;color:var(--fg);text-decoration:none}.fl .ghi{width:20px;height:20px}
 .theme{order:98;display:flex;align-items:center;background:none;border:0;color:var(--fg);padding:6px;cursor:pointer;line-height:0}
 .theme svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.theme .sun{display:none}.theme.is-dark .sun{display:block}.theme.is-dark .moon{display:none}
-.lang{order:99;color:var(--fg);text-decoration:none;padding:6px 9px;font-size:var(--fs-s)}.lang:hover{text-decoration:underline;text-underline-offset:.18em}
+.lang{order:99;color:var(--fg);text-decoration:none;padding:6px 9px;font-size:var(--fs-s)}
 .burger{display:none;margin-left:auto;background:none;color:var(--fg);border:1.5px solid var(--line);padding:6px 12px;font:inherit;font-size:var(--fs-s)}
 main{max-width:var(--max);margin:0 auto;padding:0 var(--gut)}
 section{padding:64px 0 56px;border-top:1.5px solid var(--line)}
