@@ -2,7 +2,7 @@
 
 English | [Deutsch](README.de.md)
 
-## Your choir voice. Read, listen, practise anywhere.
+## Your choir voice.<br>Read, listen, practise anywhere.
 
 **Documentation of an agentic AI music workflow and skill developed for and with Claude Code as a private code experiment.**
 

@@ -310,7 +310,7 @@ def page(L):
 <figure class="banner"><picture><source media="(prefers-color-scheme: dark)" srcset="{A}img/header-dark.png"><img src="{A}img/header.png" alt="{esc(t['og_alt'])}" width="1280" height="640" fetchpriority="high" decoding="async"></picture>
 </figure>
 <section id="start" class="hero">
- <h1>{esc(t['h1'])}</h1>
+ <h1>{esc(t['h1']).replace('. ', '.<br>', 1)}</h1>
  <p class="lead">{'<br><br>'.join(esc(x) for x in t['lead'].split(chr(10) * 2))}</p>
  <p class="cta"><a href="#{I['paket']}">{esc(t['cta'])}</a></p>
  <dl class="facts">{facts}</dl>

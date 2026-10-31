@@ -3,6 +3,7 @@
 All notable changes to the skill. Newest first. Versions follow [SemVer](https://semver.org/); every release is a git tag `vX.Y.Z` with a GitHub release that carries the `.skill` file.
 
 ## Unreleased
+- Headline on two lines: line break after "Deine Chorstimme." / "Your choir voice." on the website (H1; page title unchanged) and in the READMEs
 - Website, section "Lizenzen": one sentence, "Der Skill steht unter der PolyForm Noncommercial License 1.0.0 und nutzt Inhalte von Drittanbietern." (en: "The skill is licensed under the PolyForm Noncommercial License 1.0.0 and uses content from third parties."); the licence name links to the licence text, "Drittanbietern" / "third parties" to the overview
 - German AI note "KI-generiert. Nutzung auf eigene Verantwortung." instead of "… auf eigene Gefahr." (PDF and Markdown footers, metadata of PDF, MP3, MusicXML and MIDI, language pack, website, READMEs); the English note is unchanged
 - Website, section "Lizenzen": two lines, "PolyForm Noncommercial License 1.0.0, Lizenztext lesen" and "Lizenzen von Drittanbietern, zur Übersicht" (en: "…, to the overview")

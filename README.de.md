@@ -6,7 +6,7 @@
 
 [English](README.md) | Deutsch
 
-## Deine Chorstimme. Überall lesen, hören, üben.
+## Deine Chorstimme.<br>Überall lesen, hören, üben.
 
 **Dokumentation eines agentischen KI-Musik-Workflows und -Skills entwickelt für und mit Claude Code als privates Code-Experiment.**
 
