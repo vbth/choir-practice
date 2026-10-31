@@ -28,7 +28,7 @@ FOOT_PT = 8                      # footer size in pt on every PDF: identical eve
 SEP = '\u00a0·\u00a0'              # one space before and after the middle dot
 
 def footer_parts(lang, iso=None, kind='info'):
-    """Footer as (text before the EU AI label, text after it): [label] + "YYYY-MM-DD KI-generiert. Nutzung auf eigene Gefahr." (no middle dot anywhere)."""
+    """Footer as (text before the EU AI label, text after it): [label] + "YYYY-MM-DD KI-generiert. Nutzung auf eigene Verantwortung." (no middle dot anywhere)."""
     note = load_i18n(lang)['ai_note' if kind == 'score' else 'ai_note_info']   # no middle dot anywhere: comma
     return '', f'{human_date(lang, iso)} {note}', kind
 
@@ -37,7 +37,7 @@ DASH = '\u2014'   # em dash: the separator of the footer, with a space on both s
 MD_LABEL = 'https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/'   # EU label for Markdown, linked from the repo (black, white in dark mode)
 
 def md_footer(lang, title, iso=None):
-    """Footer line of the Markdown files = the PDF footer: [EU label, linked from the repo] "YYYY-MM-DD KI-generiert. Nutzung auf eigene Gefahr." (no title),
+    """Footer line of the Markdown files = the PDF footer: [EU label, linked from the repo] "YYYY-MM-DD KI-generiert. Nutzung auf eigene Verantwortung." (no title),
     preceded and followed by one blank line (written by make_docs; the repo READMEs end the same way). Label height 18 px, proportional to ICON_H."""
     return (f'<a href="{SITE_URL}"><picture><source media="(prefers-color-scheme: dark)" srcset="{MD_LABEL}ai-basic-dark.svg">'
             f'<img src="{MD_LABEL}ai-basic.svg" alt="AI" height="18" align="absmiddle"></picture></a> '
@@ -186,7 +186,7 @@ def register_plex():
 
 def rl_footer(c, left_x, right_x, y, size, page, title, lang, iso=None):
     """Footer of every PDF (reportlab), FOOT_PT on every PDF (`size` is ignored), IBM Plex Sans, 100 % black:
-    flush left "[EU label AI GENERATED] YYYY-MM-DD KI-generiert. Nutzung auf eigene Gefahr." (no title), page number flush right (page=None: none, cover page).
+    flush left "[EU label AI GENERATED] YYYY-MM-DD KI-generiert. Nutzung auf eigene Verantwortung." (no title), page number flush right (page=None: none, cover page).
     `title` is accepted for compatibility and not printed."""
     from reportlab.lib.utils import ImageReader
     register_plex()

@@ -73,7 +73,7 @@ T = {
   'h1': 'Deine Chorstimme. Überall lesen, hören, üben.',
   'lead': 'Dokumentation eines agentischen KI-Musik-Workflows und -Skills entwickelt für und mit Claude Code als privates Code-Experiment.\n\nEs handelt sich ausschließlich um einen „Proof of Concept“. Aus Chornoten entsteht am Ende ein „KI-\u2060geprüftes“ ZIP, in dem sich für jede Stimme 10 Aufnahmen zum Üben befinden.',
   'cta': 'Beispiel ansehen',
-  'ai': 'KI-generiert. Nutzung auf eigene Gefahr.', 'foot_note': 'choir-practice – KI-Musik-Workflow/-Skill für Claude.', 'foot_site': 'Startseite',
+  'ai': 'KI-generiert. Nutzung auf eigene Verantwortung.', 'foot_note': 'choir-practice – KI-Musik-Workflow/-Skill für Claude.', 'foot_site': 'Startseite',
   'facts': [('4', 'Stufen je Stimme'), ('2', 'Klänge: Chor und Klavier'), ('2', 'Fassungen: normal und langsam'), ('42', 'Aufnahmen im Beispiel')],
   'inh_h': 'Inhalte', 'paket_h': 'Beispiel', 'paket_p': 'Im ZIP liegen vier Ordner. Die Stimmen-ZIPs in 2_Ueben sind fertig zum Weitergeben, ihr Inhalt steht zuletzt. Einen Ordner anklicken.',
   'tree': [
