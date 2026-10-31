@@ -3,6 +3,7 @@
 All notable changes to the skill. Newest first. Versions follow [SemVer](https://semver.org/); every release is a git tag `vX.Y.Z` with a GitHub release that carries the `.skill` file.
 
 ## Unreleased
+- `make_audio.py --choir-soundfont`: optional community soundfonts for the choir sound, `chorMaleFem` (female preset for soprano/mezzo/alto, male for tenor/baritone/bass) and `VocalsPapel` (one preset per voice); recognised by the name inside the file, not shipped (the user adds them in the chat); the piano sound and the MIDI files (GM program 52) stay unchanged; `mixes.json` gets `choir_soundfont` and the package README names it. Listed in the READMEs (section 7) and as **to check** in `THIRD_PARTY_NOTICES.md` (licence not verified: the origin of the samples, Papelmedia and KBH, is unclear)
 - Website: links are no longer underlined (also the language link in the header on hover); on mouse-over a link turns black (white in dark mode, i.e. the text colour)
 - Website: German example previews (cover and both music pages) re-rendered with the current footer "KI-generiert. Nutzung auf eigene Verantwortung."; only the footer line differs, the English previews are unchanged
 - `site/README.md`: section "Hosting (GitHub Pages)" (source `main` `/docs`, no Pages or Jekyll workflow, why)
