@@ -271,10 +271,10 @@
     }
   },
   "proj_note": "choir-practice – KI-Musik-Workflow/-Skill für Claude.",
-  "ai_note": "KI-generiert. Nutzung auf eigene Gefahr.",
-  "ai_note_info": "KI-generiert. Nutzung auf eigene Gefahr.",
+  "ai_note": "KI-generiert. Nutzung auf eigene Verantwortung.",
+  "ai_note_info": "KI-generiert. Nutzung auf eigene Verantwortung.",
   "ai_tag": "KI-generiert",
-  "ai_meta": "KI-generiert. Nutzung auf eigene Gefahr.",
+  "ai_meta": "KI-generiert. Nutzung auf eigene Verantwortung.",
   "skill_name": "choir-practice",
   "made_with": "Erstellt mit dem Skill „{name}“.",
   "delivery": {

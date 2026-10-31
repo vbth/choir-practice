@@ -249,9 +249,9 @@ def main():
         ht = re.sub(r'\n*<!--.*?-->\n*', '\n\n', ht, flags=re.S)   # author hints of the template do not belong in the package
         open(handoff_dst, 'w', encoding='utf-8').write(ht)
     # AI nomenclature in the metadata of every produced file (checked in the self-check below):
-    #   PDF   Title=<title> Author/Creator/Producer/Keywords="KI-generiert" Subject="KI-generiert. Nutzung auf eigene Gefahr."
-    #   MP3   comment + copyright="KI-generiert. Nutzung auf eigene Gefahr." (title/album/track/artist/date as usual)
-    #   XML   encoding-description + rights="KI-generiert. Nutzung auf eigene Gefahr.", encoding-date
+    #   PDF   Title=<title> Author/Creator/Producer/Keywords="KI-generiert" Subject="KI-generiert. Nutzung auf eigene Verantwortung."
+    #   MP3   comment + copyright="KI-generiert. Nutzung auf eigene Verantwortung." (title/album/track/artist/date as usual)
+    #   XML   encoding-description + rights="KI-generiert. Nutzung auf eigene Verantwortung.", encoding-date
     #   MIDI  copyright + text meta event at tick 0
     from pypdf import PdfWriter
     import mido

@@ -121,7 +121,7 @@ Jede Stimme bekommt ihren eigenen Mix; die eigene Stimme liegt immer in der Mitt
 - Das Modul „Üben“ der Website zeigt die Mixe live am Kopfhörer (Punktgröße = Pegel, Position = links/rechts). Die Übersicht, die für jedes Stück erzeugt wird (`2_Ueben/1_Uebersicht.pdf`), zeigt dieselben Mixe.
 
 ## 5. KI-Kennzeichnung – Wie werden KI-Inhalte markiert?
-Alles, was der Skill erzeugt, ist als KI-generiert gekennzeichnet: das EU-Label „AI“ und der Hinweis „KI-generiert. Nutzung auf eigene Gefahr.“ in der Fußzeile jedes PDFs, derselbe Hinweis in den Metadaten von MP3, MIDI, MusicXML und PDF. Das Label folgt den Symbolen der Europäischen Kommission zur Kennzeichnung KI-generierter Inhalte (siehe [`THIRD_PARTY_NOTICES.md`](https://github.com/vbth/choir-practice/blob/main/choir-practice/THIRD_PARTY_NOTICES.md)).
+Alles, was der Skill erzeugt, ist als KI-generiert gekennzeichnet: das EU-Label „AI“ und der Hinweis „KI-generiert. Nutzung auf eigene Verantwortung.“ in der Fußzeile jedes PDFs, derselbe Hinweis in den Metadaten von MP3, MIDI, MusicXML und PDF. Das Label folgt den Symbolen der Europäischen Kommission zur Kennzeichnung KI-generierter Inhalte (siehe [`THIRD_PARTY_NOTICES.md`](https://github.com/vbth/choir-practice/blob/main/choir-practice/THIRD_PARTY_NOTICES.md)).
 
 ## 6. Grenzen – Was kann er nicht?
 - Claude hört das Audio nicht; es wird technisch geprüft (Dauer gegen das MIDI, Lücken, Übersteuerung, Lautstärke, Stereo). Klang und Geschmack werden nicht beurteilt.
@@ -153,5 +153,5 @@ PolyForm Noncommercial License 1.0.0 ([`LICENSE.md`](LICENSE.md)), frei für nic
 
 <a href="https://github.com/vbth/choir-practice"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/github-mark-dark.svg"><img src="https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/github-mark.svg" alt="GitHub" height="18" align="absmiddle"></picture></a> choir-practice – KI-Musik-Workflow/-⁠Skill für Claude.
 
-<a href="https://vbth.github.io/choir-practice/"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/ai-basic-dark.svg"><img src="https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/ai-basic.svg" alt="AI" height="18" align="absmiddle"></picture></a> 2026-10-29 KI-generiert. Nutzung auf eigene Gefahr.
+<a href="https://vbth.github.io/choir-practice/"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/ai-basic-dark.svg"><img src="https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/ai-basic.svg" alt="AI" height="18" align="absmiddle"></picture></a> 2026-10-29 KI-generiert. Nutzung auf eigene Verantwortung.
 
