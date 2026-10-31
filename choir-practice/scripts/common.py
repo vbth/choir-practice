@@ -47,7 +47,7 @@ def cover_rights_lines(spec, C, lang):
     no © of the skill or the user). Empty list = nothing about rights on the cover.
       own            arranger (Satz) if known; internal-use line
       licensed       permission 'by' + 'date' (ISO) if given; printed notice of the source unchanged; internal-use line
-      public_domain  source (reference); licence of the engraving if the user chose one ({'name', 'url'})
+      public_domain  source (reference) only if the user approved it for the cover ('show_source'); licence of the engraving if the user chose one ({'name', 'url'})
       unclear        nothing"""
     if not has_rights(spec): return []
     rt = spec.get('rights') or {}; st = rt.get('status'); m = spec.get('meta') or {}; out = []
@@ -57,7 +57,7 @@ def cover_rights_lines(spec, C, lang):
         if d and lang == 'de' and len(d) == 10: d = f'{d[8:]}.{d[5:7]}.{d[:4]}'
         out.append(C['permission'].format(by=p['by']) if not d else C['permission_date'].format(by=p['by'], date=d))
     if st == 'public_domain':
-        if rt.get('reference'): out.append(C['source'] + ': ' + rt['reference'])
+        if rt.get('reference') and rt.get('show_source'): out.append(C['source'] + ': ' + rt['reference'])
         lic = rt.get('licence') or {}
         if lic.get('name'): out.append(C['set_licence'].format(name=lic['name'], url=lic.get('url', '')).replace(' ()', ''))
     if rt.get('notice'): out.append(rt['notice'])
