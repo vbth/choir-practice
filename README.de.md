@@ -6,7 +6,7 @@
 
 [English](README.md) | Deutsch
 
-## Deine Stimme. Deine Noten.<br>Überall lesen, hören, üben.
+## Deine Chorstimme. Deine Noten.<br>Überall lesen, hören und singen.
 
 **Dokumentation eines agentischen KI-Musik-Workflows und -Skills entwickelt für und mit Claude Code als privates Code-Experiment.**
 
