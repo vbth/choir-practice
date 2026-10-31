@@ -98,7 +98,6 @@
       "The own voice is always centred; the MIDI files carry the same volume and pan values.",
       "Solo and With accompaniment (no. 1 to 4) also exist slowly ({slow_pct} % tempo, \"{slow}\" in the file name). Before the music the voice's own starting note sounds, then a short pause; file 6 (tutti) starts with the starting notes of all voices one after another (bottom to top). There is a short pause between the verses."
     ],
-    "sound_choir_sf": "Choir sound: soundfont {choir_sf}, added by the user and not part of the skill; its licence has not been verified.",
     "ai_h": "How this was made",
     "ai_text": "The notes were transcribed from the source (scan) with AI assistance, corrected twice against the source and engraved with Verovio (verovio.org). The corrections are listed in the correction log. The sound is software synthesis with a soundfont, not generative AI. The practice files are purely mechanical and exact to the notes; they do not replace an interpretation. The source, decisions and approvals come from people. No guarantee: when in doubt, the source applies.",
     "score_h": "Score",

@@ -97,7 +97,6 @@ def readme_section(lang, spec, docs, mixes, layout):
         t = mixes['tempo']; beat = i.get('beats', {}).get(t['beat'], t['beat'])
         tempo_txt = (f"{t.get('text')}, " if t.get('text') else '') + f"{beat} = {t['bpm']}"
         items = [x.format(soundfont=mixes['soundfont'], lufs=mixes['lufs'], tempo=tempo_txt, slow_pct=t.get('slow_pct', 75), slow=i['slow']) for x in R['sound_items']]
-        if mixes.get('choir_soundfont'): items.append(R['sound_choir_sf'].format(choir_sf=mixes['choir_soundfont']))
         md.append(f"## {R['sound_h']}\n\n" + '\n'.join('- ' + x for x in items) + '\n'); fl += [P(R['sound_h'], H2)] + [P('• ' + esc(x)) for x in items]
     if layout:
         sc = R.get('score_line', 'A4, {pages} pages × {spp} systems, staff space {mm} mm').format(pages=layout['pages'], spp=layout['systems_per_page'], mm=(str(layout['staff_space_mm']) if lang == 'en' else str(layout['staff_space_mm']).replace('.', ',')))
