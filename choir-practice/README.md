@@ -72,7 +72,7 @@ Choir_Practice_<Title>/
 ## 3. Workflow – Which steps are there?
 ```mermaid
 flowchart TD
-    U1(["1 – Call the skill in Claude"]) --> A{{"2 – Setup, Stop A: rights and intended use"}}
+    U1(["1 – Call the skill in Claude"]) --> A{{"2 – Setup, Stop A: rights"}}
     A --> U3(["3 – Attach the score"])
     U3 --> P1["4 – Survey and preflight check"]
     P1 --> B{{"5 – Stop B: work details, melody, seating, tempo"}}
@@ -97,7 +97,7 @@ If a check fails, Claude fixes the problem and checks again, up to three times. 
 | No. | Step | Who does what | Check at the end |
 |--:|---|---|---|
 | 1 | Call | You call the skill. | – |
-| 2 | Setup, Stop A | Claude checks the tools and, if something is missing, asks whether to install the tested or the newest package versions. Then you state the rights status and intended use. | All tools ok? |
+| 2 | Setup, Stop A | Claude checks the tools and, if something is missing, asks whether to install the tested or the newest package versions. Then you state the rights status. | All tools ok? |
 | 3 | Attach score | You attach the score. | – |
 | 4 | Survey | Claude reads the pages, checks the scan quality and compares it with your rights answer. | Structure understood, scope announced? |
 | 5 | Stop B | You approve title, melody voice, seating and tempo. | – |
@@ -132,8 +132,10 @@ Everything the skill generates is marked as AI-generated: the EU label "AI" and 
 ## 7. Requirements – What is needed?
 Python with the packages from [`scripts/requirements-stable.txt`](https://github.com/vbth/choir-practice/blob/main/choir-practice/scripts/requirements-stable.txt), FluidSynth, ffmpeg, poppler and a soundfont (a fallback is used and reported). At the start the skill checks the installation (`setup.sh --check`). If something is missing or different, it lists what it would install and asks: the **tested versions** (recommended, listed in [`scripts/requirements-stable.txt`](https://github.com/vbth/choir-practice/blob/main/choir-practice/scripts/requirements-stable.txt)) or the **newest versions**. The versions used are recorded in the check log; newest versions are marked as not tested.
 
+**Sound.** The audio is rendered with a soundfont: MuseScore General (installed by `setup.sh`, the default) or, on request, **GeneralUser GS 2.0.3**, which is included in the skill (`assets/soundfonts/`). GeneralUser GS is by S. Christian Collins ([original source](https://www.schristiancollins.com/generaluser.php), [repository](https://github.com/mrbumpy409/GeneralUser-GS)) and may be used for private and commercial music production under its own [licence](https://github.com/vbth/choir-practice/blob/main/choir-practice/assets/soundfonts/GeneralUser-GS-LICENSE.txt). To fit the upload limit the skill carries it **compressed to the SF3 format** (Ogg Vorbis, 7 MB instead of 32 MB, lossy); presets and licence text are unchanged. Details in [`THIRD_PARTY_NOTICES.md`](https://github.com/vbth/choir-practice/blob/main/choir-practice/THIRD_PARTY_NOTICES.md).
+
 ## 8. Rights – What does the skill ask?
-The skill gives no legal advice and grants no rights. It asks whether the score is public domain, licensed, your own work or unclear, and whether it is for rehearsal or commercial use, and notes the answer in the README. Unclear rights with commercial use get a clear warning. Commercial use of the skill itself needs a licence (see 9); the licence says nothing about the rights to the score.
+The skill gives no legal advice and grants no rights. It asks whether the score is public domain, licensed, your own work or unclear, and notes the answer in the README. The licence of the skill (see 9) says nothing about the rights to the score.
 
 ## 9. Licence – What is allowed?
 PolyForm Noncommercial License 1.0.0 ([`LICENSE.md`](LICENSE.md)), free for non-commercial use. Third-party components: [`THIRD_PARTY_NOTICES.md`](https://github.com/vbth/choir-practice/blob/main/choir-practice/THIRD_PARTY_NOTICES.md).

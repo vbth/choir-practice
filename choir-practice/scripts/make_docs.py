@@ -15,7 +15,7 @@ docs.json (written by Claude, see references/score-spec.md "docs.json"):
 """
 import json, os, sys, argparse, re
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from common import load_i18n, read_checks, safe, log_check, ACCENT, md_block, rl_footer, register_plex
+from common import has_rights, load_i18n, read_checks, safe, log_check, ACCENT, md_block, rl_footer, register_plex
 from reportlab.lib.pagesizes import A4, landscape
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, PageBreak
 from reportlab.lib.styles import ParagraphStyle
@@ -97,18 +97,18 @@ def readme_section(lang, spec, docs, mixes, layout):
         t = mixes['tempo']; beat = i.get('beats', {}).get(t['beat'], t['beat'])
         tempo_txt = (f"{t.get('text')}, " if t.get('text') else '') + f"{beat} = {t['bpm']}"
         items = [x.format(soundfont=mixes['soundfont'], lufs=mixes['lufs'], tempo=tempo_txt, slow_pct=t.get('slow_pct', 75), slow=i['slow']) for x in R['sound_items']]
+        if os.path.basename(mixes['soundfont']).startswith('GeneralUser'): items.append(R['sound_generaluser'])
         md.append(f"## {R['sound_h']}\n\n" + '\n'.join('- ' + x for x in items) + '\n'); fl += [P(R['sound_h'], H2)] + [P('• ' + esc(x)) for x in items]
     if layout:
         sc = R.get('score_line', 'A4, {pages} pages × {spp} systems, staff space {mm} mm').format(pages=layout['pages'], spp=layout['systems_per_page'], mm=(str(layout['staff_space_mm']) if lang == 'en' else str(layout['staff_space_mm']).replace('.', ',')))
         md.append(f"## {R['score_h']}\n\n- {sc}\n"); fl += [P(R['score_h'], H2), P('• ' + esc(sc))]
-    rt = spec.get('rights') or {}; rlines = [R['rights_base'], R['rights_status'].get(rt.get('status'), R['rights_status']['unclear'])]
-    if rt.get('use') in R['rights_use']: rlines.append(R['rights_use'][rt['use']])
-    if rt.get('use') == 'commercial' and (rt.get('status') == 'unclear' or (rt.get('status') == 'licensed' and not rt.get('reference'))): rlines.append(R['rights_warn_commercial'])
-    if rt.get('use') == 'commercial': rlines.append(R['rights_skill_licence'])   # the licence of the skill itself is a separate matter from the rights to the score
-    if rt.get('reference'): rlines.append(R['rights_ref'].format(reference=rt['reference']))
-    if rt.get('note'): rlines.append(R['rights_note'].format(note=rt['note']))
-    if rt.get('notice'): rlines.append(R['rights_notice'].format(notice=rt['notice']))
-    md.append(f"## {R['rights_h']}\n\n" + '\n\n'.join(rlines) + '\n'); fl += [P(R['rights_h'], H2)] + [P(esc(x)) for x in rlines]
+    rt = spec.get('rights') or {}
+    if has_rights(spec):   # nothing is written about rights if the user gave no information and the source prints none
+        rlines = [R['rights_base']] + ([R['rights_status'][rt['status']]] if rt.get('status') in R['rights_status'] else [])
+        if rt.get('reference'): rlines.append(R['rights_ref'].format(reference=rt['reference']))
+        if rt.get('note'): rlines.append(R['rights_note'].format(note=rt['note']))
+        if rt.get('notice'): rlines.append(R['rights_notice'].format(notice=rt['notice']))
+        md.append(f"## {R['rights_h']}\n\n" + '\n\n'.join(rlines) + '\n'); fl += [P(R['rights_h'], H2)] + [P(esc(x)) for x in rlines]
     md.append(f"## {R['ai_h']}\n\n{R['ai_text']}\n"); fl += [P(R['ai_h'], H2), P(esc(R['ai_text']))]
     tx = docs.get('texts', {}).get(lang, {})
     for key, head in (('notes', R['notes_h']), ('open', R['open_h'])):
@@ -142,9 +142,7 @@ def main():
     # log this step first, so the check log below already shows the current run
     _corr = docs.get('corrections', []); _unc = sum(1 for c in _corr if c.get('status') == 'uncertain')
     log_check(A.workdir, 6, 'make_docs', 'warn' if _unc else 'pass', f'{len(_corr)} correction-log entries, {_unc} uncertain')
-    rs = (spec.get('rights') or {}).get('status')
-    _rt = spec.get('rights') or {}; _open = rs == 'unclear' or (rs == 'licensed' and not _rt.get('reference'))
-    log_check(A.workdir, 6, 'rights', 'pass' if rs in ('public_domain', 'licensed', 'own') and not _open else ('warn' if rs in ('unclear', 'licensed') else 'fail'), f'status {rs}' + (', commercial use, skill licence' if _rt.get('use') == 'commercial' else '') + (', open' if _open else ''))
+    if (spec.get('rights') or {}).get('status') in ('public_domain', 'licensed', 'own'): log_check(A.workdir, 6, 'rights', 'pass', f"status {spec['rights']['status']}")   # no rights information: no log row either
     # Check log
     Pr = i['protocol']; ph = i['phases']; checks = read_checks(A.workdir)
     rows = [[Pr['col_phase'], Pr['col_check'], Pr['col_result'], Pr['col_note']]]

@@ -22,7 +22,7 @@ Du setzt die Arbeit an einem fertigen Chor-Übungspaket fort. **Führe zuerst `b
 | Aufstellung (links → rechts) | |
 | Tempo (Bezeichnung, bpm, Schlag) | |
 | Notenlayout | {{score_layout}} |
-| Rechte (Status, Verwendungszweck, Referenz) | |
+| Rechte (Status, Referenz) | |
 
 ## 4. Genaue Daten
 - Paket: {{package}} (Datum {{date}}); oberste Ordner: {{folders}}

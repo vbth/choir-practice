@@ -98,6 +98,7 @@
       "Die eigene Stimme steht immer in der Mitte; die MIDI-Dateien enthalten dieselben Lautstärke- und Panoramawerte.",
       "Solo und Mit Begleitung (Nr. 1 bis 4) gibt es zusätzlich langsam ({slow_pct} % Tempo, im Dateinamen „{slow}“). Vor der Musik erklingt der eigene Anfangston, danach eine kurze Pause; Datei 6 (Tutti) beginnt mit den Anfangstönen aller Stimmen nacheinander (von unten nach oben). Zwischen den Strophen liegt eine kurze Pause."
     ],
+    "sound_generaluser": "Soundfont-Nachweis: GeneralUser GS 2.0.3 von S. Christian Collins (https://www.schristiancollins.com/generaluser.php), für den Skill in das SF3-Format komprimiert; der Lizenztext liegt im Skill-Ordner (assets/soundfonts).",
     "ai_h": "Hinweis zur Entstehung",
     "ai_text": "Die Noten wurden aus der Vorlage (Scan) mit KI-Unterstützung transkribiert, zweifach gegen die Vorlage korrigiert und mit Verovio (verovio.org) gesetzt. Die Korrekturen stehen im Korrekturprotokoll. Der Klang entsteht durch Software-Synthese mit einem Soundfont, nicht durch generative KI. Die Übe-Dateien sind rein mechanisch und notengetreu; sie ersetzen keine Interpretation. Vorlage, Entscheidungen und Freigaben liegen bei Menschen. Ohne Gewähr: im Zweifel gilt die Vorlage.",
     "score_h": "Noten",
@@ -124,18 +125,11 @@
     "rights_status": {
       "public_domain": "Rechtestatus nach Angabe des Nutzers: gemeinfrei.",
       "licensed": "Rechtestatus laut Angabe: Lizenz oder Erlaubnis für Vervielfältigung und Nutzung liegt vor.",
-      "own": "Rechtestatus laut Angabe: eigenes Werk oder Rechte beim Auftraggeber.",
-      "unclear": "Rechtestatus ungeklärt. Das Paket nicht weitergeben, bevor die Nutzungsrechte geklärt sind."
+      "own": "Rechtestatus laut Angabe: eigenes Werk oder Rechte beim Auftraggeber."
     },
     "rights_note": "Angabe zu den Rechten: {note}",
     "rights_notice": "Vermerk der Vorlage: {notice}",
-    "rights_use": {
-      "rehearsal": "Vorgesehene Nutzung: Probe im eigenen Chor.",
-      "commercial": "Vorgesehene Nutzung: gewerblich."
-    },
-    "rights_skill_licence": "Lizenz des Skills: Der Skill, mit dem dieses Paket erstellt wurde, steht unter der PolyForm Noncommercial License 1.0.0. Kommerzielle Nutzung des Skills braucht eine eigene Lizenz (siehe LICENSE im Skill).",
-    "rights_ref": "Lizenz-Referenz: {reference}",
-    "rights_warn_commercial": "ACHTUNG: Gewerbliche Nutzung bei ungeklärten Rechten. Ohne Lizenz oder Erlaubnis der Rechteinhabenden nicht vervielfältigen, nicht weitergeben und nicht gewerblich nutzen. Rechte vorher klären."
+    "rights_ref": "Lizenz-Referenz: {reference}"
   },
   "protocol": {
     "title": "Prüfprotokoll",
@@ -313,6 +307,12 @@
   },
   "cover": {
     "composer": "Musik",
+    "arranger": "Satz",
+    "source": "Quelle",
+    "permission": "Bearbeitung mit Genehmigung von {by}.",
+    "permission_date": "Bearbeitung mit Genehmigung von {by} vom {date}.",
+    "set_licence": "Der Notensatz steht unter {name} ({url}).",
+    "internal": "Nur für den internen Gebrauch im Chor.",
     "lyricist": "Text",
     "notes_h": "Hinweise zur Ausführung (aus der Vorlage)",
     "bar_page": "Takt {bar}, Seite {page}",
@@ -400,28 +400,12 @@
       "Rechtestatus: eigenes Werk oder Rechte beim Auftraggeber"
     ],
     [
-      "^status unclear$",
-      "Rechtestatus: ungeklärt (Paket nicht weitergeben)"
-    ],
-    [
       "^(\\d+) files: duration, gaps, clipping, loudness, stereo$",
       "\\1 Audiodateien technisch geprüft: Dauer, Lücken, Übersteuerung, Lautstärke, Stereo"
     ],
     [
       "^(\\d+) of (\\d+) files with problems$",
       "Bei \\1 von \\2 Audiodateien Auffälligkeiten (siehe Meldung)"
-    ],
-    [
-      "^status unclear, commercial use, skill licence, open$",
-      "Rechtestatus: ungeklärt, gewerbliche Nutzung geplant (Warnung: erst Rechte klären); Skill-Lizenz beachten"
-    ],
-    [
-      "^status licensed, commercial use, skill licence, open$",
-      "Rechtestatus: Lizenz angegeben, aber ohne Referenz, gewerbliche Nutzung geplant (Warnung); Skill-Lizenz beachten"
-    ],
-    [
-      "^status (public_domain|licensed|own), commercial use, skill licence$",
-      "Rechtestatus mit gewerblicher Nutzung: \\1; Skill-Lizenz beachten"
     ],
     [
       "^hue (\\d+), major, (\\d+) quarter notes/min, (\\d+) main beats, title contrast ([\\d.]+):1, label contrast ([\\d.]+):1, light zone ([\\d.]+)$",

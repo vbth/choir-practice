@@ -277,8 +277,9 @@ def make_cover(spec, root, lang, iso, locate=None):
     no rules: the title in bold, below it Musik / Text as label/value grid; at the bottom the same footer as every PDF (without page number)."""
     from reportlab.pdfgen import canvas
     from reportlab.pdfbase import pdfmetrics
-    from common import load_i18n, rl_footer
+    from common import load_i18n, rl_footer, cover_rights_lines
     ensure_fonts(); R_, B_ = 'PlexR', 'PlexB'
+    from reportlab.lib.utils import simpleSplit
     i = load_i18n(lang); C = i['cover']; m = spec.get('meta', {})
     title = m.get('title') or root.findtext('work/work-title') or ''
     cr = {(c.get('type') or ''): (c.text or '') for c in root.iter('creator')}
@@ -292,8 +293,13 @@ def make_cover(spec, root, lang, iso, locate=None):
     y = H - 118 * mm; c.setFont(R_, BODY)
     for r in rows:
         if r[1]: c.drawString(X, y, r[0]); c.drawString(XV, y, r[1]); y -= 19
+    # rights block: only what the user stated or the source prints; nothing at all without rights information
+    rl = cover_rights_lines(spec, C, lang)
+    if rl:
+        y -= 14; c.setFont(R_, BODY)
+        for t in rl:
+            for line in simpleSplit(t, R_, BODY, W - 2 * X): c.drawString(X, y, line); y -= 16
     # printed execution remarks of the source (performance_notes): text, and where to find the place in the score (bar and page)
-    from reportlab.lib.utils import simpleSplit
     notes = [(n, None) if isinstance(n, str) else (n['text'], n.get('bar')) for n in spec.get('performance_notes') or []]
     if notes:
         XN = X + 38 * mm; y -= 14; c.setFont(B_, BODY); c.drawString(X, y, C['notes_h']); y -= 19; c.setFont(R_, BODY)

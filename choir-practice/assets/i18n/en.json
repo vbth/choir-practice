@@ -98,6 +98,7 @@
       "The own voice is always centred; the MIDI files carry the same volume and pan values.",
       "Solo and With accompaniment (no. 1 to 4) also exist slowly ({slow_pct} % tempo, \"{slow}\" in the file name). Before the music the voice's own starting note sounds, then a short pause; file 6 (tutti) starts with the starting notes of all voices one after another (bottom to top). There is a short pause between the verses."
     ],
+    "sound_generaluser": "Soundfont credit: GeneralUser GS 2.0.3 by S. Christian Collins (https://www.schristiancollins.com/generaluser.php), compressed to the SF3 format for the skill; the licence text is in the skill folder (assets/soundfonts).",
     "ai_h": "How this was made",
     "ai_text": "The notes were transcribed from the source (scan) with AI assistance, corrected twice against the source and engraved with Verovio (verovio.org). The corrections are listed in the correction log. The sound is software synthesis with a soundfont, not generative AI. The practice files are purely mechanical and exact to the notes; they do not replace an interpretation. The source, decisions and approvals come from people. No guarantee: when in doubt, the source applies.",
     "score_h": "Score",
@@ -124,18 +125,11 @@
     "rights_status": {
       "public_domain": "Rights status as stated by the user: public domain.",
       "licensed": "Rights status as stated by the user: a licence or permission for copying and use exists.",
-      "own": "Rights status as stated by the user: own work or rights held by the client.",
-      "unclear": "Rights status unclear. Do not pass the package on before the rights of use are cleared."
+      "own": "Rights status as stated by the user: own work or rights held by the client."
     },
     "rights_note": "Note on the rights: {note}",
     "rights_notice": "Notice printed in the source: {notice}",
-    "rights_use": {
-      "rehearsal": "Intended use: rehearsal in one's own choir.",
-      "commercial": "Intended use: commercial."
-    },
-    "rights_skill_licence": "Licence of the skill: the skill that made this package is licensed under the PolyForm Noncommercial License 1.0.0. Commercial use of the skill needs a separate licence (see LICENSE in the skill).",
-    "rights_ref": "Licence reference: {reference}",
-    "rights_warn_commercial": "WARNING: commercial use with unclear rights. Without a licence or permission from the rights holders, do not copy, pass on or use commercially. Clear the rights first."
+    "rights_ref": "Licence reference: {reference}"
   },
   "protocol": {
     "title": "Check log",
@@ -313,6 +307,12 @@
   },
   "cover": {
     "composer": "Music",
+    "arranger": "Arrangement",
+    "source": "Source",
+    "permission": "Arrangement with permission of {by}.",
+    "permission_date": "Arrangement with permission of {by} dated {date}.",
+    "set_licence": "The engraving is licensed under {name} ({url}).",
+    "internal": "For internal use in the choir only.",
     "lyricist": "Lyrics",
     "notes_h": "Performance notes (printed in the source)",
     "bar_page": "Bar {bar}, page {page}",
