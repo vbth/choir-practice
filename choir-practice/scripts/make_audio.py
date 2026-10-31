@@ -32,6 +32,9 @@ from common import load_i18n, safe, log_check, derive_playback
 SF_CANDIDATES = ['/usr/share/sounds/sf3/MuseScore_General_Full.sf3', '/usr/share/sounds/sf3/MuseScore_General.sf3',
                  '/usr/share/sounds/sf2/FluidR3_GM.sf2']
 SF = next((p for p in SF_CANDIDATES if os.path.exists(p)), SF_CANDIDATES[-1])
+# short names for --soundfont: MuseScore General from the package manager, GeneralUser GS from the skill (assets/soundfonts, see THIRD_PARTY_NOTICES.md)
+SF_CHOICES = {'musescore': SF_CANDIDATES[:2],
+              'generaluser': [os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'assets', 'soundfonts', 'GeneralUser-GS.sf3')]}
 LV = {'near': -7, 'second': -9, 'far': -12, 'melody': -4, 'accomp': -12, 'tutti': -3}   # dB relative to own voice
 REVERB = {'on': True, 'rt': 1.3, 'wet': 0.30}
 LUFS = -19
@@ -273,12 +276,17 @@ def main():
     ap = argparse.ArgumentParser(); ap.add_argument('xml'); ap.add_argument('spec'); ap.add_argument('outdir')
     ap.add_argument('--slug', required=True); ap.add_argument('--workdir'); ap.add_argument('--no-reverb', action='store_true')
     ap.add_argument('--slow-pct', type=int, default=SLOW_PCT, help='tempo of the slow versions in %% of the normal tempo (10 to 95, default %(default)s)')
-    ap.add_argument('--soundfont'); ap.add_argument('--only', help='trial run: stage:voice, e.g. accomp:B2 (no tutti, normal tempo)')
+    ap.add_argument('--soundfont', help='path to a soundfont, or musescore (MuseScore General) or generaluser (GeneralUser GS, included in the skill); default: MuseScore General, else FluidR3_GM')
+    ap.add_argument('--only', help='trial run: stage:voice, e.g. accomp:B2 (no tutti, normal tempo)')
     A = ap.parse_args()
     if A.no_reverb: REVERB['on'] = False
     if not 10 <= A.slow_pct <= 95: sys.exit('--slow-pct must be between 10 and 95')
     SLOW_PCT = A.slow_pct
-    if A.soundfont: SF = A.soundfont
+    if A.soundfont:
+        SF = A.soundfont
+        if SF in SF_CHOICES:
+            SF = next((p for p in SF_CHOICES[SF] if os.path.exists(p)), None) or sys.exit(f'--soundfont {A.soundfont}: soundfont not found (' + ', '.join(SF_CHOICES[A.soundfont]) + ')')
+        elif not os.path.isfile(SF): sys.exit(f'--soundfont: file not found: {SF}')
     spec = json.load(open(A.spec, encoding='utf-8')); i18 = load_i18n(spec.get('language', 'en'))
     vids = [v['id'] for v in spec['voices']]; vname = {v['id']: v['name'] for v in spec['voices']}
     seat = spec.get('seating') or vids; melody = spec.get('melody'); idx = {v: k for k, v in enumerate(vids)}

@@ -208,6 +208,7 @@ Write `$WORK/score.json` bar by bar following `references/score-spec.md`; read `
 3. `python3 $S/make_scores.py $WORK/final.musicxml "$PKG/<scores>" --slug <Title> --lang <l> --workdir $WORK` (choir + piano MusicXML).
 
 ### Phase 6 – Audio (gate: all files, spot check)
+0. **Soundfont:** ask the user once which sound they want: MuseScore General (default) or GeneralUser GS (included in the skill, `assets/soundfonts/`, compressed to SF3; licence in `THIRD_PARTY_NOTICES.md`). For GeneralUser GS add `--soundfont generaluser` to the trial and the full run (default: nothing); the package README then names it with the source automatically.
 1. Trial: `python3 $S/make_audio.py $WORK/final.musicxml $WORK/score.json $WORK/trial --slug <Title> --only accomp:<voice>` – check duration and that the file starts with the own starting note and the pause, then the music (ffmpeg volumedetect on the first seconds).
 2. Full: `python3 $S/make_audio.py $WORK/final.musicxml $WORK/score.json "$PKG" --slug <Title> --workdir $WORK` (takes several minutes; may run in the background only while no question to the user is open).
 3. Spot check one stage-3 file: own voice vs. a neighbour stem level difference ≈ 7 dB (measure, don't assume).
