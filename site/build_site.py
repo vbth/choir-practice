@@ -95,7 +95,7 @@ T = {
   'who_claude': 'Claude', 'who_you': 'Nutzer',
   'steps': [
    ('Aufruf', 'you', 'Skill in Claude starten, noch ohne Noten.', ''),
-   ('Stopp A', 'both', 'Angaben über Rechte und Verwendungszweck.', 'Alles bereit?'),
+   ('Stopp A', 'both', 'Angaben über die Rechte.', 'Alles bereit?'),
    ('Noten anhängen', 'you', 'Als PDF oder Foto.', ''),
    ('Sichtung', 'claude', 'Claude liest die Seiten und prüft die Qualität.', 'Alles verstanden?'),
    ('Stopp B', 'you', 'Titel, Stimmen und Tempo bestätigen.', ''),
@@ -161,7 +161,7 @@ T = {
   'who_claude': 'Claude', 'who_you': 'You',
   'steps': [
    ('Call', 'you', 'Start the skill in Claude, still without a score.', ''),
-   ('Stop A', 'both', 'Details on rights and intended use.', 'All set?'),
+   ('Stop A', 'both', 'Details on the rights.', 'All set?'),
    ('Attach score', 'you', 'As PDF or photo.', ''),
    ('Survey', 'claude', 'Claude reads the pages and checks the quality.', 'Everything understood?'),
    ('Stop B', 'you', 'Confirm title, voices and tempo.', ''),

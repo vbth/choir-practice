@@ -72,7 +72,7 @@ Chor_Uebungen_<Titel>/
 ## 3. Ablauf – Welche Schritte gibt es?
 ```mermaid
 flowchart TD
-    U1(["1 – Skill in Claude aufrufen"]) --> A{{"2 – Einrichtung, Stopp A: Rechte und Verwendungszweck"}}
+    U1(["1 – Skill in Claude aufrufen"]) --> A{{"2 – Einrichtung, Stopp A: Rechte"}}
     A --> U3(["3 – Noten anhängen"])
     U3 --> P1["4 – Sichtung und Vorprüfung"]
     P1 --> B{{"5 – Stopp B: Werkdaten, Melodie, Aufstellung, Tempo"}}
@@ -97,7 +97,7 @@ Besteht eine Prüfung nicht, behebt Claude den Fehler und prüft erneut, bis zu 
 | Nr. | Schritt | Wer tut was | Prüfung am Ende |
 |--:|---|---|---|
 | 1 | Aufruf | Du rufst den Skill auf. | – |
-| 2 | Einrichtung, Stopp A | Claude prüft die Werkzeuge und fragt, falls etwas fehlt, ob die getesteten oder die neuesten Paketversionen installiert werden sollen. Dann gibst du an, wie die Rechte stehen und wofür das Material gedacht ist. | Alle Werkzeuge in Ordnung? |
+| 2 | Einrichtung, Stopp A | Claude prüft die Werkzeuge und fragt, falls etwas fehlt, ob die getesteten oder die neuesten Paketversionen installiert werden sollen. Dann gibst du an, wie die Rechte stehen. | Alle Werkzeuge in Ordnung? |
 | 3 | Noten anhängen | Du hängst die Noten an. | – |
 | 4 | Sichtung | Claude liest die Seiten, prüft die Scanqualität und gleicht mit deiner Rechte-Antwort ab. | Struktur verstanden, Umfang angekündigt? |
 | 5 | Stopp B | Du bestätigst Titel, Melodiestimme, Aufstellung und Tempo. | – |
@@ -133,7 +133,7 @@ Alles, was der Skill erzeugt, ist als KI-generiert gekennzeichnet: das EU-Label 
 Python mit den Paketen aus [`scripts/requirements-stable.txt`](https://github.com/vbth/choir-practice/blob/main/choir-practice/scripts/requirements-stable.txt), FluidSynth, ffmpeg, poppler und eine Soundfont (ein Ersatz wird verwendet und gemeldet). Zu Beginn prüft der Skill die Installation (`setup.sh --check`). Fehlt etwas oder weicht etwas ab, listet er auf, was er installieren würde, und fragt: die **getesteten Versionen** (empfohlen, aufgeführt in [`scripts/requirements-stable.txt`](https://github.com/vbth/choir-practice/blob/main/choir-practice/scripts/requirements-stable.txt)) oder die **neuesten Versionen**. Die verwendeten Versionen stehen im Prüfprotokoll; neueste Versionen sind als nicht getestet gekennzeichnet.
 
 ## 8. Rechte – Was fragt der Skill ab?
-Der Skill gibt keine Rechtsberatung und räumt keine Rechte ein. Er fragt, ob die Noten gemeinfrei, lizenziert, eigenes Werk oder unklar sind und ob sie zum Proben oder kommerziell genutzt werden, und vermerkt die Antwort in der README. Unklare Rechte bei kommerzieller Nutzung bekommen eine deutliche Warnung. Die kommerzielle Nutzung des Skills selbst braucht eine Lizenz (siehe 9); die Lizenz sagt nichts über die Rechte an den Noten.
+Der Skill gibt keine Rechtsberatung und räumt keine Rechte ein. Er fragt, ob die Noten gemeinfrei, lizenziert, eigenes Werk oder unklar sind und vermerkt die Antwort in der README. Die Lizenz des Skills (siehe 9) sagt nichts über die Rechte an den Noten.
 
 ## 9. Lizenz – Was ist erlaubt?
 PolyForm Noncommercial License 1.0.0 ([`LICENSE.md`](LICENSE.md)), frei für nichtkommerzielle Nutzung. Komponenten Dritter: [`THIRD_PARTY_NOTICES.md`](https://github.com/vbth/choir-practice/blob/main/choir-practice/THIRD_PARTY_NOTICES.md).

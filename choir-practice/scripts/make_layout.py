@@ -18,7 +18,7 @@ Audio file names: <stage>_<voice>_<Title>_<Chor|Klavier>_<content>.mp3 (a number
 """
 import os, sys, re, json, glob, shutil, zipfile, argparse, subprocess
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from common import load_i18n, safe, today_iso, log_check, TRANS, ACCENT, md_block, rl_footer, register_plex
+from common import has_rights, load_i18n, safe, today_iso, log_check, TRANS, ACCENT, md_block, rl_footer, register_plex
 from reportlab.lib.pagesizes import A4
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle
 from reportlab.lib.styles import ParagraphStyle
@@ -387,12 +387,9 @@ def main():
     rd = glob.glob(os.path.join(d04, f'*{DL["readme"]}*.md'))
     if rd:
         rt = open(rd[0], encoding='utf-8').read()
-        if i18['readme']['rights_h'] not in rt: fails.append('README has no rights section')
+        if has_rights(spec) != (i18['readme']['rights_h'] in rt): fails.append('README rights section must exist exactly when rights information was given or printed in the source')
         rt_ = spec.get('rights') or {}
         if rt_.get('status') not in ('public_domain', 'licensed', 'own', 'unclear'): fails.append('score.json has no "rights" status (public_domain | licensed | own | unclear)')
-        if rt_.get('use') not in ('rehearsal', 'commercial'): fails.append('score.json rights.use missing (rehearsal | commercial)')
-        if rt_.get('use') == 'commercial' and (rt_.get('status') == 'unclear' or (rt_.get('status') == 'licensed' and not rt_.get('reference'))):
-            print('WARNING: commercial use with open rights (status unclear or licence reference missing) - the README carries a clear warning; clear the rights before any commercial use; commercial use of the skill itself needs its own licence (LICENSE)')
     for v in voices:
         vdir = os.path.join(d03, f'{ab[v["id"]]}_{DL["voice_dir"]}_{T}')
         cnt = sum(len(fs) for _, _, fs in os.walk(vdir))

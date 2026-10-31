@@ -22,7 +22,7 @@ You are continuing work on a finished choir practice package. **First run `bash 
 | Seating (left → right) | S, A, T, B (assumption, not confirmed) |
 | Tempo (marking, bpm, beat) | Cheerful, 150 per quarter; slow version 80 % |
 | Score layout | {{score_layout}} |
-| Rights (status, intended use, reference) | public domain, rehearsal, https://de.wikipedia.org/wiki/Alle_meine_Entchen |
+| Rights (status, reference) | public domain, https://de.wikipedia.org/wiki/Alle_meine_Entchen |
 
 ## 4. Exact data
 - Package: {{package}} (date {{date}}); top-level folders: {{folders}}

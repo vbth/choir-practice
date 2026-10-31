@@ -22,7 +22,7 @@ You are continuing work on a finished choir practice package. **First run `bash 
 | Seating (left → right) | |
 | Tempo (marking, bpm, beat) | |
 | Score layout | {{score_layout}} |
-| Rights (status, intended use, reference) | |
+| Rights (status, reference) | |
 
 ## 4. Exact data
 - Package: {{package}} (date {{date}}); top-level folders: {{folders}}

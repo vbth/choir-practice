@@ -3,6 +3,9 @@
 All notable changes to the skill. Newest first. Versions follow [SemVer](https://semver.org/); every release is a git tag `vX.Y.Z` with a GitHub release that carries the `.skill` file.
 
 ## Unreleased
+- Rights: `use: commercial` removed everywhere (score.json `rights.use`, Stop A question, README text and warnings, check-log entries, session handoff, website, READMEs); the skill asks only for the rights status
+- Rights: with no information from the user and nothing printed in the source (`unclear` without reference, note or notice) nothing about rights is written – no README section, no cover text, no check-log row (`common.has_rights`); `make_layout.py` checks that the README section exists exactly when there is something to say
+- Score cover page: rights block built from what the user stated (`common.cover_rights_lines`): arranger and internal-use line (own), permission of the publisher with date and the printed notice (licence), optional source (only if approved for the cover) and optional Creative Commons licence of the engraving (public domain); no own © and no "all rights reserved", the AI note stays in the footer
 - New headline "Deine Stimme. Deine Noten. Überall lesen, hören, üben." (en: "Your voice. Your notes. Read, listen, practise anywhere.") on the website (H1 and page title; the line break now sits before the last sentence) and in the READMEs
 - Website: links are no longer underlined (also the language link in the header on hover); on mouse-over a link turns black (white in dark mode, i.e. the text colour)
 - Website: German example previews (cover and both music pages) re-rendered with the current footer "KI-generiert. Nutzung auf eigene Verantwortung."; only the footer line differs, the English previews are unchanged

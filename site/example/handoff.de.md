@@ -22,7 +22,7 @@ Du setzt die Arbeit an einem fertigen Chor-Übungspaket fort. **Führe zuerst `b
 | Aufstellung (links → rechts) | S, A, T, B (Annahme, nicht bestätigt) |
 | Tempo (Bezeichnung, bpm, Schlag) | Munter, 150 pro Viertel; langsame Fassung 80 % |
 | Notenlayout | {{score_layout}} |
-| Rechte (Status, Verwendungszweck, Referenz) | gemeinfrei, Üben im Chor, https://de.wikipedia.org/wiki/Alle_meine_Entchen |
+| Rechte (Status, Referenz) | gemeinfrei, https://de.wikipedia.org/wiki/Alle_meine_Entchen |
 
 ## 4. Genaue Daten
 - Paket: {{package}} (Datum {{date}}); oberste Ordner: {{folders}}

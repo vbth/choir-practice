@@ -36,6 +36,34 @@ DASH = '\u2014'   # em dash: the separator of the footer, with a space on both s
 
 MD_LABEL = 'https://raw.githubusercontent.com/vbth/choir-practice/main/docs/img/'   # EU label for Markdown, linked from the repo (black, white in dark mode)
 
+def has_rights(spec):
+    """True only if the user gave rights information or the source prints some. `unclear` without reference, note or notice means: nothing is said
+    about rights anywhere (README, PDFs, metadata)."""
+    rt = (spec or {}).get('rights') or {}
+    return rt.get('status') in ('public_domain', 'licensed', 'own') or any(rt.get(k) for k in ('reference', 'note', 'notice'))
+
+def cover_rights_lines(spec, C, lang):
+    """Lines for the rights block of the score cover page, built only from what the user stated or the source prints (no own copyright claim,
+    no © of the skill or the user). Empty list = nothing about rights on the cover.
+      own            arranger (Satz) if known; internal-use line
+      licensed       permission 'by' + 'date' (ISO) if given; printed notice of the source unchanged; internal-use line
+      public_domain  source (reference) only if the user approved it for the cover ('show_source'); licence of the engraving if the user chose one ({'name', 'url'})
+      unclear        nothing"""
+    if not has_rights(spec): return []
+    rt = spec.get('rights') or {}; st = rt.get('status'); m = spec.get('meta') or {}; out = []
+    if st == 'own' and m.get('arranger'): out.append(C['arranger'] + ': ' + m['arranger'])
+    if st == 'licensed' and (rt.get('permission') or {}).get('by'):
+        p = rt['permission']; d = p.get('date') or ''
+        if d and lang == 'de' and len(d) == 10: d = f'{d[8:]}.{d[5:7]}.{d[:4]}'
+        out.append(C['permission'].format(by=p['by']) if not d else C['permission_date'].format(by=p['by'], date=d))
+    if st == 'public_domain':
+        if rt.get('reference') and rt.get('show_source'): out.append(C['source'] + ': ' + rt['reference'])
+        lic = rt.get('licence') or {}
+        if lic.get('name'): out.append(C['set_licence'].format(name=lic['name'], url=lic.get('url', '')).replace(' ()', ''))
+    if rt.get('notice'): out.append(rt['notice'])
+    if st in ('own', 'licensed'): out.append(C['internal'])
+    return out
+
 def md_footer(lang, title, iso=None):
     """Footer line of the Markdown files = the PDF footer: [EU label, linked from the repo] "YYYY-MM-DD KI-generiert. Nutzung auf eigene Verantwortung." (no title),
     preceded and followed by one blank line (written by make_docs; the repo READMEs end the same way). Label height 18 px, proportional to ICON_H."""
