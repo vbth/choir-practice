@@ -2,7 +2,7 @@
 
 English | [Deutsch](README.de.md)
 
-## Your voice. Your notes.<br>Read, listen, practise anywhere.
+## Your voice. Your sheet music.<br>Read, listen, and sing anywhere.
 
 **Documentation of an agentic AI music workflow and skill developed for and with Claude Code as a private code experiment.**
 
