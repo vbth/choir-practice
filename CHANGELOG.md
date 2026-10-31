@@ -3,6 +3,7 @@
 All notable changes to the skill. Newest first. Versions follow [SemVer](https://semver.org/); every release is a git tag `vX.Y.Z` with a GitHub release that carries the `.skill` file.
 
 ## Unreleased
+- Website, module "Üben" / "Practice": one sentence that the sound can be chosen when the files are created, MuseScore General or GeneralUser GS
 - Optional soundfont **GeneralUser GS 2.0.3** (S. Christian Collins) included in the skill, `make_audio.py --soundfont generaluser` (short names `musescore` and `generaluser` added; MuseScore General stays the default); to fit the upload limit it is carried compressed to the SF3 format (32.3 MB → 7.1 MB, lossy, presets and licence text unchanged); original source linked in the READMEs and `THIRD_PARTY_NOTICES.md`, licence text in `assets/soundfonts/`; the README of a package credits it when it was used; `check_third_party.py` also covers `assets/soundfonts/`
 - Rights: `use: commercial` removed everywhere (score.json `rights.use`, Stop A question, README text and warnings, check-log entries, session handoff, website, READMEs); the skill asks only for the rights status
 - Rights: with no information from the user and nothing printed in the source (`unclear` without reference, note or notice) nothing about rights is written – no README section, no cover text, no check-log row (`common.has_rights`); `make_layout.py` checks that the README section exists exactly when there is something to say
