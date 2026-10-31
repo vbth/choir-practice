@@ -4,7 +4,7 @@ English | [Deutsch](README.de.md)
 
 ## Your voice. Your sheet music.<br>Read, listen, and sing anywhere.
 
-**Documentation of an agentic AI music workflow and skill developed for and with Claude Code as a private code experiment.** This is a “proof of concept” only. In the end, a choir score becomes an “AI-checked” ZIP containing 10 practice recordings for every voice.
+**Documentation of an agentic AI music workflow and skill developed for and with Claude Code as a private code experiment.** It is only a “proof of concept”. A choir score goes in, and an “AI-checked” ZIP comes out with 10 practice recordings for every voice.
 
 **Website with example pack and player:** https://vbth.github.io/choir-practice/
 
@@ -108,7 +108,7 @@ If a check fails, Claude fixes the problem and checks again, up to three times. 
 | 12 | Download | You download the ZIP, unzip it, check it and share the voice ZIPs with the choir. | – |
 
 ## 4. Audio mix – How are the recordings mixed?
-Each voice gets its own mix; the own voice always sits centred. The other voices are panned by the choir seating, so the headphones recreate the row. It sounds best on headphones.
+Each voice gets its own mix. The own voice is always centred, and the other voices are panned to match the choir seating, so headphones recreate the row. It sounds best on headphones.
 
 - **Solo:** own voice only.
 - **With accompaniment:** own voice, melody −4 dB, piano accompaniment of all parts −12 dB.
