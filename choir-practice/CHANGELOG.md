@@ -3,6 +3,7 @@
 All notable changes to the skill. Newest first. Versions follow [SemVer](https://semver.org/); every release is a git tag `vX.Y.Z` with a GitHub release that carries the `.skill` file.
 
 ## Unreleased
+- `site/README.md`: section "Hosting (GitHub Pages)" (source `main` `/docs`, no Pages or Jekyll workflow, why)
 - Website: the menu collapses into the burger button only below 900 px (was 960 px; the full navigation fits down to about 860 px in German and 900 px in English); in the collapsed header the theme switch and the burger button sit at the right edge instead of next to the title
 - Website, section "Lizenzen": "PolyForm Noncommercial License 1.0.0, frei für nichtkommerzielle Nutzung. Komponenten von Drittanbietern." (en: "PolyForm Noncommercial License 1.0.0, free for non-commercial use. Third-party components."); the licence name links to the licence text, the second sentence to the overview of third-party components
 - Headline on two lines: line break after "Deine Chorstimme." / "Your choir voice." on the website (H1; page title unchanged) and in the READMEs

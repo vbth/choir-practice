@@ -10,6 +10,11 @@
 4. Always: `node site/render_test.js <out_dir>` (both languages, mobile 390, tablet portrait 820, tablet landscape 1180, desktop 1440). It must report `ok` everywhere; look at the screenshots.
 5. Commit `site/` and [`docs/`](../docs/) together.
 
+## Hosting (GitHub Pages)
+The website is plain static HTML served straight from the repository: Settings, Pages, source **Deploy from a branch**, branch `main`, folder **`/docs`**. [`docs/.nojekyll`](../docs/.nojekyll) keeps GitHub from processing the files. Keep it that way:
+- Do not switch the source to "GitHub Actions" and do not add a Pages or Jekyll workflow (for example the suggested "Deploy Jekyll with GitHub Pages dependencies preinstalled" from the Pages settings). Such a workflow runs on every push to `main`, builds the repository root and publishes the README instead of [`docs/`](../docs/); the site then shows the README in the Jekyll theme and `/en/` returns 404. This happened on 2026-10-31 and was fixed by deleting the workflow.
+- With the source on "Deploy from a branch", the run "pages build and deployment" starts by itself after every push to `main`. If it does not appear, check the Pages settings first.
+
 ## Logo
 `python3 site/logo/make_logo.py` draws the whole logo set. Source: the duck of the header image (group "duck" in [`site/header/header-src.svg`](header/header-src.svg)) as white lines plus an eighth note on red ground.
 - **Seal logo** [`docs/img/logo.png`](../docs/img/logo.png) (144 px; header and README): printed like the impression of a Chinese stone seal (red fills almost the whole square, slightly uneven edge, uneven ink, pin holes). Transparent only in the thin margin outside the stone, the carved lines are opaque white, so it looks the same on light and dark pages.
