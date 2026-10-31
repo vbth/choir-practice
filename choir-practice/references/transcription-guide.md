@@ -1,6 +1,6 @@
 # Transcription guide – reading choral scores reliably
 
-The single biggest risk of the whole package is a misread note or syllable. Scripts catch formal errors (bar lengths, syllables without notes); only careful visual comparison catches wrong pitches. Work slowly here; everything after this is automatic.
+The single biggest risk of the whole package is a misread note or syllable. Scripts catch formal errors (bar lengths, syllables without notes); only careful visual comparison catches wrong pitches. Work slowly here; the steps after this run automatically.
 
 ## 1. Look at the source correctly
 - Use `scan_tools.py crops` per system and segment (zoom 2.6–4). Dense chords: add `--guides` (lines/spaces labelled with sounding pitch names) and zoom further on single bars.
