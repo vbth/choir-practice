@@ -2,7 +2,7 @@
 
 [English](README.md) | Deutsch
 
-## Alleine üben, besser hören, überall singen.
+## Deine Chorstimme. Überall lesen, hören, üben.
 
 **Dokumentation eines agentischen KI-Musik-Workflows und -Skills entwickelt für und mit Claude Code als privates Code-Experiment.**
 
