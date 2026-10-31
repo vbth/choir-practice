@@ -3,6 +3,7 @@
 All notable changes to the skill. Newest first. Versions follow [SemVer](https://semver.org/); every release is a git tag `vX.Y.Z` with a GitHub release that carries the `.skill` file.
 
 ## Unreleased
+- Website, section "Lizenzen": two lines, "PolyForm Noncommercial License 1.0.0, Lizenztext lesen" and "Lizenzen von Drittanbietern, zur Übersicht" (en: "…, to the overview")
 - Headline "Deine Chorstimme. Überall lesen, hören, üben." (en: "Your choir voice. Read, listen, practise anywhere.") on the website, in the page title and in the READMEs
 - Website, section "Rechte & KI": the rights text now says the details are recorded "danach" in the README file and that processing and passing on depend on "dem Urheber- und Lizenzrecht, unter dem sie stehen" (en: "the copyright and licence law they are subject to")
 - Website: menu entry, heading, link and download button say "Beispiel" / "Example" instead of "Beispiel-ZIP" / "Example ZIP"
