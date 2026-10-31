@@ -110,8 +110,8 @@ footer{max-width:var(--max);margin:0 auto;padding:24px var(--gut) 48px;border-to
  /* same visible gap above the headline as between menu and header image (72 px; the headline box starts 13 px above its first ink) */
  section.hero{padding-top:59px}
 }
-@media (max-width:960px){
- .burger{display:block;order:100;margin-left:0}.bar>.lang{display:none}.navlang{display:block;border-top:1.5px solid var(--line);margin-top:4px}
+@media (max-width:899px){
+ .theme{margin-left:auto}.burger{display:block;order:100;margin-left:0}.bar>.lang{display:none}.navlang{display:block;border-top:1.5px solid var(--line);margin-top:4px}
  .bar nav{display:none;position:absolute;left:0;right:0;top:100%;background:var(--bg);border-bottom:1.5px solid var(--line);margin:0}
  .bar.open nav{display:block}.bar nav ul{flex-direction:column;gap:0;padding:8px var(--gut)}.bar nav a{padding:12px 0}
 }
