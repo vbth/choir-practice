@@ -8,7 +8,7 @@
 
 ## Deine Chorstimme. Deine Noten.<br>Überall lesen, hören und singen.
 
-**Dokumentation eines agentischen KI-Musik-Workflows und -Skills entwickelt für und mit Claude Code als privates Code-Experiment.** Es handelt sich ausschließlich um einen „Proof of Concept“. Aus Chornoten entsteht am Ende ein „KI-⁠geprüftes“ ZIP, in dem sich für jede Stimme 10 Aufnahmen zum Üben befinden.
+**Dokumentation eines agentischen KI-Musik-Workflows und -Skills entwickelt für und mit Claude Code als privates Code-Experiment.** Es ist nur ein „Proof of Concept“. Aus Chornoten entsteht am Ende ein „KI-⁠geprüftes“ ZIP, in dem sich für jede Stimme 10 Aufnahmen zum Üben befinden.
 
 **Website mit Beispielpaket und Player:** https://vbth.github.io/choir-practice/
 
@@ -112,7 +112,7 @@ Besteht eine Prüfung nicht, behebt Claude den Fehler und prüft erneut, bis zu 
 | 12 | Herunterladen | Du lädst das ZIP herunter, entpackst und prüfst es und teilst die Stimmen-ZIPs mit dem Chor. | – |
 
 ## 4. Audio-Mix – Wie werden die Aufnahmen gemischt?
-Jede Stimme bekommt ihren eigenen Mix; die eigene Stimme liegt immer in der Mitte. Die anderen Stimmen sind nach der Chorsitzordnung im Stereobild verteilt, der Kopfhörer bildet also die Reihe nach. Mit Kopfhörern klingt es am besten.
+Jede Stimme bekommt ihren eigenen Mix. Die eigene Stimme liegt immer in der Mitte; die anderen Stimmen sind nach der Chorsitzordnung im Stereobild verteilt, sodass der Kopfhörer die Reihe nachbildet. Mit Kopfhörern klingt es am besten.
 
 - **Allein:** nur die eigene Stimme.
 - **Mit Begleitung:** eigene Stimme, Melodie −4 dB, Klavierbegleitung aller Stimmen −12 dB.
