@@ -65,12 +65,12 @@ ST['tutti'] = {own: [[v, spread[v], M.LV['tutti'], 'own'] for v in SEAT] for own
 
 T = {
  'de': {
-  'html': 'de', 'name': 'choir-practice Skill', 'title': 'choir-practice Skill – Deine Chorstimme. Überall lesen, hören, üben.', 'other': ('en/', 'EN'), 'self_prefix': '', 'assets': '',
+  'html': 'de', 'name': 'choir-practice Skill', 'title': 'choir-practice Skill – Deine Stimme. Deine Noten. Überall lesen, hören, üben.', 'other': ('en/', 'EN'), 'self_prefix': '', 'assets': '',
   'desc': 'Dokumentation eines agentischen KI-Musik-Workflows und -Skills entwickelt für und mit Claude Code als privates Code-Experiment. Es handelt sich ausschließlich um einen „Proof of Concept“. Aus Chornoten entsteht am Ende ein „KI-geprüftes“ ZIP, in dem sich für jede Stimme 10 Aufnahmen zum Üben befinden.',
   'ids': {'start': 'start', 'ablauf': 'ablauf', 'ueben': 'ueben', 'paket': 'beispiel-zip', 'rechte': 'rechte-und-ki', 'lizenz': 'lizenz'},
   'menu': [('start', 'Start'), ('ablauf', 'Ablauf'), ('ueben', 'Üben'), ('paket', 'Beispiel'), ('rechte', 'Rechte & KI'), ('lizenz', 'Lizenzen')],
   'menu_label': 'Menü', 'skip': 'Zum Inhalt', 'theme_to_dark': 'Zum dunklen Modus wechseln', 'theme_to_light': 'Zum hellen Modus wechseln',
-  'h1': 'Deine Chorstimme. Überall lesen, hören, üben.',
+  'h1': 'Deine Stimme. Deine Noten. Überall lesen, hören, üben.',
   'lead': 'Dokumentation eines agentischen KI-Musik-Workflows und -Skills entwickelt für und mit Claude Code als privates Code-Experiment.\n\nEs handelt sich ausschließlich um einen „Proof of Concept“. Aus Chornoten entsteht am Ende ein „KI-\u2060geprüftes“ ZIP, in dem sich für jede Stimme 10 Aufnahmen zum Üben befinden.',
   'cta': 'Beispiel ansehen',
   'ai': 'KI-generiert. Nutzung auf eigene Verantwortung.', 'foot_note': 'choir-practice – KI-Musik-Workflow/-Skill für Claude.', 'foot_site': 'Startseite',
@@ -131,12 +131,12 @@ T = {
   'ai_label': 'AI', 'top': 'Nach oben',
  },
  'en': {
-  'html': 'en', 'name': 'choir-practice Skill', 'title': 'choir-practice Skill – Your choir voice. Read, listen, practise anywhere.', 'other': ('../', 'DE'), 'self_prefix': '../', 'assets': '../',
+  'html': 'en', 'name': 'choir-practice Skill', 'title': 'choir-practice Skill – Your voice. Your notes. Read, listen, practise anywhere.', 'other': ('../', 'DE'), 'self_prefix': '../', 'assets': '../',
   'desc': 'Documentation of an agentic AI music workflow and skill developed for and with Claude Code as a private code experiment. This is a “proof of concept” only. In the end, a choir score becomes an “AI-checked” ZIP containing 10 practice recordings for every voice.',
   'ids': {'start': 'start', 'ablauf': 'workflow', 'ueben': 'practice', 'paket': 'example-zip', 'rechte': 'rights-and-ai', 'lizenz': 'licence'},
   'menu': [('start', 'Start'), ('ablauf', 'Workflow'), ('ueben', 'Practice'), ('paket', 'Example'), ('rechte', 'Rights & AI'), ('lizenz', 'Licences')],
   'menu_label': 'Menu', 'skip': 'Skip to content', 'theme_to_dark': 'Switch to dark mode', 'theme_to_light': 'Switch to light mode',
-  'h1': 'Your choir voice. Read, listen, practise anywhere.',
+  'h1': 'Your voice. Your notes. Read, listen, practise anywhere.',
   'lead': 'Documentation of an agentic AI music workflow and skill developed for and with Claude Code as a private code experiment.\n\nThis is a “proof of concept” only. In the end, a choir score becomes an “AI-checked” ZIP containing 10 practice recordings for every voice.',
   'cta': 'See the example',
   'ai': 'AI-generated. Use at your own risk.', 'foot_note': 'choir-practice – AI music workflow/skill for Claude.', 'foot_site': 'Home page',
@@ -231,7 +231,9 @@ def fan_img(A, L, name, cls, alt):
 def page(L):
     t = T[L]; A = t['assets']
     I = t['ids']
-    menu = ''.join(f'<li><a href="#{I[a]}">{esc(n)}</a></li>' for a, n in t['menu'])
+    h1 = esc(t['h1']); k = h1.rfind('. ')                        # line break before the last sentence of the headline
+    h1_html = h1[:k + 1] + '<br>' + h1[k + 2:] if k >= 0 else h1
+    menu =''.join(f'<li><a href="#{I[a]}">{esc(n)}</a></li>' for a, n in t['menu'])
     facts = ''.join(f'<div><dt>{esc(a)}</dt><dd>{esc(b)}</dd></div>' for a, b in t['facts'])
     tree = ''.join(
         f'<div class="folder"><button type="button" aria-expanded="false" aria-controls="f{i}"><span class="fn">{esc(n)}</span><span class="fd">{esc(d)}</span></button>'
@@ -310,7 +312,7 @@ def page(L):
 <figure class="banner"><picture><source media="(prefers-color-scheme: dark)" srcset="{A}img/header-dark.png"><img src="{A}img/header.png" alt="{esc(t['og_alt'])}" width="1280" height="640" fetchpriority="high" decoding="async"></picture>
 </figure>
 <section id="start" class="hero">
- <h1>{esc(t['h1']).replace('. ', '.<br>', 1)}</h1>
+ <h1>{h1_html}</h1>
  <p class="lead">{'<br><br>'.join(esc(x) for x in t['lead'].split(chr(10) * 2))}</p>
  <p class="cta"><a href="#{I['paket']}">{esc(t['cta'])}</a></p>
  <dl class="facts">{facts}</dl>
