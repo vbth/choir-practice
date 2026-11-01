@@ -368,7 +368,7 @@ def page(L):
  <p class="intro wide"><a href="{GH}/blob/main/LICENSE.md">{esc(t['lic_link'])}</a>{esc(t['lic_p'])} <a href="{GH}/blob/main/choir-practice/THIRD_PARTY_NOTICES.md">{esc(t['lic_third_link'])}</a>.</p>
 </section>
 </main>
-<footer><p class="fnote"><span class="fl">{GHICON}</span><span>{esc(t['foot_note']).replace('-Skill', '-&#8288;Skill')}</span></p><p class="fnote"><a class="fl" href="{SITE}{L}/" aria-label="{esc(t['foot_site'])}">{ai}</a><span>{YEAR} {esc(t['ai'])}</span></p></footer>
+<footer><p class="fnote"><span class="fl">{GHICON}</span><span>{esc(t['foot_note']).replace('-Skill', '-&#8288;Skill')}</span></p><p class="fnote"><span class="fl">{ai}</span><span>{YEAR} {esc(t['ai'])}</span></p></footer>
 <script>window.PAGE={json.dumps(data, ensure_ascii=False)};</script>
 <script src="{A}js/site.js?v={asset_version()}"></script>
 </body>
