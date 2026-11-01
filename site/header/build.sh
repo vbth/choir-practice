@@ -12,7 +12,14 @@ i = s.rfind('</svg>')
 open(t + '/og.svg', 'w').write(s[:i] + '<rect class="fr" x="35.5" y="5" width="1209" height="630" style="stroke-width:10"/>\n' + s[i:])
 PY
 node "$HERE/render.js" "$T"
-cp "$T/og-raw.png" "$ROOT/docs/img/og.png"
+# link preview: white margin around the drawing, so messengers that round the corners (iMessage and others) do not cut off the black frame
+python3 - "$T/og-raw.png" "$ROOT/docs/img/og.png" <<'PY'
+import sys
+from PIL import Image
+src, dst = sys.argv[1:3]; im = Image.open(src).convert('RGB'); W, H = im.size; k = 0.92
+small = im.resize((round(W * k), round(H * k)), Image.Resampling.LANCZOS)
+canvas = Image.new('RGB', (W, H), 'white'); canvas.paste(small, ((W - small.width) // 2, (H - small.height) // 2)); canvas.save(dst, optimize=True)
+PY
 # header PNGs (website and README): 3x, small palette (the drawing has black, white, red and their anti-aliasing)
 python3 - "$T" "$ROOT/docs/img" <<'PY'
 import sys

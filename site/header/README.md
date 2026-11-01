@@ -14,7 +14,7 @@
 |---|---|---|
 | [`docs/img/header.png`](../../docs/img/header.png) | website banner and README, light (`<picture>`, shown at 1280 x 640; small palette) | 3840 x 1920 |
 | [`docs/img/header-dark.png`](../../docs/img/header-dark.png) | the same, dark | 3840 x 1920 |
-| [`docs/img/og.png`](../../docs/img/og.png) | link preview (Open Graph, light) | 2400 x 1260 |
+| [`docs/img/og.png`](../../docs/img/og.png) | link preview (Open Graph, light) | 2400 x 1260 (drawing at 92 % on white, so rounded corners do not cut the frame) |
 
 Only if something else changes: [`site/build_site.py`](../../site/build_site.py) (alt text `og_alt`, og image size), [`docs/index.html`](../../docs/index.html) and [`docs/en/index.html`](../../docs/en/index.html) (generated), [`CHANGELOG.md`](../../CHANGELOG.md) and [`choir-practice/CHANGELOG.md`](../../choir-practice/CHANGELOG.md) (identical copies).
 
