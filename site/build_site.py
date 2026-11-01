@@ -117,7 +117,7 @@ T = {
    'accomp': 'Die gewählte Stimme, die Melodie leiser, dazu die Klavierbegleitung aller Stimmen.',
    'choir': 'Die anderen Stimmen sitzen wie im Chor: Nachbarn links und rechts etwas leiser, weiter entfernte noch leiser.',
    'tutti': 'Alle Stimmen gleich laut.'}, 'own_lbl': 'Gesang', 'acc_lbl': 'Klavier',
-  'dl_p': 'Das Ergebnis: Aufnahmen zum Üben für jede Stimme, Anleitungen und Protokolle.', 'dl_btn': 'Beispiel herunterladen',
+  'dl_p': 'Das Ergebnis: Aufnahmen zum Üben für jede Stimme, Anleitungen und Protokolle.', 'dl_btn': 'Beispiel herunterladen', 'dl_ttl': 'Alle meine Entchen', 'dl_meta': 'ZIP · ca. 36 MB · Noten, Aufnahmen, Anleitungen',
   'tutti_all': 'Tutti, alle Stimmen', 'pl_title': 'Alle meine Entchen', 'pl_play': 'Wiedergabe', 'pl_pause': 'Pause', 'pl_prev': 'Vorherige Aufnahme', 'pl_next': 'Nächste Aufnahme', 'pl_loop': 'Wiederholen', 'pl_vol': 'Lautstärke', 'pl_mute': 'Stumm', 'pl_seek': 'Position',
   'pl_cover': 'Albumcover des Beispielpakets',
   'rechte_h': 'Rechte & KI',
@@ -184,7 +184,7 @@ T = {
    'accomp': 'The selected voice, the melody quieter, plus the piano accompaniment of all voices.',
    'choir': 'The other voices sit as in the choir: neighbours left and right a little quieter, voices further away quieter still.',
    'tutti': 'All voices equally loud.'}, 'own_lbl': 'Singing', 'acc_lbl': 'Piano',
-  'dl_p': 'The result: practice recordings for every voice, guides and logs.', 'dl_btn': 'Download the example',
+  'dl_p': 'The result: practice recordings for every voice, guides and logs.', 'dl_btn': 'Download the example', 'dl_ttl': 'All My Ducklings', 'dl_meta': 'ZIP · ca. 36 MB · Scores, recordings, guides',
   'tutti_all': 'Tutti, all voices', 'pl_title': 'All My Ducklings', 'pl_play': 'Play', 'pl_pause': 'Pause', 'pl_prev': 'Previous recording', 'pl_next': 'Next recording', 'pl_loop': 'Repeat', 'pl_vol': 'Volume', 'pl_mute': 'Mute', 'pl_seek': 'Position',
   'pl_cover': 'Album cover of the example pack',
   'rechte_h': 'Rights & AI',
@@ -370,7 +370,7 @@ def page(L):
    {fan_img(A, L, 'page-2', 'p2', t['alt_page2'])}
    {fan_img(A, L, 'page-1', 'p1', t['alt_page1'])}
   </div></figure>
-  <div class="dl"><p>{esc(t['dl_p'])}</p><p class="dlb"><a href="{REL}{ZIP_OF[L]}" download>{esc(t['dl_btn'])}</a></p></div>
+  <div class="dl"><p class="ttl">{esc(t['dl_ttl'])}</p><p>{esc(t['dl_p'])}</p><p class="meta">{esc(t['dl_meta'])}</p><p class="dlb"><a href="{REL}{ZIP_OF[L]}" download>{esc(t['dl_btn'])}<span aria-hidden="true">↓</span></a></p></div>
  </div>
  <h3 class="sub">{esc(t['inh_h'])}</h3>
  <p class="intro">{esc(t['paket_p'])}</p>
@@ -455,15 +455,17 @@ ul.note{padding-left:18px}
 .banner .duck{max-width:26em;margin:18px auto 0;text-align:center;font-style:italic;font-size:var(--fs-m);line-height:1.4;text-wrap:balance}
 .banner .duck .by{display:block;margin-top:6px;font-style:normal;font-size:var(--fs)}
 @media (max-width:600px){.banner .duck{font-size:var(--fs);margin-top:14px}.banner .duck .dbr{display:none}.banner .duck .by{font-size:var(--fs-s)}}
-.exrow{display:grid;grid-template-columns:minmax(0,420px) minmax(0,1fr);gap:32px 64px;align-items:center;margin:0 0 72px}
+.exrow{--pop:150px;--pw:250px;display:grid;grid-template-columns:calc(var(--pw)*1.8) minmax(0,1fr);gap:32px 56px;align-items:center;border:1.5px solid var(--line);padding:40px 48px;margin:calc(var(--pop) + 56px) 0 72px}   /* card; the fan pops out of its top edge by --pop, 56px stay free below the headline */
 h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 .dl p{margin:0 0 20px;max-width:30em}.dl .dlb{margin:0}.steps+.dlb{margin:24px 0 16px}.dlb a{display:inline-block;border:1.5px solid var(--line);padding:12px 20px;font-weight:400;color:var(--fg);text-decoration:none}.dlb a:hover,.dlb a:focus-visible{background:var(--fg);color:var(--bg)}
 #hp .vb{cursor:pointer}#hp .vb:hover circle{stroke:var(--link)}#hp .vb:hover text{fill:var(--link)}#hp .vb:focus-visible{outline:2px solid var(--fg);outline-offset:4px}
-.fan{margin:80px 0 0}.fan{--pw:240px}.fan .pages{position:relative;height:calc(var(--pw)*1.62)}.fan img{position:absolute;bottom:calc(var(--pw)*.13);left:50%;width:var(--pw);height:auto;background:#fff;border:1.5px solid var(--line);transform-origin:50% 100%}
+.fan{width:100%;margin:calc(var(--pop)*-1) 0 -10px}.fan .pages{position:relative;height:calc(var(--pw)*1.62)}.fan img{position:absolute;bottom:calc(var(--pw)*.13);left:50%;width:var(--pw);height:auto;background:#fff;border:1.5px solid var(--line);transform-origin:50% 100%}
 .fan .p0{transform:translateX(-50%) rotate(-15deg)}.fan .p1{transform:translateX(-50%) rotate(0)}.fan .p2{transform:translateX(-50%) rotate(15deg)}
 
-@media (max-width:900px){.exrow{grid-template-columns:1fr}.fan{max-width:420px}}
-@media (max-width:520px){.fan{--pw:160px}}
+.dl .ttl{font-weight:700;font-size:var(--fs-m);margin:0 0 6px}.dl .meta{font-size:var(--fs-s);color:var(--mute);margin:0 0 20px}
+.dlb a{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 22px}.dl{min-width:0}
+@media (max-width:900px){.exrow{--pop:130px;--pw:200px;grid-template-columns:1fr;gap:8px;padding:24px 20px;margin-top:calc(var(--pop) + 44px)}.fan{width:min(100%,calc(var(--pw)*1.8));margin:calc(var(--pop)*-1) auto 0}}
+@media (max-width:520px){.exrow{--pw:190px}}
 .mixer{display:grid;gap:28px;max-width:760px;margin:56px auto 0}
 .ctl2{display:flex;flex-wrap:wrap;gap:16px 32px}.ctl2 .ctl{flex:1 1 14em}.ctl2 .ctl[hidden]{display:none}
 .ctl{display:flex;flex-direction:column;gap:6px;align-items:stretch}.lbl{font:400 var(--fs-s)/1.2 "IBM Plex Sans Condensed",sans-serif;color:var(--link);letter-spacing:.04em;text-transform:uppercase}
