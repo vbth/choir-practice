@@ -19,7 +19,7 @@ Stages:  solo   – own voice only
 Each voice file starts with the own starting note ("starting pitch"), a pause, then the music directly.
 Tutti files start with every voice's starting note one after another (low to high), a pause, then the music.
 A bar of count-in clicks is optional (COUNT_IN = True, off by default).
-Sound chain: FluidSynth + MuseScore General (Full; fallback FluidR3_GM) – every voice rendered as a mono
+Sound chain: FluidSynth + MuseScore General (Full; fallback GeneralUser GS from the skill, then FluidR3_GM) – every voice rendered as a mono
 stem and mixed with ffmpeg (MIDI pan is too weak with stereo soundfonts), light room reverb via a
 synthetic impulse response, legato articulation, loudness LUFS, MP3 192 kbit/s.
 """
@@ -29,12 +29,13 @@ from lxml import etree
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from common import load_i18n, safe, log_check, derive_playback
 
+GU_SF = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'assets', 'soundfonts', 'GeneralUser-GS.sf3')   # shipped with the skill
 SF_CANDIDATES = ['/usr/share/sounds/sf3/MuseScore_General_Full.sf3', '/usr/share/sounds/sf3/MuseScore_General.sf3',
-                 '/usr/share/sounds/sf2/FluidR3_GM.sf2']
+                 GU_SF, '/usr/share/sounds/sf2/FluidR3_GM.sf2']   # fallback: the bundled GeneralUser GS before FluidR3
 SF = next((p for p in SF_CANDIDATES if os.path.exists(p)), SF_CANDIDATES[-1])
 # short names for --soundfont: MuseScore General from the package manager, GeneralUser GS from the skill (assets/soundfonts, see THIRD_PARTY_NOTICES.md)
 SF_CHOICES = {'musescore': SF_CANDIDATES[:2],
-              'generaluser': [os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'assets', 'soundfonts', 'GeneralUser-GS.sf3')]}
+              'generaluser': [GU_SF]}
 # Mixing levels in dB relative to the singer's own voice for the three practice stages
 LV = {'near': -7, 'second': -9, 'far': -12, 'melody': -4, 'accomp': -12, 'tutti': -3}   # dB relative to own voice
 REVERB = {'on': True, 'rt': 1.3, 'wet': 0.30}

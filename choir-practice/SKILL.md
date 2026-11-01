@@ -238,7 +238,7 @@ Goal: improve the skill without costing tokens or overwhelming the user. **Defau
 
 | Situation | Response |
 |---|---|
-| Tool missing after setup | Use the fallback (FluidR3 soundfont), log it, tell the user what is missing in the result |
+| Tool missing after setup | Use the fallback (GeneralUser GS, bundled in the skill; FluidR3 only if that is missing too), log it, tell the user what is missing in the result |
 | Tested versions cannot be installed | Say so, offer the newest versions (ask), log them as not tested |
 | Page unreadable (blur, cut off, too small) | Ask for a better scan of that page; ask with `AskUserQuestion` (better scan / continue without that page) and wait; never invent the missing part |
 | Single spot unreadable | Most likely reading + `uncertain` correction entry + README open point |
