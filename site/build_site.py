@@ -489,7 +489,7 @@ h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 .pbox{display:grid;grid-template-columns:1fr;gap:20px;align-items:start;justify-self:start;width:100%;max-width:26em}
 .listen .art{width:100%;height:auto;display:block;border:1.5px solid var(--line)}
 .hw{position:relative;container-type:inline-size}
-.ov{--b:clamp(16px,3.4cqw,40px);position:absolute;left:50%;top:79%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:0;padding:calc(var(--b)*.2) calc(var(--b)*.35)}
+.ov{--b:clamp(16px,3.4cqw,40px);position:absolute;left:50%;top:79%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:0;padding:calc(var(--b)*.08) calc(var(--b)*.35)}
 .ov .rw{position:relative;display:flex;gap:2px}
 .ov .fr{filter:url(#kf);position:absolute;inset:0;border:clamp(1.6px,.26cqw,2.6px) solid var(--fg);border-radius:calc(var(--b)*.32);pointer-events:none}   /* even border; the wobble comes from a low-frequency displacement, which bends the line without changing its thickness */
 .ov button{position:relative;width:var(--b);height:var(--b);border:0;background:transparent;color:var(--fg);display:grid;place-items:center;cursor:pointer;padding:0}
