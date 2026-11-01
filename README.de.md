@@ -2,9 +2,9 @@
 
 # choir-practice Skill
 
-<p><picture><source media="(prefers-color-scheme: dark)" srcset="docs/img/header-dark.png"><img src="docs/img/header.png" alt="Ein Mann mit Kopfhörern steht in einer alten Badewanne und singt vom Notenblatt, neben ihm schwimmt eine Quietscheente. „Dienstagabend, er übt für seinen Chor … und ich darf es wieder ausbaden!“ – The duck" width="100%"></picture></p>
+<p><picture><source media="(prefers-color-scheme: dark)" srcset="docs/img/header-dark.png"><img src="docs/img/header.png" alt="Ein Mann mit Kopfhörern steht in einer alten Badewanne und singt vom Notenblatt, neben ihm schwimmt eine Quietscheente. „Dienstagabend, er übt für seinen Chor … und ich darf es wieder ausbaden!“ – The tenor’s duck" width="100%"></picture></p>
 
-> *„Dienstagabend, er übt für seinen Chor … und ich darf es wieder ausbaden!“* – The duck
+> *„Dienstagabend, er übt für seinen Chor … und ich darf es wieder ausbaden!“* – The tenor’s duck
 
 [English](README.md) | Deutsch
 

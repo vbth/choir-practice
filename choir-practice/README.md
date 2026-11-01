@@ -1,6 +1,6 @@
 # choir-practice Skill
 
-> *“Tuesday night, he’s rehearsing for his choir … and I’m the one who has to face the music.”* – The duck
+> *“Tuesday night, he’s rehearsing for his choir … and I’m the one who has to face the music.”* – The tenor’s duck
 
 English | [Deutsch](README.de.md)
 
