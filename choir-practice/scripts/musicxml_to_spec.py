@@ -14,6 +14,7 @@ def pitch_str(n):
     p = n.find('pitch'); step = p.findtext('step'); alt = int(float(p.findtext('alter') or 0))
     return step + {-2: 'bb', -1: 'b', 0: '', 1: '#', 2: '##'}[alt] + p.findtext('octave')
 
+# Reverse of build_score.py: reads notes, lyrics, repeats and directions back into the token format of score.json
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument('xml'); ap.add_argument('out'); ap.add_argument('--voices')
     A = ap.parse_args()

@@ -135,6 +135,7 @@ def md5(p):
     return h.hexdigest()
 
 
+# Assembles the delivery folder: scores, practice files per voice, documentation, tools; ends with self-checks that must all pass
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument('pkg'); ap.add_argument('spec'); ap.add_argument('outdir')
     ap.add_argument('--workdir', required=True); ap.add_argument('--source', required=True); ap.add_argument('--docs'); ap.add_argument('--date')

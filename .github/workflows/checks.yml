@@ -27,6 +27,8 @@ jobs:
           bash choir-practice/scripts/setup.sh --check | grep -q 'python state:'
       - name: Third-party notices cover every bundled and installed component
         run: python choir-practice/scripts/check_third_party.py --brief
+      - name: VERSION, CHANGELOG and session handoff carry the same version
+        run: python choir-practice/scripts/check_version.py
       - name: Language packs and handoff templates in step
         run: python choir-practice/scripts/check_templates.py
       - name: Website is up to date with build_site.py

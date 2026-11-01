@@ -18,6 +18,7 @@ PROGRAMS = {'choir': 53, 'piano': 1}   # MusicXML midi-program is 1-based: 53 = 
 VOICE_WORDS = [('sopran', 'voice.soprano'), ('mezzo', 'voice.mezzo-soprano'), ('alt', 'voice.alto'),
                ('tenor', 'voice.tenor'), ('barit', 'voice.baritone'), ('bass', 'voice.bass'), ('baß', 'voice.bass')]
 
+# Picks the vocal sound (soprano/alto/tenor/bass) from the part name, falling back to the clef
 def voice_sound(name, clef_sign, clef_oct):
     n = (name or '').lower()
     for w, snd in VOICE_WORDS:

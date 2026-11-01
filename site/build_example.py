@@ -15,6 +15,7 @@ def run(*a):
     print('$', ' '.join(os.path.relpath(x) if os.path.exists(x) else x for x in map(str, a)), flush=True)
     subprocess.run([sys.executable, *map(str, a)], check=True)
 
+# Runs the skill's own pipeline on the example score; --from-phase allows resuming after the expensive audio steps
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument('lang'); ap.add_argument('root'); ap.add_argument('--date', default='2026-10-28'); ap.add_argument('--from-phase', type=int, default=3); ap.add_argument('--soundfont', help='passed to make_audio.py (musescore or generaluser); default: make_audio decides')
     A = ap.parse_args(); L = A.lang; base = os.path.abspath(os.path.join(A.root, L)); W, P, O = (os.path.join(base, x) for x in ('work', 'pkg', 'out'))

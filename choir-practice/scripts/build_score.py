@@ -15,10 +15,12 @@ from common import load_i18n, log_check, repeat_endings, repeat_times, skill_ver
 
 CLEFS = {'treble': ('G', '2', None), 'treble8': ('G', '2', '-1'), 'bass': ('F', '4', None),
          'alto': ('C', '3', None), 'tenor': ('C', '4', None)}
+# One note token, e.g. "C4/8~" = pitch/duration plus markers: ~ tie, ( ) slur, { } dotted slur, ^ fermata
 TOK = re.compile(r'^(?P<p>r|[A-G](?:##|bb|#|b|n)?-?\d)/(?P<d>\d+)(?P<f>[~(){}^]*)$')
 ALTER = {'': 0, 'n': 0, '#': 1, '##': 2, 'b': -1, 'bb': -2}
 SHARPS, FLATS = 'FCGDAEB', 'BEADGCF'
 
+# Maps a duration in divisions to a MusicXML note type plus dots; anything else must be split into tied notes
 def note_type(dur, div):
     q = dur / div
     table = [(4, 'whole', 0), (6, 'whole', 1), (7, 'whole', 2), (2, 'half', 0), (3, 'half', 1), (3.5, 'half', 2),
@@ -49,6 +51,7 @@ def timeline(spec, nbars):
         out.append((t, k))
     return out
 
+# Turns the bar strings of one voice into note dicts and validates bar lengths and ties
 def parse_voice(spec, vid, tl, errors):
     div = spec['divisions']; bars = spec['music'][vid]; nb = len(bars); out = []
     for bi, line in enumerate(bars):
@@ -86,6 +89,7 @@ def parse_lyric_tokens(s):
             bar, on, tok = item.split(':', 2); res.append((int(bar), int(on), tok.strip()))
     return res
 
+# A trailing "-" in a lyric token means the word continues: begin/middle/end/single is derived from that
 def syllabify(tokens):
     out = {}; prev_open = False
     for bar, on, tok in sorted(tokens, key=lambda x: (x[0], x[1])):
@@ -115,6 +119,7 @@ def E(tag, text=None, **attr):
     if text is not None: e.text = str(text)
     return e
 
+# Builds the whole MusicXML tree: header, part list, then one <part> per voice; errors and warnings are collected, not raised
 def build(spec):
     errors, warns = [], []
     div = spec['divisions']; voices = spec['voices']; vids = [v['id'] for v in voices]
@@ -153,6 +158,7 @@ def build(spec):
         mi = etree.SubElement(sp, 'midi-instrument', id=f'P{i}-I1')
         etree.SubElement(mi, 'midi-channel').text = str(i); etree.SubElement(mi, 'midi-program').text = '53'
     etree.SubElement(plist, 'part-group', type='stop', number='1')
+    # Repeat structure per bar: forward/backward repeat signs and volta (ending) brackets
     rep_fwd, rep_bwd, end_start, end_stop = set(), {}, {}, {}
     for r in spec.get('repeats') or []:
         rep_fwd.add(r['start']); ends = repeat_endings(r)
@@ -196,6 +202,7 @@ def build(spec):
                 elif x['kind'] == 'words': dt.append(E('words', x['value'], font_style='italic'))
                 elif x['kind'] == 'wedge': dt.append(E('wedge', type=x['value'], number='1'))
                 return dd
+            # accidentals are printed only when they differ from the key signature or an earlier accidental in the same bar
             acc_state = {}
             for n in bar:
                 for x in bar_dirs:
@@ -251,6 +258,7 @@ def build(spec):
                 if mnum in end_start: etree.SubElement(b, 'ending', number=end_start[mnum], type='start')
                 if mnum in rep_fwd: etree.SubElement(b, 'repeat', direction='forward')
                 m.insert(0, b)
+        # Lyrics: attach syllables to notes; a syllable held over following notes gets an extend line
         for vk, L in lyr.items():
             chain, cur = [], None
             def close():

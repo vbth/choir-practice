@@ -18,6 +18,7 @@ WIDTHS = (160, 240, 320, 480, 720)   # 160 and 240 px displayed at 1x, 2x, 3x (s
 RATIO = 1980 / 1400   # A4 as before
 RENDER = os.path.join(HERE, '..', 'choir-practice', 'scripts', 'render_score.py')
 
+# Renders the score PDF from the packed project data of one example ZIP and cuts out cover and music pages
 def one(zip_path, work):
     d = os.path.join(work, os.path.splitext(os.path.basename(zip_path))[0]); zipfile.ZipFile(zip_path).extractall(d)
     spec_p = glob.glob(os.path.join(d, '4_*', '1_*', 'score.json'))[0]; lay = json.load(open(os.path.join(os.path.dirname(spec_p), 'layout.json'), encoding='utf-8'))

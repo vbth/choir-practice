@@ -29,6 +29,7 @@ SHARP_ORDER = ['F', 'C', 'G', 'D', 'A', 'E', 'B']
 # staff position 0 = bottom line; value = (letter index, octave) of the SOUNDING pitch on the bottom line
 BOTTOM = {'treble': (2, 4), 'treble8': (2, 3), 'bass': (4, 2)}   # E4, E3, G2
 
+# Staff position -> pitch name, using the clef's bottom line and the key signature
 def pitch_name(pos, clef, key):
     li, octv = BOTTOM[clef]
     n = li + pos
@@ -38,6 +39,7 @@ def pitch_name(pos, clef, key):
     if key > 0 and letter in SHARP_ORDER[:key]: acc = '#'
     return f'{letter}{acc}{octave}'
 
+# Merges neighbouring pixel rows into line centres (rows closer than `gap` belong to one line)
 def groups(rows, gap=2):
     out, cur = [], []
     for r in rows:
@@ -46,6 +48,7 @@ def groups(rows, gap=2):
     if cur: out.append(cur)
     return [sum(c) / len(c) for c in out]
 
+# Finds groups of five roughly equidistant lines = one staff
 def five_lines(centres, H):
     res, i = [], 0
     while i + 4 < len(centres):
@@ -55,6 +58,7 @@ def five_lines(centres, H):
         else: i += 1
     return res
 
+# Scans vertical windows across the page and keeps the staff count that most windows agree on (robust against rotated scans)
 def fit_staves(dark, W, H):
     win = max(60, int(W * 0.057)); step = max(30, win // 2)
     per_window = []
@@ -95,6 +99,7 @@ def local_lines(dark, fits, x):
         found.append(ya + float((idx * w).sum() / w.sum()))
     return found
 
+# Detects filled note heads around each staff and converts their height to a pitch
 def find_heads(dark, staves, clefs, key):
     out = []
     for si, fits in enumerate(staves):

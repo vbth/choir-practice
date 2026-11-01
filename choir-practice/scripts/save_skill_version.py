@@ -4,7 +4,7 @@
 Usage: save_skill_version.py SKILL_DIR --out OUT_DIR --bump patch|minor|major --note "text" [--note "text" ...] [--handoff FILE]
 Prints the path of the created file. Does not change the user's account skill.
 """
-import argparse, datetime, pathlib, zipfile
+import argparse, datetime, pathlib, subprocess, sys, zipfile
 
 ap = argparse.ArgumentParser()
 ap.add_argument('skill_dir'); ap.add_argument('--out', required=True)
@@ -37,4 +37,7 @@ with zipfile.ZipFile(target, 'w', zipfile.ZIP_DEFLATED) as z:
 import shutil
 if a.handoff: shutil.copy(a.handoff, folder / 'session-handoff.md')
 if (d / 'README.md').exists(): shutil.copy(d / 'README.md', folder / 'README.md')
+# the folder name carries the version: make sure it matches VERSION and the archive
+if subprocess.run([sys.executable, str(d / 'scripts' / 'check_version.py'), '--file', str(target)]).returncode:
+    raise SystemExit('Version check failed: the built file does not match VERSION.')
 print(target)

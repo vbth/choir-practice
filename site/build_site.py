@@ -228,6 +228,7 @@ def fan_img(A, L, name, cls, alt):
     srcset = ', '.join(f'{A}img/example-{name}-{L}-{w}.png {w}w' for w in FAN_W)
     return f'<img class="{cls}" src="{A}img/example-{name}-{L}-480.png" srcset="{srcset}" sizes="(max-width:520px) 160px, 240px" alt="{esc(alt)}" width="240" height="339" loading="lazy">'
 
+# Renders one language version of the landing page; texts come from the dict T, structure and markup live here
 def page(L):
     t = T[L]; A = t['assets']
     I = t['ids']
@@ -671,6 +672,7 @@ def ai_labels():
     open(os.path.join(OUT, 'img', 'github-mark.svg'), 'w', encoding='utf-8').write(gh)
     open(os.path.join(OUT, 'img', 'github-mark-dark.svg'), 'w', encoding='utf-8').write(gh.replace('#000000', '#ffffff'))
 
+# Writes css, js, both pages, sitemap and robots into docs/; CI fails if the committed docs/ differ from this output
 def main():
     os.makedirs(os.path.join(OUT, 'css'), exist_ok=True); os.makedirs(os.path.join(OUT, 'js'), exist_ok=True); os.makedirs(os.path.join(OUT, 'de'), exist_ok=True); os.makedirs(os.path.join(OUT, 'en'), exist_ok=True)
     ai_labels()

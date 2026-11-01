@@ -3,6 +3,8 @@
 All notable changes to the skill. Newest first. Versions follow [SemVer](https://semver.org/); every release is a git tag `vX.Y.Z` with a GitHub release that carries the `.skill` file.
 
 ## Unreleased
+- Build and release check `check_version.py`: VERSION, newest CHANGELOG section, session handoff, version in the folder name and VERSION inside the built `.skill` must agree; runs in `release.py`, `save_skill_version.py`, the Checks workflow and the Release workflow (together with the tag)
+- Scripts: short English comments on the non-obvious parts of the build, audio, layout and website scripts (no change in behaviour)
 - Headline "Deine Chorstimme. Deine Noten. Überall lesen, hören und singen." (en: "Your voice. Your sheet music. Read, listen, and sing anywhere.") on the website (H1 and page title) and in the READMEs
 - Website, module "Üben" / "Practice": one sentence that the sound can be chosen when the files are created, MuseScore General or GeneralUser GS
 - Optional soundfont **GeneralUser GS 2.0.3** (S. Christian Collins) included in the skill, `make_audio.py --soundfont generaluser` (short names `musescore` and `generaluser` added; MuseScore General stays the default); to fit the upload limit it is carried compressed to the SF3 format (32.3 MB → 7.1 MB, lossy, presets and licence text unchanged); original source linked in the READMEs and `THIRD_PARTY_NOTICES.md`, licence text in `assets/soundfonts/`; the README of a package credits it when it was used; `check_third_party.py` also covers `assets/soundfonts/`

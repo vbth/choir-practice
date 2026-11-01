@@ -14,6 +14,7 @@ from lxml import etree
 
 def norm(t): return re.sub(r'[\W_]+', '', t.lower())
 
+# Syllables of the built score as {verse: {bar: [text, ...]}}
 def built(xml, part):
     r = etree.parse(xml).getroot(); p = r.findall('part')[part - 1]; out = {}
     for i, m in enumerate(p.findall('measure'), 1):

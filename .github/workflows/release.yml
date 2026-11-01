@@ -9,12 +9,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - name: Check that tag and VERSION match
-        run: test "v$(cat choir-practice/VERSION)" = "$GITHUB_REF_NAME"
+      - name: Check that tag, VERSION, CHANGELOG and handoff match
+        run: python choir-practice/scripts/check_version.py --tag "$GITHUB_REF_NAME"
       - name: Build .skill and release notes
         run: |
           V="${GITHUB_REF_NAME#v}"
           zip -qr choir-practice.skill choir-practice -x '*/__pycache__/*'
+          python choir-practice/scripts/check_version.py --tag "$GITHUB_REF_NAME" --file choir-practice.skill
           awk -v v="$V" '$0 ~ "^## "v" " {p=1; next} /^## / {p=0} p' CHANGELOG.md > notes.md
       - name: Create GitHub release (or add the file to a release created in the web interface)
         env:
