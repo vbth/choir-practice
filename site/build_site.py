@@ -366,7 +366,7 @@ def page(L):
  </div>
  <div class="mix" id="mix" data-audio="{A}audio/mix/" role="group" aria-labelledby="mxh">
   <p class="mxh" id="mxh">{esc(t['mx_h'])}</p><p class="mxp">{esc(t['mx_p'])}</p>
-  <div class="pc"><button type="button" class="pbtn" id="mxplay" aria-label="{esc(t['pl_play'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path id="mxicon" d="M7 4l13 8-13 8z" fill="currentColor"/></svg></button>
+  <div class="pc"><button type="button" class="mxplay" id="mxplay" aria-label="{esc(t['pl_play'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path id="mxicon" d="M7 4l13 8-13 8z" fill="currentColor"/></svg></button>
    <input type="range" id="mxseek" min="0" max="1000" value="0" aria-label="{esc(t['pl_seek'])}"><span id="mxtime" class="mono">0:00</span></div>
   {mixrows}
   </div>
@@ -495,8 +495,8 @@ h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 @container (max-width:520px){.ov button svg{width:68%;height:68%;filter:url(#krs)}.ov .fr{filter:url(#kfs);border-width:1.2px}}   /* narrow image: the tub is too small for a second row; the volume stays in the player below */
 .pt{margin:0;font-weight:700}.ps{margin:2px 0 12px;color:var(--mute);font-size:var(--fs-s);min-height:1.55em}
 .pc{display:flex;align-items:center;gap:14px}
-.pbtn,.vbtn{flex:none;width:44px;height:44px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg);display:grid;place-items:center;cursor:pointer;padding:0}
-.pbtn:focus-visible,.vbtn:focus-visible,#plseek:focus-visible,.vol:focus-visible,.groups summary:focus-visible,.trk button:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+.pbtn,.vbtn,.mxplay{flex:none;width:44px;height:44px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg);display:grid;place-items:center;cursor:pointer;padding:0}
+.pbtn:focus-visible,.vbtn:focus-visible,.mxplay:focus-visible,#plseek:focus-visible,.vol:focus-visible,.groups summary:focus-visible,.trk button:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
 #plseek{flex:1;min-width:0;accent-color:var(--fg);height:24px;cursor:pointer}
 .vol{flex:1;min-width:0;accent-color:var(--fg);height:24px;cursor:pointer}.pv{margin-top:10px}
 .mute .x{display:none}.mute[aria-pressed=true] .x{display:inline}.mute[aria-pressed=true] .w{display:none}
@@ -617,7 +617,7 @@ function draw(){
  function pos(e){return x0+e[1]*(cur.stage==='tutti'?270:190)}   // tutti: circles further apart
  own.forEach(function(e,i){var y=oy;
   var g=el('g',{'class':'vb',role:'button',tabindex:0,'aria-label':D.voices[e[0]],'aria-pressed':e[0]===cur.voice});var r=rad(e[2]);
-  var pick=function(){change(function(){cur.voice=e[0]},true)};   // the circles switch the voice, like the voice buttons
+  var pick=function(){if(e[0]===cur.voice&&!A.paused){A.pause();return}change(function(){cur.voice=e[0]},true)};   // the circles switch the voice, like the voice buttons; the circle of the voice that is playing stops the sound
   g.addEventListener('click',pick);g.addEventListener('keydown',function(ev){if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();pick()}});
   g.appendChild(el('circle',{cx:pos(e),cy:y,r:r,fill:'none','pointer-events':'all',stroke:col,'stroke-width':e[0]===cur.voice&&e[2]===0?sw*3:sw*1.5}));
   g.appendChild(el('text',{x:pos(e),y:y,dy:'.35em','font-size':Math.min(LS,1.5*r),'text-anchor':'middle','font-weight':700},e[0]));   // dy: cap height centred in the circle
@@ -757,15 +757,19 @@ function finish(){playing=false;stopSrc();off=0;setIcon(false);cancelAnimationFr
 play.addEventListener('click',function(){
  if(!AC)return;if(playing){pause();return}
  if(!cx)setup();if(cx.state==='suspended')cx.resume();
- A.pause();   // only one thing plays at a time
- load().then(function(){start(off>=dur-.1?0:off)}).catch(function(){loading=false;mx.removeAttribute('aria-busy')});
+ A.pause();mixOwns=true;   // only one thing plays at a time
+ load().then(function(){A.pause();start(off>=dur-.1?0:off)}).catch(function(){loading=false;mx.removeAttribute('aria-busy')});
 });
 seek.addEventListener('input',function(){if(!bufs)return;var p=seek.value/1000*dur;if(playing)start(p);else{off=p;time.textContent=fmt(p)}});
 rows().forEach(function(r){var b=$('.mxb',r),v=$('.mxv',r),pc=$('.mxp2',r);
  function upd(){pc.innerHTML=v.value+'&nbsp;%';r.classList.toggle('off',b.getAttribute('aria-pressed')!=='true');if(cx)apply()}
  b.addEventListener('click',function(){b.setAttribute('aria-pressed',b.getAttribute('aria-pressed')!=='true');upd()});
  v.addEventListener('input',upd)});
-A.addEventListener('play',pause);   // the recordings below take over
+// the two never play together: starting the mixer stops the recordings; the recordings only start again when the visitor asks for them
+// (on iPhones the system may resume an interrupted audio element by itself when the mixer pauses: such a start without a click on the recordings is stopped)
+var asked=0,mixOwns=false;
+document.addEventListener('click',function(e){var t=e.target;if(t.closest&&!t.closest('#mix')&&t.closest('button,.hw,#player'))asked=Date.now()},true);
+A.addEventListener('play',function(){if(mixOwns&&Date.now()-asked>1500){A.pause();return}mixOwns=false;pause()})
 document.addEventListener('visibilitychange',function(){if(!document.hidden&&playing)tick()});
 })();
 window.addEventListener('resize',function(){clearTimeout(window.__rz);window.__rz=setTimeout(function(){draw();fitLead()},150)});

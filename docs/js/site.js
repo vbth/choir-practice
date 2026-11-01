@@ -69,7 +69,7 @@ function draw(){
  function pos(e){return x0+e[1]*(cur.stage==='tutti'?270:190)}   // tutti: circles further apart
  own.forEach(function(e,i){var y=oy;
   var g=el('g',{'class':'vb',role:'button',tabindex:0,'aria-label':D.voices[e[0]],'aria-pressed':e[0]===cur.voice});var r=rad(e[2]);
-  var pick=function(){change(function(){cur.voice=e[0]},true)};   // the circles switch the voice, like the voice buttons
+  var pick=function(){if(e[0]===cur.voice&&!A.paused){A.pause();return}change(function(){cur.voice=e[0]},true)};   // the circles switch the voice, like the voice buttons; the circle of the voice that is playing stops the sound
   g.addEventListener('click',pick);g.addEventListener('keydown',function(ev){if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();pick()}});
   g.appendChild(el('circle',{cx:pos(e),cy:y,r:r,fill:'none','pointer-events':'all',stroke:col,'stroke-width':e[0]===cur.voice&&e[2]===0?sw*3:sw*1.5}));
   g.appendChild(el('text',{x:pos(e),y:y,dy:'.35em','font-size':Math.min(LS,1.5*r),'text-anchor':'middle','font-weight':700},e[0]));   // dy: cap height centred in the circle
@@ -209,15 +209,19 @@ function finish(){playing=false;stopSrc();off=0;setIcon(false);cancelAnimationFr
 play.addEventListener('click',function(){
  if(!AC)return;if(playing){pause();return}
  if(!cx)setup();if(cx.state==='suspended')cx.resume();
- A.pause();   // only one thing plays at a time
- load().then(function(){start(off>=dur-.1?0:off)}).catch(function(){loading=false;mx.removeAttribute('aria-busy')});
+ A.pause();mixOwns=true;   // only one thing plays at a time
+ load().then(function(){A.pause();start(off>=dur-.1?0:off)}).catch(function(){loading=false;mx.removeAttribute('aria-busy')});
 });
 seek.addEventListener('input',function(){if(!bufs)return;var p=seek.value/1000*dur;if(playing)start(p);else{off=p;time.textContent=fmt(p)}});
 rows().forEach(function(r){var b=$('.mxb',r),v=$('.mxv',r),pc=$('.mxp2',r);
  function upd(){pc.innerHTML=v.value+'&nbsp;%';r.classList.toggle('off',b.getAttribute('aria-pressed')!=='true');if(cx)apply()}
  b.addEventListener('click',function(){b.setAttribute('aria-pressed',b.getAttribute('aria-pressed')!=='true');upd()});
  v.addEventListener('input',upd)});
-A.addEventListener('play',pause);   // the recordings below take over
+// the two never play together: starting the mixer stops the recordings; the recordings only start again when the visitor asks for them
+// (on iPhones the system may resume an interrupted audio element by itself when the mixer pauses: such a start without a click on the recordings is stopped)
+var asked=0,mixOwns=false;
+document.addEventListener('click',function(e){var t=e.target;if(t.closest&&!t.closest('#mix')&&t.closest('button,.hw,#player'))asked=Date.now()},true);
+A.addEventListener('play',function(){if(mixOwns&&Date.now()-asked>1500){A.pause();return}mixOwns=false;pause()})
 document.addEventListener('visibilitychange',function(){if(!document.hidden&&playing)tick()});
 })();
 window.addEventListener('resize',function(){clearTimeout(window.__rz);window.__rz=setTimeout(function(){draw();fitLead()},150)});
