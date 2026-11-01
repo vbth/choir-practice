@@ -509,6 +509,7 @@ h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 .mxr{display:flex;align-items:center;gap:14px;margin-top:10px}
 .mxb{flex:none;width:6.5em;height:36px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg);font:inherit;font-size:var(--fs-s);cursor:pointer;padding:0 6px}
 .mxb[aria-pressed=true]{background:var(--fg);color:var(--bg)}
+.mxplay{width:calc(6.5*var(--fs-s));height:36px}   /* same size as the voice buttons below */
 .mxv{flex:1;min-width:0;accent-color:var(--fg);height:24px;cursor:pointer}.mxr .mxp2{flex:none;font-size:var(--fs-s);min-width:3.2em;text-align:right}
 .mxr.off .mxv,.mxr.off .mxp2{opacity:.4}
 .mxb:focus-visible,.mxv:focus-visible,#mxseek:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
