@@ -84,17 +84,7 @@ h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 .listen{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 56px;align-items:start}
 .pbox{display:grid;grid-template-columns:1fr;gap:20px;align-items:start;justify-self:start;width:100%;max-width:26em}
 .listen .art{width:100%;height:auto;display:block;border:1.5px solid var(--line)}
-.hw{position:relative;container-type:inline-size}
-.ov{--b:clamp(16px,3.4cqw,40px);position:absolute;left:50%;top:79%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:0;padding:calc(var(--b)*.08) calc(var(--b)*.35)}
-.ov .rw{position:relative;display:flex;gap:2px}
-.fr{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;fill:none;stroke:var(--fg);stroke-width:clamp(1.6px,.26cqw,2.6px);stroke-linejoin:round;stroke-linecap:round}
-.fr path{vector-effect:non-scaling-stroke}   /* the line keeps its thickness at every size; the wobble is in the path (WOBBLE in build_site.py) */
-.hw.on .fr1{display:none}.hw:not(.on) .fr2{display:none}   /* closed: the single play button in its frame; open: the full remote */
-.ov button{position:relative;width:var(--b);height:var(--b);border:0;background:transparent;color:var(--fg);display:grid;place-items:center;cursor:pointer;padding:0}
-.ov button svg{width:55%;height:55%}.ov button svg{filter:url(#kr)}.ov button:focus-visible{outline:2px solid var(--fg);outline-offset:-2px}
-@media (hover:hover){.pbtn:hover,.vbtn:hover,.ov button:hover,.ov button[aria-pressed=true]:hover{color:var(--link)}.vol:hover,#plseek:hover{accent-color:var(--link)}}
-.hw:not(.on) .ov .rw button:not(.pbtn){display:none}   /* before the first click or tap only the play button in its frame */
-@container (max-width:520px){.ov button svg{width:68%;height:68%;filter:url(#krs)}.fr{stroke-width:1.2px}}   /* narrow image: the tub is too small for a second row; the volume stays in the player below */
+@media (hover:hover){.pbtn:hover,.vbtn:hover{color:var(--link)}.vol:hover,#plseek:hover{accent-color:var(--link)}}
 .pt{margin:0;font-weight:700}.ps{margin:2px 0 12px;color:var(--mute);font-size:var(--fs-s);min-height:1.55em}
 .pc{display:flex;align-items:center;gap:14px}
 .pbtn,.vbtn,.mxplay{flex:none;width:44px;height:44px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg);display:grid;place-items:center;cursor:pointer;padding:0}
