@@ -14,7 +14,7 @@ Rules (all deterministic, so the same piece always gets the same cover):
   dark centre  metre: number of main beats per bar (6/8 = 2, 3/4 = 3, 4/4 = 4) moves the dark centre along the bottom edge
                (more beats = further left); the bottom right corner stays light for the EU label
 EU label "AI" (round basic icon, black): fixed in the template (LABEL_H, LABEL_MARGIN): height 14 % of the cover, right and bottom margin 5 %
-Exception: score.json may carry "cover": {"color": "#rrggbb"}; the hue then comes from that colour instead of the key (used for the example pack).
+Only the website's example may carry "cover": {"color": "#rrggbb"} (the hue then comes from that colour); the skill never writes or documents it, so every new score gets the key-derived colours.
 Four radial colour fields (light top left, saturated top right, mid bottom right, deep bottom centre) are blended, plus a little grain.
 Legibility is guaranteed by construction and checked on the pixels: the title box (top left) and the label box (bottom right,
 EU label "AI" alone, the black circle must stay recognisable) must both reach contrast >= 7:1 with black
@@ -104,7 +104,7 @@ def title_layout(title, W, fnt_path):
 def make(spec, xml, out, workdir=None):
     S = SIZE; fifths = int(spec.get('key_fifths', 0)); minor = detect_minor(xml, fifths)
     hue = (120 + 30 * fifths) % 360
-    col_hex = (spec.get('cover') or {}).get('color')   # optional override (the example pack uses the red of the website): hue taken from this colour
+    col_hex = (spec.get('cover') or {}).get('color')   # set only in the website's example spec (red of the website); new scores never set it
     if col_hex: hue = round(colorsys.rgb_to_hls(*(int(col_hex.lstrip('#')[i:i + 2], 16) / 255 for i in (0, 2, 4)))[0] * 360) % 360
     reg = REG_SHIFT * min(1.0, max(-1.0, (mean_pitch(xml) - 60) / 12.0)); q = qpm(spec.get('tempo') or {}); ts = spec.get('time') or [4, 4]
     soft = 0.36 - 0.14 * min(1.0, max(0.0, (q - 50) / 100.0)); beats = beats_per_bar(ts)

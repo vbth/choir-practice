@@ -29,7 +29,6 @@
 | `directions` | see 4 |
 | `barlines` | `{"bar index": "light-light"}` etc. (final bar gets light-heavy automatically) |
 | `changes` | `{"bar index": {"time": [3,4], "key_fifths": 0}}` |
-| `cover` | optional `{"color": "#rrggbb"}`: the album art takes its hue from this colour instead of the key (normally not set) |
 
 Bar index 0 is the pickup if `pickup` is true; otherwise bar 0 is the first full bar.
 
