@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Builds the example package of the website ("Alle meine Entchen" / "All My Ducklings", 2/4) with the skill's own pipeline (phases 3 to 7).
 
-  python3 site/build_example.py LANG WORKROOT [--date YYYY-MM-DD] [--from-phase N]
+  python3 site/build_example.py LANG WORKROOT [--date YYYY-MM-DD] [--from-phase N] [--soundfont NAME]
 
 Inputs live in site/example/: score.<lang>.json (the piece), docs.<lang>.json (notes, sources), handoff.<lang>.md (session handoff of the piece).
 Writes WORKROOT/<lang>/work (project data), WORKROOT/<lang>/pkg (work package) and WORKROOT/<lang>/out (delivery folder and the ONE ZIP).
@@ -16,7 +16,7 @@ def run(*a):
     subprocess.run([sys.executable, *map(str, a)], check=True)
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument('lang'); ap.add_argument('root'); ap.add_argument('--date', default='2026-10-28'); ap.add_argument('--from-phase', type=int, default=3)
+    ap = argparse.ArgumentParser(); ap.add_argument('lang'); ap.add_argument('root'); ap.add_argument('--date', default='2026-10-28'); ap.add_argument('--from-phase', type=int, default=3); ap.add_argument('--soundfont', help='passed to make_audio.py (musescore or generaluser); default: make_audio decides')
     A = ap.parse_args(); L = A.lang; base = os.path.abspath(os.path.join(A.root, L)); W, P, O = (os.path.join(base, x) for x in ('work', 'pkg', 'out'))
     spec = json.load(open(os.path.join(HERE, 'example', f'score.{L}.json'), encoding='utf-8')); slug = safe(spec['meta']['title']); i18 = load_i18n(L); fo = i18['folders']
     if A.from_phase <= 3:
@@ -31,7 +31,8 @@ def main():
         '--write-xml', os.path.join(W, 'final.musicxml'), '--workdir', W)
     run(os.path.join(S, 'make_scores.py'), os.path.join(W, 'final.musicxml'), sc, '--slug', slug, '--lang', L, '--workdir', W)
     if A.from_phase <= 5:
-        run(os.path.join(S, 'make_audio.py'), os.path.join(W, 'final.musicxml'), score, P, '--slug', slug, '--slow-pct', '80', '--workdir', W)
+        run(os.path.join(S, 'make_audio.py'), os.path.join(W, 'final.musicxml'), score, P, '--slug', slug, '--slow-pct', '80', '--workdir', W,
+            *(['--soundfont', A.soundfont] if A.soundfont else []))
         run(os.path.join(S, 'audio_check.py'), P, score, '--workdir', W)
     run(os.path.join(S, 'make_overview.py'), os.path.join(P, 'mixes.json'), score, os.path.join(P, fo['practice'], f'{slug}_{i18["files"]["overview"]}.pdf'), '--png', os.path.join(W, 'overview.png'), '--workdir', W)
     shutil.copy(os.path.join(HERE, 'example', f'handoff.{L}.md'), os.path.join(P, 'session_handoff.md'))
