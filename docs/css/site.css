@@ -87,7 +87,7 @@ h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 .ov .fr{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}.ov .fr path{fill:none;stroke:var(--fg);stroke-width:clamp(2.4px,.3cqw,3.4px);vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round}
 .hw:hover .ov,.hw:focus-within .ov{opacity:1;pointer-events:auto}
 .ov button{position:relative;width:var(--b);height:var(--b);border:0;background:transparent;color:var(--fg);display:grid;place-items:center;cursor:pointer;padding:0}
-.ov button[aria-pressed=true]{background:var(--fg);color:var(--bg)}.ov button svg{width:55%;height:55%}.ov button:focus-visible{outline:2px solid var(--fg);outline-offset:-2px}
+.ov .loop[aria-pressed=true]{color:var(--link)}.ov button svg{width:55%;height:55%}.ov button:focus-visible{outline:2px solid var(--fg);outline-offset:-2px}
 .pbtn:hover,.vbtn:hover,.ov button:hover,.ov button[aria-pressed=true]:hover{color:var(--link)}.vol:hover,.ov .vol:hover,#plseek:hover{accent-color:var(--link)}
 @media (hover:none){.ov{opacity:1;pointer-events:auto}}
 .pt{margin:0;font-weight:700}.ps{margin:2px 0 12px;color:var(--mute);font-size:var(--fs-s);min-height:1.55em}

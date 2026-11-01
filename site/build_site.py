@@ -316,12 +316,12 @@ def page(L):
 <div class="ov" role="group" aria-label="{esc(t['pl_title'])}">
 <svg class="fr" viewBox="0 0 200 60" preserveAspectRatio="none" aria-hidden="true"><path d="M16 3.6C60 1.6 140 4.6 184 2.8Q198 3 197.6 17C198.6 25 196.6 40 197 44Q197 57.6 183 57C140 58.6 60 55.6 17 57.6Q2.6 58 3 44C2 35 4 22 2.8 16Q3 2.6 17.4 3.8L27 2.4"/></svg>
 <div class="rw">
-     <button type="button" class="prev" aria-label="{esc(t['pl_prev'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 5h2.5v14H6zM19 5v14L9.5 12z" fill="currentColor"/></svg></button>
-     <button type="button" class="pbtn" aria-label="{esc(t['pl_play'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path class="picon" d="M7 4l13 8-13 8z" fill="currentColor"/></svg></button>
-     <button type="button" class="next" aria-label="{esc(t['pl_next'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M15.5 5H18v14h-2.5zM5 5l9.5 7L5 19z" fill="currentColor"/></svg></button>
-     <button type="button" class="loop" aria-pressed="false" aria-label="{esc(t['pl_loop'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M7 7h10v3l4-4-4-4v3H5v6h2zM17 17H7v-3l-4 4 4 4v-3h12v-6h-2z" fill="currentColor"/></svg></button>
+     <button type="button" class="prev" aria-label="{esc(t['pl_prev'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M5.9 5.2Q6.3 11 6 18.9" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.9 5.4Q13 9.2 9.1 12.3Q13.4 14.6 18.6 18.7Q19.3 12 18.9 5.4Z" fill="currentColor" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round"/></svg></button>
+     <button type="button" class="pbtn" aria-label="{esc(t['pl_play'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path class="picon" d="M7.2 4.6Q13.5 8.4 19.6 12.1Q13.3 15.9 7.4 19.6Q7.8 12 7.2 4.6Z" fill="currentColor" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round"/></svg></button>
+     <button type="button" class="next" aria-label="{esc(t['pl_next'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M18 5.2Q17.7 11 18.1 18.9" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.2 5.4Q11 9.2 14.9 12.3Q10.6 14.6 5.4 18.7Q4.7 12 5.2 5.4Z" fill="currentColor" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round"/></svg></button>
+     <button type="button" class="loop" aria-pressed="false" aria-label="{esc(t['pl_loop'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M5 11.2Q5.3 6.8 9.6 6.6L17.8 6.9M15 3.8L18.4 6.9L15.2 9.9M19 12.8Q18.8 17.2 14.4 17.4L6.2 17.1M9 14.1L5.6 17.1L8.8 20.2" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
 </div>
-<div class="vw"><button type="button" class="mute" aria-pressed="false" aria-label="{esc(t['pl_mute'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3z" fill="currentColor"/><path class="w" d="M15.5 8.5a5 5 0 010 7M18 6a8.5 8.5 0 010 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path class="x" d="M15 9l6 6M21 9l-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button><input type="range" class="vol" min="0" max="100" value="100" aria-label="{esc(t['pl_vol'])}"></div>
+<div class="vw"><button type="button" class="mute" aria-pressed="false" aria-label="{esc(t['pl_mute'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M3.4 9.2Q3.2 12 3.5 14.9L7 15Q9.6 17 12.2 19.2Q12.6 12 12.1 4.8Q9.5 7 7 9.1Z" fill="currentColor" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round"/><path class="w" d="M15.6 8.6Q17.6 12 15.4 15.5M18.4 5.9Q21.8 12.2 18.3 18.3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path class="x" d="M15.2 9.2L21 15M20.8 9.1L15.3 15.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><input type="range" class="vol" min="0" max="100" value="100" aria-label="{esc(t['pl_vol'])}"></div>
     </div></div>
 <figcaption class="duck">{esc(t['duck']).replace(chr(10), ' <br class="dbr">')}<span class="by">— {esc(t['duck_by'])}</span></figcaption></figure>
 <section id="start" class="hero">
@@ -342,9 +342,9 @@ def page(L):
    <img class="art" src="{A}img/cover-{L}.jpg" alt="{esc(t['pl_cover'])}" width="600" height="600" loading="lazy">
    <div class="pl">
     <p class="pt">{esc(t['pl_title'])}</p><p class="ps" id="plname" aria-live="polite"></p>
-    <div class="pc"><button type="button" class="pbtn" aria-label="{esc(t['pl_play'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path class="picon" d="M7 4l13 8-13 8z" fill="currentColor"/></svg></button>
+    <div class="pc"><button type="button" class="pbtn" aria-label="{esc(t['pl_play'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path class="picon" d="M7.2 4.6Q13.5 8.4 19.6 12.1Q13.3 15.9 7.4 19.6Q7.8 12 7.2 4.6Z" fill="currentColor" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round"/></svg></button>
      <input type="range" id="plseek" min="0" max="1000" value="0" aria-label="{esc(t['pl_seek'])}"><span id="pltime" class="mono">0:00</span></div>
-    <div class="pc pv"><button type="button" class="vbtn mute" aria-pressed="false" aria-label="{esc(t['pl_mute'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3z" fill="currentColor"/><path class="w" d="M15.5 8.5a5 5 0 010 7M18 6a8.5 8.5 0 010 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path class="x" d="M15 9l6 6M21 9l-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button><input type="range" class="vol" min="0" max="100" value="100" aria-label="{esc(t['pl_vol'])}"></div>
+    <div class="pc pv"><button type="button" class="vbtn mute" aria-pressed="false" aria-label="{esc(t['pl_mute'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M3.4 9.2Q3.2 12 3.5 14.9L7 15Q9.6 17 12.2 19.2Q12.6 12 12.1 4.8Q9.5 7 7 9.1Z" fill="currentColor" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round"/><path class="w" d="M15.6 8.6Q17.6 12 15.4 15.5M18.4 5.9Q21.8 12.2 18.3 18.3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path class="x" d="M15.2 9.2L21 15M20.8 9.1L15.3 15.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><input type="range" class="vol" min="0" max="100" value="100" aria-label="{esc(t['pl_vol'])}"></div>
    </div>
   </div>
   <div class="groups">{playlist(t)}</div>
@@ -359,7 +359,7 @@ def page(L):
    <div class="ctl"><span class="lbl" id="klbl">{esc(t['sound_label'])}</span><div class="seg" id="sounds" role="group" aria-labelledby="klbl">{sounds}</div></div>
    <div class="ctl" id="tempoctl"><span class="lbl" id="tlbl">{esc(t['tempo_label'])}</span><div class="seg" id="tempos" role="group" aria-labelledby="tlbl">{tempos}</div></div>
   </div>
-  <div class="nowplay"><button type="button" class="pbtn" aria-label="{esc(t['pl_play'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path class="picon" d="M7 4l13 8-13 8z" fill="currentColor"/></svg></button><p class="ps" id="hpname" aria-live="polite"></p></div>
+  <div class="nowplay"><button type="button" class="pbtn" aria-label="{esc(t['pl_play'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path class="picon" d="M7.2 4.6Q13.5 8.4 19.6 12.1Q13.3 15.9 7.4 19.6Q7.8 12 7.2 4.6Z" fill="currentColor" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round"/></svg></button><p class="ps" id="hpname" aria-live="polite"></p></div>
  </div>
 </section>
 <section id="{I['paket']}"><h2><span class="num">03</span>{esc(t['paket_h'])}</h2>
@@ -478,7 +478,7 @@ h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 .ov .fr{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}.ov .fr path{fill:none;stroke:var(--fg);stroke-width:clamp(2.4px,.3cqw,3.4px);vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round}
 .hw:hover .ov,.hw:focus-within .ov{opacity:1;pointer-events:auto}
 .ov button{position:relative;width:var(--b);height:var(--b);border:0;background:transparent;color:var(--fg);display:grid;place-items:center;cursor:pointer;padding:0}
-.ov button[aria-pressed=true]{background:var(--fg);color:var(--bg)}.ov button svg{width:55%;height:55%}.ov button:focus-visible{outline:2px solid var(--fg);outline-offset:-2px}
+.ov .loop[aria-pressed=true]{color:var(--link)}.ov button svg{width:55%;height:55%}.ov button:focus-visible{outline:2px solid var(--fg);outline-offset:-2px}
 .pbtn:hover,.vbtn:hover,.ov button:hover,.ov button[aria-pressed=true]:hover{color:var(--link)}.vol:hover,.ov .vol:hover,#plseek:hover{accent-color:var(--link)}
 @media (hover:none){.ov{opacity:1;pointer-events:auto}}
 .pt{margin:0;font-weight:700}.ps{margin:2px 0 12px;color:var(--mute);font-size:var(--fs-s);min-height:1.55em}
@@ -605,7 +605,7 @@ function isSlow(){return slowOk()&&cur.tempo==='slow'}
 function file(){return cur.stage==='tutti'?'tutti_'+cur.sound:cur.voice.toLowerCase()+'_'+cur.stage+'_'+cur.sound+(isSlow()?'_slow':'')}
 function label(){return (cur.stage==='tutti'?D.stages.tutti:D.voices[cur.voice]+', '+D.stages[cur.stage])+', '+D.sound_names[cur.sound]+(isSlow()?', '+D.slow_name:'')}
 function f(t){t=Math.floor(t||0);return Math.floor(t/60)+':'+('0'+t%60).slice(-2)}
-function ui(){var on=!A.paused;svg.classList.toggle('playing',on);$$('.picon').forEach(function(i){i.setAttribute('d',on?'M6 4h4v16H6zM14 4h4v16h-4z':'M7 4l13 8-13 8z')});$$('.pbtn').forEach(function(b){b.setAttribute('aria-label',pl.getAttribute(on?'data-pause':'data-play'))})}
+function ui(){var on=!A.paused;svg.classList.toggle('playing',on);$$('.picon').forEach(function(i){i.setAttribute('d',on?'M6.3 4.4Q8.2 4 10.1 4.5Q10.4 12 9.9 19.7Q8 20.2 6.1 19.6Q6.6 12 6.3 4.4ZM14.2 4.3Q16.1 4 18 4.6Q18.4 12 17.9 19.8Q16 20.1 14.1 19.7Q14.5 12 14.2 4.3Z':'M7.2 4.6Q13.5 8.4 19.6 12.1Q13.3 15.9 7.4 19.6Q7.8 12 7.2 4.6Z')});$$('.pbtn').forEach(function(b){b.setAttribute('aria-label',pl.getAttribute(on?'data-pause':'data-play'))})}
 function sync(){
  draw();
  $$('#voices button').forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-voice')===cur.voice)});
