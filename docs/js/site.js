@@ -59,8 +59,10 @@ function draw(){
  list.forEach(function(e){(e[3]==='acc'?acc:own).push(e)});
  function pos(e){return x0+e[1]*(cur.stage==='tutti'?270:190)}   // tutti: circles further apart
  own.forEach(function(e,i){var y=oy;
-  var g=el('g',{});var r=rad(e[2]);
-  g.appendChild(el('circle',{cx:pos(e),cy:y,r:r,fill:'none',stroke:col,'stroke-width':e[0]===cur.voice&&e[2]===0?sw*3:sw*1.5}));
+  var g=el('g',{'class':'vb',role:'button',tabindex:0,'aria-label':D.voices[e[0]],'aria-pressed':e[0]===cur.voice});var r=rad(e[2]);
+  var pick=function(){change(function(){cur.voice=e[0]},true)};   // the circles switch the voice, like the voice buttons
+  g.addEventListener('click',pick);g.addEventListener('keydown',function(ev){if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();pick()}});
+  g.appendChild(el('circle',{cx:pos(e),cy:y,r:r,fill:'none','pointer-events':'all',stroke:col,'stroke-width':e[0]===cur.voice&&e[2]===0?sw*3:sw*1.5}));
   g.appendChild(el('text',{x:pos(e),y:y,dy:'.35em','font-size':Math.min(LS,1.5*r),'text-anchor':'middle','font-weight':700},e[0]));   // dy: cap height centred in the circle
   g.appendChild(el('text',{x:pos(e),y:y+r+(mob?FS*0.95+3:16),'font-size':FS,'text-anchor':'middle'},e[2]+(mob&&i>0?'':' dB')));
   svg.appendChild(g);});

@@ -66,6 +66,7 @@ ul.note{padding-left:18px}
 .exrow{display:grid;grid-template-columns:minmax(0,420px) minmax(0,1fr);gap:32px 64px;align-items:center;margin:0 0 72px}
 h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 .dl p{margin:0 0 20px;max-width:30em}.dl .dlb{margin:0}.steps+.dlb{margin:24px 0 16px}.dlb a{display:inline-block;border:1.5px solid var(--line);padding:12px 20px;font-weight:400;color:var(--fg);text-decoration:none}.dlb a:hover,.dlb a:focus-visible{background:var(--fg);color:var(--bg)}
+#hp .vb{cursor:pointer}#hp .vb:hover circle{stroke:var(--link)}#hp .vb:hover text{fill:var(--link)}#hp .vb:focus-visible{outline:2px solid var(--fg);outline-offset:4px}
 .fan{margin:80px 0 0}.fan{--pw:240px}.fan .pages{position:relative;height:calc(var(--pw)*1.62)}.fan img{position:absolute;bottom:calc(var(--pw)*.13);left:50%;width:var(--pw);height:auto;background:#fff;border:1.5px solid var(--line);transform-origin:50% 100%}
 .fan .p0{transform:translateX(-50%) rotate(-15deg)}.fan .p1{transform:translateX(-50%) rotate(0)}.fan .p2{transform:translateX(-50%) rotate(15deg)}
 
