@@ -34,7 +34,7 @@
 <link rel="preload" href="../img/header.png?v=75c1c652" as="image" type="image/png" media="(prefers-color-scheme: light)">
 <link rel="preload" href="../img/header-dark.png?v=e2381952" as="image" type="image/png" media="(prefers-color-scheme: dark)">
 <script>try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
-<link rel="stylesheet" href="../css/site.css?v=3541cb43">
+<link rel="stylesheet" href="../css/site.css?v=b6658bda">
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -75,7 +75,7 @@
  <button class="theme" type="button" aria-label="Zum dunklen Modus wechseln"><svg class="moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 14.6A8.6 8.6 0 0 1 9.4 4 8.6 8.6 0 1 0 20 14.6z"/></svg><svg class="sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></svg></button>
  <a class="lang" href="../en/" hreflang="en" lang="en">EN</a>
  <button class="burger" type="button" aria-expanded="false" aria-controls="nav">Menü</button>
- <nav id="nav" aria-label="Menü"><ul><li><a href="#start">Start</a></li><li><a href="#ablauf">Ablauf</a></li><li><a href="#ueben">Üben</a></li><li><a href="#beispiel-zip">Beispiel</a></li><li><a href="#rechte-und-ki">Rechte &amp;&nbsp;KI</a></li><li><a href="#lizenz">Lizenzen</a></li><li class="navlang"><a href="../en/" hreflang="en" lang="en">English</a></li></ul></nav>
+ <nav id="nav" aria-label="Menü"><ul><li><a href="#start">Start</a></li><li><a href="#ablauf">Ablauf</a></li><li><a href="#ueben">Üben</a></li><li><a href="#beispiel">Beispiel</a></li><li><a href="#rechte-und-ki">Rechte &amp;&nbsp;KI</a></li><li><a href="#lizenzen">Lizenzen</a></li><li class="navlang"><a href="../en/" hreflang="en" lang="en">English</a></li></ul></nav>
 </header>
 <main>
 <figure class="banner"><div class="hw"><picture><source media="(prefers-color-scheme: dark)" srcset="../img/header-dark.png?v=e2381952"><img src="../img/header.png?v=75c1c652" alt="Ein Mann mit Kopfhörern steht in einer alten Badewanne und singt vom Notenblatt, neben ihm schwimmt eine Quietscheente, rote Noten schweben im Raum. „Sonntagmorgen, er übt mal wieder für seinen Chor … und ich darf es ausbaden!“ — Ente eines Tenors" width="1280" height="640" fetchpriority="high" decoding="async"></picture>
@@ -86,15 +86,13 @@
      <button type="button" class="prev" aria-label="Vorherige Aufnahme"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M5.9 5.2Q6.3 11 6 18.9" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.9 5.4Q13 9.2 9.1 12.3Q13.4 14.6 18.6 18.7Q19.3 12 18.9 5.4Z" fill="currentColor" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round"/></svg></button>
      <button type="button" class="pbtn" aria-label="Wiedergabe"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path class="picon" d="M7.2 4.6Q13.5 8.4 19.6 12.1Q13.3 15.9 7.4 19.6Q7.8 12 7.2 4.6Z" fill="currentColor" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round"/></svg></button>
      <button type="button" class="next" aria-label="Nächste Aufnahme"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M18 5.2Q17.7 11 18.1 18.9" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.2 5.4Q11 9.2 14.9 12.3Q10.6 14.6 5.4 18.7Q4.7 12 5.2 5.4Z" fill="currentColor" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round"/></svg></button>
-     <button type="button" class="loop" aria-pressed="false" aria-label="Wiederholen"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M5 11.2Q5.3 6.8 9.6 6.6L17.8 6.9M15 3.8L18.4 6.9L15.2 9.9M19 12.8Q18.8 17.2 14.4 17.4L6.2 17.1M9 14.1L5.6 17.1L8.8 20.2" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
 </div>
-<div class="vw"><button type="button" class="mute" aria-pressed="false" aria-label="Stumm"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M3.4 9.2Q3.2 12 3.5 14.9L7 15Q9.6 17 12.2 19.2Q12.6 12 12.1 4.8Q9.5 7 7 9.1Z" fill="currentColor" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round"/><path class="w" d="M15.6 8.6Q17.6 12 15.4 15.5M18.4 5.9Q21.8 12.2 18.3 18.3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path class="x" d="M15.2 9.2L21 15M20.8 9.1L15.3 15.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><input type="range" class="vol" min="0" max="100" value="50" aria-label="Lautstärke"></div>
-    </div></div>
+</div></div>
 <figcaption class="duck">„Sonntagmorgen, er übt mal wieder für seinen Chor <br class="dbr">… und ich darf es ausbaden!“<span class="by">— Ente eines&nbsp;Tenors</span></figcaption></figure>
 <section id="start" class="hero">
  <h1>Deine Chorstimme. Deine&nbsp;Noten.<br>Überall lesen, hören und&nbsp;singen.</h1>
  <p class="lead">Dokumentation eines agentischen KI-Musik-Workflows und -Skills entwickelt für und mit Claude Code als privates Code-Experiment. Es ist nur ein „Proof of Concept“. Aus Chornoten entsteht ein „KI-⁠geprüftes“ ZIP, in dem sich für jede Stimme 10 Aufnahmen zum Üben&nbsp;befinden.</p>
- <p class="cta"><a href="#beispiel-zip">Beispiel&nbsp;ansehen</a></p>
+ <p class="cta"><a href="#beispiel">Beispiel&nbsp;ansehen</a></p>
  <dl class="facts"><div><dt>4</dt><dd>Stufen je&nbsp;Stimme</dd></div><div><dt>2</dt><dd>Klänge: Chor und&nbsp;Klavier</dd></div><div><dt>2</dt><dd>Fassungen: normal und&nbsp;langsam</dd></div><div><dt>42</dt><dd>Aufnahmen im&nbsp;Beispiel</dd></div></dl>
 </section>
 <section id="ablauf"><h2><span class="num">01</span>Ablauf</h2>
@@ -129,7 +127,7 @@
   <div class="nowplay"><button type="button" class="pbtn" aria-label="Wiedergabe"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path class="picon" data-c d="M7 4l13 8-13 8z" fill="currentColor"/></svg></button><p class="ps" id="hpname" aria-live="polite"></p></div>
  </div>
 </section>
-<section id="beispiel-zip"><h2><span class="num">03</span>Beispiel</h2>
+<section id="beispiel"><h2><span class="num">03</span>Beispiel</h2>
  <div class="exrow">
   <figure class="fan"><div class="pages">
    <img class="p0" src="../img/example-cover-de-480.png?v=81448ad1" srcset="../img/example-cover-de-160.png?v=ea5ff62c 160w, ../img/example-cover-de-240.png?v=b7f65e70 240w, ../img/example-cover-de-320.png?v=ecd3084c 320w, ../img/example-cover-de-480.png?v=81448ad1 480w, ../img/example-cover-de-720.png?v=816ba33e 720w" sizes="(max-width:520px) 160px, 240px" alt="Deckblatt des Beispielpakets" width="240" height="339" loading="lazy">
@@ -145,7 +143,7 @@
 <section id="rechte-und-ki"><h2><span class="num">04</span>Rechte &amp;&nbsp;KI</h2>
  <div class="cols"><article><h3>Rechte</h3><p>Bevor Noten verarbeitet werden, fragt der Skill nach den Rechten. Diese Angaben werden danach in der README-Datei vermerkt. Ob die Noten verarbeitet und weitergegeben werden dürfen, richtet sich nach dem Urheber- und Lizenzrecht, unter dem sie&nbsp;stehen.</p></article><article><h3>KI-Kennzeichnung</h3><p>Alles, was der Skill erzeugt, ist als KI-Inhalt gekennzeichnet, sowohl mit dem EU-Label für KI-generierte Inhalte als auch im Text und in den Metadaten der&nbsp;Dokumente.</p></article></div>
 </section>
-<section id="lizenz"><h2><span class="num">05</span>Lizenzen</h2>
+<section id="lizenzen"><h2><span class="num">05</span>Lizenzen</h2>
  <p class="intro wide"><a href="https://github.com/vbth/choir-practice/blob/main/LICENSE.md" target="_blank" rel="noopener noreferrer">PolyForm Noncommercial License 1.0.0</a>, frei für nichtkommerzielle Nutzung. <a href="https://github.com/vbth/choir-practice/blob/main/choir-practice/THIRD_PARTY_NOTICES.md" target="_blank" rel="noopener noreferrer">Komponenten von&nbsp;Drittanbietern</a>.</p>
 </section>
 </main>
@@ -156,6 +154,6 @@
   </g></svg>
 </span><span>2026 KI-generiert. Nutzung auf eigene&nbsp;Verantwortung.</span></p></footer>
 <script>window.PAGE={"lang": "de", "seat": ["S", "A", "T", "B"], "mix": {"solo": {"S": [["S", 0.0, 0, "own"]], "A": [["A", 0.0, 0, "own"]], "T": [["T", 0.0, 0, "own"]], "B": [["B", 0.0, 0, "own"]]}, "accomp": {"S": [["S", 0.0, 0, "own"], ["S", -0.5, -12, "acc"], ["A", -0.17, -12, "acc"], ["T", 0.17, -12, "acc"], ["B", 0.5, -12, "acc"]], "A": [["A", 0.0, 0, "own"], ["S", -0.45, -4, "own"], ["S", -0.5, -12, "acc"], ["A", -0.17, -12, "acc"], ["T", 0.17, -12, "acc"], ["B", 0.5, -12, "acc"]], "T": [["T", 0.0, 0, "own"], ["S", -0.45, -4, "own"], ["S", -0.5, -12, "acc"], ["A", -0.17, -12, "acc"], ["T", 0.17, -12, "acc"], ["B", 0.5, -12, "acc"]], "B": [["B", 0.0, 0, "own"], ["S", -0.45, -4, "own"], ["S", -0.5, -12, "acc"], ["A", -0.17, -12, "acc"], ["T", 0.17, -12, "acc"], ["B", 0.5, -12, "acc"]]}, "choir": {"S": [["S", 0.0, 0, "own"], ["A", 0.6, -7, "own"], ["T", -0.6, -9, "own"], ["B", 0.95, -12, "own"]], "A": [["A", 0.0, 0, "own"], ["S", -0.6, -7, "own"], ["T", 0.6, -7, "own"], ["B", 0.95, -12, "own"]], "T": [["T", 0.0, 0, "own"], ["S", -0.95, -12, "own"], ["A", -0.6, -7, "own"], ["B", 0.6, -7, "own"]], "B": [["B", 0.0, 0, "own"], ["S", -0.95, -12, "own"], ["A", 0.6, -9, "own"], ["T", -0.6, -7, "own"]]}, "tutti": {"S": [["S", -0.5, -3, "own"], ["A", -0.17, -3, "own"], ["T", 0.17, -3, "own"], ["B", 0.5, -3, "own"]], "A": [["S", -0.5, -3, "own"], ["A", -0.17, -3, "own"], ["T", 0.17, -3, "own"], ["B", 0.5, -3, "own"]], "T": [["S", -0.5, -3, "own"], ["A", -0.17, -3, "own"], ["T", 0.17, -3, "own"], ["B", 0.5, -3, "own"]], "B": [["S", -0.5, -3, "own"], ["A", -0.17, -3, "own"], ["T", 0.17, -3, "own"], ["B", 0.5, -3, "own"]]}}, "voices": {"S": "Sopran", "A": "Alt", "T": "Tenor", "B": "Bass"}, "stages": {"solo": "Allein", "accomp": "Mit Begleitung", "choir": "Im Chor", "tutti": "Tutti"}, "stage_txt": {"solo": "Nur die gewählte Stimme, in der Mitte.", "accomp": "Die gewählte Stimme, die Melodie leiser, dazu die Klavierbegleitung aller Stimmen.", "choir": "Die anderen Stimmen sitzen wie im Chor: Nachbarn links und rechts etwas leiser, weiter entfernte noch leiser.", "tutti": "Alle Stimmen gleich laut."}, "steps": [["Aufruf", "you", "Skill in Claude starten, noch ohne Noten.", ""], ["Stopp A", "both", "Angaben über die Rechte.", "Alles bereit?"], ["Noten anhängen", "you", "Als PDF oder Foto.", ""], ["Sichtung", "claude", "Claude liest die Seiten und prüft die Qualität.", "Alles verstanden?"], ["Stopp B", "you", "Titel, Stimmen und Tempo bestätigen.", ""], ["Notenerfassung", "claude", "Claude überträgt die Noten.", "Alle Takte und Stimmen erfasst?"], ["Korrekturlesen", "claude", "Claude vergleicht das Ergebnis zweimal mit der Vorlage: erst Töne, dann Text.", "Töne und Text wie in der Vorlage? Sonst zurück zu Schritt 6."], ["Endgültiger Notensatz", "claude", "Claude setzt die Noten sauber, mit Titelblatt.", "Gut lesbar?"], ["Audio", "claude", "Claude erzeugt für jede Stimme die Audio-Dateien zum Üben.", "Passt jede Stimme zu den Noten?"], ["Paket", "claude", "Claude schreibt die Anleitungen und packt alles zusammen.", "Alle Inhalte vorhanden?"], ["Abschluss", "both", "Claude macht Verbesserungsvorschläge. Die Entscheidung über die Umsetzung liegt beim Nutzer.", ""], ["Herunterladen", "you", "ZIP herunterladen und die Audiodateien der einzelnen Stimmen an den Chor weitergeben.", ""]], "who": {"you": "Nutzer", "claude": "Claude", "both": "Claude + Nutzer"}, "own": "Gesang", "acc": "Klavier", "gate": "Prüfung am Ende", "sound_names": {"choir": "Chorklang", "piano": "Klavierklang"}, "slow_name": "langsam", "slow": 0.75, "theme_to_dark": "Zum dunklen Modus wechseln", "theme_to_light": "Zum hellen Modus wechseln"};</script>
-<script src="../js/site.js?v=3541cb43"></script>
+<script src="../js/site.js?v=b6658bda"></script>
 </body>
 </html>

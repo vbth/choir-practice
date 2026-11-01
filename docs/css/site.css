@@ -6,14 +6,14 @@
 @media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#000;--fg:#fff;--mute:#fff;--line:#fff}}
 :root[data-theme=dark]{--bg:#000;--fg:#fff;--mute:#fff;--line:#fff;color-scheme:dark}:root[data-theme=light]{color-scheme:light}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:var(--barh,76px)}
 p,li,figcaption{text-wrap:pretty}
 body{margin:0;background:var(--bg);color:var(--fg);font:400 var(--fs)/1.55 "IBM Plex Sans",Helvetica,Arial,sans-serif;-webkit-text-size-adjust:100%}
 a{color:var(--link);text-decoration:none}a:hover{color:var(--fg)}
 .mono{font-family:"IBM Plex Sans Condensed","IBM Plex Sans",sans-serif}
 .skip{position:absolute;left:-999px}.skip:focus{left:16px;top:8px;background:var(--bg);padding:8px;z-index:20}
 :focus-visible{outline:2px solid var(--fg);outline-offset:3px}
-.bar{position:relative;z-index:10;display:flex;align-items:center;gap:16px;padding:12px var(--edge);background:var(--bg);border-bottom:1.5px solid var(--line)}
+.bar{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:16px;padding:12px var(--edge);background:var(--bg);border-bottom:1.5px solid var(--line)}
 .brand{display:flex;align-items:center;gap:12px;color:var(--fg);text-decoration:none;font-weight:700;font-size:var(--fs-m);letter-spacing:.02em}
 .brand img{display:block;flex:none}.bn{white-space:nowrap}.bt{line-height:1.15}
 .bar nav{margin-left:auto}.bar nav ul{display:flex;gap:0;list-style:none;margin:0;padding:0}
@@ -85,16 +85,14 @@ h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 .pbox{display:grid;grid-template-columns:1fr;gap:20px;align-items:start;justify-self:start;width:100%;max-width:26em}
 .listen .art{width:100%;height:auto;display:block;border:1.5px solid var(--line)}
 .hw{position:relative;container-type:inline-size}
-.ov{--b:clamp(16px,3.4cqw,40px);position:absolute;left:50%;top:79%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:0;padding:calc(var(--b)*.2) calc(var(--b)*.35);opacity:0;pointer-events:none;transition:opacity .15s}
-.ov .rw{position:relative;display:flex;gap:2px}.ov .vw{position:relative;display:flex;align-items:center;gap:4px;width:100%}.ov .vol{flex:1 1 0;width:0;min-width:0;height:max(18px,calc(var(--b)*.5));accent-color:var(--fg)}.ov .vw .mute{width:calc(var(--b)*.8);height:calc(var(--b)*.8)}
+.ov{--b:clamp(16px,3.4cqw,40px);position:absolute;left:50%;top:79%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:0;padding:calc(var(--b)*.2) calc(var(--b)*.35)}
+.ov .rw{position:relative;display:flex;gap:2px}
 .ov .fr{filter:url(#kf);position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}.ov .fr path{fill:none;stroke:var(--fg);stroke-width:clamp(1.5px,.22cqw,2.6px);vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round}
-.hw:hover .ov,.hw:focus-within .ov{opacity:1;pointer-events:auto}
 .ov button{position:relative;width:var(--b);height:var(--b);border:0;background:transparent;color:var(--fg);display:grid;place-items:center;cursor:pointer;padding:0}
-.ov .loop[aria-pressed=true]{color:var(--link)}.ov button svg{width:55%;height:55%}.ov button svg{filter:url(#kr)}.ov button:focus-visible{outline:2px solid var(--fg);outline-offset:-2px}
-@media (hover:hover){.pbtn:hover,.vbtn:hover,.ov button:hover,.ov button[aria-pressed=true]:hover{color:var(--link)}.vol:hover,.ov .vol:hover,#plseek:hover{accent-color:var(--link)}}
-.ov .vol{filter:url(#kb)}
-@media (hover:none){.ov{opacity:1;pointer-events:auto}.hw:not(.on) .ov .rw button:not(.pbtn),.hw:not(.on) .ov .vw{display:none}.hw:not(.on) .ov .pbtn{width:calc(var(--b)*1.4);height:calc(var(--b)*1.4)}}   /* touch: before the first tap only the play button in its frame */
-@container (max-width:520px){.ov .vw{display:none}.ov button svg{width:68%;height:68%;filter:url(#krs)}.ov .fr{filter:url(#kfs)}}   /* narrow image: the tub is too small for a second row; the volume stays in the player below */
+.ov button svg{width:55%;height:55%}.ov button svg{filter:url(#kr)}.ov button:focus-visible{outline:2px solid var(--fg);outline-offset:-2px}
+@media (hover:hover){.pbtn:hover,.vbtn:hover,.ov button:hover,.ov button[aria-pressed=true]:hover{color:var(--link)}.vol:hover,#plseek:hover{accent-color:var(--link)}}
+.hw:not(.on) .ov .rw button:not(.pbtn){display:none}   /* before the first click or tap only the play button in its frame */
+@container (max-width:520px){.ov button svg{width:68%;height:68%;filter:url(#krs)}.ov .fr{filter:url(#kfs)}}   /* narrow image: the tub is too small for a second row; the volume stays in the player below */
 .pt{margin:0;font-weight:700}.ps{margin:2px 0 12px;color:var(--mute);font-size:var(--fs-s);min-height:1.55em}
 .pc{display:flex;align-items:center;gap:14px}
 .pbtn,.vbtn{flex:none;width:44px;height:44px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg);display:grid;place-items:center;cursor:pointer;padding:0}

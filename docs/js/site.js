@@ -3,7 +3,16 @@ var D=window.PAGE,$=function(s,r){return (r||document).querySelector(s)},$$=func
 // menu
 var bar=$('.bar'),bg=$('.burger');
 bg.addEventListener('click',function(){var o=bar.classList.toggle('open');bg.setAttribute('aria-expanded',o)});
-$$('#nav a').forEach(function(a){a.addEventListener('click',function(){bar.classList.remove('open');bg.setAttribute('aria-expanded',false)})});
+function barH(){document.documentElement.style.setProperty('--barh',bar.offsetHeight+'px')}
+barH();window.addEventListener('resize',barH);window.addEventListener('load',barH);
+// a menu click always scrolls to its section; layout shifts during the smooth scroll (late images, fonts) are corrected afterwards
+$$('#nav a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){
+ bar.classList.remove('open');bg.setAttribute('aria-expanded',false);
+ var t=document.getElementById(a.getAttribute('href').slice(1));if(!t)return;e.preventDefault();
+ function y(){return Math.max(0,Math.round(t.getBoundingClientRect().top+window.pageYOffset-bar.offsetHeight))}
+ window.scrollTo({top:y(),behavior:'smooth'});
+ try{history.replaceState(null,'',a.getAttribute('href'))}catch(x){}
+ setTimeout(function(){if(Math.abs(window.pageYOffset-y())>2)window.scrollTo({top:y(),behavior:'auto'})},900)})});
 if('IntersectionObserver' in window){
  var links={};$$('#nav a[href^="#"]').forEach(function(a){links[a.getAttribute('href').slice(1)]=a});
  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){$$('#nav a').forEach(function(a){a.removeAttribute('aria-current')});var a=links[e.target.id];if(a)a.setAttribute('aria-current','true')}})},{rootMargin:'-45% 0px -50% 0px'});
@@ -117,12 +126,11 @@ setVol(.5);   // starts at half volume
 // remote control on the cover (shown while the pointer is over it): previous / next recording of the playlist, repeat
 function step(d){var all=$$('.trk button'),i=0;all.forEach(function(b,k){if(b.getAttribute('aria-pressed')==='true')i=k});all[(i+d+all.length)%all.length].click()}
 $('.ov .prev').addEventListener('click',function(){step(-1)});$('.ov .next').addEventListener('click',function(){step(1)});
-$('.ov .loop').addEventListener('click',function(){A.loop=!A.loop;this.setAttribute('aria-pressed',A.loop)});
 // first touch on the header image: the remote grows from the single play button to the full set (and the recording starts); with a mouse nothing changes
 var hw=$('.hw');
 function activate(){hw.classList.add('on')}
 $('.ov .pbtn').addEventListener('click',activate);
-hw.addEventListener('click',function(e){if(hw.classList.contains('on'))return;activate();if(window.matchMedia('(hover:none)').matches&&!e.target.closest('.ov')&&A.paused)A.play().catch(function(){})});
+hw.addEventListener('click',function(e){if(hw.classList.contains('on'))return;activate();if(!e.target.closest('.ov')&&A.paused)A.play().catch(function(){})});
 A.addEventListener('play',ui);A.addEventListener('pause',ui);
 // sound waves pulse with the rhythm of the recording: Web Audio analyser on the audio element; every note onset (level jumps more than 2.5 dB above its slow average) switches the three arcs per side on, they then go off again from the outside in; while it sounds the inner arc stays on (always full red, no fading).
 // Onset rate on the example recordings: 2 to 4 per second. Without Web Audio, with reduced motion or if the context cannot run, the fixed animation stays

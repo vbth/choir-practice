@@ -67,7 +67,7 @@ T = {
  'de': {
   'html': 'de', 'name': 'Choir Practice Skill', 'title': 'Choir Practice Skill – Deine Chorstimme. Deine Noten. Überall lesen, hören und singen.', 'other': ('../en/', 'EN'), 'self_prefix': '../', 'assets': '../',
   'desc': 'Dokumentation eines agentischen KI-Musik-Workflows und -Skills entwickelt für und mit Claude Code als privates Code-Experiment. Es ist nur ein „Proof of Concept“. Aus Chornoten entsteht ein „KI-geprüftes“ ZIP, in dem sich für jede Stimme 10 Aufnahmen zum Üben befinden.',
-  'ids': {'start': 'start', 'ablauf': 'ablauf', 'ueben': 'ueben', 'paket': 'beispiel-zip', 'rechte': 'rechte-und-ki', 'lizenz': 'lizenz'},
+  'ids': {'start': 'start', 'ablauf': 'ablauf', 'ueben': 'ueben', 'paket': 'beispiel', 'rechte': 'rechte-und-ki', 'lizenz': 'lizenzen'},
   'menu': [('start', 'Start'), ('ablauf', 'Ablauf'), ('ueben', 'Üben'), ('paket', 'Beispiel'), ('rechte', 'Rechte & KI'), ('lizenz', 'Lizenzen')],
   'menu_label': 'Menü', 'skip': 'Zum Inhalt', 'theme_to_dark': 'Zum dunklen Modus wechseln', 'theme_to_light': 'Zum hellen Modus wechseln',
   'h1': 'Deine Chorstimme. Deine Noten. Überall lesen, hören und singen.',
@@ -134,7 +134,7 @@ T = {
  'en': {
   'html': 'en', 'name': 'Choir Practice Skill', 'title': 'Choir Practice Skill – Your voice. Your sheet music. Read, listen, and sing anywhere.', 'other': ('../de/', 'DE'), 'self_prefix': '../', 'assets': '../',
   'desc': 'Documentation of an agentic AI music workflow and skill developed for and with Claude Code as a private code experiment. It is only a “proof of concept”. A choir score goes in, and an “AI-checked” ZIP comes out with 10 practice recordings for every voice.',
-  'ids': {'start': 'start', 'ablauf': 'workflow', 'ueben': 'practice', 'paket': 'example-zip', 'rechte': 'rights-and-ai', 'lizenz': 'licence'},
+  'ids': {'start': 'start', 'ablauf': 'workflow', 'ueben': 'practice', 'paket': 'example', 'rechte': 'rights-and-ai', 'lizenz': 'licences'},
   'menu': [('start', 'Start'), ('ablauf', 'Workflow'), ('ueben', 'Practice'), ('paket', 'Example'), ('rechte', 'Rights & AI'), ('lizenz', 'Licences')],
   'menu_label': 'Menu', 'skip': 'Skip to content', 'theme_to_dark': 'Switch to dark mode', 'theme_to_light': 'Switch to light mode',
   'h1': 'Your voice. Your sheet music. Read, listen, and sing anywhere.',
@@ -320,10 +320,8 @@ def page(L):
      <button type="button" class="prev" aria-label="{esc(t['pl_prev'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M5.9 5.2Q6.3 11 6 18.9" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.9 5.4Q13 9.2 9.1 12.3Q13.4 14.6 18.6 18.7Q19.3 12 18.9 5.4Z" fill="currentColor" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round"/></svg></button>
      <button type="button" class="pbtn" aria-label="{esc(t['pl_play'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path class="picon" d="M7.2 4.6Q13.5 8.4 19.6 12.1Q13.3 15.9 7.4 19.6Q7.8 12 7.2 4.6Z" fill="currentColor" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round"/></svg></button>
      <button type="button" class="next" aria-label="{esc(t['pl_next'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M18 5.2Q17.7 11 18.1 18.9" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.2 5.4Q11 9.2 14.9 12.3Q10.6 14.6 5.4 18.7Q4.7 12 5.2 5.4Z" fill="currentColor" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round"/></svg></button>
-     <button type="button" class="loop" aria-pressed="false" aria-label="{esc(t['pl_loop'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M5 11.2Q5.3 6.8 9.6 6.6L17.8 6.9M15 3.8L18.4 6.9L15.2 9.9M19 12.8Q18.8 17.2 14.4 17.4L6.2 17.1M9 14.1L5.6 17.1L8.8 20.2" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
 </div>
-<div class="vw"><button type="button" class="mute" aria-pressed="false" aria-label="{esc(t['pl_mute'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M3.4 9.2Q3.2 12 3.5 14.9L7 15Q9.6 17 12.2 19.2Q12.6 12 12.1 4.8Q9.5 7 7 9.1Z" fill="currentColor" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round"/><path class="w" d="M15.6 8.6Q17.6 12 15.4 15.5M18.4 5.9Q21.8 12.2 18.3 18.3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path class="x" d="M15.2 9.2L21 15M20.8 9.1L15.3 15.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><input type="range" class="vol" min="0" max="100" value="50" aria-label="{esc(t['pl_vol'])}"></div>
-    </div></div>
+</div></div>
 <figcaption class="duck">{esc(t['duck']).replace(chr(10), ' <br class="dbr">')}<span class="by">— {esc(t['duck_by'])}</span></figcaption></figure>
 <section id="start" class="hero">
  <h1>{h1_html}</h1>
@@ -398,14 +396,14 @@ CSS = r'''@font-face{font-family:"IBM Plex Sans";font-weight:400;font-style:norm
 @media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#000;--fg:#fff;--mute:#fff;--line:#fff}}
 :root[data-theme=dark]{--bg:#000;--fg:#fff;--mute:#fff;--line:#fff;color-scheme:dark}:root[data-theme=light]{color-scheme:light}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:var(--barh,76px)}
 p,li,figcaption{text-wrap:pretty}
 body{margin:0;background:var(--bg);color:var(--fg);font:400 var(--fs)/1.55 "IBM Plex Sans",Helvetica,Arial,sans-serif;-webkit-text-size-adjust:100%}
 a{color:var(--link);text-decoration:none}a:hover{color:var(--fg)}
 .mono{font-family:"IBM Plex Sans Condensed","IBM Plex Sans",sans-serif}
 .skip{position:absolute;left:-999px}.skip:focus{left:16px;top:8px;background:var(--bg);padding:8px;z-index:20}
 :focus-visible{outline:2px solid var(--fg);outline-offset:3px}
-.bar{position:relative;z-index:10;display:flex;align-items:center;gap:16px;padding:12px var(--edge);background:var(--bg);border-bottom:1.5px solid var(--line)}
+.bar{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:16px;padding:12px var(--edge);background:var(--bg);border-bottom:1.5px solid var(--line)}
 .brand{display:flex;align-items:center;gap:12px;color:var(--fg);text-decoration:none;font-weight:700;font-size:var(--fs-m);letter-spacing:.02em}
 .brand img{display:block;flex:none}.bn{white-space:nowrap}.bt{line-height:1.15}
 .bar nav{margin-left:auto}.bar nav ul{display:flex;gap:0;list-style:none;margin:0;padding:0}
@@ -477,16 +475,14 @@ h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 .pbox{display:grid;grid-template-columns:1fr;gap:20px;align-items:start;justify-self:start;width:100%;max-width:26em}
 .listen .art{width:100%;height:auto;display:block;border:1.5px solid var(--line)}
 .hw{position:relative;container-type:inline-size}
-.ov{--b:clamp(16px,3.4cqw,40px);position:absolute;left:50%;top:79%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:0;padding:calc(var(--b)*.2) calc(var(--b)*.35);opacity:0;pointer-events:none;transition:opacity .15s}
-.ov .rw{position:relative;display:flex;gap:2px}.ov .vw{position:relative;display:flex;align-items:center;gap:4px;width:100%}.ov .vol{flex:1 1 0;width:0;min-width:0;height:max(18px,calc(var(--b)*.5));accent-color:var(--fg)}.ov .vw .mute{width:calc(var(--b)*.8);height:calc(var(--b)*.8)}
+.ov{--b:clamp(16px,3.4cqw,40px);position:absolute;left:50%;top:79%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:0;padding:calc(var(--b)*.2) calc(var(--b)*.35)}
+.ov .rw{position:relative;display:flex;gap:2px}
 .ov .fr{filter:url(#kf);position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}.ov .fr path{fill:none;stroke:var(--fg);stroke-width:clamp(1.5px,.22cqw,2.6px);vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round}
-.hw:hover .ov,.hw:focus-within .ov{opacity:1;pointer-events:auto}
 .ov button{position:relative;width:var(--b);height:var(--b);border:0;background:transparent;color:var(--fg);display:grid;place-items:center;cursor:pointer;padding:0}
-.ov .loop[aria-pressed=true]{color:var(--link)}.ov button svg{width:55%;height:55%}.ov button svg{filter:url(#kr)}.ov button:focus-visible{outline:2px solid var(--fg);outline-offset:-2px}
-@media (hover:hover){.pbtn:hover,.vbtn:hover,.ov button:hover,.ov button[aria-pressed=true]:hover{color:var(--link)}.vol:hover,.ov .vol:hover,#plseek:hover{accent-color:var(--link)}}
-.ov .vol{filter:url(#kb)}
-@media (hover:none){.ov{opacity:1;pointer-events:auto}.hw:not(.on) .ov .rw button:not(.pbtn),.hw:not(.on) .ov .vw{display:none}.hw:not(.on) .ov .pbtn{width:calc(var(--b)*1.4);height:calc(var(--b)*1.4)}}   /* touch: before the first tap only the play button in its frame */
-@container (max-width:520px){.ov .vw{display:none}.ov button svg{width:68%;height:68%;filter:url(#krs)}.ov .fr{filter:url(#kfs)}}   /* narrow image: the tub is too small for a second row; the volume stays in the player below */
+.ov button svg{width:55%;height:55%}.ov button svg{filter:url(#kr)}.ov button:focus-visible{outline:2px solid var(--fg);outline-offset:-2px}
+@media (hover:hover){.pbtn:hover,.vbtn:hover,.ov button:hover,.ov button[aria-pressed=true]:hover{color:var(--link)}.vol:hover,#plseek:hover{accent-color:var(--link)}}
+.hw:not(.on) .ov .rw button:not(.pbtn){display:none}   /* before the first click or tap only the play button in its frame */
+@container (max-width:520px){.ov button svg{width:68%;height:68%;filter:url(#krs)}.ov .fr{filter:url(#kfs)}}   /* narrow image: the tub is too small for a second row; the volume stays in the player below */
 .pt{margin:0;font-weight:700}.ps{margin:2px 0 12px;color:var(--mute);font-size:var(--fs-s);min-height:1.55em}
 .pc{display:flex;align-items:center;gap:14px}
 .pbtn,.vbtn{flex:none;width:44px;height:44px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg);display:grid;place-items:center;cursor:pointer;padding:0}
@@ -536,7 +532,16 @@ var D=window.PAGE,$=function(s,r){return (r||document).querySelector(s)},$$=func
 // menu
 var bar=$('.bar'),bg=$('.burger');
 bg.addEventListener('click',function(){var o=bar.classList.toggle('open');bg.setAttribute('aria-expanded',o)});
-$$('#nav a').forEach(function(a){a.addEventListener('click',function(){bar.classList.remove('open');bg.setAttribute('aria-expanded',false)})});
+function barH(){document.documentElement.style.setProperty('--barh',bar.offsetHeight+'px')}
+barH();window.addEventListener('resize',barH);window.addEventListener('load',barH);
+// a menu click always scrolls to its section; layout shifts during the smooth scroll (late images, fonts) are corrected afterwards
+$$('#nav a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){
+ bar.classList.remove('open');bg.setAttribute('aria-expanded',false);
+ var t=document.getElementById(a.getAttribute('href').slice(1));if(!t)return;e.preventDefault();
+ function y(){return Math.max(0,Math.round(t.getBoundingClientRect().top+window.pageYOffset-bar.offsetHeight))}
+ window.scrollTo({top:y(),behavior:'smooth'});
+ try{history.replaceState(null,'',a.getAttribute('href'))}catch(x){}
+ setTimeout(function(){if(Math.abs(window.pageYOffset-y())>2)window.scrollTo({top:y(),behavior:'auto'})},900)})});
 if('IntersectionObserver' in window){
  var links={};$$('#nav a[href^="#"]').forEach(function(a){links[a.getAttribute('href').slice(1)]=a});
  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){$$('#nav a').forEach(function(a){a.removeAttribute('aria-current')});var a=links[e.target.id];if(a)a.setAttribute('aria-current','true')}})},{rootMargin:'-45% 0px -50% 0px'});
@@ -650,12 +655,11 @@ setVol(.5);   // starts at half volume
 // remote control on the cover (shown while the pointer is over it): previous / next recording of the playlist, repeat
 function step(d){var all=$$('.trk button'),i=0;all.forEach(function(b,k){if(b.getAttribute('aria-pressed')==='true')i=k});all[(i+d+all.length)%all.length].click()}
 $('.ov .prev').addEventListener('click',function(){step(-1)});$('.ov .next').addEventListener('click',function(){step(1)});
-$('.ov .loop').addEventListener('click',function(){A.loop=!A.loop;this.setAttribute('aria-pressed',A.loop)});
 // first touch on the header image: the remote grows from the single play button to the full set (and the recording starts); with a mouse nothing changes
 var hw=$('.hw');
 function activate(){hw.classList.add('on')}
 $('.ov .pbtn').addEventListener('click',activate);
-hw.addEventListener('click',function(e){if(hw.classList.contains('on'))return;activate();if(window.matchMedia('(hover:none)').matches&&!e.target.closest('.ov')&&A.paused)A.play().catch(function(){})});
+hw.addEventListener('click',function(e){if(hw.classList.contains('on'))return;activate();if(!e.target.closest('.ov')&&A.paused)A.play().catch(function(){})});
 A.addEventListener('play',ui);A.addEventListener('pause',ui);
 // sound waves pulse with the rhythm of the recording: Web Audio analyser on the audio element; every note onset (level jumps more than 2.5 dB above its slow average) switches the three arcs per side on, they then go off again from the outside in; while it sounds the inner arc stays on (always full red, no fading).
 // Onset rate on the example recordings: 2 to 4 per second. Without Web Audio, with reduced motion or if the context cannot run, the fixed animation stays
