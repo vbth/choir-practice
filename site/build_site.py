@@ -474,11 +474,12 @@ h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 .listen .art{width:100%;height:auto;display:block;border:1.5px solid var(--line)}
 .hw{position:relative}
 .ov{--b:clamp(28px,3.6vw,40px);position:absolute;left:50%;top:80%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:0;padding:8px 14px;opacity:0;pointer-events:none;transition:opacity .15s}
-.ov .rw{position:relative;display:flex;gap:2px}.ov .vw{position:relative;display:flex;align-items:center;gap:4px;width:100%}.ov .vol{flex:1;min-width:0;height:18px;accent-color:#000}.ov .vw .mute{width:calc(var(--b)*.8);height:calc(var(--b)*.8)}
-.ov .fr{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}.ov .fr path{fill:rgba(255,255,255,.78);stroke:#000;stroke-width:3.2;vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round}
+.ov .rw{position:relative;display:flex;gap:2px}.ov .vw{position:relative;display:flex;align-items:center;gap:4px;width:100%}.ov .vol{flex:1;min-width:0;height:18px;accent-color:var(--fg)}.ov .vw .mute{width:calc(var(--b)*.8);height:calc(var(--b)*.8)}
+.ov .fr{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}.ov .fr path{fill:none;stroke:var(--fg);stroke-width:3.2;vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round}
 .hw:hover .ov,.hw:focus-within .ov{opacity:1;pointer-events:auto}
-.ov button{position:relative;width:var(--b);height:var(--b);border:0;background:transparent;color:#000;display:grid;place-items:center;cursor:pointer;padding:0}
-.ov button:hover{background:rgba(0,0,0,.1)}.ov button[aria-pressed=true]{background:#000;color:#fff}.ov button svg{width:55%;height:55%}.ov button:focus-visible{outline:2px solid #000;outline-offset:-2px}
+.ov button{position:relative;width:var(--b);height:var(--b);border:0;background:transparent;color:var(--fg);display:grid;place-items:center;cursor:pointer;padding:0}
+.ov button[aria-pressed=true]{background:var(--fg);color:var(--bg)}.ov button svg{width:55%;height:55%}.ov button:focus-visible{outline:2px solid var(--fg);outline-offset:-2px}
+.pbtn:hover,.vbtn:hover,.ov button:hover,.ov button[aria-pressed=true]:hover{color:var(--link)}.vol:hover,.ov .vol:hover,#plseek:hover{accent-color:var(--link)}
 @media (hover:none){.ov{opacity:1;pointer-events:auto}}
 .pt{margin:0;font-weight:700}.ps{margin:2px 0 12px;color:var(--mute);font-size:var(--fs-s);min-height:1.55em}
 .pc{display:flex;align-items:center;gap:14px}
