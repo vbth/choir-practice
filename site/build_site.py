@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Builds docs/de/index.html (de), docs/en/index.html (en), css/site.css, js/site.js for the landing page.
 Level data comes from the skill itself (make_audio.stages), so the headphone graphic cannot drift from the audio."""
-import re, os, sys, json, hashlib
+import re, os, sys, json, hashlib, math
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, '..', 'choir-practice', 'scripts'))
 import make_audio as M
@@ -204,6 +204,39 @@ def asset_version():
     """Short hash of CSS and JS: appended to their URLs, so browsers and the Pages cache fetch changed files at once."""
     return hashlib.sha1((CSS + JS).encode('utf-8')).hexdigest()[:8]
 
+WOBBLE = 5.0   # strength of the hand-drawn wobble of the player frame, in units where 100 = one button; 0 = straight line, 8 = clearly wobbly
+FRAME_R = 32   # corner radius of the frame, same as the old border radius (.32 of a button)
+
+def _wobble_path(W, H, R, amp, seed):
+    # closed outline of a rounded rectangle, points every ~8 units, with a slow wave plus a little jitter (same method as the preview)
+    s = seed
+    def rnd():
+        nonlocal s
+        s = (s * 16807) % 2147483647
+        return s / 2147483647
+    pts, step = [], 8.0
+    def edge(x0, y0, x1, y1, n):
+        pts.extend((x0 + (x1 - x0) * i / n, y0 + (y1 - y0) * i / n) for i in range(n))
+    def arc(cx, cy, a0, a1, n):
+        pts.extend((cx + R * math.cos(a0 + (a1 - a0) * i / n), cy + R * math.sin(a0 + (a1 - a0) * i / n)) for i in range(n))
+    nw, nh = max(4, round(W / step)), max(4, round(H / step))
+    edge(R, 0, W - R, 0, nw); arc(W - R, R, -math.pi / 2, 0, 8)
+    edge(W, R, W, H - R, nh); arc(W - R, H - R, 0, math.pi / 2, 8)
+    edge(W - R, H, R, H, nw); arc(R, H - R, math.pi / 2, math.pi, 8)
+    edge(0, H - R, 0, R, nh); arc(R, R, math.pi, 1.5 * math.pi, 8)
+    ph1, ph2 = rnd() * 2 * math.pi, rnd() * 2 * math.pi
+    d = []
+    for i, (x, y) in enumerate(pts):
+        k = i / len(pts) * 2 * math.pi * 3
+        dx = amp * (math.sin(k + ph1) * .6 + (rnd() - .5) * .35)
+        dy = amp * (math.cos(k + ph2) * .6 + (rnd() - .5) * .35)
+        d.append(('M' if i == 0 else 'L') + f'{x + dx:.1f} {y + dy:.1f}')
+    return ' '.join(d) + 'Z'
+
+def frame_svg(W, H, seed, cls):
+    # the frame is an SVG line, not a CSS filter: Safari does not reliably apply filter:url() to HTML boxes
+    return f'<svg class="fr {cls}" viewBox="0 0 {W} {H}" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="{_wobble_path(W, H, FRAME_R, WOBBLE, seed)}"/></svg>'
+
 def esc(s): return s.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
 
 def playlist(t):
@@ -320,9 +353,9 @@ def page(L):
 </header>
 <main>
 <figure class="banner"><div class="hw"><picture><source media="(prefers-color-scheme: dark)" srcset="{A}img/header-dark.png"><img src="{A}img/header.png" alt="{esc(t['og_alt'])}. {esc(t['duck'].replace(chr(10), ' '))} — {esc(t['duck_by'])}" width="1280" height="640" fetchpriority="high" decoding="async"></picture>
-<svg width="0" height="0" aria-hidden="true" style="position:absolute"><filter id="kr" x="-15%" y="-15%" width="130%" height="130%"><feTurbulence type="fractalNoise" baseFrequency=".13" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.9" xChannelSelector="R" yChannelSelector="G"/></filter><filter id="kb" x="-5%" y="-60%" width="110%" height="220%"><feTurbulence type="fractalNoise" baseFrequency=".05 .12" numOctaves="2" seed="9" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3.2" xChannelSelector="R" yChannelSelector="G"/></filter><filter id="kf" x="-8%" y="-15%" width="116%" height="130%"><feTurbulence type="fractalNoise" baseFrequency=".03" numOctaves="1" seed="2" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3.4" xChannelSelector="R" yChannelSelector="G"/></filter><filter id="krs" x="-15%" y="-15%" width="130%" height="130%"><feTurbulence type="fractalNoise" baseFrequency=".13" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="1.3" xChannelSelector="R" yChannelSelector="G"/></filter><filter id="kfs" x="-8%" y="-15%" width="116%" height="130%"><feTurbulence type="fractalNoise" baseFrequency=".03" numOctaves="1" seed="2" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2" xChannelSelector="R" yChannelSelector="G"/></filter></svg>
+<svg width="0" height="0" aria-hidden="true" style="position:absolute"><filter id="kr" x="-15%" y="-15%" width="130%" height="130%"><feTurbulence type="fractalNoise" baseFrequency=".13" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.9" xChannelSelector="R" yChannelSelector="G"/></filter><filter id="kb" x="-5%" y="-60%" width="110%" height="220%"><feTurbulence type="fractalNoise" baseFrequency=".05 .12" numOctaves="2" seed="9" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3.2" xChannelSelector="R" yChannelSelector="G"/></filter><filter id="krs" x="-15%" y="-15%" width="130%" height="130%"><feTurbulence type="fractalNoise" baseFrequency=".13" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="1.3" xChannelSelector="R" yChannelSelector="G"/></filter></svg>
 <div class="ov" role="group" aria-label="{esc(t['pl_title'])}">
-<span class="fr" aria-hidden="true"></span>
+{frame_svg(170, 116, 3, 'fr1')}{frame_svg(381, 116, 5, 'fr2')}
 <div class="rw">
      <button type="button" class="prev" aria-label="{esc(t['pl_prev'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M5.9 5.2Q6.3 11 6 18.9" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.9 5.4Q13 9.2 9.1 12.3Q13.4 14.6 18.6 18.7Q19.3 12 18.9 5.4Z" fill="currentColor" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round"/></svg></button>
      <button type="button" class="pbtn" aria-label="{esc(t['pl_play'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path class="picon" d="M7.2 4.6Q13.5 8.4 19.6 12.1Q13.3 15.9 7.4 19.6Q7.8 12 7.2 4.6Z" fill="currentColor" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round"/></svg></button>
@@ -491,12 +524,14 @@ h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 .hw{position:relative;container-type:inline-size}
 .ov{--b:clamp(16px,3.4cqw,40px);position:absolute;left:50%;top:79%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:0;padding:calc(var(--b)*.08) calc(var(--b)*.35)}
 .ov .rw{position:relative;display:flex;gap:2px}
-.ov .fr{filter:url(#kf);position:absolute;inset:0;border:clamp(1.6px,.26cqw,2.6px) solid var(--fg);border-radius:calc(var(--b)*.32);pointer-events:none}   /* even border; the wobble comes from a low-frequency displacement, which bends the line without changing its thickness */
+.fr{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;fill:none;stroke:var(--fg);stroke-width:clamp(1.6px,.26cqw,2.6px);stroke-linejoin:round;stroke-linecap:round}
+.fr path{vector-effect:non-scaling-stroke}   /* the line keeps its thickness at every size; the wobble is in the path (WOBBLE in build_site.py) */
+.hw.on .fr1{display:none}.hw:not(.on) .fr2{display:none}   /* closed: the single play button in its frame; open: the full remote */
 .ov button{position:relative;width:var(--b);height:var(--b);border:0;background:transparent;color:var(--fg);display:grid;place-items:center;cursor:pointer;padding:0}
 .ov button svg{width:55%;height:55%}.ov button svg{filter:url(#kr)}.ov button:focus-visible{outline:2px solid var(--fg);outline-offset:-2px}
 @media (hover:hover){.pbtn:hover,.vbtn:hover,.ov button:hover,.ov button[aria-pressed=true]:hover{color:var(--link)}.vol:hover,#plseek:hover{accent-color:var(--link)}}
 .hw:not(.on) .ov .rw button:not(.pbtn){display:none}   /* before the first click or tap only the play button in its frame */
-@container (max-width:520px){.ov button svg{width:68%;height:68%;filter:url(#krs)}.ov .fr{filter:url(#kfs);border-width:1.2px}}   /* narrow image: the tub is too small for a second row; the volume stays in the player below */
+@container (max-width:520px){.ov button svg{width:68%;height:68%;filter:url(#krs)}.fr{stroke-width:1.2px}}   /* narrow image: the tub is too small for a second row; the volume stays in the player below */
 .pt{margin:0;font-weight:700}.ps{margin:2px 0 12px;color:var(--mute);font-size:var(--fs-s);min-height:1.55em}
 .pc{display:flex;align-items:center;gap:14px}
 .pbtn,.vbtn,.mxplay{flex:none;width:44px;height:44px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg);display:grid;place-items:center;cursor:pointer;padding:0}
