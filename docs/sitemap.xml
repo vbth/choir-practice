@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-<url><loc>https://choir-practice-skill.pages.dev/</loc><xhtml:link rel="alternate" hreflang="de" href="https://choir-practice-skill.pages.dev/"/><xhtml:link rel="alternate" hreflang="en" href="https://choir-practice-skill.pages.dev/en/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://choir-practice-skill.pages.dev/"/></url>
-<url><loc>https://choir-practice-skill.pages.dev/en/</loc><xhtml:link rel="alternate" hreflang="de" href="https://choir-practice-skill.pages.dev/"/><xhtml:link rel="alternate" hreflang="en" href="https://choir-practice-skill.pages.dev/en/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://choir-practice-skill.pages.dev/"/></url>
+<url><loc>https://choir-practice-skill.pages.dev/de/</loc><xhtml:link rel="alternate" hreflang="de" href="https://choir-practice-skill.pages.dev/de/"/><xhtml:link rel="alternate" hreflang="en" href="https://choir-practice-skill.pages.dev/en/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://choir-practice-skill.pages.dev/"/></url>
+<url><loc>https://choir-practice-skill.pages.dev/en/</loc><xhtml:link rel="alternate" hreflang="de" href="https://choir-practice-skill.pages.dev/de/"/><xhtml:link rel="alternate" hreflang="en" href="https://choir-practice-skill.pages.dev/en/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://choir-practice-skill.pages.dev/"/></url>
 </urlset>

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Builds docs/index.html (de), docs/en/index.html (en), css/site.css, js/site.js for the landing page.
+"""Builds docs/de/index.html (de), docs/en/index.html (en), css/site.css, js/site.js for the landing page.
 Level data comes from the skill itself (make_audio.stages), so the headphone graphic cannot drift from the audio."""
 import re, os, sys, json, hashlib
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -65,7 +65,7 @@ ST['tutti'] = {own: [[v, spread[v], M.LV['tutti'], 'own'] for v in SEAT] for own
 
 T = {
  'de': {
-  'html': 'de', 'name': 'choir-practice Skill', 'title': 'choir-practice Skill – Deine Chorstimme. Deine Noten. Überall lesen, hören und singen.', 'other': ('en/', 'EN'), 'self_prefix': '', 'assets': '',
+  'html': 'de', 'name': 'choir-practice Skill', 'title': 'choir-practice Skill – Deine Chorstimme. Deine Noten. Überall lesen, hören und singen.', 'other': ('../en/', 'EN'), 'self_prefix': '../', 'assets': '../',
   'desc': 'Dokumentation eines agentischen KI-Musik-Workflows und -Skills entwickelt für und mit Claude Code als privates Code-Experiment. Es ist nur ein „Proof of Concept“. Aus Chornoten entsteht ein „KI-geprüftes“ ZIP, in dem sich für jede Stimme 10 Aufnahmen zum Üben befinden.',
   'ids': {'start': 'start', 'ablauf': 'ablauf', 'ueben': 'ueben', 'paket': 'beispiel-zip', 'rechte': 'rechte-und-ki', 'lizenz': 'lizenz'},
   'menu': [('start', 'Start'), ('ablauf', 'Ablauf'), ('ueben', 'Üben'), ('paket', 'Beispiel'), ('rechte', 'Rechte & KI'), ('lizenz', 'Lizenzen')],
@@ -131,7 +131,7 @@ T = {
   'ai_label': 'AI', 'top': 'Nach oben',
  },
  'en': {
-  'html': 'en', 'name': 'choir-practice Skill', 'title': 'choir-practice Skill – Your voice. Your sheet music. Read, listen, and sing anywhere.', 'other': ('../', 'DE'), 'self_prefix': '../', 'assets': '../',
+  'html': 'en', 'name': 'choir-practice Skill', 'title': 'choir-practice Skill – Your voice. Your sheet music. Read, listen, and sing anywhere.', 'other': ('../de/', 'DE'), 'self_prefix': '../', 'assets': '../',
   'desc': 'Documentation of an agentic AI music workflow and skill developed for and with Claude Code as a private code experiment. It is only a “proof of concept”. A choir score goes in, and an “AI-checked” ZIP comes out with 10 practice recordings for every voice.',
   'ids': {'start': 'start', 'ablauf': 'workflow', 'ueben': 'practice', 'paket': 'example-zip', 'rechte': 'rights-and-ai', 'lizenz': 'licence'},
   'menu': [('start', 'Start'), ('ablauf', 'Workflow'), ('ueben', 'Practice'), ('paket', 'Example'), ('rechte', 'Rights & AI'), ('lizenz', 'Licences')],
@@ -252,7 +252,7 @@ def page(L):
             'sound_names': t['sound_names'], 'slow_name': t['slow_name'], 'slow': M.SLOW_PCT / 100, 'theme_to_dark': t['theme_to_dark'], 'theme_to_light': t['theme_to_light']}
     other_href, other_lbl = t['other']
     ld = {'@context': 'https://schema.org', '@type': 'SoftwareApplication', 'name': t['name'],
-          'description': t['desc'], 'url': SITE + ('en/' if L == 'en' else ''), 'inLanguage': L, 'softwareVersion': VERSION,
+          'description': t['desc'], 'url': SITE + L + '/', 'inLanguage': L, 'softwareVersion': VERSION,
           'applicationCategory': 'MultimediaApplication', 'operatingSystem': 'Claude (skill)', 'image': {'@type': 'ImageObject', 'url': SITE + 'img/og.png', 'width': 2400, 'height': 1260, 'caption': t['og_alt']},
           'license': 'https://polyformproject.org/licenses/noncommercial/1.0.0', 'codeRepository': GH,
           'author': {'@type': 'Person', 'name': 'vbth', 'url': PROFILE},
@@ -266,15 +266,15 @@ def page(L):
 <title>{esc(t['title'])}</title>
 <meta name="description" content="{esc(t['desc'])}">
 <meta name="color-scheme" content="light dark">
-<link rel="canonical" href="{SITE}{'en/' if L=='en' else ''}">
-<link rel="alternate" hreflang="de" href="{SITE}">
+<link rel="canonical" href="{SITE}{L}/">
+<link rel="alternate" hreflang="de" href="{SITE}de/">
 <link rel="alternate" hreflang="en" href="{SITE}en/">
 <link rel="alternate" hreflang="x-default" href="{SITE}">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="{esc(t['name'])}">
 <meta property="og:title" content="{esc(t['title'])}">
 <meta property="og:description" content="{esc(t['desc'])}">
-<meta property="og:url" content="{SITE}{'en/' if L=='en' else ''}">
+<meta property="og:url" content="{SITE}{L}/">
 <meta property="og:locale" content="{'de_DE' if L=='de' else 'en_US'}">
 <meta property="og:locale:alternate" content="{'en_US' if L=='de' else 'de_DE'}">
 <meta property="og:image" content="{SITE}img/og.png">
@@ -302,7 +302,7 @@ def page(L):
 <body>
 <a class="skip" href="#start">{esc(t['skip'])}</a>
 <header class="bar">
- <a class="brand" href="{SITE}{'en/' if L=='en' else ''}" aria-label="{esc(t['name'])}"><img src="{A}img/logo.png" alt="" width="46" height="46"><span class="bt"><span class="bn">{esc(t['name'].partition(' ')[0])}</span> {esc(t['name'].partition(' ')[2])}</span></a>
+ <a class="brand" href="{SITE}{L}/" aria-label="{esc(t['name'])}"><img src="{A}img/logo.png" alt="" width="46" height="46"><span class="bt"><span class="bn">{esc(t['name'].partition(' ')[0])}</span> {esc(t['name'].partition(' ')[2])}</span></a>
  <button class="theme" type="button" aria-label="{esc(t['theme_to_dark'])}"><svg class="moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 14.6A8.6 8.6 0 0 1 9.4 4 8.6 8.6 0 1 0 20 14.6z"/></svg><svg class="sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></svg></button>
  <a class="lang" href="{other_href}" hreflang="{'en' if L=='de' else 'de'}" lang="{'en' if L=='de' else 'de'}">{other_lbl}</a>
  <button class="burger" type="button" aria-expanded="false" aria-controls="nav">{esc(t['menu_label'])}</button>
@@ -368,7 +368,7 @@ def page(L):
  <p class="intro wide"><a href="{GH}/blob/main/LICENSE.md">{esc(t['lic_link'])}</a>{esc(t['lic_p'])} <a href="{GH}/blob/main/choir-practice/THIRD_PARTY_NOTICES.md">{esc(t['lic_third_link'])}</a>.</p>
 </section>
 </main>
-<footer><p class="fnote"><span>{esc(t['foot_note']).replace('-Skill', '-&#8288;Skill')}</span></p><p class="fnote"><a class="fl" href="{SITE}{'en/' if L=='en' else ''}" aria-label="{esc(t['foot_site'])}">{ai}</a><span>{YEAR} {esc(t['ai'])}</span></p></footer>
+<footer><p class="fnote"><span>{esc(t['foot_note']).replace('-Skill', '-&#8288;Skill')}</span></p><p class="fnote"><a class="fl" href="{SITE}{L}/" aria-label="{esc(t['foot_site'])}">{ai}</a><span>{YEAR} {esc(t['ai'])}</span></p></footer>
 <script>window.PAGE={json.dumps(data, ensure_ascii=False)};</script>
 <script src="{A}js/site.js?v={asset_version()}"></script>
 </body>
@@ -672,16 +672,17 @@ def ai_labels():
     open(os.path.join(OUT, 'img', 'github-mark-dark.svg'), 'w', encoding='utf-8').write(gh.replace('#000000', '#ffffff'))
 
 def main():
-    os.makedirs(os.path.join(OUT, 'css'), exist_ok=True); os.makedirs(os.path.join(OUT, 'js'), exist_ok=True); os.makedirs(os.path.join(OUT, 'en'), exist_ok=True)
+    os.makedirs(os.path.join(OUT, 'css'), exist_ok=True); os.makedirs(os.path.join(OUT, 'js'), exist_ok=True); os.makedirs(os.path.join(OUT, 'de'), exist_ok=True); os.makedirs(os.path.join(OUT, 'en'), exist_ok=True)
     ai_labels()
     open(os.path.join(OUT, 'css', 'site.css'), 'w', encoding='utf-8').write(CSS)
     open(os.path.join(OUT, 'js', 'site.js'), 'w', encoding='utf-8').write(JS)
-    open(os.path.join(OUT, 'index.html'), 'w', encoding='utf-8').write(ext(bust(nobreak(page('de')))))
+    open(os.path.join(OUT, 'de', 'index.html'), 'w', encoding='utf-8').write(ext(bust(nobreak(page('de')))))
     open(os.path.join(OUT, 'en', 'index.html'), 'w', encoding='utf-8').write(ext(bust(nobreak(page('en')))))
-    alt = ''.join(f'<xhtml:link rel="alternate" hreflang="{h}" href="{u}"/>' for h, u in (('de', SITE), ('en', SITE + 'en/'), ('x-default', SITE)))
+    alt = ''.join(f'<xhtml:link rel="alternate" hreflang="{h}" href="{u}"/>' for h, u in (('de', SITE + 'de/'), ('en', SITE + 'en/'), ('x-default', SITE)))
     open(os.path.join(OUT, 'sitemap.xml'), 'w', encoding='utf-8').write(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'
-        + ''.join(f'<url><loc>{u}</loc>{alt}</url>\n' for u in (SITE, SITE + 'en/')) + '</urlset>\n')
+        + ''.join(f'<url><loc>{u}</loc>{alt}</url>\n' for u in (SITE + 'de/', SITE + 'en/')) + '</urlset>\n')
+    open(os.path.join(OUT, '_redirects'), 'w', encoding='utf-8').write('/ /en/ 302\n')   # Cloudflare Pages: Startseite leitet auf Englisch um
     print('site built')
 
 if __name__ == '__main__': main()
