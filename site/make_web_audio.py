@@ -12,6 +12,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 STAGES = {'solo': {'': '2', '_slow': '1'}, 'accomp': {'': '4', '_slow': '3'}, 'choir': {'': '5'}}   # number of the file in the voice ZIP
 SOUNDS = {'choir': '3', 'piano': '4'}                                                                 # folder number in the voice ZIP
 
+# Converts the voice recordings from an example ZIP into the small MP3s the website player streams
 def main():
     zp = sys.argv[1]; out = sys.argv[sys.argv.index('--out') + 1] if '--out' in sys.argv else os.path.join(HERE, '..', 'docs', 'audio')
     os.makedirs(out, exist_ok=True)

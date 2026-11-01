@@ -14,6 +14,7 @@ import os, re, sys, json, glob
 HERE = os.path.dirname(os.path.abspath(__file__)); ASSETS = os.path.join(HERE, '..', 'assets')
 SKIP = ('protocol_notes', 'capitalised_nouns')   # language-specific by nature (regex translations, nouns of that language)
 
+# Flattens a language pack into (path, value) pairs so two packs can be compared key by key
 def walk(o, path=''):
     if isinstance(o, dict):
         for k, v in o.items():
@@ -26,6 +27,7 @@ def ph(o):
     txt = ' '.join(map(str, o)) if isinstance(o, list) else str(o)
     return set(re.findall(r'\{[a-z_]+\}', txt))
 
+# Every non-English pack must have exactly the keys of en.json; the footer rules are checked on top
 def problems():
     out = []; packs = {os.path.splitext(os.path.basename(f))[0]: json.load(open(f, encoding='utf-8')) for f in glob.glob(os.path.join(ASSETS, 'i18n', '*.json'))}
     ref = dict(walk(packs['en']))

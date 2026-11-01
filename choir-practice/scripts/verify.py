@@ -53,6 +53,7 @@ def check_midi(pkg, spec, i18, xml, fails, warns):
         n_mid = len(score['parts'][k]['tev'])
         if n_xml > n_mid and not MA.playback_order(spec): fails.append(f'MIDI: voice {vids[k]} has {n_xml} notes in the score but only {n_mid} are read for the audio (chord notes dropped?)')
 
+    # MIDI file -> per track (note-on events, tempo, name)
     def read(path):
         m = mido.MidiFile(path); tr = []
         for track in m.tracks:
@@ -65,6 +66,7 @@ def check_midi(pkg, spec, i18, xml, fails, warns):
             tr.append((ons, tempo, name))
         return tr
 
+    # A MIDI file must carry the intended tempo, one track per voice, the starting-note intro and the same notes as the score
     def compare(path, tq, voices, intro_keys):
         rel = os.path.relpath(path, pkg)
         try: tr = read(path)
@@ -101,6 +103,7 @@ def check_midi(pkg, spec, i18, xml, fails, warns):
     return n
 
 
+# Final gate: collects everything wrong with the package in `fails` (blocking) and `warns` (shown, not blocking)
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument('pkg'); ap.add_argument('spec'); ap.add_argument('--workdir', required=True)
     A = ap.parse_args(); pkg = A.pkg

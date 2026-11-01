@@ -73,6 +73,9 @@ with zipfile.ZipFile(target, 'w', zipfile.ZIP_DEFLATED) as z:
     for f in sorted(sk.rglob('*')):
         if f.is_file() and '__pycache__' not in f.parts:
             z.write(f, pathlib.Path(name) / f.relative_to(sk))
+# version check on the finished file: name, VERSION inside the archive, CHANGELOG and handoff must agree
+if subprocess.run([sys.executable, str(sk / 'scripts' / 'check_version.py'), '--file', str(target)]).returncode:
+    raise SystemExit('Version check failed: the built file does not match VERSION.')
 (out / 'RELEASE_NOTES.md').write_text('\n'.join(bullets) + '\n', encoding='utf-8')
 print(f'version {cur} -> {new}\n{target}\n{out / "RELEASE_NOTES.md"}')
 print(f'\ngit add -A\ngit commit -m "Release {new}"\ngit tag v{new}\ngit push origin main --tags')

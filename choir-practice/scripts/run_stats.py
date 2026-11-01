@@ -12,6 +12,7 @@ from common import read_checks
 
 def mins(s): return f'{s / 60:.1f} min'
 
+# Time spent waiting for the user's answers is separated from working time (question_asked / answer entries in the log)
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument('work'); ap.add_argument('--zip'); ap.add_argument('--out')
     A = ap.parse_args(); W = A.work; ent = read_checks(W)

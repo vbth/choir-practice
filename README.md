@@ -2,7 +2,9 @@
 
 # choir-practice Skill
 
-<p><picture><source media="(prefers-color-scheme: dark)" srcset="docs/img/header-dark.png"><img src="docs/img/header.png" alt="A man with headphones stands in an old bathtub and sings from a sheet of music, a rubber duck floats beside him" width="100%"></picture></p>
+<p><picture><source media="(prefers-color-scheme: dark)" srcset="docs/img/header-dark.png"><img src="docs/img/header.png" alt="A man with headphones stands in an old bathtub and sings from a sheet of music, a rubber duck floats beside him. “Tuesday night, he’s rehearsing for his choir … and I’m the one who has to face the music.” – The duck" width="100%"></picture></p>
+
+> *“Tuesday night, he’s rehearsing for his choir … and I’m the one who has to face the music.”* – The duck
 
 English | [Deutsch](README.de.md)
 

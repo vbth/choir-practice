@@ -13,6 +13,7 @@ def load_i18n(lang):
                          f'(keep all keys), show it to the user, then rerun.')
     return json.load(open(p, encoding='utf-8'))
 
+# Transliteration table used by safe(): keeps file names ASCII-only on every platform
 TRANS = {'ä': 'ae', 'ö': 'oe', 'ü': 'ue', 'Ä': 'Ae', 'Ö': 'Oe', 'Ü': 'Ue', 'ß': 'ss', 'é': 'e', 'è': 'e', 'à': 'a',
          'ç': 'c', 'ñ': 'n', 'ø': 'o', 'å': 'a', 'æ': 'ae', 'œ': 'oe'}
 
@@ -27,6 +28,7 @@ ACCENT = '#000000'   # no signal colour: table heads (bold) and the own voice in
 FOOT_PT = 8                      # footer size in pt on every PDF: identical everywhere (guides, logs, overview, score cover and music pages)
 SEP = '\u00a0·\u00a0'              # one space before and after the middle dot
 
+# Footer pieces shared by all PDFs; the EU AI label itself is drawn separately (icon_markup / rl_footer)
 def footer_parts(lang, iso=None, kind='info'):
     """Footer as (text before the EU AI label, text after it): [label] + "YYYY-MM-DD KI-generiert. Nutzung auf eigene Verantwortung." (no middle dot anywhere)."""
     note = load_i18n(lang)['ai_note' if kind == 'score' else 'ai_note_info']   # no middle dot anywhere: comma
@@ -95,6 +97,7 @@ def icon_path(kind):
 #   of the text and stand on the same baseline; Markdown: one blank line, md_footer(), one blank line (label linked from the repo)
 PLEX_CAP = 0.698         # cap height of IBM Plex Sans in em
 LABEL_WORD_CAP = 141 / 365.48   # cap height of the letters AI in the round label, in label heights
+# The label is scaled so that the capital letters inside it match the cap height of the footer text
 ICON_H = round(PLEX_CAP / LABEL_WORD_CAP, 3)   # label height in font sizes (1.809)
 ICON_BASE = 0.6922   # baseline of the letters, from the top of the label, in label heights: label and text share one baseline
 
@@ -169,6 +172,7 @@ def repeat_times(r):
     ends = repeat_endings(r)
     return int(r.get('times') or max([2] + [p for ps, _, _ in ends for p in ps]))
 
+# Expands repeats/endings into the order in which bars are actually played; audio and MIDI use this order, the printed score does not
 def derive_playback(spec):
     """Ordered [first, last] measure ranges (1-based, pickup = 1) from spec['playback'] (explicit, wins) or from
     spec['repeats'] (any number of repeats, passes and endings); None = the score once as printed.
@@ -198,6 +202,7 @@ def derive_playback(spec):
 
 FONT_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'assets', 'fonts')
 
+# Fonts are copied to ~/.fonts once so that reportlab and cairosvg/fontconfig see the same typeface
 def register_plex():
     """IBM Plex Sans (SIL OFL, assets/fonts) for reportlab (PlexR / PlexB / PlexI) and, via ~/.fonts, for cairosvg/fontconfig."""
     import shutil, subprocess

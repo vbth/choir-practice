@@ -35,6 +35,7 @@ SF = next((p for p in SF_CANDIDATES if os.path.exists(p)), SF_CANDIDATES[-1])
 # short names for --soundfont: MuseScore General from the package manager, GeneralUser GS from the skill (assets/soundfonts, see THIRD_PARTY_NOTICES.md)
 SF_CHOICES = {'musescore': SF_CANDIDATES[:2],
               'generaluser': [os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'assets', 'soundfonts', 'GeneralUser-GS.sf3')]}
+# Mixing levels in dB relative to the singer's own voice for the three practice stages
 LV = {'near': -7, 'second': -9, 'far': -12, 'melody': -4, 'accomp': -12, 'tutti': -3}   # dB relative to own voice
 REVERB = {'on': True, 'rt': 1.3, 'wet': 0.30}
 LUFS = -19
@@ -58,6 +59,7 @@ def playback_order(spec):
     """Measure ranges in played order (see common.derive_playback): spec['playback'] or derived from spec['repeats']."""
     return derive_playback(spec or {})
 
+# MusicXML -> note events [start, length, midi key, velocity] per part; repeats are unrolled, tied notes merged
 def read_score(xml, order=None, tempo_q=None):
     r = etree.parse(xml).getroot()
     div = int(r.find('.//divisions').text)
@@ -134,6 +136,7 @@ def velocities(part):
         return last if last is not None else step(t)
     for e in part['events']: e[3] = vel_at(e[0])
 
+# Fermata notes are held longer; everything after them is shifted, so all parts stay in step
 def apply_fermatas(score):
     ends = sorted({t for p in score['parts'] for t in p['fermatas']}); total = max(p['total'] for p in score['parts'])
     shifts = []
@@ -151,6 +154,7 @@ def apply_fermatas(score):
                 if e[0] >= t: e[0] += s
                 elif e[0] + e[1] == t: e[1] += s
 
+# MIDI ticks and legato: a note starting where another ends gets a small gap (same pitch) or overlap (new pitch)
 def to_ticks(score):
     """Convert to MIDI ticks and apply legato: repeated pitch ends 15 ticks early, pitch change overlaps 10 ticks."""
     f = TPQ / score['div']
@@ -271,6 +275,7 @@ def stages(seat, melody):
         out['choir'][own] = b
     return out
 
+# Per sound (choir, piano) and stage (solo, accomp, choir): render stems with FluidSynth, mix with ffmpeg, write MIDI and mixes.json
 def main():
     global SF, IR, SLOW_PCT
     ap = argparse.ArgumentParser(); ap.add_argument('xml'); ap.add_argument('spec'); ap.add_argument('outdir')

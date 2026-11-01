@@ -61,6 +61,7 @@ def build_pdf(path, flow, lang, footer_title, **kw):
         SimpleDocTemplate(path, **kw).build(list(flow), onFirstPage=cb, onLaterPages=cb)
         if len(PdfReader(path).pages) > 1: break   # several pages: keep the numbers; one page: second pass without number
 
+# Builds one README section twice from the same strings: Markdown text (md) and PDF flowables (fl)
 def readme_section(lang, spec, docs, mixes, layout):
     i = load_i18n(lang); R = i['readme']; RM = i['readme_more']; meta = spec.get('meta', {})
     title = meta.get('title', ''); md = []; fl = []
@@ -121,6 +122,7 @@ def readme_section(lang, spec, docs, mixes, layout):
         fl += [P(R['sources_h'], H2)] + [P('• ' + esc(u), S) for u in dict.fromkeys(urls)]
     return '\n'.join(md), fl
 
+# Writes README, check log and correction log (Markdown + PDF) from the language pack and the logged checks
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument('spec'); ap.add_argument('docs'); ap.add_argument('outdir')
     ap.add_argument('--workdir', required=True); ap.add_argument('--mixes'); ap.add_argument('--layout')

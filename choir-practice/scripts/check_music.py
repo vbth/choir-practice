@@ -31,6 +31,7 @@ def voice_type(v):
             if txt.startswith(k): return t
     return None
 
+# Collects plausibility findings per voice (range, leaps, rhythm patterns); they are warnings for the user to look at, not proof of errors
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument('spec'); ap.add_argument('--workdir')
     A = ap.parse_args(); spec = json.load(open(A.spec, encoding='utf-8'))

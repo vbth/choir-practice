@@ -82,6 +82,7 @@ def partition(weights, S):
         i = cut[k][j]; starts.append(i); j = i
     return sorted(starts)
 
+# Copy of the score with forced system (and page) breaks at the given bars
 def with_breaks(root, starts, spp, pages=False):
     r = copy.deepcopy(root)
     for p in r.findall('part'):
@@ -94,6 +95,7 @@ def with_breaks(root, starts, spp, pages=False):
             ms[s].insert(0, etree.Element('print', **attrs))
     return etree.tostring(r, encoding='unicode')
 
+# Verovio toolkit configured for A4 at a given scale; page size is divided by the scale because Verovio works in scaled units
 def tk_for(xml, scale, mode='line'):
     f = 100 / scale; tk = verovio.toolkit()
     tk.setOptions({'pageWidth': int(BASE_W * f), 'pageHeight': int(BASE_H * f), 'scale': scale, 'adjustPageHeight': False,
@@ -117,6 +119,7 @@ def music_fill(svg):
     a = np.array(bg.convert('L')); a = a[:int(a.shape[0] * 0.955)]; rows = np.where((a < 128).sum(axis=1) > 0)[0]
     return float(rows.max() / (a.shape[0] / 0.955)) if len(rows) else 0.0
 
+# Verovio sets the title small; scale it up in the SVG and move the following text down accordingly
 def enlarge_title(svg, title, subtitle=None):
     if not title: return svg
     m = re.search(r'<tspan font-size="(\d+)px">' + re.escape(title) + '</tspan>', svg)
@@ -312,6 +315,7 @@ def make_cover(spec, root, lang, iso, locate=None):
     rl_footer(c, X, W - X, 12 * mm, BODY, None, title, lang, iso)
     c.showPage(); c.save(); return buf.getvalue()
 
+# Tries scales from large to --min-scale until the music fits --max-pages, then adds cover page and footers
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument('xml'); ap.add_argument('pdf')
     ap.add_argument('--lang', default='en'); ap.add_argument('--date'); ap.add_argument('--spec', help='score.json: metadata for the cover page')

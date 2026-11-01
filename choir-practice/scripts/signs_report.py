@@ -9,6 +9,7 @@ ending without end). It does not read the scan; the comparison with the original
 import sys, argparse
 from lxml import etree
 
+# Collects dynamics, tempo words, repeats and endings per bar and voice from the MusicXML
 def signs(xml):
     r = etree.parse(xml).getroot(); names = {sp.get('id'): sp.findtext('part-name') for sp in r.iter('score-part')}
     res = {}

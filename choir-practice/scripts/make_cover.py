@@ -64,6 +64,7 @@ def lum(a):
     c = a / 255.0; c = np.where(c <= 0.03928, c / 12.92, ((c + 0.055) / 1.055) ** 2.4)
     return 0.2126 * c[..., 0] + 0.7152 * c[..., 1] + 0.0722 * c[..., 2]
 
+# Generative album art: colours from key and mode, softness from tempo, a dark zone per beat in the bar
 def render(hue, minor, soft, beats, zones=(), strength=0.0, seed=1, reg=0.0):
     S = SIZE; y, x = np.mgrid[0:S, 0:S] / (S - 1.0)
     dl, ds = (-0.08, -0.12) if minor else (0.0, 0.0); h = hue - (12 if minor else 0)

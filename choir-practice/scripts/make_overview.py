@@ -17,6 +17,7 @@ FONT = 'font-family="IBM Plex Sans, sans-serif"'
 
 def esc(s): return str(s).replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
 
+# One-page overview PDF: a headphone symbol per voice and stage, showing where each voice sits in the stereo image
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument('mixes'); ap.add_argument('spec'); ap.add_argument('out')
     ap.add_argument('--png'); ap.add_argument('--workdir')

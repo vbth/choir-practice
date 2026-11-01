@@ -20,6 +20,7 @@ def main():
     ap.add_argument('--docs'); ap.add_argument('--date'); ap.add_argument('--out', help='folder for the delivery folder and ZIP (default: parent of PKG)')
     A = ap.parse_args(); spec = json.load(open(A.spec, encoding='utf-8'))
     slug = safe(spec['meta']['title']); date = A.date or today_iso(); pkg = A.pkg
+    # remove scratch files of earlier phases so they never end up in the delivery
     for pat in ('**/*.png', '**/*_check.pdf', '**/__pycache__'):
         for f in glob.glob(os.path.join(pkg, pat), recursive=True):
             shutil.rmtree(f) if os.path.isdir(f) else os.remove(f)
@@ -32,12 +33,14 @@ def main():
         if os.path.exists(mx): dcmd += ['--mixes', mx]
         if lj: dcmd += ['--layout', lj[0]]
         subprocess.run(dcmd, check=True)   # pass 0: documents and check log with everything logged so far (audio test, verify)
+    # first pass builds the layout so the check log can include its results
     ok = subprocess.run(cmd).returncode == 0
     if ok:   # second pass: regenerate the check log (now with this run's delivery check) and build the delivery folder again
         if dcmd: subprocess.run(dcmd, check=True); ok = subprocess.run(cmd).returncode == 0
     top = f'{load_i18n(spec.get("language", "en"))["delivery"]["package"]}_{slug}'; folder = os.path.join(outdir, top); zpath = os.path.join(outdir, f'{top}.zip')   # no date in folder or ZIP name
     pkg_word = load_i18n(spec.get('language', 'en'))['delivery']['package']
     for old in glob.glob(os.path.join(outdir, f'*_{pkg_word}_{slug}.zip')): os.remove(old)   # no stray ZIPs of THIS piece from earlier runs (exact title, so 'Ave' never removes 'Ave_Maria')
+    # every ZIP is verified with testzip() and a file count before the run counts as delivered
     bad, n = 'no delivery folder', 0
     vz_bad = []
     if ok and os.path.isdir(folder):

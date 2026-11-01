@@ -15,6 +15,7 @@ import sys, os, json, subprocess, argparse
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
+# Renders each PDF page to PNG at 300 dpi and saves the text layer, so text and image can be compared
 def extract(pdf, outdir):
     os.makedirs(outdir, exist_ok=True)
     subprocess.run(['pdftoppm', '-r', '300', '-png', pdf, os.path.join(outdir, 'page')], check=True)
@@ -48,6 +49,7 @@ def _groups(rows, gap=2):
     if cur: out.append(cur)
     return [sum(c) / len(c) for c in out]
 
+# Finds staff line positions on a page from several vertical strips (tolerates slightly rotated photos)
 def staves(page, out=None):
     dark, (H, W) = _dark(page)
     # several vertical strips so that slightly rotated photos still work
@@ -81,6 +83,7 @@ TREBLE8 = ['C3', 'D3', 'E3', 'F3', 'G3', 'A3', 'B3', 'C4', 'D4', 'E4', 'F4', 'G4
 TREBLE = [p[0] + str(int(p[1]) + 1) for p in TREBLE8]
 BASS = ['E2', 'F2', 'G2', 'A2', 'B2', 'C3', 'D3', 'E3', 'F3', 'G3', 'A3', 'B3', 'C4', 'D4', 'E4']
 
+# Cuts staff systems into zoomed segments for close reading; `guides` draws helper lines
 def crops(page, staves_json, outdir, per_system=2, segments=3, zoom=2.6, guides=False, clefs=None):
     os.makedirs(outdir, exist_ok=True)
     S = json.load(open(staves_json))

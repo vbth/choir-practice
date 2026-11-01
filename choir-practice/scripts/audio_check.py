@@ -26,11 +26,13 @@ def decode(mp3):
         a = np.fromfile(w, dtype='<f4')
     return a.reshape(-1, 2)
 
+# Integrated loudness via ffmpeg's ebur128 filter (last reported value wins)
 def lufs(mp3):
     r = subprocess.run(['ffmpeg', '-nostats', '-i', mp3, '-vn', '-af', 'ebur128=framelog=quiet', '-f', 'null', '-'], capture_output=True, text=True).stderr
     m = re.findall(r'I:\s*(-?[\d.]+) LUFS', r)
     return float(m[-1]) if m else None
 
+# Pairs note_on/note_off of a MIDI file into (start_s, end_s, pitch) tuples; returns them with the total length in seconds
 def midi_notes(path):
     import mido
     t = 0.0; on = {}; notes = []
@@ -74,6 +76,7 @@ def check_file(mp3, target_lufs, tutti=False):
     else: prob.append('MIDI file next to the MP3 missing')
     return prob
 
+# Checks every MP3 below PKG; the exit code is 1 if any file has a problem
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument('pkg'); ap.add_argument('spec'); ap.add_argument('--workdir'); ap.add_argument('--only'); ap.add_argument('--json')
     A = ap.parse_args()

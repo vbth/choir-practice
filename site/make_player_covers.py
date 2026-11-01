@@ -18,6 +18,7 @@ def recolour(src, dst):
     hsv[..., 1] = np.clip(hsv[..., 1] * SAT, 0, 255)
     Image.fromarray(hsv.round().astype(np.uint8), 'HSV').convert('RGB').save(dst, 'JPEG', quality=90, subsampling=0, optimize=True)
 
+# Reuses the skill's album-art generator and recolours it to the site palette
 def main():
     with tempfile.TemporaryDirectory() as w:
         for lang in ('de', 'en'):
