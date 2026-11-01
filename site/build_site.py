@@ -231,6 +231,9 @@ def fan_img(A, L, name, cls, alt):
     return f'<img class="{cls}" src="{A}img/example-{name}-{L}-480.png" srcset="{srcset}" sizes="(max-width:520px) 160px, 240px" alt="{esc(alt)}" width="240" height="339" loading="lazy">'
 
 # Renders one language version of the landing page; texts come from the dict T, structure and markup live here
+# tick marks at the snap points (10 %) of the mixer sliders; left = half a thumb + the free track length times the step
+SNAP = '<span class="tk" aria-hidden="true">' + ''.join(f'<i style="left:calc(var(--th)/2 + (100% - var(--th)) * {i / 10:g})"></i>' for i in range(1, 10)) + '</span>'
+
 def page(L):
     t = T[L]; A = t['assets']
     I = t['ids']
@@ -245,10 +248,10 @@ def page(L):
     steps = ''.join(f'<li><button type="button" data-step="{i}" aria-pressed="false"><span class="n">{i+1}</span><span class="s">{esc(s[0])}</span></button></li>' for i, s in enumerate(t['steps']))
     rights = ''.join(f'<article><h3>{esc(h)}</h3><p>{esc(p)}</p></article>' for h, p in t['rechte_items'])
     METER = '<span class="mxmeter" data-meter="{}" aria-hidden="true">' + '<i></i>' * 16 + '</span>'
-    mxmaster = f'<div class="mxr mxm"><span class="mxmlb">{esc(t["mx_all"])}</span>{METER.format("master")}<span class="mxf"><input type="range" id="mxmaster" class="mxv" min="0" max="100" step="10" value="100"aria-label="{esc(t["mx_all"])}"></span><span id="mxmp" class="mxp2 mono">100&nbsp;%</span></div>'
+    mxmaster = f'<div class="mxr mxm"><span class="mxmlb">{esc(t["mx_all"])}</span>{METER.format("master")}<span class="mxf"><input type="range" id="mxmaster" class="mxv" min="0" max="100" step="10" value="100"aria-label="{esc(t["mx_all"])}">{SNAP}</span><span id="mxmp" class="mxp2 mono">100&nbsp;%</span></div>'
     mixrows = ''.join(
         f'<div class="mxr"><button type="button" class="mxb" data-stem="{k}" data-pan="{pan}" aria-pressed="true" title="{esc(t["mx_on"])}">{esc(n)}</button>'
-        f'{METER.format(k)}<span class="mxf"><input type="range" class="mxv" min="0" max="100" step="10" value="100" aria-label="{esc(n)}"></span><span class="mxp2 mono">100&nbsp;%</span></div>'
+        f'{METER.format(k)}<span class="mxf"><input type="range" class="mxv" min="0" max="100" step="10" value="100" aria-label="{esc(n)}">{SNAP}</span><span class="mxp2 mono">100&nbsp;%</span></div>'
         for k, n, pan in [(v.lower(), vn, round(-0.6 + 1.2 * i / 3, 2)) for i, (v, vn) in enumerate(t['voices'].items())] + [('acc', t['mx_acc'], 0)])
     mxtempos = '<input type="range" id="mxtempo" class="mxtrack" min="80" max="100" step="10" value="100" aria-label="' + esc(t['mx_tempo']) + '"><div class="mxtk"><span>80&nbsp;%</span><span>90&nbsp;%</span><span>100&nbsp;%</span></div>'
     voices = ''.join(f'<button type="button" data-voice="{v}" aria-pressed="false">{esc(n)}</button>' for v, n in t['voices'].items())
@@ -491,7 +494,7 @@ h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 .nowplay{display:flex;align-items:center;gap:14px}.nowplay .ps{margin:0}
 .mix{margin:32px 0 0;padding:20px 0 0;border-top:1.5px solid var(--line)}.mxh{margin:0;font-weight:700;font-size:var(--fs-m)}.mxp{margin:4px 0 14px;color:var(--mute);font-size:var(--fs-s)}
 .mix #mxseek{flex:1;min-width:0;accent-color:var(--fg);height:24px;cursor:pointer}.mix #mxtime{flex:none;font-size:var(--fs-s);min-width:3.2em;text-align:right}
-.mxr{display:flex;align-items:center;gap:14px;margin-top:10px}
+.mxr{display:flex;align-items:center;gap:14px;margin-top:10px;--th:16px}
 .mxb{flex:none;width:6.5em;height:36px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg);font:inherit;font-size:var(--fs-s);cursor:pointer;padding:0 6px}
 .mxb[aria-pressed=true]{background:var(--fg);color:var(--bg)}
 .mxplay{width:calc(6.5*var(--fs-s));height:36px}
@@ -516,14 +519,22 @@ h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
  .mxmeter{display:flex;flex-direction:column-reverse;gap:2px;grid-column:1;grid-row:2;width:14px;height:150px;align-self:center}
  .mxf{grid-column:2;grid-row:2;flex:none;width:auto;height:150px}
  .mxf .mxv{position:absolute;left:50%;top:50%;width:150px;height:28px;transform:translate(-50%,-50%) rotate(-90deg)}
+ .mxf .tk{left:50%;top:50%;right:auto;bottom:auto;width:150px;height:28px;transform:translate(-50%,-50%) rotate(-90deg)}
  .mxr .mxp2,.mxm .mxp2{grid-column:1/-1;text-align:center;min-width:0}
  .mxm .mxmlb{width:100%}   /* as wide as the channels */
 }
 .mxmlb{flex:none;width:calc(6.5*var(--fs-s));height:36px;display:grid;place-items:center;box-sizing:border-box;border:1.5px solid var(--line);background:var(--fg);color:var(--bg);font-size:var(--fs-s);font-weight:700}   /* always on, so filled like a pressed voice */   /* same size as the voice buttons below */
-.mxv{flex:1;min-width:0;accent-color:var(--fg);height:24px;cursor:pointer}.mxr .mxp2{flex:none;font-size:var(--fs-s);min-width:3.2em;text-align:right}
+.mxv{flex:1;min-width:0;height:24px;margin:0;cursor:pointer;-webkit-appearance:none;appearance:none;background:transparent}
+.mxv::-webkit-slider-runnable-track{height:2px;background:var(--fg)}
+.mxv::-webkit-slider-thumb{-webkit-appearance:none;width:var(--th);height:var(--th);margin-top:-7px;border:0;border-radius:50%;background:var(--fg)}
+.mxv::-moz-range-track{height:2px;background:var(--fg)}
+.mxv::-moz-range-thumb{width:var(--th);height:var(--th);border:0;border-radius:50%;background:var(--fg)}
+.tk{position:absolute;inset:0;pointer-events:none}
+.tk i{position:absolute;top:calc(50% - 4px);width:1px;height:8px;margin-left:-.5px;background:var(--fg)}
+.mxr .mxp2{flex:none;font-size:var(--fs-s);min-width:3.2em;text-align:right}
 .mxr.off .mxv,.mxr.off .mxp2{opacity:.4}
 .mxb:focus-visible,.mxv:focus-visible,#mxseek:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
-@media (hover:hover){.mxb:hover,#mxplay:hover{color:var(--link)}.mxb[aria-pressed=true]:hover{background:var(--link);color:var(--bg);border-color:var(--link)}.mxv:hover,#mxseek:hover{accent-color:var(--link)}}
+@media (hover:hover){.mxb:hover,#mxplay:hover{color:var(--link)}.mxb[aria-pressed=true]:hover{background:var(--link);color:var(--bg);border-color:var(--link)}#mxseek:hover{accent-color:var(--link)}.mxv:hover::-webkit-slider-thumb,.mxv:hover::-moz-range-thumb{background:var(--link)}}
 .groups details{border-top:1.5px solid var(--line)}.groups details:last-child{border-bottom:1.5px solid var(--line)}
 .groups summary{list-style:none;cursor:pointer;padding:8px 28px 8px 0;position:relative}.groups summary::-webkit-details-marker{display:none}
 .groups summary::after{content:"+";position:absolute;right:4px;top:4px;font-size:24px;line-height:1.3}.groups details[open] summary::after{content:"\2212"}
