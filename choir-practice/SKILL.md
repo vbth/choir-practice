@@ -12,7 +12,7 @@ Display name for users: `skill_name` in the language pack (de: "Chor-Übungsmate
 ## First step, always
 **Before any other work – in every new chat, after installing or updating this skill, after a session handoff, and before rerunning any single script (e.g. only make_layout.py or make_docs.py) – run `bash <skill dir>/scripts/setup.sh --check`.** It installs nothing and reports what is present, what is missing and how the installed Python packages differ from the tested versions in `scripts/requirements-stable.txt`. A fresh environment has none of the audio and notation tools; working without them silently skips or fakes steps (no audio rendering, untestable timing).
 
-- **Nothing missing, all tools ok:** continue (for the first run in a chat: `setup.sh --stable` once, a no-op when the versions match) and go on with Stop A. Before a rerun of a single script, `--check` alone is enough.
+- **Nothing missing, all tools ok:** continue (for the first run in a chat: `setup.sh --stable --verbose` once, a no-op when the versions match; show its `[setup]` steps in the chat, the script repairs itself, so report only what is still missing) and go on with Stop A. Before a rerun of a single script, `--check` alone is enough.
 - **Something missing or different (`python state: missing|differs`, or apt packages to install) – this comes before Stop A and is a hard stop:** tell the user in 3–6 short lines what will be installed (apt packages; Python packages with tested vs. installed version) and ask once with `AskUserQuestion`: **tested stable versions (Recommended)** or **newest versions** (the free-text field stays available). Then run `setup.sh --stable` or `--latest` and wait until every tool is ok. The question is asked in the user's language; log it like a stop (`question_asked` / `answer_received`, phase 0).
 - **Unattended** (user away, scheduled run): take the stable versions without asking.
 - **Always log the result:** `python3 $S/log_check.py $WORK 0 setup_versions pass "<mode, versions line from the report>"`. With `--latest` log `warn` and the note "newest versions, not tested", and say so in the final message.
@@ -157,7 +157,7 @@ Interaction rules:
 Use a task list with one task per phase. Work directory: `WORK=<scratch>/<slug>`; package folder `PKG=$WORK/pkg`. `S=<skill dir>/scripts`.
 
 ### Phase 0 – Setup (gate: all tools ok)
-Mandatory, see "First step, always". `bash $S/setup.sh --check`, the package question if needed, then `bash $S/setup.sh --stable|--latest` → must report python, fluidsynth, ffmpeg, pdftoppm, soundfont ok. Soundfont fallback → log + tell user. `python3 $S/log_check.py $WORK 0 setup pass "<summary>"` and `… 0 setup_versions …` (see "First step, always").
+Mandatory, see "First step, always". `bash $S/setup.sh --check`, the package question if needed, then `bash $S/setup.sh --stable|--latest --verbose` (first run in a chat: with `--verbose`, its steps shown in the chat) → must report python, fluidsynth, ffmpeg, pdftoppm, soundfont ok. Soundfont fallback → log + tell user. `python3 $S/log_check.py $WORK 0 setup pass "<summary>"` and `… 0 setup_versions …` (see "First step, always").
 
 ### Phase 1 – Survey (after Stop A; gate: structure understood, scope announced)
 0. Source as image file(s) (photo, scan as JPG/PNG/TIFF/WebP): `python3 $S/scan_tools.py topdf img1 [img2 …] source.pdf` first; this PDF is the source from here on (and the delivered "Scan"). A MusicXML file from notation software is a draft only (Phase 3).
