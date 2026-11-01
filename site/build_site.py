@@ -67,7 +67,7 @@ T = {
  'de': {
   'html': 'de', 'name': 'Choir Practice Skill', 'title': 'Choir Practice Skill – Deine Chorstimme. Deine Noten. Überall lesen, hören und singen.', 'other': ('../en/', 'EN'), 'self_prefix': '../', 'assets': '../',
   'desc': 'Dokumentation eines agentischen KI-Musik-Workflows und -Skills entwickelt für und mit Claude Code als privates Code-Experiment. Es ist nur ein „Proof of Concept“. Aus Chornoten entsteht ein „KI-geprüftes“ ZIP, in dem sich für jede Stimme 10 Aufnahmen zum Üben befinden.',
-  'ids': {'start': 'start', 'ablauf': 'ablauf', 'ueben': 'ueben', 'paket': 'beispiel-zip', 'rechte': 'rechte-und-ki', 'lizenz': 'lizenz'},
+  'ids': {'start': 'start', 'ablauf': 'ablauf', 'ueben': 'ueben', 'paket': 'beispiel', 'rechte': 'rechte-und-ki', 'lizenz': 'lizenzen'},
   'menu': [('start', 'Start'), ('ablauf', 'Ablauf'), ('ueben', 'Üben'), ('paket', 'Beispiel'), ('rechte', 'Rechte & KI'), ('lizenz', 'Lizenzen')],
   'menu_label': 'Menü', 'skip': 'Zum Inhalt', 'theme_to_dark': 'Zum dunklen Modus wechseln', 'theme_to_light': 'Zum hellen Modus wechseln',
   'h1': 'Deine Chorstimme. Deine Noten. Überall lesen, hören und singen.',
@@ -117,16 +117,16 @@ T = {
    'accomp': 'Die gewählte Stimme, die Melodie leiser, dazu die Klavierbegleitung aller Stimmen.',
    'choir': 'Die anderen Stimmen sitzen wie im Chor: Nachbarn links und rechts etwas leiser, weiter entfernte noch leiser.',
    'tutti': 'Alle Stimmen gleich laut.'}, 'own_lbl': 'Gesang', 'acc_lbl': 'Klavier',
-  'dl_p': 'Das Ergebnis: Aufnahmen zum Üben für jede Stimme, Anleitungen und Protokolle.', 'dl_btn': 'Beispiel herunterladen',
-  'tutti_all': 'Tutti, alle Stimmen', 'pl_title': 'Alle meine Entchen', 'pl_play': 'Wiedergabe', 'pl_pause': 'Pause', 'pl_seek': 'Position',
-  'pl_cover': 'Albumcover des Beispielpakets',
+  'dl_p': 'Das Ergebnis: Aufnahmen zum Üben für jede Stimme, Anleitungen und Protokolle.', 'dl_btn': 'Download', 'dl_ttl': 'Alle meine Entchen', 'dl_meta': 'ZIP · ca. 36 MB · Noten, Aufnahmen, Anleitungen',
+  'tutti_all': 'Tutti, alle Stimmen', 'pl_title': 'Alle meine Entchen', 'pl_play': 'Wiedergabe', 'pl_pause': 'Pause', 'pl_prev': 'Vorherige Aufnahme', 'pl_next': 'Nächste Aufnahme', 'pl_loop': 'Wiederholen', 'pl_vol': 'Lautstärke', 'pl_mute': 'Stumm', 'pl_seek': 'Position',
+  'pl_cover': 'Albumcover des Beispielpakets', 'mx_h': 'Mixer', 'mx_tempo': 'Tempo', 'mx_all': 'Gesamt', 'mx_p': 'Stimmen und Klavier einzeln ein- und ausschalten (antippen oder -klicken) und in der Lautstärke regeln, während es läuft.', 'mx_acc': 'Klavier', 'mx_on': 'an / aus',
   'rechte_h': 'Rechte & KI',
   'rechte_items': [
    ('Rechte', 'Bevor Noten verarbeitet werden, fragt der Skill nach den Rechten. Diese Angaben werden danach in der README-Datei vermerkt. Ob die Noten verarbeitet und weitergegeben werden dürfen, richtet sich nach dem Urheber- und Lizenzrecht, unter dem sie stehen.'),
    ('KI-Kennzeichnung', 'Alles, was der Skill erzeugt, ist als KI-Inhalt gekennzeichnet, sowohl mit dem EU-Label für KI-generierte Inhalte als auch im Text und in den Metadaten der Dokumente.'),
   ],
   'lic_h': 'Lizenzen', 'lic_link': 'PolyForm Noncommercial License 1.0.0', 'lic_p': ', frei für nichtkommerzielle Nutzung.',
-  'duck': '„Sonntagmorgen, er übt wieder für seinen Chor … und ich darf es ausbaden!“ – Die Ente eines Tenors',
+  'duck': '„Sonntagmorgen, er übt mal wieder für seinen Chor\n… und ich darf es ausbaden!“', 'duck_by': 'Ente eines Tenors',
   'lic_third_link': 'Komponenten von Drittanbietern', 'foot_profile': 'GitHub-Repository vbth/choir-practice', 'private': 'privates Projekt', 'og_alt': 'Ein Mann mit Kopfhörern steht in einer alten Badewanne und singt vom Notenblatt, neben ihm schwimmt eine Quietscheente, rote Noten schweben im Raum',
   'alt_cover': 'Deckblatt des Beispielpakets', 'alt_page1': 'Erste Notenseite des Beispielpakets', 'alt_page2': 'Zweite Notenseite des Beispielpakets', 'alt_ai': 'EU-Label AI',
   'ai_label': 'AI', 'top': 'Nach oben',
@@ -134,7 +134,7 @@ T = {
  'en': {
   'html': 'en', 'name': 'Choir Practice Skill', 'title': 'Choir Practice Skill – Your voice. Your sheet music. Read, listen, and sing anywhere.', 'other': ('../de/', 'DE'), 'self_prefix': '../', 'assets': '../',
   'desc': 'Documentation of an agentic AI music workflow and skill developed for and with Claude Code as a private code experiment. It is only a “proof of concept”. A choir score goes in, and an “AI-checked” ZIP comes out with 10 practice recordings for every voice.',
-  'ids': {'start': 'start', 'ablauf': 'workflow', 'ueben': 'practice', 'paket': 'example-zip', 'rechte': 'rights-and-ai', 'lizenz': 'licence'},
+  'ids': {'start': 'start', 'ablauf': 'workflow', 'ueben': 'practice', 'paket': 'example', 'rechte': 'rights-and-ai', 'lizenz': 'licences'},
   'menu': [('start', 'Start'), ('ablauf', 'Workflow'), ('ueben', 'Practice'), ('paket', 'Example'), ('rechte', 'Rights & AI'), ('lizenz', 'Licences')],
   'menu_label': 'Menu', 'skip': 'Skip to content', 'theme_to_dark': 'Switch to dark mode', 'theme_to_light': 'Switch to light mode',
   'h1': 'Your voice. Your sheet music. Read, listen, and sing anywhere.',
@@ -184,16 +184,16 @@ T = {
    'accomp': 'The selected voice, the melody quieter, plus the piano accompaniment of all voices.',
    'choir': 'The other voices sit as in the choir: neighbours left and right a little quieter, voices further away quieter still.',
    'tutti': 'All voices equally loud.'}, 'own_lbl': 'Singing', 'acc_lbl': 'Piano',
-  'dl_p': 'The result: practice recordings for every voice, guides and logs.', 'dl_btn': 'Download the example',
-  'tutti_all': 'Tutti, all voices', 'pl_title': 'All My Ducklings', 'pl_play': 'Play', 'pl_pause': 'Pause', 'pl_seek': 'Position',
-  'pl_cover': 'Album cover of the example pack',
+  'dl_p': 'The result: practice recordings for every voice, guides and logs.', 'dl_btn': 'Download', 'dl_ttl': 'All My Ducklings', 'dl_meta': 'ZIP · ca. 36 MB · Scores, recordings, guides',
+  'tutti_all': 'Tutti, all voices', 'pl_title': 'All My Ducklings', 'pl_play': 'Play', 'pl_pause': 'Pause', 'pl_prev': 'Previous recording', 'pl_next': 'Next recording', 'pl_loop': 'Repeat', 'pl_vol': 'Volume', 'pl_mute': 'Mute', 'pl_seek': 'Position',
+  'pl_cover': 'Album cover of the example pack', 'mx_h': 'Mixer', 'mx_tempo': 'Tempo', 'mx_all': 'Master', 'mx_p': 'Switch each voice and the piano on and off (tap or click) and set its level while it plays.', 'mx_acc': 'Piano', 'mx_on': 'on / off',
   'rechte_h': 'Rights & AI',
   'rechte_items': [
    ('Rights', 'Before scores are processed, the skill asks about the rights. These details are then recorded in the README file. Whether the scores may be processed and passed on depends on the copyright and licence law they are subject to.'),
    ('AI labelling', 'Everything the skill creates is labelled as AI content, both with the EU label for AI-generated content and in the text and metadata of the documents.'),
   ],
   'lic_h': 'Licences', 'lic_link': 'PolyForm Noncommercial License 1.0.0', 'lic_p': ', free for non-commercial use.',
-  'duck': '“Sunday morning, he’s rehearsing for his choir … and I’m the one who has to face the music.” – A tenor’s duck',
+  'duck': '“Sunday morning, he’s rehearsing for his choir\n… and I’m the one who has to face the music.”', 'duck_by': 'A tenor’s duck',
   'lic_third_link': 'Third-party components', 'foot_profile': 'GitHub repository vbth/choir-practice', 'private': 'private project', 'og_alt': 'A man with headphones stands in an old bathtub and sings from a sheet of music, a rubber duck floats beside him, red notes drift through the room',
   'alt_cover': 'Title page of the example pack', 'alt_page1': 'First score page of the example pack', 'alt_page2': 'Second score page of the example pack', 'alt_ai': 'EU label AI',
   'ai_label': 'AI', 'top': 'Back to top',
@@ -244,6 +244,13 @@ def page(L):
         for i, (n, d, ch) in enumerate(t['tree']))
     steps = ''.join(f'<li><button type="button" data-step="{i}" aria-pressed="false"><span class="n">{i+1}</span><span class="s">{esc(s[0])}</span></button></li>' for i, s in enumerate(t['steps']))
     rights = ''.join(f'<article><h3>{esc(h)}</h3><p>{esc(p)}</p></article>' for h, p in t['rechte_items'])
+    METER = '<span class="mxmeter" data-meter="{}" aria-hidden="true">' + '<i></i>' * 16 + '</span>'
+    mxmaster = f'<div class="mxr mxm"><span class="mxmlb">{esc(t["mx_all"])}</span>{METER.format("master")}<span class="mxf"><input type="range" id="mxmaster" class="mxv" min="0" max="100" value="100" aria-label="{esc(t["mx_all"])}"></span><span id="mxmp" class="mxp2 mono">100&nbsp;%</span></div>'
+    mixrows = ''.join(
+        f'<div class="mxr"><button type="button" class="mxb" data-stem="{k}" data-pan="{pan}" aria-pressed="true" title="{esc(t["mx_on"])}">{esc(n)}</button>'
+        f'{METER.format(k)}<span class="mxf"><input type="range" class="mxv" min="0" max="100" value="100" aria-label="{esc(n)}"></span><span class="mxp2 mono">100&nbsp;%</span></div>'
+        for k, n, pan in [(v.lower(), vn, round(-0.6 + 1.2 * i / 3, 2)) for i, (v, vn) in enumerate(t['voices'].items())] + [('acc', t['mx_acc'], 0)])
+    mxtempos = '<input type="range" id="mxtempo" class="mxtrack" min="80" max="100" step="10" value="100" aria-label="' + esc(t['mx_tempo']) + '"><div class="mxtk"><span>80&nbsp;%</span><span>90&nbsp;%</span><span>100&nbsp;%</span></div>'
     voices = ''.join(f'<button type="button" data-voice="{v}" aria-pressed="false">{esc(n)}</button>' for v, n in t['voices'].items())
     stages = ''.join(f'<button type="button" data-stage="{k}" aria-pressed="false">{esc(n)}</button>' for k, n in t['stages'].items())
     sounds = ''.join(f'<button type="button" data-sound="{k}" aria-pressed="false">{esc(n)}</button>' for k, n in t['sounds'].items())
@@ -312,8 +319,17 @@ def page(L):
  <nav id="nav" aria-label="{esc(t['menu_label'])}"><ul>{menu}<li class="navlang"><a href="{other_href}" hreflang="{'en' if L=='de' else 'de'}" lang="{'en' if L=='de' else 'de'}">{'English' if L=='de' else 'Deutsch'}</a></li></ul></nav>
 </header>
 <main>
-<figure class="banner"><picture><source media="(prefers-color-scheme: dark)" srcset="{A}img/header-dark.png"><img src="{A}img/header.png" alt="{esc(t['og_alt'])}. {esc(t['duck'])}" width="1280" height="640" fetchpriority="high" decoding="async"></picture>
-<figcaption class="duck">{esc(t['duck'])}</figcaption></figure>
+<figure class="banner"><div class="hw"><picture><source media="(prefers-color-scheme: dark)" srcset="{A}img/header-dark.png"><img src="{A}img/header.png" alt="{esc(t['og_alt'])}. {esc(t['duck'].replace(chr(10), ' '))} — {esc(t['duck_by'])}" width="1280" height="640" fetchpriority="high" decoding="async"></picture>
+<svg width="0" height="0" aria-hidden="true" style="position:absolute"><filter id="kr" x="-15%" y="-15%" width="130%" height="130%"><feTurbulence type="fractalNoise" baseFrequency=".13" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.9" xChannelSelector="R" yChannelSelector="G"/></filter><filter id="kb" x="-5%" y="-60%" width="110%" height="220%"><feTurbulence type="fractalNoise" baseFrequency=".05 .12" numOctaves="2" seed="9" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3.2" xChannelSelector="R" yChannelSelector="G"/></filter><filter id="kf" x="-8%" y="-15%" width="116%" height="130%"><feTurbulence type="fractalNoise" baseFrequency=".03" numOctaves="1" seed="2" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3.4" xChannelSelector="R" yChannelSelector="G"/></filter><filter id="krs" x="-15%" y="-15%" width="130%" height="130%"><feTurbulence type="fractalNoise" baseFrequency=".13" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="1.3" xChannelSelector="R" yChannelSelector="G"/></filter><filter id="kfs" x="-8%" y="-15%" width="116%" height="130%"><feTurbulence type="fractalNoise" baseFrequency=".03" numOctaves="1" seed="2" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2" xChannelSelector="R" yChannelSelector="G"/></filter></svg>
+<div class="ov" role="group" aria-label="{esc(t['pl_title'])}">
+<span class="fr" aria-hidden="true"></span>
+<div class="rw">
+     <button type="button" class="prev" aria-label="{esc(t['pl_prev'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M5.9 5.2Q6.3 11 6 18.9" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.9 5.4Q13 9.2 9.1 12.3Q13.4 14.6 18.6 18.7Q19.3 12 18.9 5.4Z" fill="currentColor" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round"/></svg></button>
+     <button type="button" class="pbtn" aria-label="{esc(t['pl_play'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path class="picon" d="M7.2 4.6Q13.5 8.4 19.6 12.1Q13.3 15.9 7.4 19.6Q7.8 12 7.2 4.6Z" fill="currentColor" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round"/></svg></button>
+     <button type="button" class="next" aria-label="{esc(t['pl_next'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M18 5.2Q17.7 11 18.1 18.9" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.2 5.4Q11 9.2 14.9 12.3Q10.6 14.6 5.4 18.7Q4.7 12 5.2 5.4Z" fill="currentColor" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round"/></svg></button>
+</div>
+</div></div>
+<figcaption class="duck">{esc(t['duck']).replace(chr(10), ' <br class="dbr">')}<span class="by">— {esc(t['duck_by'])}</span></figcaption></figure>
 <section id="start" class="hero">
  <h1>{h1_html}</h1>
  <p class="lead">{'<br><br>'.join(esc(x) for x in t['lead'].split(chr(10) * 2))}</p>
@@ -332,8 +348,9 @@ def page(L):
    <img class="art" src="{A}img/cover-{L}.jpg" alt="{esc(t['pl_cover'])}" width="600" height="600" loading="lazy">
    <div class="pl">
     <p class="pt">{esc(t['pl_title'])}</p><p class="ps" id="plname" aria-live="polite"></p>
-    <div class="pc"><button type="button" class="pbtn" aria-label="{esc(t['pl_play'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path class="picon" d="M7 4l13 8-13 8z" fill="currentColor"/></svg></button>
+    <div class="pc"><button type="button" class="pbtn" aria-label="{esc(t['pl_play'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path class="picon" data-c d="M7 4l13 8-13 8z" fill="currentColor"/></svg></button>
      <input type="range" id="plseek" min="0" max="1000" value="0" aria-label="{esc(t['pl_seek'])}"><span id="pltime" class="mono">0:00</span></div>
+    <div class="pc pv"><button type="button" class="vbtn mute" aria-pressed="false" aria-label="{esc(t['pl_mute'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3z" fill="currentColor"/><path class="w" d="M15.5 8.5a5 5 0 010 7M18 6a8.5 8.5 0 010 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path class="x" d="M15 9l6 6M21 9l-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button><input type="range" class="vol" min="0" max="100" value="50" aria-label="{esc(t['pl_vol'])}"><span class="mono vp">50&nbsp;%</span></div>
    </div>
   </div>
   <div class="groups">{playlist(t)}</div>
@@ -348,8 +365,15 @@ def page(L):
    <div class="ctl"><span class="lbl" id="klbl">{esc(t['sound_label'])}</span><div class="seg" id="sounds" role="group" aria-labelledby="klbl">{sounds}</div></div>
    <div class="ctl" id="tempoctl"><span class="lbl" id="tlbl">{esc(t['tempo_label'])}</span><div class="seg" id="tempos" role="group" aria-labelledby="tlbl">{tempos}</div></div>
   </div>
-  <div class="nowplay"><button type="button" class="pbtn" aria-label="{esc(t['pl_play'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path class="picon" d="M7 4l13 8-13 8z" fill="currentColor"/></svg></button><p class="ps" id="hpname" aria-live="polite"></p></div>
+  <div class="nowplay"><button type="button" class="pbtn" aria-label="{esc(t['pl_play'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path class="picon" data-c d="M7 4l13 8-13 8z" fill="currentColor"/></svg></button><p class="ps" id="hpname" aria-live="polite"></p></div>
  </div>
+ <div class="mix" id="mix" data-audio="{A}audio/mix/" role="group" aria-labelledby="mxh">
+  <p class="mxh" id="mxh">{esc(t['mx_h'])}</p><p class="mxp">{esc(t['mx_p'])}</p>
+  <div class="pc"><button type="button" class="mxplay" id="mxplay" aria-label="{esc(t['pl_play'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path id="mxicon" d="M7 4l13 8-13 8z" fill="currentColor"/></svg></button>
+   <input type="range" id="mxseek" min="0" max="1000" value="0" aria-label="{esc(t['pl_seek'])}"><span id="mxtime" class="mono">0:00</span></div>
+<div class="mxbank">{mxmaster}{mixrows}</div>
+  <div class="ctl mxt"><span class="lbl" id="mxtl">{esc(t['mx_tempo'])}</span><div id="mxtempos">{mxtempos}</div></div>
+  </div>
 </section>
 <section id="{I['paket']}"><h2><span class="num">03</span>{esc(t['paket_h'])}</h2>
  <div class="exrow">
@@ -358,7 +382,7 @@ def page(L):
    {fan_img(A, L, 'page-2', 'p2', t['alt_page2'])}
    {fan_img(A, L, 'page-1', 'p1', t['alt_page1'])}
   </div></figure>
-  <div class="dl"><p>{esc(t['dl_p'])}</p><p class="dlb"><a href="{REL}{ZIP_OF[L]}" download>{esc(t['dl_btn'])}</a></p></div>
+  <div class="dl"><p class="ttl">{esc(t['dl_ttl'])}</p><p>{esc(t['dl_p'])}</p><p class="meta">{esc(t['dl_meta'])}</p><p class="dlb"><a href="{REL}{ZIP_OF[L]}" download>{esc(t['dl_btn'])}</a></p></div>
  </div>
  <h3 class="sub">{esc(t['inh_h'])}</h3>
  <p class="intro">{esc(t['paket_p'])}</p>
@@ -386,14 +410,14 @@ CSS = r'''@font-face{font-family:"IBM Plex Sans";font-weight:400;font-style:norm
 @media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#000;--fg:#fff;--mute:#fff;--line:#fff}}
 :root[data-theme=dark]{--bg:#000;--fg:#fff;--mute:#fff;--line:#fff;color-scheme:dark}:root[data-theme=light]{color-scheme:light}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:var(--barh,76px)}
 p,li,figcaption{text-wrap:pretty}
 body{margin:0;background:var(--bg);color:var(--fg);font:400 var(--fs)/1.55 "IBM Plex Sans",Helvetica,Arial,sans-serif;-webkit-text-size-adjust:100%}
 a{color:var(--link);text-decoration:none}a:hover{color:var(--fg)}
 .mono{font-family:"IBM Plex Sans Condensed","IBM Plex Sans",sans-serif}
 .skip{position:absolute;left:-999px}.skip:focus{left:16px;top:8px;background:var(--bg);padding:8px;z-index:20}
 :focus-visible{outline:2px solid var(--fg);outline-offset:3px}
-.bar{position:relative;z-index:10;display:flex;align-items:center;gap:16px;padding:12px var(--edge);background:var(--bg);border-bottom:1.5px solid var(--line)}
+.bar{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:16px;padding:12px var(--edge);background:var(--bg);border-bottom:1.5px solid var(--line)}
 .brand{display:flex;align-items:center;gap:12px;color:var(--fg);text-decoration:none;font-weight:700;font-size:var(--fs-m);letter-spacing:.02em}
 .brand img{display:block;flex:none}.bn{white-space:nowrap}.bt{line-height:1.15}
 .bar nav{margin-left:auto}.bar nav ul{display:flex;gap:0;list-style:none;margin:0;padding:0}
@@ -440,16 +464,20 @@ ul.note{padding-left:18px}
 .panel h3{display:flex;gap:12px;align-items:baseline}.panel .gate{margin:10px 0 0;color:var(--mute)}.panel .who{font-weight:400;font-size:var(--fs-s);color:var(--link);letter-spacing:.04em;text-transform:uppercase;font-family:"IBM Plex Sans Condensed",sans-serif}
 .panel p{margin:0}
 .banner{margin:72px 0 0}.banner img{display:block;width:100%;height:auto}
-.banner .duck{max-width:24em;margin:18px auto 0;text-align:center;font-style:italic;font-size:var(--fs-m);line-height:1.4}
-@media (max-width:600px){.banner .duck{font-size:var(--fs);margin-top:14px}}
-.exrow{display:grid;grid-template-columns:minmax(0,420px) minmax(0,1fr);gap:32px 64px;align-items:center;margin:0 0 72px}
+.banner .duck{max-width:26em;margin:18px auto 0;text-align:center;font-style:italic;font-size:var(--fs-m);line-height:1.4;text-wrap:balance}
+.banner .duck .by{display:block;margin-top:6px;font-style:normal;font-size:var(--fs)}
+@media (max-width:600px){.banner .duck{font-size:var(--fs);margin-top:14px}.banner .duck .dbr{display:none}.banner .duck .by{font-size:var(--fs-s)}}
+.exrow{--pop:150px;--pw:250px;display:grid;grid-template-columns:calc(var(--pw)*1.8) minmax(0,1fr);gap:32px 56px;align-items:center;border:1.5px solid var(--line);padding:40px 48px;margin:calc(var(--pop) + 56px) 0 72px}   /* card; the fan pops out of its top edge by --pop, 56px stay free below the headline */
 h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 .dl p{margin:0 0 20px;max-width:30em}.dl .dlb{margin:0}.steps+.dlb{margin:24px 0 16px}.dlb a{display:inline-block;border:1.5px solid var(--line);padding:12px 20px;font-weight:400;color:var(--fg);text-decoration:none}.dlb a:hover,.dlb a:focus-visible{background:var(--fg);color:var(--bg)}
-.fan{margin:80px 0 0}.fan{--pw:240px}.fan .pages{position:relative;height:calc(var(--pw)*1.62)}.fan img{position:absolute;bottom:calc(var(--pw)*.13);left:50%;width:var(--pw);height:auto;background:#fff;border:1.5px solid var(--line);transform-origin:50% 100%}
+#hp .vb{cursor:pointer}@media (hover:hover){#hp .vb:hover circle{stroke:var(--link)}#hp .vb:hover text{fill:var(--link)}}   /* hover only where a pointer exists: on touch screens it would stay red after the tap */#hp .vb:focus-visible{outline:2px solid var(--fg);outline-offset:4px}
+.fan{width:100%;margin:calc(var(--pop)*-1) 0 -10px}.fan .pages{position:relative;height:calc(var(--pw)*1.62)}.fan img{position:absolute;bottom:calc(var(--pw)*.13);left:50%;width:var(--pw);height:auto;background:#fff;border:1.5px solid var(--line);transform-origin:50% 100%}
 .fan .p0{transform:translateX(-50%) rotate(-15deg)}.fan .p1{transform:translateX(-50%) rotate(0)}.fan .p2{transform:translateX(-50%) rotate(15deg)}
 
-@media (max-width:900px){.exrow{grid-template-columns:1fr}.fan{max-width:420px}}
-@media (max-width:520px){.fan{--pw:160px}}
+.dl .ttl{font-weight:700;font-size:var(--fs-m);margin:0 0 6px}.dl .meta{font-size:var(--fs-s);color:var(--mute);margin:0 0 20px}
+.dlb a{padding:16px 22px}.dl{min-width:0}   /* desktop: the button is as wide as its text, no arrow */
+@media (max-width:900px){.dlb a{display:block;text-align:center}.exrow{--pop:130px;--pw:200px;grid-template-columns:1fr;gap:8px;padding:24px 20px;margin-top:calc(var(--pop) + 44px)}.fan{width:min(100%,calc(var(--pw)*1.8));margin:calc(var(--pop)*-1) auto 0}}
+@media (max-width:520px){.exrow{--pw:190px}}
 .mixer{display:grid;gap:28px;max-width:760px;margin:56px auto 0}
 .ctl2{display:flex;flex-wrap:wrap;gap:16px 32px}.ctl2 .ctl{flex:1 1 14em}.ctl2 .ctl[hidden]{display:none}
 .ctl{display:flex;flex-direction:column;gap:6px;align-items:stretch}.lbl{font:400 var(--fs-s)/1.2 "IBM Plex Sans Condensed",sans-serif;color:var(--link);letter-spacing:.04em;text-transform:uppercase}
@@ -460,13 +488,59 @@ h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 .listen{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 56px;align-items:start}
 .pbox{display:grid;grid-template-columns:1fr;gap:20px;align-items:start;justify-self:start;width:100%;max-width:26em}
 .listen .art{width:100%;height:auto;display:block;border:1.5px solid var(--line)}
+.hw{position:relative;container-type:inline-size}
+.ov{--b:clamp(16px,3.4cqw,40px);position:absolute;left:50%;top:79%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:0;padding:calc(var(--b)*.2) calc(var(--b)*.35)}
+.ov .rw{position:relative;display:flex;gap:2px}
+.ov .fr{filter:url(#kf);position:absolute;inset:0;border:clamp(1.6px,.26cqw,2.6px) solid var(--fg);border-radius:calc(var(--b)*.32);pointer-events:none}   /* even border; the wobble comes from a low-frequency displacement, which bends the line without changing its thickness */
+.ov button{position:relative;width:var(--b);height:var(--b);border:0;background:transparent;color:var(--fg);display:grid;place-items:center;cursor:pointer;padding:0}
+.ov button svg{width:55%;height:55%}.ov button svg{filter:url(#kr)}.ov button:focus-visible{outline:2px solid var(--fg);outline-offset:-2px}
+@media (hover:hover){.pbtn:hover,.vbtn:hover,.ov button:hover,.ov button[aria-pressed=true]:hover{color:var(--link)}.vol:hover,#plseek:hover{accent-color:var(--link)}}
+.hw:not(.on) .ov .rw button:not(.pbtn){display:none}   /* before the first click or tap only the play button in its frame */
+@container (max-width:520px){.ov button svg{width:68%;height:68%;filter:url(#krs)}.ov .fr{filter:url(#kfs);border-width:1.2px}}   /* narrow image: the tub is too small for a second row; the volume stays in the player below */
 .pt{margin:0;font-weight:700}.ps{margin:2px 0 12px;color:var(--mute);font-size:var(--fs-s);min-height:1.55em}
 .pc{display:flex;align-items:center;gap:14px}
-.pbtn{flex:none;width:44px;height:44px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg);display:grid;place-items:center;cursor:pointer;padding:0}
-.pbtn:focus-visible,#plseek:focus-visible,.groups summary:focus-visible,.trk button:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+.pbtn,.vbtn,.mxplay{flex:none;width:44px;height:44px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg);display:grid;place-items:center;cursor:pointer;padding:0}
+.pbtn:focus-visible,.vbtn:focus-visible,.mxplay:focus-visible,#plseek:focus-visible,.vol:focus-visible,.groups summary:focus-visible,.trk button:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
 #plseek{flex:1;min-width:0;accent-color:var(--fg);height:24px;cursor:pointer}
-#pltime{flex:none;font-size:var(--fs-s);min-width:3.2em;text-align:right}
+.vol{flex:1;min-width:0;accent-color:var(--fg);height:24px;cursor:pointer}.pv{margin-top:10px}
+.mute .x{display:none}.mute[aria-pressed=true] .x{display:inline}.mute[aria-pressed=true] .w{display:none}
+#pltime,.vp{flex:none;font-size:var(--fs-s);min-width:3.2em;text-align:right}
 .nowplay{display:flex;align-items:center;gap:14px}.nowplay .ps{margin:0}
+.mix{margin:32px 0 0;padding:20px 0 0;border-top:1.5px solid var(--line)}.mxh{margin:0;font-weight:700;font-size:var(--fs-m)}.mxp{margin:4px 0 14px;color:var(--mute);font-size:var(--fs-s)}
+.mix #mxseek{flex:1;min-width:0;accent-color:var(--fg);height:24px;cursor:pointer}.mix #mxtime{flex:none;font-size:var(--fs-s);min-width:3.2em;text-align:right}
+.mxr{display:flex;align-items:center;gap:14px;margin-top:10px}
+.mxb{flex:none;width:6.5em;height:36px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg);font:inherit;font-size:var(--fs-s);cursor:pointer;padding:0 6px}
+.mxb[aria-pressed=true]{background:var(--fg);color:var(--bg)}
+.mxplay{width:calc(6.5*var(--fs-s));height:36px}
+.mxt{margin-top:18px}
+.mxtrack{display:block;width:100%;accent-color:var(--fg);height:28px;margin:6px 0 0;cursor:pointer}
+.mxtk{display:flex;justify-content:space-between;padding:0 10px;font-size:var(--fs-s);color:var(--mute)}
+.mxtrack:focus-visible{outline:2px solid var(--fg);outline-offset:4px}
+/* the mixer as a console: on wide screens the channels stand side by side with a level meter and a vertical fader; on phones they stay rows */
+.mxbank{display:flex;flex-direction:column;margin-top:20px}   /* space between the play row and the channels */
+.mxm{order:-1}
+.mxmeter{display:none}
+.mxmeter i{display:block;flex:1;border:1px solid var(--line)}
+.mxmeter i.on{background:var(--fg)}
+.mxmeter i:nth-child(n+14){border-color:var(--link)}.mxmeter i:nth-child(n+14).on{background:var(--link)}
+.mxf{position:relative;flex:1 1 0;width:0;min-width:0;height:auto}
+.mxf .mxv{position:static;width:100%;height:24px;margin:0;transform:none}
+@media (min-width:760px){
+ .mxbank{flex-direction:row;align-items:flex-start;gap:12px}
+ .mxm{order:0}
+ .mxr,.mxm{display:grid;grid-template-columns:14px 1fr;gap:10px;flex:1 1 0;min-width:0;margin-top:0;align-items:stretch}
+ .mxb,.mxmlb{grid-column:1/-1;width:100%}
+ .mxmeter{display:flex;flex-direction:column-reverse;gap:2px;grid-column:1;grid-row:2;width:14px;height:150px;align-self:center}
+ .mxf{grid-column:2;grid-row:2;flex:none;width:auto;height:150px}
+ .mxf .mxv{position:absolute;left:50%;top:50%;width:150px;height:28px;transform:translate(-50%,-50%) rotate(-90deg)}
+ .mxr .mxp2,.mxm .mxp2{grid-column:1/-1;text-align:center;min-width:0}
+ .mxm .mxmlb{width:100%}   /* as wide as the channels */
+}
+.mxmlb{flex:none;width:calc(6.5*var(--fs-s));height:36px;display:grid;place-items:center;box-sizing:border-box;border:1.5px solid var(--line);background:var(--fg);color:var(--bg);font-size:var(--fs-s);font-weight:700}   /* always on, so filled like a pressed voice */   /* same size as the voice buttons below */
+.mxv{flex:1;min-width:0;accent-color:var(--fg);height:24px;cursor:pointer}.mxr .mxp2{flex:none;font-size:var(--fs-s);min-width:3.2em;text-align:right}
+.mxr.off .mxv,.mxr.off .mxp2{opacity:.4}
+.mxb:focus-visible,.mxv:focus-visible,#mxseek:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+@media (hover:hover){.mxb:hover,#mxplay:hover{color:var(--link)}.mxb[aria-pressed=true]:hover{background:var(--link);color:var(--bg);border-color:var(--link)}.mxv:hover,#mxseek:hover{accent-color:var(--link)}}
 .groups details{border-top:1.5px solid var(--line)}.groups details:last-child{border-bottom:1.5px solid var(--line)}
 .groups summary{list-style:none;cursor:pointer;padding:8px 28px 8px 0;position:relative}.groups summary::-webkit-details-marker{display:none}
 .groups summary::after{content:"+";position:absolute;right:4px;top:4px;font-size:24px;line-height:1.3}.groups details[open] summary::after{content:"\2212"}
@@ -507,7 +581,16 @@ var D=window.PAGE,$=function(s,r){return (r||document).querySelector(s)},$$=func
 // menu
 var bar=$('.bar'),bg=$('.burger');
 bg.addEventListener('click',function(){var o=bar.classList.toggle('open');bg.setAttribute('aria-expanded',o)});
-$$('#nav a').forEach(function(a){a.addEventListener('click',function(){bar.classList.remove('open');bg.setAttribute('aria-expanded',false)})});
+function barH(){document.documentElement.style.setProperty('--barh',bar.offsetHeight+'px')}
+barH();window.addEventListener('resize',barH);window.addEventListener('load',barH);
+// a menu click always scrolls to its section; layout shifts during the smooth scroll (late images, fonts) are corrected afterwards
+$$('#nav a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){
+ bar.classList.remove('open');bg.setAttribute('aria-expanded',false);
+ var t=document.getElementById(a.getAttribute('href').slice(1));if(!t)return;e.preventDefault();
+ function y(){return Math.max(0,Math.round(t.getBoundingClientRect().top+window.pageYOffset-bar.offsetHeight))}
+ window.scrollTo({top:y(),behavior:'smooth'});
+ try{history.replaceState(null,'',a.getAttribute('href'))}catch(x){}
+ setTimeout(function(){if(Math.abs(window.pageYOffset-y())>2)window.scrollTo({top:y(),behavior:'auto'})},900)})});
 if('IntersectionObserver' in window){
  var links={};$$('#nav a[href^="#"]').forEach(function(a){links[a.getAttribute('href').slice(1)]=a});
  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){$$('#nav a').forEach(function(a){a.removeAttribute('aria-current')});var a=links[e.target.id];if(a)a.setAttribute('aria-current','true')}})},{rootMargin:'-45% 0px -50% 0px'});
@@ -563,8 +646,10 @@ function draw(){
  list.forEach(function(e){(e[3]==='acc'?acc:own).push(e)});
  function pos(e){return x0+e[1]*(cur.stage==='tutti'?270:190)}   // tutti: circles further apart
  own.forEach(function(e,i){var y=oy;
-  var g=el('g',{});var r=rad(e[2]);
-  g.appendChild(el('circle',{cx:pos(e),cy:y,r:r,fill:'none',stroke:col,'stroke-width':e[0]===cur.voice&&e[2]===0?sw*3:sw*1.5}));
+  var g=el('g',{'class':'vb',role:'button',tabindex:0,'aria-label':D.voices[e[0]],'aria-pressed':e[0]===cur.voice});var r=rad(e[2]);
+  var pick=function(){if(e[0]===cur.voice&&!A.paused){A.pause();return}change(function(){cur.voice=e[0]},true)};   // the circles switch the voice, like the voice buttons; the circle of the voice that is playing stops the sound
+  g.addEventListener('click',pick);g.addEventListener('keydown',function(ev){if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();pick()}});
+  g.appendChild(el('circle',{cx:pos(e),cy:y,r:r,fill:'none','pointer-events':'all',stroke:col,'stroke-width':e[0]===cur.voice&&e[2]===0?sw*3:sw*1.5}));
   g.appendChild(el('text',{x:pos(e),y:y,dy:'.35em','font-size':Math.min(LS,1.5*r),'text-anchor':'middle','font-weight':700},e[0]));   // dy: cap height centred in the circle
   g.appendChild(el('text',{x:pos(e),y:y+r+(mob?FS*0.95+3:16),'font-size':FS,'text-anchor':'middle'},e[2]+(mob&&i>0?'':' dB')));
   svg.appendChild(g);});
@@ -582,7 +667,7 @@ function isSlow(){return slowOk()&&cur.tempo==='slow'}
 function file(){return cur.stage==='tutti'?'tutti_'+cur.sound:cur.voice.toLowerCase()+'_'+cur.stage+'_'+cur.sound+(isSlow()?'_slow':'')}
 function label(){return (cur.stage==='tutti'?D.stages.tutti:D.voices[cur.voice]+', '+D.stages[cur.stage])+', '+D.sound_names[cur.sound]+(isSlow()?', '+D.slow_name:'')}
 function f(t){t=Math.floor(t||0);return Math.floor(t/60)+':'+('0'+t%60).slice(-2)}
-function ui(){var on=!A.paused;svg.classList.toggle('playing',on);$$('.picon').forEach(function(i){i.setAttribute('d',on?'M6 4h4v16H6zM14 4h4v16h-4z':'M7 4l13 8-13 8z')});$$('.pbtn').forEach(function(b){b.setAttribute('aria-label',pl.getAttribute(on?'data-pause':'data-play'))})}
+function ui(){var on=!A.paused;svg.classList.toggle('playing',on);$$('.picon').forEach(function(i){var c=i.hasAttribute('data-c');i.setAttribute('d',on?(c?'M6 4h4v16H6zM14 4h4v16h-4z':'M6.3 4.4Q8.2 4 10.1 4.5Q10.4 12 9.9 19.7Q8 20.2 6.1 19.6Q6.6 12 6.3 4.4ZM14.2 4.3Q16.1 4 18 4.6Q18.4 12 17.9 19.8Q16 20.1 14.1 19.7Q14.5 12 14.2 4.3Z'):(c?'M7 4l13 8-13 8z':'M7.2 4.6Q13.5 8.4 19.6 12.1Q13.3 15.9 7.4 19.6Q7.8 12 7.2 4.6Z'))});$$('.pbtn').forEach(function(b){b.setAttribute('aria-label',pl.getAttribute(on?'data-pause':'data-play'))})}
 function sync(){
  draw();
  $$('#voices button').forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-voice')===cur.voice)});
@@ -610,6 +695,20 @@ $$('#sounds button').forEach(function(b){b.addEventListener('click',function(){c
 $$('#tempos button').forEach(function(b){b.addEventListener('click',function(){change(function(){cur.tempo=b.getAttribute('data-tempo')},A.paused)})});
 $$('.trk button').forEach(function(b){b.addEventListener('click',function(){change(function(){var v=b.getAttribute('data-voice');if(v)cur.voice=v;cur.stage=b.getAttribute('data-stage');cur.sound=b.getAttribute('data-sound');cur.tempo=b.getAttribute('data-tempo')},true)})});
 $$('.pbtn').forEach(function(b){b.addEventListener('click',function(){if(A.paused){A.play().catch(function(){})}else{A.pause()}})});
+// volume: the slider and the speaker button exist twice (remote on the header image, player); both follow one value (no effect on iPhones: the system volume rules there)
+var vols=$$('.vol'),mutes=$$('.mute'),lastVol=.5;
+function setVol(v){v=Math.max(0,Math.min(1,v));A.volume=v;$$('.vp').forEach(function(e){e.textContent=Math.round(v*100)+'\u00a0%'});vols.forEach(function(r){r.value=Math.round(v*100)});mutes.forEach(function(m){m.setAttribute('aria-pressed',v===0)})}
+vols.forEach(function(r){r.addEventListener('input',function(){lastVol=+r.value/100||lastVol;setVol(+r.value/100)})});
+mutes.forEach(function(m){m.addEventListener('click',function(){if(A.volume>0){lastVol=A.volume;setVol(0)}else setVol(lastVol||.5)})});
+setVol(.5);   // starts at half volume
+// remote control on the cover (shown while the pointer is over it): previous / next recording of the playlist, repeat
+function step(d){var all=$$('.trk button'),i=0;all.forEach(function(b,k){if(b.getAttribute('aria-pressed')==='true')i=k});all[(i+d+all.length)%all.length].click()}
+$('.ov .prev').addEventListener('click',function(){step(-1)});$('.ov .next').addEventListener('click',function(){step(1)});
+// first touch on the header image: the remote grows from the single play button to the full set (and the recording starts); with a mouse nothing changes
+var hw=$('.hw');
+function activate(){hw.classList.add('on')}
+$('.ov .pbtn').addEventListener('click',activate);
+hw.addEventListener('click',function(e){if(hw.classList.contains('on'))return;activate();if(!e.target.closest('.ov')&&A.paused)A.play().catch(function(){})});
 A.addEventListener('play',ui);A.addEventListener('pause',ui);
 // sound waves pulse with the rhythm of the recording: Web Audio analyser on the audio element; every note onset (level jumps more than 2.5 dB above its slow average) switches the three arcs per side on, they then go off again from the outside in; while it sounds the inner arc stays on (always full red, no fading).
 // Onset rate on the example recordings: 2 to 4 per second. Without Web Audio, with reduced motion or if the context cannot run, the fixed animation stays
@@ -650,6 +749,84 @@ A.addEventListener('loadedmetadata',function(){tm.textContent=f(A.currentTime)})
 A.addEventListener('ended',function(){ui();sk.value=0});
 sk.addEventListener('input',function(){if(A.duration)A.currentTime=sk.value/1000*A.duration});
 sync();ui();
+// mixer: the stems (4 voices, piano, starting notes) play together through Web Audio; every voice has an on/off button and its own level; the room reverb is added here.
+// Tempo steps (60, 75, 90, 100 %) are separate sets of files, loaded when first chosen; switching keeps the position in proportion to the length of the set.
+(function(){
+var mx=$('#mix');if(!mx)return;
+var AC=window.AudioContext||window.webkitAudioContext,base=mx.getAttribute('data-audio'),play=$('#mxplay'),ic=$('#mxicon'),seek=$('#mxseek'),time=$('#mxtime');
+var names=['s','a','t','b','acc','intro'],cx=null,mgain=null,anal={},mloop=0,sets={},tp='100',gains={},srcs=[],t0=0,off=0,playing=false,raf=0,asked=0,mixOwns=false;
+var PLAY='M7 4l13 8-13 8z',PAUSE='M6 4h4v16H6zM14 4h4v16h-4z';
+function dur(){return sets[tp]?sets[tp].dur:0}
+function fmt(t){t=Math.floor(t||0);return Math.floor(t/60)+':'+('0'+t%60).slice(-2)}
+function rows(){return $$('.mxr:not(.mxm)',mx)}   // the master row is not a stem
+function level(r){var b=$('.mxb',r),v=+$('.mxv',r).value/100;return b.getAttribute('aria-pressed')==='true'?v*v:0}   // squared: the slider follows the loudness we hear
+function apply(){if(!cx)return;rows().forEach(function(r){var k=$('.mxb',r).getAttribute('data-stem');if(gains[k])gains[k].gain.setTargetAtTime(level(r),cx.currentTime,.02)})}
+function setIcon(on){ic.setAttribute('d',on?PAUSE:PLAY);play.setAttribute('aria-label',on?pl.getAttribute('data-pause'):pl.getAttribute('data-play'))}
+function ir(c){var rt=1.3,n=Math.floor(c.sampleRate*rt*1.2),b=c.createBuffer(2,n,c.sampleRate);   // synthetic room: decaying noise
+ for(var ch=0;ch<2;ch++){var d=b.getChannelData(ch);for(var i=0;i<n;i++)d[i]=(Math.random()*2-1)*Math.exp(-6.9*(i/c.sampleRate)/rt)*.35}return b}
+function setup(){
+ cx=new AC();var master=cx.createGain(),lim=cx.createDynamicsCompressor();mgain=cx.createGain();var mv=$('#mxmaster');mgain.gain.value=mv?Math.pow(+mv.value/100,2):1;master.connect(mgain);lim.threshold.value=-6;lim.ratio.value=8;lim.attack.value=.003;lim.release.value=.15;
+ var wet=cx.createGain(),cv=cx.createConvolver();wet.gain.value=.3;cv.buffer=ir(cx);mgain.connect(lim);mgain.connect(cv);cv.connect(wet);wet.connect(lim);lim.connect(cx.destination);
+ names.forEach(function(k){var g=cx.createGain(),p=cx.createStereoPanner?cx.createStereoPanner():null,b=$('.mxb[data-stem="'+k+'"]',mx);g.gain.value=1;
+  if(p){p.pan.value=b?+b.getAttribute('data-pan'):0;g.connect(p);p.connect(master)}else g.connect(master);gains[k]=g;anal[k]=cx.createAnalyser();anal[k].fftSize=512;g.connect(anal[k])});anal.master=cx.createAnalyser();anal.master.fftSize=512;mgain.connect(anal.master);
+}
+function load(t){
+ if(sets[t])return Promise.resolve(sets[t]);
+ return Promise.all(names.map(function(k){return fetch(base+t+'/'+k+'.mp3').then(function(r){return r.arrayBuffer()}).then(function(a){return new Promise(function(ok,no){cx.decodeAudioData(a,ok,no)})})})).then(function(l){
+  var b={};names.forEach(function(k,i){b[k]=l[i]});b.dur=Math.max.apply(null,l.map(function(x){return x.duration}));sets[t]=b;return b});
+}
+// level meters: one per channel and one for the master, each behind its gain; 16 segments from -60 dB to 0 dB
+function lamp(el,n){if(el._n===n)return;el._n=n;var c=el.children;for(var i=0;i<c.length;i++)c[i].className=i<n?'on':''}
+function meterTick(){
+ if(!playing){mloop=0;$$('.mxmeter',mx).forEach(function(m){lamp(m,0)});return}
+ var buf=new Float32Array(512);
+ $$('.mxmeter',mx).forEach(function(m){var an=anal[m.getAttribute('data-meter')];if(!an)return;an.getFloatTimeDomainData(buf);var q=0,i;for(i=0;i<buf.length;i++)q+=buf[i]*buf[i];var db=20*Math.log10(Math.sqrt(q/buf.length)+1e-9);lamp(m,Math.max(0,Math.min(16,Math.round((db+60)/60*16))))});
+ mloop=requestAnimationFrame(meterTick);
+}
+function stopSrc(){srcs.forEach(function(s){try{s.onended=null;s.stop()}catch(e){}});srcs=[]}
+function pos(){return playing?Math.max(0,Math.min(dur(),off+cx.currentTime-t0)):off}   // t0 lies slightly ahead, so the first frames would be negative
+function tick(){var p=pos(),d=dur();seek.value=d?Math.round(p/d*1000):0;time.textContent=fmt(p);if(playing)raf=requestAnimationFrame(tick)}
+function start(from){
+ stopSrc();apply();var b=sets[tp];off=from;t0=cx.currentTime+.05;
+ names.forEach(function(k){var s=cx.createBufferSource();s.buffer=b[k];s.connect(gains[k]);s.start(t0,from);srcs.push(s)});
+ srcs[0].onended=function(){if(playing&&pos()>=dur()-.1)finish()};
+ playing=true;setIcon(true);cancelAnimationFrame(raf);tick(); if(!mloop)mloop=requestAnimationFrame(meterTick);
+}
+function pause(){if(!playing)return;off=pos();playing=false;stopSrc();setIcon(false);cancelAnimationFrame(raf);tick()}
+function finish(){playing=false;stopSrc();off=0;setIcon(false);cancelAnimationFrame(raf);tick()}
+function mark(){var tr=$('#mxtempo');if(tr){tr.value=tp;tr.setAttribute('aria-valuetext',tp+' %')}}   // the slider snaps to 80, 90 and 100
+function setTempo(t){
+ if(t===tp)return;
+ var p=pos(),old=dur(),was=playing;
+ tp=t;mark();
+ if(!cx){off=0;return}
+ pause();
+ load(t).then(function(){
+  if(tp!==t)return;   // the visitor changed the step again meanwhile
+  var nd=dur();off=old?Math.min(Math.max(0,nd-.1),p*nd/old):0;
+  if(was&&!playing)start(off);else if(!playing){seek.value=nd?Math.round(off/nd*1000):0;time.textContent=fmt(off)}
+ }).catch(function(){});
+}
+play.addEventListener('click',function(){
+ if(!AC)return;if(playing){pause();return}
+ if(!cx)setup();if(cx.state==='suspended')cx.resume();
+ A.pause();mixOwns=true;   // only one thing plays at a time
+ mx.setAttribute('aria-busy','true');
+ load(tp).then(function(){mx.removeAttribute('aria-busy');A.pause();if(!playing)start(off>=dur()-.1?0:off)}).catch(function(){mx.removeAttribute('aria-busy')});
+});
+seek.addEventListener('input',function(){if(!sets[tp])return;var p=seek.value/1000*dur();if(playing)start(p);else{off=p;time.textContent=fmt(p)}});
+rows().forEach(function(r){var b=$('.mxb',r),v=$('.mxv',r),pc=$('.mxp2',r);
+ function upd(){pc.innerHTML=v.value+'&nbsp;%';r.classList.toggle('off',b.getAttribute('aria-pressed')!=='true');apply()}
+ b.addEventListener('click',function(){b.setAttribute('aria-pressed',b.getAttribute('aria-pressed')!=='true');upd()});
+ v.addEventListener('input',upd)});
+var tr=$('#mxtempo');if(tr)tr.addEventListener('input',function(){setTempo(tr.value)});
+var mv=$('#mxmaster'),mp=$('#mxmp');if(mv)mv.addEventListener('input',function(){var v=+mv.value/100;mp.innerHTML=mv.value+'&nbsp;%';if(mgain)mgain.gain.setTargetAtTime(v*v,cx.currentTime,.02)});   // master: scales every stem and the room together; the limiter at the output still catches peaks
+// the two never play together: starting the mixer stops the recordings; the recordings only start again when the visitor asks for them
+// (on iPhones the system may resume an interrupted audio element by itself when the mixer pauses: such a start without a click on the recordings is stopped)
+document.addEventListener('click',function(e){var t=e.target;if(t.closest&&!t.closest('#mix')&&t.closest('button,.hw,#player'))asked=Date.now()},true);
+A.addEventListener('play',function(){if(mixOwns&&Date.now()-asked>1500){A.pause();return}mixOwns=false;pause()});
+document.addEventListener('visibilitychange',function(){if(!document.hidden&&playing)tick()});
+})();
 window.addEventListener('resize',function(){clearTimeout(window.__rz);window.__rz=setTimeout(function(){draw();fitLead()},150)});
 })();
 '''

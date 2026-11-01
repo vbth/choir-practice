@@ -6,14 +6,14 @@
 @media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#000;--fg:#fff;--mute:#fff;--line:#fff}}
 :root[data-theme=dark]{--bg:#000;--fg:#fff;--mute:#fff;--line:#fff;color-scheme:dark}:root[data-theme=light]{color-scheme:light}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:var(--barh,76px)}
 p,li,figcaption{text-wrap:pretty}
 body{margin:0;background:var(--bg);color:var(--fg);font:400 var(--fs)/1.55 "IBM Plex Sans",Helvetica,Arial,sans-serif;-webkit-text-size-adjust:100%}
 a{color:var(--link);text-decoration:none}a:hover{color:var(--fg)}
 .mono{font-family:"IBM Plex Sans Condensed","IBM Plex Sans",sans-serif}
 .skip{position:absolute;left:-999px}.skip:focus{left:16px;top:8px;background:var(--bg);padding:8px;z-index:20}
 :focus-visible{outline:2px solid var(--fg);outline-offset:3px}
-.bar{position:relative;z-index:10;display:flex;align-items:center;gap:16px;padding:12px var(--edge);background:var(--bg);border-bottom:1.5px solid var(--line)}
+.bar{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:16px;padding:12px var(--edge);background:var(--bg);border-bottom:1.5px solid var(--line)}
 .brand{display:flex;align-items:center;gap:12px;color:var(--fg);text-decoration:none;font-weight:700;font-size:var(--fs-m);letter-spacing:.02em}
 .brand img{display:block;flex:none}.bn{white-space:nowrap}.bt{line-height:1.15}
 .bar nav{margin-left:auto}.bar nav ul{display:flex;gap:0;list-style:none;margin:0;padding:0}
@@ -60,16 +60,20 @@ ul.note{padding-left:18px}
 .panel h3{display:flex;gap:12px;align-items:baseline}.panel .gate{margin:10px 0 0;color:var(--mute)}.panel .who{font-weight:400;font-size:var(--fs-s);color:var(--link);letter-spacing:.04em;text-transform:uppercase;font-family:"IBM Plex Sans Condensed",sans-serif}
 .panel p{margin:0}
 .banner{margin:72px 0 0}.banner img{display:block;width:100%;height:auto}
-.banner .duck{max-width:24em;margin:18px auto 0;text-align:center;font-style:italic;font-size:var(--fs-m);line-height:1.4}
-@media (max-width:600px){.banner .duck{font-size:var(--fs);margin-top:14px}}
-.exrow{display:grid;grid-template-columns:minmax(0,420px) minmax(0,1fr);gap:32px 64px;align-items:center;margin:0 0 72px}
+.banner .duck{max-width:26em;margin:18px auto 0;text-align:center;font-style:italic;font-size:var(--fs-m);line-height:1.4;text-wrap:balance}
+.banner .duck .by{display:block;margin-top:6px;font-style:normal;font-size:var(--fs)}
+@media (max-width:600px){.banner .duck{font-size:var(--fs);margin-top:14px}.banner .duck .dbr{display:none}.banner .duck .by{font-size:var(--fs-s)}}
+.exrow{--pop:150px;--pw:250px;display:grid;grid-template-columns:calc(var(--pw)*1.8) minmax(0,1fr);gap:32px 56px;align-items:center;border:1.5px solid var(--line);padding:40px 48px;margin:calc(var(--pop) + 56px) 0 72px}   /* card; the fan pops out of its top edge by --pop, 56px stay free below the headline */
 h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 .dl p{margin:0 0 20px;max-width:30em}.dl .dlb{margin:0}.steps+.dlb{margin:24px 0 16px}.dlb a{display:inline-block;border:1.5px solid var(--line);padding:12px 20px;font-weight:400;color:var(--fg);text-decoration:none}.dlb a:hover,.dlb a:focus-visible{background:var(--fg);color:var(--bg)}
-.fan{margin:80px 0 0}.fan{--pw:240px}.fan .pages{position:relative;height:calc(var(--pw)*1.62)}.fan img{position:absolute;bottom:calc(var(--pw)*.13);left:50%;width:var(--pw);height:auto;background:#fff;border:1.5px solid var(--line);transform-origin:50% 100%}
+#hp .vb{cursor:pointer}@media (hover:hover){#hp .vb:hover circle{stroke:var(--link)}#hp .vb:hover text{fill:var(--link)}}   /* hover only where a pointer exists: on touch screens it would stay red after the tap */#hp .vb:focus-visible{outline:2px solid var(--fg);outline-offset:4px}
+.fan{width:100%;margin:calc(var(--pop)*-1) 0 -10px}.fan .pages{position:relative;height:calc(var(--pw)*1.62)}.fan img{position:absolute;bottom:calc(var(--pw)*.13);left:50%;width:var(--pw);height:auto;background:#fff;border:1.5px solid var(--line);transform-origin:50% 100%}
 .fan .p0{transform:translateX(-50%) rotate(-15deg)}.fan .p1{transform:translateX(-50%) rotate(0)}.fan .p2{transform:translateX(-50%) rotate(15deg)}
 
-@media (max-width:900px){.exrow{grid-template-columns:1fr}.fan{max-width:420px}}
-@media (max-width:520px){.fan{--pw:160px}}
+.dl .ttl{font-weight:700;font-size:var(--fs-m);margin:0 0 6px}.dl .meta{font-size:var(--fs-s);color:var(--mute);margin:0 0 20px}
+.dlb a{padding:16px 22px}.dl{min-width:0}   /* desktop: the button is as wide as its text, no arrow */
+@media (max-width:900px){.dlb a{display:block;text-align:center}.exrow{--pop:130px;--pw:200px;grid-template-columns:1fr;gap:8px;padding:24px 20px;margin-top:calc(var(--pop) + 44px)}.fan{width:min(100%,calc(var(--pw)*1.8));margin:calc(var(--pop)*-1) auto 0}}
+@media (max-width:520px){.exrow{--pw:190px}}
 .mixer{display:grid;gap:28px;max-width:760px;margin:56px auto 0}
 .ctl2{display:flex;flex-wrap:wrap;gap:16px 32px}.ctl2 .ctl{flex:1 1 14em}.ctl2 .ctl[hidden]{display:none}
 .ctl{display:flex;flex-direction:column;gap:6px;align-items:stretch}.lbl{font:400 var(--fs-s)/1.2 "IBM Plex Sans Condensed",sans-serif;color:var(--link);letter-spacing:.04em;text-transform:uppercase}
@@ -80,13 +84,59 @@ h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 .listen{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 56px;align-items:start}
 .pbox{display:grid;grid-template-columns:1fr;gap:20px;align-items:start;justify-self:start;width:100%;max-width:26em}
 .listen .art{width:100%;height:auto;display:block;border:1.5px solid var(--line)}
+.hw{position:relative;container-type:inline-size}
+.ov{--b:clamp(16px,3.4cqw,40px);position:absolute;left:50%;top:79%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:0;padding:calc(var(--b)*.2) calc(var(--b)*.35)}
+.ov .rw{position:relative;display:flex;gap:2px}
+.ov .fr{filter:url(#kf);position:absolute;inset:0;border:clamp(1.6px,.26cqw,2.6px) solid var(--fg);border-radius:calc(var(--b)*.32);pointer-events:none}   /* even border; the wobble comes from a low-frequency displacement, which bends the line without changing its thickness */
+.ov button{position:relative;width:var(--b);height:var(--b);border:0;background:transparent;color:var(--fg);display:grid;place-items:center;cursor:pointer;padding:0}
+.ov button svg{width:55%;height:55%}.ov button svg{filter:url(#kr)}.ov button:focus-visible{outline:2px solid var(--fg);outline-offset:-2px}
+@media (hover:hover){.pbtn:hover,.vbtn:hover,.ov button:hover,.ov button[aria-pressed=true]:hover{color:var(--link)}.vol:hover,#plseek:hover{accent-color:var(--link)}}
+.hw:not(.on) .ov .rw button:not(.pbtn){display:none}   /* before the first click or tap only the play button in its frame */
+@container (max-width:520px){.ov button svg{width:68%;height:68%;filter:url(#krs)}.ov .fr{filter:url(#kfs);border-width:1.2px}}   /* narrow image: the tub is too small for a second row; the volume stays in the player below */
 .pt{margin:0;font-weight:700}.ps{margin:2px 0 12px;color:var(--mute);font-size:var(--fs-s);min-height:1.55em}
 .pc{display:flex;align-items:center;gap:14px}
-.pbtn{flex:none;width:44px;height:44px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg);display:grid;place-items:center;cursor:pointer;padding:0}
-.pbtn:focus-visible,#plseek:focus-visible,.groups summary:focus-visible,.trk button:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+.pbtn,.vbtn,.mxplay{flex:none;width:44px;height:44px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg);display:grid;place-items:center;cursor:pointer;padding:0}
+.pbtn:focus-visible,.vbtn:focus-visible,.mxplay:focus-visible,#plseek:focus-visible,.vol:focus-visible,.groups summary:focus-visible,.trk button:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
 #plseek{flex:1;min-width:0;accent-color:var(--fg);height:24px;cursor:pointer}
-#pltime{flex:none;font-size:var(--fs-s);min-width:3.2em;text-align:right}
+.vol{flex:1;min-width:0;accent-color:var(--fg);height:24px;cursor:pointer}.pv{margin-top:10px}
+.mute .x{display:none}.mute[aria-pressed=true] .x{display:inline}.mute[aria-pressed=true] .w{display:none}
+#pltime,.vp{flex:none;font-size:var(--fs-s);min-width:3.2em;text-align:right}
 .nowplay{display:flex;align-items:center;gap:14px}.nowplay .ps{margin:0}
+.mix{margin:32px 0 0;padding:20px 0 0;border-top:1.5px solid var(--line)}.mxh{margin:0;font-weight:700;font-size:var(--fs-m)}.mxp{margin:4px 0 14px;color:var(--mute);font-size:var(--fs-s)}
+.mix #mxseek{flex:1;min-width:0;accent-color:var(--fg);height:24px;cursor:pointer}.mix #mxtime{flex:none;font-size:var(--fs-s);min-width:3.2em;text-align:right}
+.mxr{display:flex;align-items:center;gap:14px;margin-top:10px}
+.mxb{flex:none;width:6.5em;height:36px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg);font:inherit;font-size:var(--fs-s);cursor:pointer;padding:0 6px}
+.mxb[aria-pressed=true]{background:var(--fg);color:var(--bg)}
+.mxplay{width:calc(6.5*var(--fs-s));height:36px}
+.mxt{margin-top:18px}
+.mxtrack{display:block;width:100%;accent-color:var(--fg);height:28px;margin:6px 0 0;cursor:pointer}
+.mxtk{display:flex;justify-content:space-between;padding:0 10px;font-size:var(--fs-s);color:var(--mute)}
+.mxtrack:focus-visible{outline:2px solid var(--fg);outline-offset:4px}
+/* the mixer as a console: on wide screens the channels stand side by side with a level meter and a vertical fader; on phones they stay rows */
+.mxbank{display:flex;flex-direction:column;margin-top:20px}   /* space between the play row and the channels */
+.mxm{order:-1}
+.mxmeter{display:none}
+.mxmeter i{display:block;flex:1;border:1px solid var(--line)}
+.mxmeter i.on{background:var(--fg)}
+.mxmeter i:nth-child(n+14){border-color:var(--link)}.mxmeter i:nth-child(n+14).on{background:var(--link)}
+.mxf{position:relative;flex:1 1 0;width:0;min-width:0;height:auto}
+.mxf .mxv{position:static;width:100%;height:24px;margin:0;transform:none}
+@media (min-width:760px){
+ .mxbank{flex-direction:row;align-items:flex-start;gap:12px}
+ .mxm{order:0}
+ .mxr,.mxm{display:grid;grid-template-columns:14px 1fr;gap:10px;flex:1 1 0;min-width:0;margin-top:0;align-items:stretch}
+ .mxb,.mxmlb{grid-column:1/-1;width:100%}
+ .mxmeter{display:flex;flex-direction:column-reverse;gap:2px;grid-column:1;grid-row:2;width:14px;height:150px;align-self:center}
+ .mxf{grid-column:2;grid-row:2;flex:none;width:auto;height:150px}
+ .mxf .mxv{position:absolute;left:50%;top:50%;width:150px;height:28px;transform:translate(-50%,-50%) rotate(-90deg)}
+ .mxr .mxp2,.mxm .mxp2{grid-column:1/-1;text-align:center;min-width:0}
+ .mxm .mxmlb{width:100%}   /* as wide as the channels */
+}
+.mxmlb{flex:none;width:calc(6.5*var(--fs-s));height:36px;display:grid;place-items:center;box-sizing:border-box;border:1.5px solid var(--line);background:var(--fg);color:var(--bg);font-size:var(--fs-s);font-weight:700}   /* always on, so filled like a pressed voice */   /* same size as the voice buttons below */
+.mxv{flex:1;min-width:0;accent-color:var(--fg);height:24px;cursor:pointer}.mxr .mxp2{flex:none;font-size:var(--fs-s);min-width:3.2em;text-align:right}
+.mxr.off .mxv,.mxr.off .mxp2{opacity:.4}
+.mxb:focus-visible,.mxv:focus-visible,#mxseek:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+@media (hover:hover){.mxb:hover,#mxplay:hover{color:var(--link)}.mxb[aria-pressed=true]:hover{background:var(--link);color:var(--bg);border-color:var(--link)}.mxv:hover,#mxseek:hover{accent-color:var(--link)}}
 .groups details{border-top:1.5px solid var(--line)}.groups details:last-child{border-bottom:1.5px solid var(--line)}
 .groups summary{list-style:none;cursor:pointer;padding:8px 28px 8px 0;position:relative}.groups summary::-webkit-details-marker{display:none}
 .groups summary::after{content:"+";position:absolute;right:4px;top:4px;font-size:24px;line-height:1.3}.groups details[open] summary::after{content:"\2212"}

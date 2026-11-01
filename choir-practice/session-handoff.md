@@ -1,7 +1,7 @@
-# Skill session handoff – choir-practice v1.2.0
+# Skill session handoff – choir-practice v1.0.0
 (file name always `session-handoff.md`, in the skill folder; git keeps the earlier versions; English, no piece-specific content)
 
-**Date:** 2026-11-01 · **Skill version:** 1.2.0
+**Date:** 2026-11-01 · **Skill version:** 1.0.0
 
 ## 0. Instructions for the next chat
 Unpack the .skill, run `scripts/setup.sh`, read this file. The skill in the user's account is not updated automatically. Do not start open items unprompted.

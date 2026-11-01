@@ -10,6 +10,7 @@
   "bpm": 150,
   "beat": "quarter"
  },
+ "cover": {"color": "#d9251d"},
  "key_fifths": 0,
  "time": [
   2,

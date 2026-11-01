@@ -2,9 +2,9 @@
 
 # Choir Practice Skill
 
-<p><picture><source media="(prefers-color-scheme: dark)" srcset="docs/img/header-dark.png"><img src="docs/img/header.png" alt="Ein Mann mit Kopfhörern steht in einer alten Badewanne und singt vom Notenblatt, neben ihm schwimmt eine Quietscheente. „Sonntagmorgen, er übt wieder für seinen Chor … und ich darf es ausbaden!“ – Die Ente eines Tenors" width="100%"></picture></p>
+<p><picture><source media="(prefers-color-scheme: dark)" srcset="docs/img/header-dark.png"><img src="docs/img/header.png" alt="Ein Mann mit Kopfhörern steht in einer alten Badewanne und singt vom Notenblatt, neben ihm schwimmt eine Quietscheente. „Sonntagmorgen, er übt mal wieder für seinen Chor … und ich darf es ausbaden!“ — Ente eines Tenors" width="100%"></picture></p>
 
-> *„Sonntagmorgen, er übt wieder für seinen Chor … und ich darf es ausbaden!“* – Die Ente eines Tenors
+> *„Sonntagmorgen, er übt mal wieder für seinen Chor*<br>*… und ich darf es ausbaden!“*<br>— Ente eines Tenors
 
 [English](README.md) | Deutsch
 

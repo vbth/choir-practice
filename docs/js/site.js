@@ -3,7 +3,16 @@ var D=window.PAGE,$=function(s,r){return (r||document).querySelector(s)},$$=func
 // menu
 var bar=$('.bar'),bg=$('.burger');
 bg.addEventListener('click',function(){var o=bar.classList.toggle('open');bg.setAttribute('aria-expanded',o)});
-$$('#nav a').forEach(function(a){a.addEventListener('click',function(){bar.classList.remove('open');bg.setAttribute('aria-expanded',false)})});
+function barH(){document.documentElement.style.setProperty('--barh',bar.offsetHeight+'px')}
+barH();window.addEventListener('resize',barH);window.addEventListener('load',barH);
+// a menu click always scrolls to its section; layout shifts during the smooth scroll (late images, fonts) are corrected afterwards
+$$('#nav a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){
+ bar.classList.remove('open');bg.setAttribute('aria-expanded',false);
+ var t=document.getElementById(a.getAttribute('href').slice(1));if(!t)return;e.preventDefault();
+ function y(){return Math.max(0,Math.round(t.getBoundingClientRect().top+window.pageYOffset-bar.offsetHeight))}
+ window.scrollTo({top:y(),behavior:'smooth'});
+ try{history.replaceState(null,'',a.getAttribute('href'))}catch(x){}
+ setTimeout(function(){if(Math.abs(window.pageYOffset-y())>2)window.scrollTo({top:y(),behavior:'auto'})},900)})});
 if('IntersectionObserver' in window){
  var links={};$$('#nav a[href^="#"]').forEach(function(a){links[a.getAttribute('href').slice(1)]=a});
  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){$$('#nav a').forEach(function(a){a.removeAttribute('aria-current')});var a=links[e.target.id];if(a)a.setAttribute('aria-current','true')}})},{rootMargin:'-45% 0px -50% 0px'});
@@ -59,8 +68,10 @@ function draw(){
  list.forEach(function(e){(e[3]==='acc'?acc:own).push(e)});
  function pos(e){return x0+e[1]*(cur.stage==='tutti'?270:190)}   // tutti: circles further apart
  own.forEach(function(e,i){var y=oy;
-  var g=el('g',{});var r=rad(e[2]);
-  g.appendChild(el('circle',{cx:pos(e),cy:y,r:r,fill:'none',stroke:col,'stroke-width':e[0]===cur.voice&&e[2]===0?sw*3:sw*1.5}));
+  var g=el('g',{'class':'vb',role:'button',tabindex:0,'aria-label':D.voices[e[0]],'aria-pressed':e[0]===cur.voice});var r=rad(e[2]);
+  var pick=function(){if(e[0]===cur.voice&&!A.paused){A.pause();return}change(function(){cur.voice=e[0]},true)};   // the circles switch the voice, like the voice buttons; the circle of the voice that is playing stops the sound
+  g.addEventListener('click',pick);g.addEventListener('keydown',function(ev){if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();pick()}});
+  g.appendChild(el('circle',{cx:pos(e),cy:y,r:r,fill:'none','pointer-events':'all',stroke:col,'stroke-width':e[0]===cur.voice&&e[2]===0?sw*3:sw*1.5}));
   g.appendChild(el('text',{x:pos(e),y:y,dy:'.35em','font-size':Math.min(LS,1.5*r),'text-anchor':'middle','font-weight':700},e[0]));   // dy: cap height centred in the circle
   g.appendChild(el('text',{x:pos(e),y:y+r+(mob?FS*0.95+3:16),'font-size':FS,'text-anchor':'middle'},e[2]+(mob&&i>0?'':' dB')));
   svg.appendChild(g);});
@@ -78,7 +89,7 @@ function isSlow(){return slowOk()&&cur.tempo==='slow'}
 function file(){return cur.stage==='tutti'?'tutti_'+cur.sound:cur.voice.toLowerCase()+'_'+cur.stage+'_'+cur.sound+(isSlow()?'_slow':'')}
 function label(){return (cur.stage==='tutti'?D.stages.tutti:D.voices[cur.voice]+', '+D.stages[cur.stage])+', '+D.sound_names[cur.sound]+(isSlow()?', '+D.slow_name:'')}
 function f(t){t=Math.floor(t||0);return Math.floor(t/60)+':'+('0'+t%60).slice(-2)}
-function ui(){var on=!A.paused;svg.classList.toggle('playing',on);$$('.picon').forEach(function(i){i.setAttribute('d',on?'M6 4h4v16H6zM14 4h4v16h-4z':'M7 4l13 8-13 8z')});$$('.pbtn').forEach(function(b){b.setAttribute('aria-label',pl.getAttribute(on?'data-pause':'data-play'))})}
+function ui(){var on=!A.paused;svg.classList.toggle('playing',on);$$('.picon').forEach(function(i){var c=i.hasAttribute('data-c');i.setAttribute('d',on?(c?'M6 4h4v16H6zM14 4h4v16h-4z':'M6.3 4.4Q8.2 4 10.1 4.5Q10.4 12 9.9 19.7Q8 20.2 6.1 19.6Q6.6 12 6.3 4.4ZM14.2 4.3Q16.1 4 18 4.6Q18.4 12 17.9 19.8Q16 20.1 14.1 19.7Q14.5 12 14.2 4.3Z'):(c?'M7 4l13 8-13 8z':'M7.2 4.6Q13.5 8.4 19.6 12.1Q13.3 15.9 7.4 19.6Q7.8 12 7.2 4.6Z'))});$$('.pbtn').forEach(function(b){b.setAttribute('aria-label',pl.getAttribute(on?'data-pause':'data-play'))})}
 function sync(){
  draw();
  $$('#voices button').forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-voice')===cur.voice)});
@@ -106,6 +117,20 @@ $$('#sounds button').forEach(function(b){b.addEventListener('click',function(){c
 $$('#tempos button').forEach(function(b){b.addEventListener('click',function(){change(function(){cur.tempo=b.getAttribute('data-tempo')},A.paused)})});
 $$('.trk button').forEach(function(b){b.addEventListener('click',function(){change(function(){var v=b.getAttribute('data-voice');if(v)cur.voice=v;cur.stage=b.getAttribute('data-stage');cur.sound=b.getAttribute('data-sound');cur.tempo=b.getAttribute('data-tempo')},true)})});
 $$('.pbtn').forEach(function(b){b.addEventListener('click',function(){if(A.paused){A.play().catch(function(){})}else{A.pause()}})});
+// volume: the slider and the speaker button exist twice (remote on the header image, player); both follow one value (no effect on iPhones: the system volume rules there)
+var vols=$$('.vol'),mutes=$$('.mute'),lastVol=.5;
+function setVol(v){v=Math.max(0,Math.min(1,v));A.volume=v;$$('.vp').forEach(function(e){e.textContent=Math.round(v*100)+'\u00a0%'});vols.forEach(function(r){r.value=Math.round(v*100)});mutes.forEach(function(m){m.setAttribute('aria-pressed',v===0)})}
+vols.forEach(function(r){r.addEventListener('input',function(){lastVol=+r.value/100||lastVol;setVol(+r.value/100)})});
+mutes.forEach(function(m){m.addEventListener('click',function(){if(A.volume>0){lastVol=A.volume;setVol(0)}else setVol(lastVol||.5)})});
+setVol(.5);   // starts at half volume
+// remote control on the cover (shown while the pointer is over it): previous / next recording of the playlist, repeat
+function step(d){var all=$$('.trk button'),i=0;all.forEach(function(b,k){if(b.getAttribute('aria-pressed')==='true')i=k});all[(i+d+all.length)%all.length].click()}
+$('.ov .prev').addEventListener('click',function(){step(-1)});$('.ov .next').addEventListener('click',function(){step(1)});
+// first touch on the header image: the remote grows from the single play button to the full set (and the recording starts); with a mouse nothing changes
+var hw=$('.hw');
+function activate(){hw.classList.add('on')}
+$('.ov .pbtn').addEventListener('click',activate);
+hw.addEventListener('click',function(e){if(hw.classList.contains('on'))return;activate();if(!e.target.closest('.ov')&&A.paused)A.play().catch(function(){})});
 A.addEventListener('play',ui);A.addEventListener('pause',ui);
 // sound waves pulse with the rhythm of the recording: Web Audio analyser on the audio element; every note onset (level jumps more than 2.5 dB above its slow average) switches the three arcs per side on, they then go off again from the outside in; while it sounds the inner arc stays on (always full red, no fading).
 // Onset rate on the example recordings: 2 to 4 per second. Without Web Audio, with reduced motion or if the context cannot run, the fixed animation stays
@@ -146,5 +171,83 @@ A.addEventListener('loadedmetadata',function(){tm.textContent=f(A.currentTime)})
 A.addEventListener('ended',function(){ui();sk.value=0});
 sk.addEventListener('input',function(){if(A.duration)A.currentTime=sk.value/1000*A.duration});
 sync();ui();
+// mixer: the stems (4 voices, piano, starting notes) play together through Web Audio; every voice has an on/off button and its own level; the room reverb is added here.
+// Tempo steps (60, 75, 90, 100 %) are separate sets of files, loaded when first chosen; switching keeps the position in proportion to the length of the set.
+(function(){
+var mx=$('#mix');if(!mx)return;
+var AC=window.AudioContext||window.webkitAudioContext,base=mx.getAttribute('data-audio'),play=$('#mxplay'),ic=$('#mxicon'),seek=$('#mxseek'),time=$('#mxtime');
+var names=['s','a','t','b','acc','intro'],cx=null,mgain=null,anal={},mloop=0,sets={},tp='100',gains={},srcs=[],t0=0,off=0,playing=false,raf=0,asked=0,mixOwns=false;
+var PLAY='M7 4l13 8-13 8z',PAUSE='M6 4h4v16H6zM14 4h4v16h-4z';
+function dur(){return sets[tp]?sets[tp].dur:0}
+function fmt(t){t=Math.floor(t||0);return Math.floor(t/60)+':'+('0'+t%60).slice(-2)}
+function rows(){return $$('.mxr:not(.mxm)',mx)}   // the master row is not a stem
+function level(r){var b=$('.mxb',r),v=+$('.mxv',r).value/100;return b.getAttribute('aria-pressed')==='true'?v*v:0}   // squared: the slider follows the loudness we hear
+function apply(){if(!cx)return;rows().forEach(function(r){var k=$('.mxb',r).getAttribute('data-stem');if(gains[k])gains[k].gain.setTargetAtTime(level(r),cx.currentTime,.02)})}
+function setIcon(on){ic.setAttribute('d',on?PAUSE:PLAY);play.setAttribute('aria-label',on?pl.getAttribute('data-pause'):pl.getAttribute('data-play'))}
+function ir(c){var rt=1.3,n=Math.floor(c.sampleRate*rt*1.2),b=c.createBuffer(2,n,c.sampleRate);   // synthetic room: decaying noise
+ for(var ch=0;ch<2;ch++){var d=b.getChannelData(ch);for(var i=0;i<n;i++)d[i]=(Math.random()*2-1)*Math.exp(-6.9*(i/c.sampleRate)/rt)*.35}return b}
+function setup(){
+ cx=new AC();var master=cx.createGain(),lim=cx.createDynamicsCompressor();mgain=cx.createGain();var mv=$('#mxmaster');mgain.gain.value=mv?Math.pow(+mv.value/100,2):1;master.connect(mgain);lim.threshold.value=-6;lim.ratio.value=8;lim.attack.value=.003;lim.release.value=.15;
+ var wet=cx.createGain(),cv=cx.createConvolver();wet.gain.value=.3;cv.buffer=ir(cx);mgain.connect(lim);mgain.connect(cv);cv.connect(wet);wet.connect(lim);lim.connect(cx.destination);
+ names.forEach(function(k){var g=cx.createGain(),p=cx.createStereoPanner?cx.createStereoPanner():null,b=$('.mxb[data-stem="'+k+'"]',mx);g.gain.value=1;
+  if(p){p.pan.value=b?+b.getAttribute('data-pan'):0;g.connect(p);p.connect(master)}else g.connect(master);gains[k]=g;anal[k]=cx.createAnalyser();anal[k].fftSize=512;g.connect(anal[k])});anal.master=cx.createAnalyser();anal.master.fftSize=512;mgain.connect(anal.master);
+}
+function load(t){
+ if(sets[t])return Promise.resolve(sets[t]);
+ return Promise.all(names.map(function(k){return fetch(base+t+'/'+k+'.mp3').then(function(r){return r.arrayBuffer()}).then(function(a){return new Promise(function(ok,no){cx.decodeAudioData(a,ok,no)})})})).then(function(l){
+  var b={};names.forEach(function(k,i){b[k]=l[i]});b.dur=Math.max.apply(null,l.map(function(x){return x.duration}));sets[t]=b;return b});
+}
+// level meters: one per channel and one for the master, each behind its gain; 16 segments from -60 dB to 0 dB
+function lamp(el,n){if(el._n===n)return;el._n=n;var c=el.children;for(var i=0;i<c.length;i++)c[i].className=i<n?'on':''}
+function meterTick(){
+ if(!playing){mloop=0;$$('.mxmeter',mx).forEach(function(m){lamp(m,0)});return}
+ var buf=new Float32Array(512);
+ $$('.mxmeter',mx).forEach(function(m){var an=anal[m.getAttribute('data-meter')];if(!an)return;an.getFloatTimeDomainData(buf);var q=0,i;for(i=0;i<buf.length;i++)q+=buf[i]*buf[i];var db=20*Math.log10(Math.sqrt(q/buf.length)+1e-9);lamp(m,Math.max(0,Math.min(16,Math.round((db+60)/60*16))))});
+ mloop=requestAnimationFrame(meterTick);
+}
+function stopSrc(){srcs.forEach(function(s){try{s.onended=null;s.stop()}catch(e){}});srcs=[]}
+function pos(){return playing?Math.max(0,Math.min(dur(),off+cx.currentTime-t0)):off}   // t0 lies slightly ahead, so the first frames would be negative
+function tick(){var p=pos(),d=dur();seek.value=d?Math.round(p/d*1000):0;time.textContent=fmt(p);if(playing)raf=requestAnimationFrame(tick)}
+function start(from){
+ stopSrc();apply();var b=sets[tp];off=from;t0=cx.currentTime+.05;
+ names.forEach(function(k){var s=cx.createBufferSource();s.buffer=b[k];s.connect(gains[k]);s.start(t0,from);srcs.push(s)});
+ srcs[0].onended=function(){if(playing&&pos()>=dur()-.1)finish()};
+ playing=true;setIcon(true);cancelAnimationFrame(raf);tick(); if(!mloop)mloop=requestAnimationFrame(meterTick);
+}
+function pause(){if(!playing)return;off=pos();playing=false;stopSrc();setIcon(false);cancelAnimationFrame(raf);tick()}
+function finish(){playing=false;stopSrc();off=0;setIcon(false);cancelAnimationFrame(raf);tick()}
+function mark(){var tr=$('#mxtempo');if(tr){tr.value=tp;tr.setAttribute('aria-valuetext',tp+' %')}}   // the slider snaps to 80, 90 and 100
+function setTempo(t){
+ if(t===tp)return;
+ var p=pos(),old=dur(),was=playing;
+ tp=t;mark();
+ if(!cx){off=0;return}
+ pause();
+ load(t).then(function(){
+  if(tp!==t)return;   // the visitor changed the step again meanwhile
+  var nd=dur();off=old?Math.min(Math.max(0,nd-.1),p*nd/old):0;
+  if(was&&!playing)start(off);else if(!playing){seek.value=nd?Math.round(off/nd*1000):0;time.textContent=fmt(off)}
+ }).catch(function(){});
+}
+play.addEventListener('click',function(){
+ if(!AC)return;if(playing){pause();return}
+ if(!cx)setup();if(cx.state==='suspended')cx.resume();
+ A.pause();mixOwns=true;   // only one thing plays at a time
+ mx.setAttribute('aria-busy','true');
+ load(tp).then(function(){mx.removeAttribute('aria-busy');A.pause();if(!playing)start(off>=dur()-.1?0:off)}).catch(function(){mx.removeAttribute('aria-busy')});
+});
+seek.addEventListener('input',function(){if(!sets[tp])return;var p=seek.value/1000*dur();if(playing)start(p);else{off=p;time.textContent=fmt(p)}});
+rows().forEach(function(r){var b=$('.mxb',r),v=$('.mxv',r),pc=$('.mxp2',r);
+ function upd(){pc.innerHTML=v.value+'&nbsp;%';r.classList.toggle('off',b.getAttribute('aria-pressed')!=='true');apply()}
+ b.addEventListener('click',function(){b.setAttribute('aria-pressed',b.getAttribute('aria-pressed')!=='true');upd()});
+ v.addEventListener('input',upd)});
+var tr=$('#mxtempo');if(tr)tr.addEventListener('input',function(){setTempo(tr.value)});
+var mv=$('#mxmaster'),mp=$('#mxmp');if(mv)mv.addEventListener('input',function(){var v=+mv.value/100;mp.innerHTML=mv.value+'&nbsp;%';if(mgain)mgain.gain.setTargetAtTime(v*v,cx.currentTime,.02)});   // master: scales every stem and the room together; the limiter at the output still catches peaks
+// the two never play together: starting the mixer stops the recordings; the recordings only start again when the visitor asks for them
+// (on iPhones the system may resume an interrupted audio element by itself when the mixer pauses: such a start without a click on the recordings is stopped)
+document.addEventListener('click',function(e){var t=e.target;if(t.closest&&!t.closest('#mix')&&t.closest('button,.hw,#player'))asked=Date.now()},true);
+A.addEventListener('play',function(){if(mixOwns&&Date.now()-asked>1500){A.pause();return}mixOwns=false;pause()});
+document.addEventListener('visibilitychange',function(){if(!document.hidden&&playing)tick()});
+})();
 window.addEventListener('resize',function(){clearTimeout(window.__rz);window.__rz=setTimeout(function(){draw();fitLead()},150)});
 })();

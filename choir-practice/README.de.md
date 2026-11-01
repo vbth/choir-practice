@@ -1,6 +1,6 @@
 # Choir Practice Skill
 
-> *„Sonntagmorgen, er übt wieder für seinen Chor … und ich darf es ausbaden!“* – Die Ente eines Tenors
+> *„Sonntagmorgen, er übt mal wieder für seinen Chor*<br>*… und ich darf es ausbaden!“*<br>— Ente eines Tenors
 
 [English](README.md) | Deutsch
 
