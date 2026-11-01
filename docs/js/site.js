@@ -196,7 +196,7 @@ function load(){
   bufs={};names.forEach(function(k,i){bufs[k]=l[i]});dur=Math.max.apply(null,l.map(function(b){return b.duration}));loading=false;mx.removeAttribute('aria-busy');apply()});
 }
 function stopSrc(){srcs.forEach(function(s){try{s.onended=null;s.stop()}catch(e){}});srcs=[]}
-function pos(){return playing?Math.min(dur,off+cx.currentTime-t0):off}
+function pos(){return playing?Math.max(0,Math.min(dur,off+cx.currentTime-t0)):off}   // t0 lies slightly ahead, so the first frames would be negative
 function tick(){var p=pos();seek.value=dur?Math.round(p/dur*1000):0;time.textContent=fmt(p);if(playing)raf=requestAnimationFrame(tick)}
 function start(from){
  stopSrc();off=from;t0=cx.currentTime+.05;

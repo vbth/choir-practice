@@ -350,12 +350,6 @@ def page(L):
     <div class="pc pv"><button type="button" class="vbtn mute" aria-pressed="false" aria-label="{esc(t['pl_mute'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3z" fill="currentColor"/><path class="w" d="M15.5 8.5a5 5 0 010 7M18 6a8.5 8.5 0 010 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path class="x" d="M15 9l6 6M21 9l-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button><input type="range" class="vol" min="0" max="100" value="50" aria-label="{esc(t['pl_vol'])}"><span class="mono vp">50&nbsp;%</span></div>
    </div>
   </div>
-  <div class="mix" id="mix" data-audio="{A}audio/mix/" role="group" aria-labelledby="mxh">
-   <p class="mxh" id="mxh">{esc(t['mx_h'])}</p><p class="mxp">{esc(t['mx_p'])}</p>
-   <div class="pc"><button type="button" class="pbtn" id="mxplay" aria-label="{esc(t['pl_play'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path id="mxicon" d="M7 4l13 8-13 8z" fill="currentColor"/></svg></button>
-    <input type="range" id="mxseek" min="0" max="1000" value="0" aria-label="{esc(t['pl_seek'])}"><span id="mxtime" class="mono">0:00</span></div>
-   {mixrows}
-  </div>
   <div class="groups">{playlist(t)}</div>
   <audio id="plaudio" preload="none"></audio>
  </div>
@@ -370,6 +364,12 @@ def page(L):
   </div>
   <div class="nowplay"><button type="button" class="pbtn" aria-label="{esc(t['pl_play'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path class="picon" data-c d="M7 4l13 8-13 8z" fill="currentColor"/></svg></button><p class="ps" id="hpname" aria-live="polite"></p></div>
  </div>
+ <div class="mix" id="mix" data-audio="{A}audio/mix/" role="group" aria-labelledby="mxh">
+  <p class="mxh" id="mxh">{esc(t['mx_h'])}</p><p class="mxp">{esc(t['mx_p'])}</p>
+  <div class="pc"><button type="button" class="pbtn" id="mxplay" aria-label="{esc(t['pl_play'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path id="mxicon" d="M7 4l13 8-13 8z" fill="currentColor"/></svg></button>
+   <input type="range" id="mxseek" min="0" max="1000" value="0" aria-label="{esc(t['pl_seek'])}"><span id="mxtime" class="mono">0:00</span></div>
+  {mixrows}
+  </div>
 </section>
 <section id="{I['paket']}"><h2><span class="num">03</span>{esc(t['paket_h'])}</h2>
  <div class="exrow">
@@ -502,7 +502,7 @@ h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 .mute .x{display:none}.mute[aria-pressed=true] .x{display:inline}.mute[aria-pressed=true] .w{display:none}
 #pltime,.vp{flex:none;font-size:var(--fs-s);min-width:3.2em;text-align:right}
 .nowplay{display:flex;align-items:center;gap:14px}.nowplay .ps{margin:0}
-.mix{margin:0 0 20px;padding:0 0 18px;border-bottom:1.5px solid var(--line)}.mxh{margin:0;font-weight:700;font-size:var(--fs-m)}.mxp{margin:4px 0 14px;color:var(--mute);font-size:var(--fs-s)}
+.mix{margin:32px 0 0;padding:20px 0 0;border-top:1.5px solid var(--line)}.mxh{margin:0;font-weight:700;font-size:var(--fs-m)}.mxp{margin:4px 0 14px;color:var(--mute);font-size:var(--fs-s)}
 .mix #mxseek{flex:1;min-width:0;accent-color:var(--fg);height:24px;cursor:pointer}.mix #mxtime{flex:none;font-size:var(--fs-s);min-width:3.2em;text-align:right}
 .mxr{display:flex;align-items:center;gap:14px;margin-top:10px}
 .mxb{flex:none;width:6.5em;height:36px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg);font:inherit;font-size:var(--fs-s);cursor:pointer;padding:0 6px}
@@ -744,7 +744,7 @@ function load(){
   bufs={};names.forEach(function(k,i){bufs[k]=l[i]});dur=Math.max.apply(null,l.map(function(b){return b.duration}));loading=false;mx.removeAttribute('aria-busy');apply()});
 }
 function stopSrc(){srcs.forEach(function(s){try{s.onended=null;s.stop()}catch(e){}});srcs=[]}
-function pos(){return playing?Math.min(dur,off+cx.currentTime-t0):off}
+function pos(){return playing?Math.max(0,Math.min(dur,off+cx.currentTime-t0)):off}   // t0 lies slightly ahead, so the first frames would be negative
 function tick(){var p=pos();seek.value=dur?Math.round(p/dur*1000):0;time.textContent=fmt(p);if(playing)raf=requestAnimationFrame(tick)}
 function start(from){
  stopSrc();off=from;t0=cx.currentTime+.05;

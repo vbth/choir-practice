@@ -102,7 +102,7 @@ h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 .mute .x{display:none}.mute[aria-pressed=true] .x{display:inline}.mute[aria-pressed=true] .w{display:none}
 #pltime,.vp{flex:none;font-size:var(--fs-s);min-width:3.2em;text-align:right}
 .nowplay{display:flex;align-items:center;gap:14px}.nowplay .ps{margin:0}
-.mix{margin:0 0 20px;padding:0 0 18px;border-bottom:1.5px solid var(--line)}.mxh{margin:0;font-weight:700;font-size:var(--fs-m)}.mxp{margin:4px 0 14px;color:var(--mute);font-size:var(--fs-s)}
+.mix{margin:32px 0 0;padding:20px 0 0;border-top:1.5px solid var(--line)}.mxh{margin:0;font-weight:700;font-size:var(--fs-m)}.mxp{margin:4px 0 14px;color:var(--mute);font-size:var(--fs-s)}
 .mix #mxseek{flex:1;min-width:0;accent-color:var(--fg);height:24px;cursor:pointer}.mix #mxtime{flex:none;font-size:var(--fs-s);min-width:3.2em;text-align:right}
 .mxr{display:flex;align-items:center;gap:14px;margin-top:10px}
 .mxb{flex:none;width:6.5em;height:36px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg);font:inherit;font-size:var(--fs-s);cursor:pointer;padding:0 6px}
