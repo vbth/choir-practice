@@ -81,6 +81,12 @@ h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 .listen{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 56px;align-items:start}
 .pbox{display:grid;grid-template-columns:1fr;gap:20px;align-items:start;justify-self:start;width:100%;max-width:26em}
 .listen .art{width:100%;height:auto;display:block;border:1.5px solid var(--line)}
+.artw{position:relative}
+.ov{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);display:flex;gap:2px;padding:6px;background:rgba(255,255,255,.78);opacity:0;pointer-events:none;transition:opacity .15s}
+.artw:hover .ov,.artw:focus-within .ov{opacity:1;pointer-events:auto}
+.ov button{width:40px;height:40px;border:0;background:transparent;color:#000;display:grid;place-items:center;cursor:pointer;padding:0}
+.ov button:hover{background:rgba(0,0,0,.1)}.ov button[aria-pressed=true]{background:#000;color:#fff}.ov button:focus-visible{outline:2px solid #000;outline-offset:-2px}
+@media (hover:none){.ov{opacity:1;pointer-events:auto}}
 .pt{margin:0;font-weight:700}.ps{margin:2px 0 12px;color:var(--mute);font-size:var(--fs-s);min-height:1.55em}
 .pc{display:flex;align-items:center;gap:14px}
 .pbtn{flex:none;width:44px;height:44px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg);display:grid;place-items:center;cursor:pointer;padding:0}

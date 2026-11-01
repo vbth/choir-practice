@@ -118,7 +118,7 @@ T = {
    'choir': 'Die anderen Stimmen sitzen wie im Chor: Nachbarn links und rechts etwas leiser, weiter entfernte noch leiser.',
    'tutti': 'Alle Stimmen gleich laut.'}, 'own_lbl': 'Gesang', 'acc_lbl': 'Klavier',
   'dl_p': 'Das Ergebnis: Aufnahmen zum Üben für jede Stimme, Anleitungen und Protokolle.', 'dl_btn': 'Beispiel herunterladen',
-  'tutti_all': 'Tutti, alle Stimmen', 'pl_title': 'Alle meine Entchen', 'pl_play': 'Wiedergabe', 'pl_pause': 'Pause', 'pl_seek': 'Position',
+  'tutti_all': 'Tutti, alle Stimmen', 'pl_title': 'Alle meine Entchen', 'pl_play': 'Wiedergabe', 'pl_pause': 'Pause', 'pl_prev': 'Vorherige Aufnahme', 'pl_next': 'Nächste Aufnahme', 'pl_loop': 'Wiederholen', 'pl_seek': 'Position',
   'pl_cover': 'Albumcover des Beispielpakets',
   'rechte_h': 'Rechte & KI',
   'rechte_items': [
@@ -185,7 +185,7 @@ T = {
    'choir': 'The other voices sit as in the choir: neighbours left and right a little quieter, voices further away quieter still.',
    'tutti': 'All voices equally loud.'}, 'own_lbl': 'Singing', 'acc_lbl': 'Piano',
   'dl_p': 'The result: practice recordings for every voice, guides and logs.', 'dl_btn': 'Download the example',
-  'tutti_all': 'Tutti, all voices', 'pl_title': 'All My Ducklings', 'pl_play': 'Play', 'pl_pause': 'Pause', 'pl_seek': 'Position',
+  'tutti_all': 'Tutti, all voices', 'pl_title': 'All My Ducklings', 'pl_play': 'Play', 'pl_pause': 'Pause', 'pl_prev': 'Previous recording', 'pl_next': 'Next recording', 'pl_loop': 'Repeat', 'pl_seek': 'Position',
   'pl_cover': 'Album cover of the example pack',
   'rechte_h': 'Rights & AI',
   'rechte_items': [
@@ -329,7 +329,13 @@ def page(L):
  <p class="intro">{esc(t['ueben_p'])}</p>
  <div class="listen" id="player" data-audio="{A}audio/" data-play="{esc(t['pl_play'])}" data-pause="{esc(t['pl_pause'])}">
   <div class="pbox">
-   <img class="art" src="{A}img/cover-{L}.jpg" alt="{esc(t['pl_cover'])}" width="600" height="600" loading="lazy">
+   <div class="artw"><img class="art" src="{A}img/cover-{L}.jpg" alt="{esc(t['pl_cover'])}" width="600" height="600" loading="lazy">
+    <div class="ov" role="group" aria-label="{esc(t['pl_title'])}">
+     <button type="button" class="prev" aria-label="{esc(t['pl_prev'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 5h2.5v14H6zM19 5v14L9.5 12z" fill="currentColor"/></svg></button>
+     <button type="button" class="pbtn" aria-label="{esc(t['pl_play'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path class="picon" d="M7 4l13 8-13 8z" fill="currentColor"/></svg></button>
+     <button type="button" class="next" aria-label="{esc(t['pl_next'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M15.5 5H18v14h-2.5zM5 5l9.5 7L5 19z" fill="currentColor"/></svg></button>
+     <button type="button" class="loop" aria-pressed="false" aria-label="{esc(t['pl_loop'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M7 7h10v3l4-4-4-4v3H5v6h2zM17 17H7v-3l-4 4 4 4v-3h12v-6h-2z" fill="currentColor"/></svg></button>
+    </div></div>
    <div class="pl">
     <p class="pt">{esc(t['pl_title'])}</p><p class="ps" id="plname" aria-live="polite"></p>
     <div class="pc"><button type="button" class="pbtn" aria-label="{esc(t['pl_play'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path class="picon" d="M7 4l13 8-13 8z" fill="currentColor"/></svg></button>
@@ -461,6 +467,12 @@ h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 .listen{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 56px;align-items:start}
 .pbox{display:grid;grid-template-columns:1fr;gap:20px;align-items:start;justify-self:start;width:100%;max-width:26em}
 .listen .art{width:100%;height:auto;display:block;border:1.5px solid var(--line)}
+.artw{position:relative}
+.ov{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);display:flex;gap:2px;padding:6px;background:rgba(255,255,255,.78);opacity:0;pointer-events:none;transition:opacity .15s}
+.artw:hover .ov,.artw:focus-within .ov{opacity:1;pointer-events:auto}
+.ov button{width:40px;height:40px;border:0;background:transparent;color:#000;display:grid;place-items:center;cursor:pointer;padding:0}
+.ov button:hover{background:rgba(0,0,0,.1)}.ov button[aria-pressed=true]{background:#000;color:#fff}.ov button:focus-visible{outline:2px solid #000;outline-offset:-2px}
+@media (hover:none){.ov{opacity:1;pointer-events:auto}}
 .pt{margin:0;font-weight:700}.ps{margin:2px 0 12px;color:var(--mute);font-size:var(--fs-s);min-height:1.55em}
 .pc{display:flex;align-items:center;gap:14px}
 .pbtn{flex:none;width:44px;height:44px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg);display:grid;place-items:center;cursor:pointer;padding:0}
@@ -611,6 +623,10 @@ $$('#sounds button').forEach(function(b){b.addEventListener('click',function(){c
 $$('#tempos button').forEach(function(b){b.addEventListener('click',function(){change(function(){cur.tempo=b.getAttribute('data-tempo')},A.paused)})});
 $$('.trk button').forEach(function(b){b.addEventListener('click',function(){change(function(){var v=b.getAttribute('data-voice');if(v)cur.voice=v;cur.stage=b.getAttribute('data-stage');cur.sound=b.getAttribute('data-sound');cur.tempo=b.getAttribute('data-tempo')},true)})});
 $$('.pbtn').forEach(function(b){b.addEventListener('click',function(){if(A.paused){A.play().catch(function(){})}else{A.pause()}})});
+// remote control on the cover (shown while the pointer is over it): previous / next recording of the playlist, repeat
+function step(d){var all=$$('.trk button'),i=0;all.forEach(function(b,k){if(b.getAttribute('aria-pressed')==='true')i=k});all[(i+d+all.length)%all.length].click()}
+$('.ov .prev').addEventListener('click',function(){step(-1)});$('.ov .next').addEventListener('click',function(){step(1)});
+$('.ov .loop').addEventListener('click',function(){A.loop=!A.loop;this.setAttribute('aria-pressed',A.loop)});
 A.addEventListener('play',ui);A.addEventListener('pause',ui);
 // sound waves pulse with the rhythm of the recording: Web Audio analyser on the audio element; every note onset (level jumps more than 2.5 dB above its slow average) switches the three arcs per side on, they then go off again from the outside in; while it sounds the inner arc stays on (always full red, no fading).
 // Onset rate on the example recordings: 2 to 4 per second. Without Web Audio, with reduced motion or if the context cannot run, the fixed animation stays
