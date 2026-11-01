@@ -107,10 +107,11 @@ $$('#tempos button').forEach(function(b){b.addEventListener('click',function(){c
 $$('.trk button').forEach(function(b){b.addEventListener('click',function(){change(function(){var v=b.getAttribute('data-voice');if(v)cur.voice=v;cur.stage=b.getAttribute('data-stage');cur.sound=b.getAttribute('data-sound');cur.tempo=b.getAttribute('data-tempo')},true)})});
 $$('.pbtn').forEach(function(b){b.addEventListener('click',function(){if(A.paused){A.play().catch(function(){})}else{A.pause()}})});
 // volume: the slider and the speaker button exist twice (remote on the header image, player); both follow one value (no effect on iPhones: the system volume rules there)
-var vols=$$('.vol'),mutes=$$('.mute'),lastVol=1;
+var vols=$$('.vol'),mutes=$$('.mute'),lastVol=.5;
 function setVol(v){v=Math.max(0,Math.min(1,v));A.volume=v;vols.forEach(function(r){r.value=Math.round(v*100)});mutes.forEach(function(m){m.setAttribute('aria-pressed',v===0)})}
 vols.forEach(function(r){r.addEventListener('input',function(){lastVol=+r.value/100||lastVol;setVol(+r.value/100)})});
-mutes.forEach(function(m){m.addEventListener('click',function(){if(A.volume>0){lastVol=A.volume;setVol(0)}else setVol(lastVol||1)})});
+mutes.forEach(function(m){m.addEventListener('click',function(){if(A.volume>0){lastVol=A.volume;setVol(0)}else setVol(lastVol||.5)})});
+setVol(.5);   // starts at half volume
 // remote control on the cover (shown while the pointer is over it): previous / next recording of the playlist, repeat
 function step(d){var all=$$('.trk button'),i=0;all.forEach(function(b,k){if(b.getAttribute('aria-pressed')==='true')i=k});all[(i+d+all.length)%all.length].click()}
 $('.ov .prev').addEventListener('click',function(){step(-1)});$('.ov .next').addEventListener('click',function(){step(1)});
