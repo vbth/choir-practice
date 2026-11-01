@@ -18,7 +18,7 @@ import make_audio as ma
 import mido
 
 LEVEL = {'voice': -3, 'acc': -9, 'intro': -3}   # dB of the default mix; the page starts with these levels at 100 %
-TEMPI = [60, 75, 90, 100]                      # tempo steps in % of the written tempo
+TEMPI = [80, 90, 100]                      # tempo steps in % of the written tempo
 
 def sh(*a): subprocess.run(a, check=True, capture_output=True)
 

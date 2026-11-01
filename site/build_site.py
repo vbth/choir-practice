@@ -248,7 +248,7 @@ def page(L):
         f'<div class="mxr"><button type="button" class="mxb" data-stem="{k}" data-pan="{pan}" aria-pressed="true" title="{esc(t["mx_on"])}">{esc(n)}</button>'
         f'<input type="range" class="mxv" min="0" max="100" value="100" aria-label="{esc(n)}"><span class="mxp2 mono">100&nbsp;%</span></div>'
         for k, n, pan in [(v.lower(), vn, round(-0.6 + 1.2 * i / 3, 2)) for i, (v, vn) in enumerate(t['voices'].items())] + [('acc', t['mx_acc'], 0)])
-    mxtempos = ''.join(f'<button type="button" data-mxt="{p}" aria-pressed="{str(p == 100).lower()}">{p}&nbsp;%</button>' for p in (60, 75, 90, 100))
+    mxtempos = ''.join(f'<button type="button" data-mxt="{p}" aria-pressed="{str(p == 100).lower()}">{p}&nbsp;%</button>' for p in (80, 90, 100))
     voices = ''.join(f'<button type="button" data-voice="{v}" aria-pressed="false">{esc(n)}</button>' for v, n in t['voices'].items())
     stages = ''.join(f'<button type="button" data-stage="{k}" aria-pressed="false">{esc(n)}</button>' for k, n in t['stages'].items())
     sounds = ''.join(f'<button type="button" data-sound="{k}" aria-pressed="false">{esc(n)}</button>' for k, n in t['sounds'].items())
