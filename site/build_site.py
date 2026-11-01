@@ -119,7 +119,7 @@ T = {
    'tutti': 'Alle Stimmen gleich laut.'}, 'own_lbl': 'Gesang', 'acc_lbl': 'Klavier',
   'dl_p': 'Das Ergebnis: Aufnahmen zum Üben für jede Stimme, Anleitungen und Protokolle.', 'dl_btn': 'Download', 'dl_ttl': 'Alle meine Entchen', 'dl_meta': 'ZIP · ca. 36 MB · Noten, Aufnahmen, Anleitungen',
   'tutti_all': 'Tutti, alle Stimmen', 'pl_title': 'Alle meine Entchen', 'pl_play': 'Wiedergabe', 'pl_pause': 'Pause', 'pl_prev': 'Vorherige Aufnahme', 'pl_next': 'Nächste Aufnahme', 'pl_loop': 'Wiederholen', 'pl_vol': 'Lautstärke', 'pl_mute': 'Stumm', 'pl_seek': 'Position',
-  'pl_cover': 'Albumcover des Beispielpakets',
+  'pl_cover': 'Albumcover des Beispielpakets', 'mx_h': 'Mixer', 'mx_p': 'Stimmen und Klavier einzeln ein- und ausschalten und in der Lautstärke regeln, während es läuft.', 'mx_acc': 'Klavier', 'mx_on': 'an / aus', 'mx_load': 'Lädt …',
   'rechte_h': 'Rechte & KI',
   'rechte_items': [
    ('Rechte', 'Bevor Noten verarbeitet werden, fragt der Skill nach den Rechten. Diese Angaben werden danach in der README-Datei vermerkt. Ob die Noten verarbeitet und weitergegeben werden dürfen, richtet sich nach dem Urheber- und Lizenzrecht, unter dem sie stehen.'),
@@ -186,7 +186,7 @@ T = {
    'tutti': 'All voices equally loud.'}, 'own_lbl': 'Singing', 'acc_lbl': 'Piano',
   'dl_p': 'The result: practice recordings for every voice, guides and logs.', 'dl_btn': 'Download', 'dl_ttl': 'All My Ducklings', 'dl_meta': 'ZIP · ca. 36 MB · Scores, recordings, guides',
   'tutti_all': 'Tutti, all voices', 'pl_title': 'All My Ducklings', 'pl_play': 'Play', 'pl_pause': 'Pause', 'pl_prev': 'Previous recording', 'pl_next': 'Next recording', 'pl_loop': 'Repeat', 'pl_vol': 'Volume', 'pl_mute': 'Mute', 'pl_seek': 'Position',
-  'pl_cover': 'Album cover of the example pack',
+  'pl_cover': 'Album cover of the example pack', 'mx_h': 'Mixer', 'mx_p': 'Switch each voice and the piano on and off and set its level while it plays.', 'mx_acc': 'Piano', 'mx_on': 'on / off', 'mx_load': 'Loading …',
   'rechte_h': 'Rights & AI',
   'rechte_items': [
    ('Rights', 'Before scores are processed, the skill asks about the rights. These details are then recorded in the README file. Whether the scores may be processed and passed on depends on the copyright and licence law they are subject to.'),
@@ -244,6 +244,10 @@ def page(L):
         for i, (n, d, ch) in enumerate(t['tree']))
     steps = ''.join(f'<li><button type="button" data-step="{i}" aria-pressed="false"><span class="n">{i+1}</span><span class="s">{esc(s[0])}</span></button></li>' for i, s in enumerate(t['steps']))
     rights = ''.join(f'<article><h3>{esc(h)}</h3><p>{esc(p)}</p></article>' for h, p in t['rechte_items'])
+    mixrows = ''.join(
+        f'<div class="mxr"><button type="button" class="mxb" data-stem="{k}" data-pan="{pan}" aria-pressed="true" title="{esc(t["mx_on"])}">{esc(n)}</button>'
+        f'<input type="range" class="mxv" min="0" max="100" value="100" aria-label="{esc(n)}"><span class="mxp2 mono">100&nbsp;%</span></div>'
+        for k, n, pan in [(v.lower(), vn, round(-0.6 + 1.2 * i / 3, 2)) for i, (v, vn) in enumerate(t['voices'].items())] + [('acc', t['mx_acc'], 0)])
     voices = ''.join(f'<button type="button" data-voice="{v}" aria-pressed="false">{esc(n)}</button>' for v, n in t['voices'].items())
     stages = ''.join(f'<button type="button" data-stage="{k}" aria-pressed="false">{esc(n)}</button>' for k, n in t['stages'].items())
     sounds = ''.join(f'<button type="button" data-sound="{k}" aria-pressed="false">{esc(n)}</button>' for k, n in t['sounds'].items())
@@ -345,6 +349,12 @@ def page(L):
      <input type="range" id="plseek" min="0" max="1000" value="0" aria-label="{esc(t['pl_seek'])}"><span id="pltime" class="mono">0:00</span></div>
     <div class="pc pv"><button type="button" class="vbtn mute" aria-pressed="false" aria-label="{esc(t['pl_mute'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3z" fill="currentColor"/><path class="w" d="M15.5 8.5a5 5 0 010 7M18 6a8.5 8.5 0 010 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path class="x" d="M15 9l6 6M21 9l-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button><input type="range" class="vol" min="0" max="100" value="50" aria-label="{esc(t['pl_vol'])}"><span class="mono vp">50&nbsp;%</span></div>
    </div>
+  </div>
+  <div class="mix" id="mix" data-audio="{A}audio/mix/" role="group" aria-labelledby="mxh">
+   <p class="mxh" id="mxh">{esc(t['mx_h'])}</p><p class="mxp">{esc(t['mx_p'])}</p>
+   <div class="pc"><button type="button" class="pbtn" id="mxplay" aria-label="{esc(t['pl_play'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path id="mxicon" d="M7 4l13 8-13 8z" fill="currentColor"/></svg></button>
+    <input type="range" id="mxseek" min="0" max="1000" value="0" aria-label="{esc(t['pl_seek'])}"><span id="mxtime" class="mono">0:00</span></div>
+   {mixrows}
   </div>
   <div class="groups">{playlist(t)}</div>
   <audio id="plaudio" preload="none"></audio>
@@ -492,6 +502,15 @@ h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 .mute .x{display:none}.mute[aria-pressed=true] .x{display:inline}.mute[aria-pressed=true] .w{display:none}
 #pltime,.vp{flex:none;font-size:var(--fs-s);min-width:3.2em;text-align:right}
 .nowplay{display:flex;align-items:center;gap:14px}.nowplay .ps{margin:0}
+.mix{margin:0 0 20px;padding:0 0 18px;border-bottom:1.5px solid var(--line)}.mxh{margin:0;font-weight:700;font-size:var(--fs-m)}.mxp{margin:4px 0 14px;color:var(--mute);font-size:var(--fs-s)}
+.mix #mxseek{flex:1;min-width:0;accent-color:var(--fg);height:24px;cursor:pointer}.mix #mxtime{flex:none;font-size:var(--fs-s);min-width:3.2em;text-align:right}
+.mxr{display:flex;align-items:center;gap:14px;margin-top:10px}
+.mxb{flex:none;width:6.5em;height:36px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg);font:inherit;font-size:var(--fs-s);cursor:pointer;padding:0 6px}
+.mxb[aria-pressed=true]{background:var(--fg);color:var(--bg)}
+.mxv{flex:1;min-width:0;accent-color:var(--fg);height:24px;cursor:pointer}.mxr .mxp2{flex:none;font-size:var(--fs-s);min-width:3.2em;text-align:right}
+.mxr.off .mxv,.mxr.off .mxp2{opacity:.4}
+.mxb:focus-visible,.mxv:focus-visible,#mxseek:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+@media (hover:hover){.mxb:hover,#mxplay:hover{color:var(--link)}.mxb[aria-pressed=true]:hover{background:var(--link);color:var(--bg);border-color:var(--link)}.mxv:hover,#mxseek:hover{accent-color:var(--link)}}
 .groups details{border-top:1.5px solid var(--line)}.groups details:last-child{border-bottom:1.5px solid var(--line)}
 .groups summary{list-style:none;cursor:pointer;padding:8px 28px 8px 0;position:relative}.groups summary::-webkit-details-marker{display:none}
 .groups summary::after{content:"+";position:absolute;right:4px;top:4px;font-size:24px;line-height:1.3}.groups details[open] summary::after{content:"\2212"}
@@ -700,6 +719,55 @@ A.addEventListener('loadedmetadata',function(){tm.textContent=f(A.currentTime)})
 A.addEventListener('ended',function(){ui();sk.value=0});
 sk.addEventListener('input',function(){if(A.duration)A.currentTime=sk.value/1000*A.duration});
 sync();ui();
+// mixer: the stems (4 voices, piano, starting notes) play together through Web Audio; every voice has an on/off button and its own level; the room reverb is added here
+(function(){
+var mx=$('#mix');if(!mx)return;
+var AC=window.AudioContext||window.webkitAudioContext,base=mx.getAttribute('data-audio'),play=$('#mxplay'),ic=$('#mxicon'),seek=$('#mxseek'),time=$('#mxtime');
+var names=['s','a','t','b','acc','intro'],cx=null,bufs=null,gains={},srcs=[],t0=0,off=0,dur=0,playing=false,raf=0,loading=false;
+var PLAY='M7 4l13 8-13 8z',PAUSE='M6 4h4v16H6zM14 4h4v16h-4z';
+function fmt(t){t=Math.floor(t||0);return Math.floor(t/60)+':'+('0'+t%60).slice(-2)}
+function rows(){return $$('.mxr',mx)}
+function level(r){var b=$('.mxb',r),v=+$('.mxv',r).value/100;return b.getAttribute('aria-pressed')==='true'?v*v:0}   // squared: the slider follows the loudness we hear
+function apply(){rows().forEach(function(r){var k=$('.mxb',r).getAttribute('data-stem');if(gains[k])gains[k].gain.setTargetAtTime(level(r),cx.currentTime,.02)})}
+function setIcon(on){ic.setAttribute('d',on?PAUSE:PLAY);play.setAttribute('aria-label',on?pl.getAttribute('data-pause'):pl.getAttribute('data-play'))}
+function ir(c){var rt=1.3,n=Math.floor(c.sampleRate*rt*1.2),b=c.createBuffer(2,n,c.sampleRate);   // synthetic room: decaying noise
+ for(var ch=0;ch<2;ch++){var d=b.getChannelData(ch);for(var i=0;i<n;i++)d[i]=(Math.random()*2-1)*Math.exp(-6.9*(i/c.sampleRate)/rt)*.35}return b}
+function setup(){
+ cx=new AC();var master=cx.createGain(),lim=cx.createDynamicsCompressor();lim.threshold.value=-6;lim.ratio.value=8;lim.attack.value=.003;lim.release.value=.15;
+ var wet=cx.createGain(),cv=cx.createConvolver();wet.gain.value=.3;cv.buffer=ir(cx);master.connect(lim);master.connect(cv);cv.connect(wet);wet.connect(lim);lim.connect(cx.destination);
+ names.forEach(function(k){var g=cx.createGain(),p=cx.createStereoPanner?cx.createStereoPanner():null,b=$('.mxb[data-stem="'+k+'"]',mx);g.gain.value=1;
+  if(p){p.pan.value=b?+b.getAttribute('data-pan'):0;g.connect(p);p.connect(master)}else g.connect(master);gains[k]=g});
+}
+function load(){
+ if(bufs||loading)return Promise.resolve();loading=true;mx.setAttribute('aria-busy','true');
+ return Promise.all(names.map(function(k){return fetch(base+k+'.mp3').then(function(r){return r.arrayBuffer()}).then(function(a){return new Promise(function(ok,no){cx.decodeAudioData(a,ok,no)})})})).then(function(l){
+  bufs={};names.forEach(function(k,i){bufs[k]=l[i]});dur=Math.max.apply(null,l.map(function(b){return b.duration}));loading=false;mx.removeAttribute('aria-busy');apply()});
+}
+function stopSrc(){srcs.forEach(function(s){try{s.onended=null;s.stop()}catch(e){}});srcs=[]}
+function pos(){return playing?Math.min(dur,off+cx.currentTime-t0):off}
+function tick(){var p=pos();seek.value=dur?Math.round(p/dur*1000):0;time.textContent=fmt(p);if(playing)raf=requestAnimationFrame(tick)}
+function start(from){
+ stopSrc();off=from;t0=cx.currentTime+.05;
+ names.forEach(function(k){var s=cx.createBufferSource();s.buffer=bufs[k];s.connect(gains[k]);s.start(t0,from);srcs.push(s)});
+ srcs[0].onended=function(){if(playing&&pos()>=dur-.1)finish()};
+ playing=true;setIcon(true);cancelAnimationFrame(raf);tick();
+}
+function pause(){if(!playing)return;off=pos();playing=false;stopSrc();setIcon(false);cancelAnimationFrame(raf);tick()}
+function finish(){playing=false;stopSrc();off=0;setIcon(false);cancelAnimationFrame(raf);tick()}
+play.addEventListener('click',function(){
+ if(!AC)return;if(playing){pause();return}
+ if(!cx)setup();if(cx.state==='suspended')cx.resume();
+ A.pause();   // only one thing plays at a time
+ load().then(function(){start(off>=dur-.1?0:off)}).catch(function(){loading=false;mx.removeAttribute('aria-busy')});
+});
+seek.addEventListener('input',function(){if(!bufs)return;var p=seek.value/1000*dur;if(playing)start(p);else{off=p;time.textContent=fmt(p)}});
+rows().forEach(function(r){var b=$('.mxb',r),v=$('.mxv',r),pc=$('.mxp2',r);
+ function upd(){pc.innerHTML=v.value+'&nbsp;%';r.classList.toggle('off',b.getAttribute('aria-pressed')!=='true');if(cx)apply()}
+ b.addEventListener('click',function(){b.setAttribute('aria-pressed',b.getAttribute('aria-pressed')!=='true');upd()});
+ v.addEventListener('input',upd)});
+A.addEventListener('play',pause);   // the recordings below take over
+document.addEventListener('visibilitychange',function(){if(!document.hidden&&playing)tick()});
+})();
 window.addEventListener('resize',function(){clearTimeout(window.__rz);window.__rz=setTimeout(function(){draw();fitLead()},150)});
 })();
 '''

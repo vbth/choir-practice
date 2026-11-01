@@ -41,4 +41,4 @@ No text block may end with a single word on its last line. `nobreak()` in [`buil
 
 ## Cache busting
 `bust()` in [`build_site.py`](build_site.py) appends `?v=<hash of the file>` to every `img/...` reference (src, srcset, preload, og:image) at every build. A changed image therefore gets a new URL; run [`make_previews.py`](make_previews.py) and [`build_site.py`](build_site.py) after any template change and the page shows the new example pages without a hard reload.
-
+- Mixer above the voice groups in "Practice": `docs/audio/mix/` holds mono stems (`s`, `a`, `t`, `b` choir voices, `acc` piano with all voices, `intro` starting notes); they come from [`make_mixer_audio.py`](make_mixer_audio.py), which imports the skill's `make_audio.py` without changing it (soundfont GeneralUser GS). The page plays them together with Web Audio, with live on/off, level, pan and room reverb. Run the script again after a change to the example score.
