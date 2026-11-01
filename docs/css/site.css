@@ -93,7 +93,7 @@ h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 .ov .loop[aria-pressed=true]{color:var(--link)}.ov button svg{width:55%;height:55%}.ov button svg{filter:url(#kr)}.ov button:focus-visible{outline:2px solid var(--fg);outline-offset:-2px}
 @media (hover:hover){.pbtn:hover,.vbtn:hover,.ov button:hover,.ov button[aria-pressed=true]:hover{color:var(--link)}.vol:hover,.ov .vol:hover,#plseek:hover{accent-color:var(--link)}}
 .ov .vol{filter:url(#kb)}
-@media (hover:none){.ov{opacity:1;pointer-events:auto}}
+@media (hover:none){.ov{opacity:1;pointer-events:auto}.hw:not(.on) .ov .rw button:not(.pbtn),.hw:not(.on) .ov .vw{display:none}.hw:not(.on) .ov .pbtn{width:calc(var(--b)*1.4);height:calc(var(--b)*1.4)}}   /* touch: before the first tap only the play button in its frame */
 @container (max-width:520px){.ov .vw{display:none}.ov button svg{width:68%;height:68%;filter:url(#krs)}.ov .fr{filter:url(#kfs)}}   /* narrow image: the tub is too small for a second row; the volume stays in the player below */
 .pt{margin:0;font-weight:700}.ps{margin:2px 0 12px;color:var(--mute);font-size:var(--fs-s);min-height:1.55em}
 .pc{display:flex;align-items:center;gap:14px}

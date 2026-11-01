@@ -118,6 +118,11 @@ setVol(.5);   // starts at half volume
 function step(d){var all=$$('.trk button'),i=0;all.forEach(function(b,k){if(b.getAttribute('aria-pressed')==='true')i=k});all[(i+d+all.length)%all.length].click()}
 $('.ov .prev').addEventListener('click',function(){step(-1)});$('.ov .next').addEventListener('click',function(){step(1)});
 $('.ov .loop').addEventListener('click',function(){A.loop=!A.loop;this.setAttribute('aria-pressed',A.loop)});
+// first touch on the header image: the remote grows from the single play button to the full set (and the recording starts); with a mouse nothing changes
+var hw=$('.hw');
+function activate(){hw.classList.add('on')}
+$('.ov .pbtn').addEventListener('click',activate);
+hw.addEventListener('click',function(e){if(hw.classList.contains('on'))return;activate();if(window.matchMedia('(hover:none)').matches&&!e.target.closest('.ov')&&A.paused)A.play().catch(function(){})});
 A.addEventListener('play',ui);A.addEventListener('pause',ui);
 // sound waves pulse with the rhythm of the recording: Web Audio analyser on the audio element; every note onset (level jumps more than 2.5 dB above its slow average) switches the three arcs per side on, they then go off again from the outside in; while it sounds the inner arc stays on (always full red, no fading).
 // Onset rate on the example recordings: 2 to 4 per second. Without Web Audio, with reduced motion or if the context cannot run, the fixed animation stays
