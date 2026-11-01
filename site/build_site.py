@@ -119,7 +119,7 @@ T = {
    'tutti': 'Alle Stimmen gleich laut.'}, 'own_lbl': 'Gesang', 'acc_lbl': 'Klavier',
   'dl_p': 'Das Ergebnis: Aufnahmen zum Üben für jede Stimme, Anleitungen und Protokolle.', 'dl_btn': 'Download', 'dl_ttl': 'Alle meine Entchen', 'dl_meta': 'ZIP · ca. 36 MB · Noten, Aufnahmen, Anleitungen',
   'tutti_all': 'Tutti, alle Stimmen', 'pl_title': 'Alle meine Entchen', 'pl_play': 'Wiedergabe', 'pl_pause': 'Pause', 'pl_prev': 'Vorherige Aufnahme', 'pl_next': 'Nächste Aufnahme', 'pl_loop': 'Wiederholen', 'pl_vol': 'Lautstärke', 'pl_mute': 'Stumm', 'pl_seek': 'Position',
-  'pl_cover': 'Albumcover des Beispielpakets', 'mx_h': 'Mixer', 'mx_tempo': 'Tempo', 'mx_all': 'Gesamt', 'mx_p': 'Stimmen und Klavier einzeln ein- und ausschalten und in der Lautstärke regeln, während es läuft.', 'mx_acc': 'Klavier', 'mx_on': 'an / aus', 'mx_load': 'Lädt …',
+  'pl_cover': 'Albumcover des Beispielpakets', 'mx_h': 'Mixer', 'mx_tempo': 'Tempo', 'mx_all': 'Gesamt', 'mx_p': 'Stimmen und Klavier einzeln ein- und ausschalten (antippen oder -klicken) und in der Lautstärke regeln, während es läuft.', 'mx_acc': 'Klavier', 'mx_on': 'an / aus', 'mx_load': 'Lädt …',
   'rechte_h': 'Rechte & KI',
   'rechte_items': [
    ('Rechte', 'Bevor Noten verarbeitet werden, fragt der Skill nach den Rechten. Diese Angaben werden danach in der README-Datei vermerkt. Ob die Noten verarbeitet und weitergegeben werden dürfen, richtet sich nach dem Urheber- und Lizenzrecht, unter dem sie stehen.'),
@@ -186,7 +186,7 @@ T = {
    'tutti': 'All voices equally loud.'}, 'own_lbl': 'Singing', 'acc_lbl': 'Piano',
   'dl_p': 'The result: practice recordings for every voice, guides and logs.', 'dl_btn': 'Download', 'dl_ttl': 'All My Ducklings', 'dl_meta': 'ZIP · ca. 36 MB · Scores, recordings, guides',
   'tutti_all': 'Tutti, all voices', 'pl_title': 'All My Ducklings', 'pl_play': 'Play', 'pl_pause': 'Pause', 'pl_prev': 'Previous recording', 'pl_next': 'Next recording', 'pl_loop': 'Repeat', 'pl_vol': 'Volume', 'pl_mute': 'Mute', 'pl_seek': 'Position',
-  'pl_cover': 'Album cover of the example pack', 'mx_h': 'Mixer', 'mx_tempo': 'Tempo', 'mx_all': 'Master', 'mx_p': 'Switch each voice and the piano on and off and set its level while it plays.', 'mx_acc': 'Piano', 'mx_on': 'on / off', 'mx_load': 'Loading …',
+  'pl_cover': 'Album cover of the example pack', 'mx_h': 'Mixer', 'mx_tempo': 'Tempo', 'mx_all': 'Master', 'mx_p': 'Switch each voice and the piano on and off (tap or click) and set its level while it plays.', 'mx_acc': 'Piano', 'mx_on': 'on / off', 'mx_load': 'Loading …',
   'rechte_h': 'Rights & AI',
   'rechte_items': [
    ('Rights', 'Before scores are processed, the skill asks about the rights. These details are then recorded in the README file. Whether the scores may be processed and passed on depends on the copyright and licence law they are subject to.'),
