@@ -73,6 +73,9 @@ T = {
   'h1': 'Deine Chorstimme. Deine Noten. Überall lesen, hören und singen.',
   'lead': 'Dokumentation eines agentischen KI-Musik-Workflows und -Skills entwickelt für und mit Claude Code als privates Code-Experiment. Es ist nur ein „Proof of Concept“. Aus Chornoten entsteht ein „KI-\u2060geprüftes“ ZIP, in dem sich für jede Stimme 10 Aufnahmen zum Üben befinden.',
   'cta': 'Beispiel ansehen',
+  'pr_label': 'Oder direkt in Claude Code einfügen:',
+  'pr_text': 'Installiere den Skill choir-practice aus ' + REL + 'choir-practice.skill. Führe danach das Setup-Skript mit --check aus und zeige mir, was fehlt. Frage mich, ob die getesteten oder die neuesten Paketversionen installiert werden sollen, bevor du etwas installierst.',
+  'pr_copy': 'Prompt kopieren', 'pr_done': 'Kopiert',
   'ai': 'KI-generiert. Nutzung auf eigene Verantwortung.', 'foot_note': 'choir-practice – KI-Musik-Workflow/-Skill für Claude.', 'foot_site': 'Startseite',
   'facts': [('4', 'Stufen je Stimme'), ('2', 'Klänge: Chor und Klavier'), ('2', 'Fassungen: normal und langsam'), ('42', 'Aufnahmen im Beispiel')],
   'inh_h': 'Inhalte', 'paket_h': 'Beispiel', 'paket_p': 'Im ZIP liegen vier Ordner. Die Stimmen-ZIPs in 2_Ueben sind fertig zum Weitergeben, ihr Inhalt steht zuletzt. Einen Ordner anklicken.',
@@ -140,6 +143,9 @@ T = {
   'h1': 'Your voice. Your sheet music. Read, listen, and sing anywhere.',
   'lead': 'Documentation of an agentic AI music workflow and skill developed for and with Claude Code as a private code experiment. It is only a “proof of concept”. A choir score goes in, and an “AI-checked” ZIP comes out with 10 practice recordings for every voice.',
   'cta': 'See the example',
+  'pr_label': 'Or paste it straight into Claude Code:',
+  'pr_text': 'Install the choir-practice skill from ' + REL + 'choir-practice.skill. Then run the setup script with --check and tell me what is missing. Ask me whether to install the tested or the newest package versions before you install anything.',
+  'pr_copy': 'Copy prompt', 'pr_done': 'Copied',
   'ai': 'AI-generated. Use at your own risk.', 'foot_note': 'choir-practice – AI music workflow/skill for Claude.', 'foot_site': 'Home page',
   'facts': [('4', 'stages per voice'), ('2', 'sounds: choir and piano'), ('2', 'versions: normal and slow'), ('42', 'recordings in the example')],
   'inh_h': 'Contents', 'paket_h': 'Example', 'paket_p': 'The ZIP holds four folders. The voice ZIPs in 2_Practice are ready to hand out, their contents are listed last. Click a folder.',
@@ -334,6 +340,7 @@ def page(L):
  <h1>{h1_html}</h1>
  <p class="lead">{'<br><br>'.join(esc(x) for x in t['lead'].split(chr(10) * 2))}</p>
  <p class="cta"><a href="#{I['paket']}">{esc(t['cta'])}</a></p>
+ <div class="prwrap"><p class="prlabel">{esc(t['pr_label'])}</p><div class="prbox"><code id="pr">{esc(t['pr_text'])}</code><button type="button" class="prcopy"aria-label="{esc(t['pr_copy'])}" title="{esc(t['pr_copy'])}" data-done="{esc(t['pr_done'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M5 15V5a1 1 0 0 1 1-1h10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></div></div>
  <dl class="facts">{facts}</dl>
 </section>
 <section id="{I['ablauf']}"><h2><span class="num">01</span>{esc(t['ablauf_h'])}</h2>
@@ -439,6 +446,11 @@ h3{margin:0 0 8px;font-size:var(--fs-m)}
 .input{margin:0 0 24px;color:var(--mute)}
 .intro{max-width:44em;margin:0 0 28px}.intro.wide{max-width:none}
 .cta{display:flex;flex-wrap:wrap;gap:12px 28px;margin:0 0 36px}
+.prwrap{margin:0 0 36px;max-width:44em}.prlabel{margin:0 0 8px;color:var(--mute);font-size:var(--fs-s)}
+.prbox{display:flex;align-items:flex-start;gap:12px;border:1.5px solid var(--line);padding:14px 16px}
+.prbox code{flex:1 1 auto;min-width:0;font-family:inherit;font-size:var(--fs-s);line-height:1.5;overflow-wrap:anywhere}
+.prcopy{flex:0 0 44px;width:44px;height:44px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg);padding:0;display:grid;place-items:center;cursor:pointer}
+.prcopy:focus-visible{outline:2px solid var(--link);outline-offset:2px}
 .facts{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:0;border-top:1.5px solid var(--line)}
 .facts div{padding:22px 12px 0 0}.facts dt{font-size:clamp(28px,4vw,44px);font-weight:700;line-height:1}.facts dd{margin:6px 0 0;color:var(--mute);font-size:var(--fs-s)}
 .aitag{display:flex;align-items:center;gap:10px;margin:0}
@@ -827,6 +839,9 @@ document.addEventListener('click',function(e){var t=e.target;if(t.closest&&!t.cl
 A.addEventListener('play',function(){if(mixOwns&&Date.now()-asked>1500){A.pause();return}mixOwns=false;pause()});
 document.addEventListener('visibilitychange',function(){if(!document.hidden&&playing)tick()});
 })();
+(function(){var b=document.querySelector('.prcopy');if(!b)return;var ICO=b.innerHTML,OK='<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';var code=document.getElementById('pr');
+function done(){b.innerHTML=OK;b.title=b.getAttribute('data-done');setTimeout(function(){b.innerHTML=ICO;b.title=b.getAttribute('aria-label')},1600)}
+b.addEventListener('click',function(){if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(code.textContent).then(done,function(){})}else{var r=document.createRange();r.selectNodeContents(code);var s=window.getSelection();s.removeAllRanges();s.addRange(r)}})})();
 window.addEventListener('resize',function(){clearTimeout(window.__rz);window.__rz=setTimeout(function(){draw();fitLead()},150)});
 })();
 '''
