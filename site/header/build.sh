@@ -16,7 +16,7 @@ node "$HERE/render.js" "$T"
 python3 - "$T/og-raw.png" "$ROOT/docs/img/og.png" <<'PY'
 import sys
 from PIL import Image
-src, dst = sys.argv[1:3]; im = Image.open(src).convert('RGB'); W, H = im.size; k = 0.92
+src, dst = sys.argv[1:3]; im = Image.open(src).convert('RGB'); W, H = im.size; k = 0.84
 small = im.resize((round(W * k), round(H * k)), Image.Resampling.LANCZOS)
 canvas = Image.new('RGB', (W, H), 'white'); canvas.paste(small, ((W - small.width) // 2, (H - small.height) // 2)); canvas.save(dst, optimize=True)
 PY
