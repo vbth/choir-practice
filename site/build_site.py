@@ -73,9 +73,6 @@ T = {
   'h1': 'Deine Chorstimme. Deine Noten. Überall lesen, hören und singen.',
   'lead': 'Dokumentation eines agentischen KI-Musik-Workflows und -Skills entwickelt für und mit Claude Code als privates Code-Experiment. Es ist nur ein „Proof of Concept“. Aus Chornoten entsteht ein „KI-\u2060geprüftes“ ZIP, in dem sich für jede Stimme 10 Aufnahmen zum Üben befinden.',
   'cta': 'Beispiel ansehen',
-  'pr_label': 'Oder direkt in Claude Code einfügen:',
-  'pr_text': 'Installiere den Skill choir-practice aus ' + REL + 'choir-practice.skill. Führe danach das Setup-Skript mit --check aus und zeige mir, was fehlt. Frage mich, ob die getesteten oder die neuesten Paketversionen installiert werden sollen, bevor du etwas installierst.',
-  'pr_copy': 'Prompt kopieren', 'pr_done': 'Kopiert',
   'ai': 'KI-generiert. Nutzung auf eigene Verantwortung.', 'foot_note': 'choir-practice – KI-Musik-Workflow/-Skill für Claude.', 'foot_site': 'Startseite',
   'facts': [('4', 'Stufen je Stimme'), ('2', 'Klänge: Chor und Klavier'), ('2', 'Fassungen: normal und langsam'), ('42', 'Aufnahmen im Beispiel')],
   'inh_h': 'Inhalte', 'paket_h': 'Beispiel', 'paket_p': 'Im ZIP liegen vier Ordner. Die Stimmen-ZIPs in 2_Ueben sind fertig zum Weitergeben, ihr Inhalt steht zuletzt. Einen Ordner anklicken.',
@@ -121,7 +118,7 @@ T = {
    'choir': 'Die anderen Stimmen sitzen wie im Chor: Nachbarn links und rechts etwas leiser, weiter entfernte noch leiser.',
    'tutti': 'Alle Stimmen gleich laut.'}, 'own_lbl': 'Gesang', 'acc_lbl': 'Klavier',
   'dl_p': 'Das Ergebnis: Aufnahmen zum Üben für jede Stimme, Anleitungen und Protokolle.', 'dl_btn': 'Download', 'dl_ttl': 'Alle meine Entchen', 'dl_meta': 'ZIP · ca. 36 MB · Noten, Aufnahmen, Anleitungen',
-  'tutti_all': 'Tutti, alle Stimmen', 'pl_title': 'Alle meine Entchen', 'pl_play': 'Wiedergabe', 'pl_pause': 'Pause', 'pl_prev': 'Vorherige Aufnahme', 'pl_next': 'Nächste Aufnahme', 'pl_loop': 'Wiederholen', 'pl_vol': 'Lautstärke', 'pl_mute': 'Stumm', 'pl_seek': 'Position',
+  'tutti_all': 'Tutti, alle Stimmen', 'pl_title': 'Alle meine Entchen', 'pl_play': 'Wiedergabe', 'pl_pause': 'Pause', 'pl_loop': 'Wiederholen', 'pl_vol': 'Lautstärke', 'pl_mute': 'Stumm', 'pl_seek': 'Position',
   'pl_cover': 'Albumcover des Beispielpakets', 'mx_h': 'Mixer', 'mx_tempo': 'Tempo', 'mx_all': 'Gesamt', 'mx_p': 'Stimmen und Klavier einzeln ein- und ausschalten (antippen oder -klicken) und in der Lautstärke regeln, während es läuft.', 'mx_acc': 'Klavier', 'mx_on': 'an / aus',
   'rechte_h': 'Rechte & KI',
   'rechte_items': [
@@ -143,9 +140,6 @@ T = {
   'h1': 'Your voice. Your sheet music. Read, listen, and sing anywhere.',
   'lead': 'Documentation of an agentic AI music workflow and skill developed for and with Claude Code as a private code experiment. It is only a “proof of concept”. A choir score goes in, and an “AI-checked” ZIP comes out with 10 practice recordings for every voice.',
   'cta': 'See the example',
-  'pr_label': 'Or paste it straight into Claude Code:',
-  'pr_text': 'Install the choir-practice skill from ' + REL + 'choir-practice.skill. Then run the setup script with --check and tell me what is missing. Ask me whether to install the tested or the newest package versions before you install anything.',
-  'pr_copy': 'Copy prompt', 'pr_done': 'Copied',
   'ai': 'AI-generated. Use at your own risk.', 'foot_note': 'choir-practice – AI music workflow/skill for Claude.', 'foot_site': 'Home page',
   'facts': [('4', 'stages per voice'), ('2', 'sounds: choir and piano'), ('2', 'versions: normal and slow'), ('42', 'recordings in the example')],
   'inh_h': 'Contents', 'paket_h': 'Example', 'paket_p': 'The ZIP holds four folders. The voice ZIPs in 2_Practice are ready to hand out, their contents are listed last. Click a folder.',
@@ -191,7 +185,7 @@ T = {
    'choir': 'The other voices sit as in the choir: neighbours left and right a little quieter, voices further away quieter still.',
    'tutti': 'All voices equally loud.'}, 'own_lbl': 'Singing', 'acc_lbl': 'Piano',
   'dl_p': 'The result: practice recordings for every voice, guides and logs.', 'dl_btn': 'Download', 'dl_ttl': 'All My Ducklings', 'dl_meta': 'ZIP · ca. 36 MB · Scores, recordings, guides',
-  'tutti_all': 'Tutti, all voices', 'pl_title': 'All My Ducklings', 'pl_play': 'Play', 'pl_pause': 'Pause', 'pl_prev': 'Previous recording', 'pl_next': 'Next recording', 'pl_loop': 'Repeat', 'pl_vol': 'Volume', 'pl_mute': 'Mute', 'pl_seek': 'Position',
+  'tutti_all': 'Tutti, all voices', 'pl_title': 'All My Ducklings', 'pl_play': 'Play', 'pl_pause': 'Pause', 'pl_loop': 'Repeat', 'pl_vol': 'Volume', 'pl_mute': 'Mute', 'pl_seek': 'Position',
   'pl_cover': 'Album cover of the example pack', 'mx_h': 'Mixer', 'mx_tempo': 'Tempo', 'mx_all': 'Master', 'mx_p': 'Switch each voice and the piano on and off (tap or click) and set its level while it plays.', 'mx_acc': 'Piano', 'mx_on': 'on / off',
   'rechte_h': 'Rights & AI',
   'rechte_items': [
@@ -237,6 +231,9 @@ def fan_img(A, L, name, cls, alt):
     return f'<img class="{cls}" src="{A}img/example-{name}-{L}-480.png" srcset="{srcset}" sizes="(max-width:520px) 160px, 240px" alt="{esc(alt)}" width="240" height="339" loading="lazy">'
 
 # Renders one language version of the landing page; texts come from the dict T, structure and markup live here
+# tick marks at the snap points (10 %) of the mixer sliders; left = half a thumb + the free track length times the step
+SNAP = '<span class="tk" aria-hidden="true">' + ''.join(f'<i style="left:calc(var(--th)/2 + (100% - var(--th)) * {i / 10:g})"></i>' for i in range(1, 10)) + '</span>'
+
 def page(L):
     t = T[L]; A = t['assets']
     I = t['ids']
@@ -251,10 +248,10 @@ def page(L):
     steps = ''.join(f'<li><button type="button" data-step="{i}" aria-pressed="false"><span class="n">{i+1}</span><span class="s">{esc(s[0])}</span></button></li>' for i, s in enumerate(t['steps']))
     rights = ''.join(f'<article><h3>{esc(h)}</h3><p>{esc(p)}</p></article>' for h, p in t['rechte_items'])
     METER = '<span class="mxmeter" data-meter="{}" aria-hidden="true">' + '<i></i>' * 16 + '</span>'
-    mxmaster = f'<div class="mxr mxm"><span class="mxmlb">{esc(t["mx_all"])}</span>{METER.format("master")}<span class="mxf"><input type="range" id="mxmaster" class="mxv" min="0" max="100" value="100" aria-label="{esc(t["mx_all"])}"></span><span id="mxmp" class="mxp2 mono">100&nbsp;%</span></div>'
+    mxmaster = f'<div class="mxr mxm"><span class="mxmlb">{esc(t["mx_all"])}</span>{METER.format("master")}<span class="mxf"><input type="range" id="mxmaster" class="mxv" min="0" max="100" step="10" value="100"aria-label="{esc(t["mx_all"])}">{SNAP}</span><span id="mxmp" class="mxp2 mono">100&nbsp;%</span></div>'
     mixrows = ''.join(
         f'<div class="mxr"><button type="button" class="mxb" data-stem="{k}" data-pan="{pan}" aria-pressed="true" title="{esc(t["mx_on"])}">{esc(n)}</button>'
-        f'{METER.format(k)}<span class="mxf"><input type="range" class="mxv" min="0" max="100" value="100" aria-label="{esc(n)}"></span><span class="mxp2 mono">100&nbsp;%</span></div>'
+        f'{METER.format(k)}<span class="mxf"><input type="range" class="mxv" min="0" max="100" step="10" value="100" aria-label="{esc(n)}">{SNAP}</span><span class="mxp2 mono">100&nbsp;%</span></div>'
         for k, n, pan in [(v.lower(), vn, round(-0.6 + 1.2 * i / 3, 2)) for i, (v, vn) in enumerate(t['voices'].items())] + [('acc', t['mx_acc'], 0)])
     mxtempos = '<input type="range" id="mxtempo" class="mxtrack" min="80" max="100" step="10" value="100" aria-label="' + esc(t['mx_tempo']) + '"><div class="mxtk"><span>80&nbsp;%</span><span>90&nbsp;%</span><span>100&nbsp;%</span></div>'
     voices = ''.join(f'<button type="button" data-voice="{v}" aria-pressed="false">{esc(n)}</button>' for v, n in t['voices'].items())
@@ -325,22 +322,12 @@ def page(L):
  <nav id="nav" aria-label="{esc(t['menu_label'])}"><ul>{menu}<li class="navlang"><a href="{other_href}" hreflang="{'en' if L=='de' else 'de'}" lang="{'en' if L=='de' else 'de'}">{'English' if L=='de' else 'Deutsch'}</a></li></ul></nav>
 </header>
 <main>
-<figure class="banner"><div class="hw"><picture><source media="(prefers-color-scheme: dark)" srcset="{A}img/header-dark.png"><img src="{A}img/header.png" alt="{esc(t['og_alt'])}. {esc(t['duck'].replace(chr(10), ' '))} — {esc(t['duck_by'])}" width="1280" height="640" fetchpriority="high" decoding="async"></picture>
-<svg width="0" height="0" aria-hidden="true" style="position:absolute"><filter id="kr" x="-15%" y="-15%" width="130%" height="130%"><feTurbulence type="fractalNoise" baseFrequency=".13" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.9" xChannelSelector="R" yChannelSelector="G"/></filter><filter id="kb" x="-5%" y="-60%" width="110%" height="220%"><feTurbulence type="fractalNoise" baseFrequency=".05 .12" numOctaves="2" seed="9" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3.2" xChannelSelector="R" yChannelSelector="G"/></filter><filter id="kf" x="-8%" y="-15%" width="116%" height="130%"><feTurbulence type="fractalNoise" baseFrequency=".03" numOctaves="1" seed="2" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3.4" xChannelSelector="R" yChannelSelector="G"/></filter><filter id="krs" x="-15%" y="-15%" width="130%" height="130%"><feTurbulence type="fractalNoise" baseFrequency=".13" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="1.3" xChannelSelector="R" yChannelSelector="G"/></filter><filter id="kfs" x="-8%" y="-15%" width="116%" height="130%"><feTurbulence type="fractalNoise" baseFrequency=".03" numOctaves="1" seed="2" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2" xChannelSelector="R" yChannelSelector="G"/></filter></svg>
-<div class="ov" role="group" aria-label="{esc(t['pl_title'])}">
-<span class="fr" aria-hidden="true"></span>
-<div class="rw">
-     <button type="button" class="prev" aria-label="{esc(t['pl_prev'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M5.9 5.2Q6.3 11 6 18.9" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.9 5.4Q13 9.2 9.1 12.3Q13.4 14.6 18.6 18.7Q19.3 12 18.9 5.4Z" fill="currentColor" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round"/></svg></button>
-     <button type="button" class="pbtn" aria-label="{esc(t['pl_play'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path class="picon" d="M7.2 4.6Q13.5 8.4 19.6 12.1Q13.3 15.9 7.4 19.6Q7.8 12 7.2 4.6Z" fill="currentColor" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round"/></svg></button>
-     <button type="button" class="next" aria-label="{esc(t['pl_next'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M18 5.2Q17.7 11 18.1 18.9" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.2 5.4Q11 9.2 14.9 12.3Q10.6 14.6 5.4 18.7Q4.7 12 5.2 5.4Z" fill="currentColor" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round"/></svg></button>
-</div>
-</div></div>
+<figure class="banner"><picture><source media="(prefers-color-scheme: dark)" srcset="{A}img/header-dark.png"><img src="{A}img/header.png" alt="{esc(t['og_alt'])}. {esc(t['duck'].replace(chr(10), ' '))} — {esc(t['duck_by'])}" width="1280" height="640" fetchpriority="high" decoding="async"></picture>
 <figcaption class="duck">{esc(t['duck']).replace(chr(10), ' <br class="dbr">')}<span class="by">— {esc(t['duck_by'])}</span></figcaption></figure>
 <section id="start" class="hero">
  <h1>{h1_html}</h1>
  <p class="lead">{'<br><br>'.join(esc(x) for x in t['lead'].split(chr(10) * 2))}</p>
  <p class="cta"><a href="#{I['paket']}">{esc(t['cta'])}</a></p>
- <div class="prwrap"><p class="prlabel">{esc(t['pr_label'])}</p><div class="prbox"><code id="pr">{esc(t['pr_text'])}</code><button type="button" class="prcopy"aria-label="{esc(t['pr_copy'])}" title="{esc(t['pr_copy'])}" data-done="{esc(t['pr_done'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M5 15V5a1 1 0 0 1 1-1h10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></div></div>
  <dl class="facts">{facts}</dl>
 </section>
 <section id="{I['ablauf']}"><h2><span class="num">01</span>{esc(t['ablauf_h'])}</h2>
@@ -446,11 +433,6 @@ h3{margin:0 0 8px;font-size:var(--fs-m)}
 .input{margin:0 0 24px;color:var(--mute)}
 .intro{max-width:44em;margin:0 0 28px}.intro.wide{max-width:none}
 .cta{display:flex;flex-wrap:wrap;gap:12px 28px;margin:0 0 36px}
-.prwrap{margin:0 0 36px;max-width:44em}.prlabel{margin:0 0 8px;color:var(--mute);font-size:var(--fs-s)}
-.prbox{display:flex;align-items:flex-start;gap:12px;border:1.5px solid var(--line);padding:14px 16px}
-.prbox code{flex:1 1 auto;min-width:0;font-family:inherit;font-size:var(--fs-s);line-height:1.5;overflow-wrap:anywhere}
-.prcopy{flex:0 0 44px;width:44px;height:44px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg);padding:0;display:grid;place-items:center;cursor:pointer}
-.prcopy:focus-visible{outline:2px solid var(--link);outline-offset:2px}
 .facts{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:0;border-top:1.5px solid var(--line)}
 .facts div{padding:22px 12px 0 0}.facts dt{font-size:clamp(28px,4vw,44px);font-weight:700;line-height:1}.facts dd{margin:6px 0 0;color:var(--mute);font-size:var(--fs-s)}
 .aitag{display:flex;align-items:center;gap:10px;margin:0}
@@ -500,15 +482,7 @@ h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 .listen{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 56px;align-items:start}
 .pbox{display:grid;grid-template-columns:1fr;gap:20px;align-items:start;justify-self:start;width:100%;max-width:26em}
 .listen .art{width:100%;height:auto;display:block;border:1.5px solid var(--line)}
-.hw{position:relative;container-type:inline-size}
-.ov{--b:clamp(16px,3.4cqw,40px);position:absolute;left:50%;top:79%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:0;padding:calc(var(--b)*.2) calc(var(--b)*.35)}
-.ov .rw{position:relative;display:flex;gap:2px}
-.ov .fr{filter:url(#kf);position:absolute;inset:0;border:clamp(1.6px,.26cqw,2.6px) solid var(--fg);border-radius:calc(var(--b)*.32);pointer-events:none}   /* even border; the wobble comes from a low-frequency displacement, which bends the line without changing its thickness */
-.ov button{position:relative;width:var(--b);height:var(--b);border:0;background:transparent;color:var(--fg);display:grid;place-items:center;cursor:pointer;padding:0}
-.ov button svg{width:55%;height:55%}.ov button svg{filter:url(#kr)}.ov button:focus-visible{outline:2px solid var(--fg);outline-offset:-2px}
-@media (hover:hover){.pbtn:hover,.vbtn:hover,.ov button:hover,.ov button[aria-pressed=true]:hover{color:var(--link)}.vol:hover,#plseek:hover{accent-color:var(--link)}}
-.hw:not(.on) .ov .rw button:not(.pbtn){display:none}   /* before the first click or tap only the play button in its frame */
-@container (max-width:520px){.ov button svg{width:68%;height:68%;filter:url(#krs)}.ov .fr{filter:url(#kfs);border-width:1.2px}}   /* narrow image: the tub is too small for a second row; the volume stays in the player below */
+@media (hover:hover){.pbtn:hover,.vbtn:hover{color:var(--link)}.vol:hover,#plseek:hover{accent-color:var(--link)}}
 .pt{margin:0;font-weight:700}.ps{margin:2px 0 12px;color:var(--mute);font-size:var(--fs-s);min-height:1.55em}
 .pc{display:flex;align-items:center;gap:14px}
 .pbtn,.vbtn,.mxplay{flex:none;width:44px;height:44px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg);display:grid;place-items:center;cursor:pointer;padding:0}
@@ -520,7 +494,7 @@ h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 .nowplay{display:flex;align-items:center;gap:14px}.nowplay .ps{margin:0}
 .mix{margin:32px 0 0;padding:20px 0 0;border-top:1.5px solid var(--line)}.mxh{margin:0;font-weight:700;font-size:var(--fs-m)}.mxp{margin:4px 0 14px;color:var(--mute);font-size:var(--fs-s)}
 .mix #mxseek{flex:1;min-width:0;accent-color:var(--fg);height:24px;cursor:pointer}.mix #mxtime{flex:none;font-size:var(--fs-s);min-width:3.2em;text-align:right}
-.mxr{display:flex;align-items:center;gap:14px;margin-top:10px}
+.mxr{display:flex;align-items:center;gap:14px;margin-top:10px;--th:16px}
 .mxb{flex:none;width:6.5em;height:36px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg);font:inherit;font-size:var(--fs-s);cursor:pointer;padding:0 6px}
 .mxb[aria-pressed=true]{background:var(--fg);color:var(--bg)}
 .mxplay{width:calc(6.5*var(--fs-s));height:36px}
@@ -545,14 +519,22 @@ h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
  .mxmeter{display:flex;flex-direction:column-reverse;gap:2px;grid-column:1;grid-row:2;width:14px;height:150px;align-self:center}
  .mxf{grid-column:2;grid-row:2;flex:none;width:auto;height:150px}
  .mxf .mxv{position:absolute;left:50%;top:50%;width:150px;height:28px;transform:translate(-50%,-50%) rotate(-90deg)}
+ .mxf .tk{left:50%;top:50%;right:auto;bottom:auto;width:150px;height:28px;transform:translate(-50%,-50%) rotate(-90deg)}
  .mxr .mxp2,.mxm .mxp2{grid-column:1/-1;text-align:center;min-width:0}
  .mxm .mxmlb{width:100%}   /* as wide as the channels */
 }
 .mxmlb{flex:none;width:calc(6.5*var(--fs-s));height:36px;display:grid;place-items:center;box-sizing:border-box;border:1.5px solid var(--line);background:var(--fg);color:var(--bg);font-size:var(--fs-s);font-weight:700}   /* always on, so filled like a pressed voice */   /* same size as the voice buttons below */
-.mxv{flex:1;min-width:0;accent-color:var(--fg);height:24px;cursor:pointer}.mxr .mxp2{flex:none;font-size:var(--fs-s);min-width:3.2em;text-align:right}
+.mxv{flex:1;min-width:0;height:24px;margin:0;cursor:pointer;-webkit-appearance:none;appearance:none;background:transparent}
+.mxv::-webkit-slider-runnable-track{height:2px;background:var(--fg)}
+.mxv::-webkit-slider-thumb{-webkit-appearance:none;width:var(--th);height:var(--th);margin-top:-7px;border:0;border-radius:50%;background:var(--fg)}
+.mxv::-moz-range-track{height:2px;background:var(--fg)}
+.mxv::-moz-range-thumb{width:var(--th);height:var(--th);border:0;border-radius:50%;background:var(--fg)}
+.tk{position:absolute;inset:0;pointer-events:none}
+.tk i{position:absolute;top:calc(50% - 4px);width:1px;height:8px;margin-left:-.5px;background:var(--fg)}
+.mxr .mxp2{flex:none;font-size:var(--fs-s);min-width:3.2em;text-align:right}
 .mxr.off .mxv,.mxr.off .mxp2{opacity:.4}
 .mxb:focus-visible,.mxv:focus-visible,#mxseek:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
-@media (hover:hover){.mxb:hover,#mxplay:hover{color:var(--link)}.mxb[aria-pressed=true]:hover{background:var(--link);color:var(--bg);border-color:var(--link)}.mxv:hover,#mxseek:hover{accent-color:var(--link)}}
+@media (hover:hover){.mxb:hover,#mxplay:hover{color:var(--link)}.mxb[aria-pressed=true]:hover{background:var(--link);color:var(--bg);border-color:var(--link)}#mxseek:hover{accent-color:var(--link)}.mxv:hover::-webkit-slider-thumb,.mxv:hover::-moz-range-thumb{background:var(--link)}}
 .groups details{border-top:1.5px solid var(--line)}.groups details:last-child{border-bottom:1.5px solid var(--line)}
 .groups summary{list-style:none;cursor:pointer;padding:8px 28px 8px 0;position:relative}.groups summary::-webkit-details-marker{display:none}
 .groups summary::after{content:"+";position:absolute;right:4px;top:4px;font-size:24px;line-height:1.3}.groups details[open] summary::after{content:"\2212"}
@@ -713,14 +695,6 @@ function setVol(v){v=Math.max(0,Math.min(1,v));A.volume=v;$$('.vp').forEach(func
 vols.forEach(function(r){r.addEventListener('input',function(){lastVol=+r.value/100||lastVol;setVol(+r.value/100)})});
 mutes.forEach(function(m){m.addEventListener('click',function(){if(A.volume>0){lastVol=A.volume;setVol(0)}else setVol(lastVol||.5)})});
 setVol(.5);   // starts at half volume
-// remote control on the cover (shown while the pointer is over it): previous / next recording of the playlist, repeat
-function step(d){var all=$$('.trk button'),i=0;all.forEach(function(b,k){if(b.getAttribute('aria-pressed')==='true')i=k});all[(i+d+all.length)%all.length].click()}
-$('.ov .prev').addEventListener('click',function(){step(-1)});$('.ov .next').addEventListener('click',function(){step(1)});
-// first touch on the header image: the remote grows from the single play button to the full set (and the recording starts); with a mouse nothing changes
-var hw=$('.hw');
-function activate(){hw.classList.add('on')}
-$('.ov .pbtn').addEventListener('click',activate);
-hw.addEventListener('click',function(e){if(hw.classList.contains('on'))return;activate();if(!e.target.closest('.ov')&&A.paused)A.play().catch(function(){})});
 A.addEventListener('play',ui);A.addEventListener('pause',ui);
 // sound waves pulse with the rhythm of the recording: Web Audio analyser on the audio element; every note onset (level jumps more than 2.5 dB above its slow average) switches the three arcs per side on, they then go off again from the outside in; while it sounds the inner arc stays on (always full red, no fading).
 // Onset rate on the example recordings: 2 to 4 per second. Without Web Audio, with reduced motion or if the context cannot run, the fixed animation stays
@@ -835,13 +809,10 @@ var tr=$('#mxtempo');if(tr)tr.addEventListener('input',function(){setTempo(tr.va
 var mv=$('#mxmaster'),mp=$('#mxmp');if(mv)mv.addEventListener('input',function(){var v=+mv.value/100;mp.innerHTML=mv.value+'&nbsp;%';if(mgain)mgain.gain.setTargetAtTime(v*v,cx.currentTime,.02)});   // master: scales every stem and the room together; the limiter at the output still catches peaks
 // the two never play together: starting the mixer stops the recordings; the recordings only start again when the visitor asks for them
 // (on iPhones the system may resume an interrupted audio element by itself when the mixer pauses: such a start without a click on the recordings is stopped)
-document.addEventListener('click',function(e){var t=e.target;if(t.closest&&!t.closest('#mix')&&t.closest('button,.hw,#player'))asked=Date.now()},true);
+document.addEventListener('click',function(e){var t=e.target;if(t.closest&&!t.closest('#mix')&&t.closest('button,#player'))asked=Date.now()},true);
 A.addEventListener('play',function(){if(mixOwns&&Date.now()-asked>1500){A.pause();return}mixOwns=false;pause()});
 document.addEventListener('visibilitychange',function(){if(!document.hidden&&playing)tick()});
 })();
-(function(){var b=document.querySelector('.prcopy');if(!b)return;var ICO=b.innerHTML,OK='<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';var code=document.getElementById('pr');
-function done(){b.innerHTML=OK;b.title=b.getAttribute('data-done');setTimeout(function(){b.innerHTML=ICO;b.title=b.getAttribute('aria-label')},1600)}
-b.addEventListener('click',function(){if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(code.textContent).then(done,function(){})}else{var r=document.createRange();r.selectNodeContents(code);var s=window.getSelection();s.removeAllRanges();s.addRange(r)}})})();
 window.addEventListener('resize',function(){clearTimeout(window.__rz);window.__rz=setTimeout(function(){draw();fitLead()},150)});
 })();
 '''
