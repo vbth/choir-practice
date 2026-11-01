@@ -3,6 +3,8 @@
 All notable changes to the skill. Newest first. Versions follow [SemVer](https://semver.org/); every release is a git tag `vX.Y.Z` with a GitHub release that carries the `.skill` file.
 
 ## Unreleased
+
+## 1.2.0 – 2026-11-01
 - Build and release check `check_version.py`: VERSION, newest CHANGELOG section, session handoff, version in the folder name and VERSION inside the built `.skill` must agree; runs in `release.py`, `save_skill_version.py`, the Checks workflow and the Release workflow (together with the tag)
 - Scripts: short English comments on the non-obvious parts of the build, audio, layout and website scripts (no change in behaviour)
 - Headline "Deine Chorstimme. Deine Noten. Überall lesen, hören und singen." (en: "Your voice. Your sheet music. Read, listen, and sing anywhere.") on the website (H1 and page title) and in the READMEs
