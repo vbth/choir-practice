@@ -370,7 +370,7 @@ def page(L):
    {fan_img(A, L, 'page-2', 'p2', t['alt_page2'])}
    {fan_img(A, L, 'page-1', 'p1', t['alt_page1'])}
   </div></figure>
-  <div class="dl"><p class="ttl">{esc(t['dl_ttl'])}</p><p>{esc(t['dl_p'])}</p><p class="meta">{esc(t['dl_meta'])}</p><p class="dlb"><a href="{REL}{ZIP_OF[L]}" download>{esc(t['dl_btn'])}<span aria-hidden="true">↓</span></a></p></div>
+  <div class="dl"><p class="ttl">{esc(t['dl_ttl'])}</p><p>{esc(t['dl_p'])}</p><p class="meta">{esc(t['dl_meta'])}</p><p class="dlb"><a href="{REL}{ZIP_OF[L]}" download>{esc(t['dl_btn'])}</a></p></div>
  </div>
  <h3 class="sub">{esc(t['inh_h'])}</h3>
  <p class="intro">{esc(t['paket_p'])}</p>
@@ -463,8 +463,8 @@ h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 .fan .p0{transform:translateX(-50%) rotate(-15deg)}.fan .p1{transform:translateX(-50%) rotate(0)}.fan .p2{transform:translateX(-50%) rotate(15deg)}
 
 .dl .ttl{font-weight:700;font-size:var(--fs-m);margin:0 0 6px}.dl .meta{font-size:var(--fs-s);color:var(--mute);margin:0 0 20px}
-.dlb a{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 22px}.dl{min-width:0}
-@media (max-width:900px){.exrow{--pop:130px;--pw:200px;grid-template-columns:1fr;gap:8px;padding:24px 20px;margin-top:calc(var(--pop) + 44px)}.fan{width:min(100%,calc(var(--pw)*1.8));margin:calc(var(--pop)*-1) auto 0}}
+.dlb a{padding:16px 22px}.dl{min-width:0}   /* desktop: the button is as wide as its text, no arrow */
+@media (max-width:900px){.dlb a{display:block;text-align:center}.exrow{--pop:130px;--pw:200px;grid-template-columns:1fr;gap:8px;padding:24px 20px;margin-top:calc(var(--pop) + 44px)}.fan{width:min(100%,calc(var(--pw)*1.8));margin:calc(var(--pop)*-1) auto 0}}
 @media (max-width:520px){.exrow{--pw:190px}}
 .mixer{display:grid;gap:28px;max-width:760px;margin:56px auto 0}
 .ctl2{display:flex;flex-wrap:wrap;gap:16px 32px}.ctl2 .ctl{flex:1 1 14em}.ctl2 .ctl[hidden]{display:none}
