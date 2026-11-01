@@ -345,7 +345,7 @@ def page(L):
     <p class="pt">{esc(t['pl_title'])}</p><p class="ps" id="plname" aria-live="polite"></p>
     <div class="pc"><button type="button" class="pbtn" aria-label="{esc(t['pl_play'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path class="picon" data-c d="M7 4l13 8-13 8z" fill="currentColor"/></svg></button>
      <input type="range" id="plseek" min="0" max="1000" value="0" aria-label="{esc(t['pl_seek'])}"><span id="pltime" class="mono">0:00</span></div>
-    <div class="pc pv"><button type="button" class="vbtn mute" aria-pressed="false" aria-label="{esc(t['pl_mute'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3z" fill="currentColor"/><path class="w" d="M15.5 8.5a5 5 0 010 7M18 6a8.5 8.5 0 010 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path class="x" d="M15 9l6 6M21 9l-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button><input type="range" class="vol" min="0" max="100" value="50" aria-label="{esc(t['pl_vol'])}"></div>
+    <div class="pc pv"><button type="button" class="vbtn mute" aria-pressed="false" aria-label="{esc(t['pl_mute'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3z" fill="currentColor"/><path class="w" d="M15.5 8.5a5 5 0 010 7M18 6a8.5 8.5 0 010 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path class="x" d="M15 9l6 6M21 9l-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button><input type="range" class="vol" min="0" max="100" value="50" aria-label="{esc(t['pl_vol'])}"><span class="mono vp">50&nbsp;%</span></div>
    </div>
   </div>
   <div class="groups">{playlist(t)}</div>
@@ -491,7 +491,7 @@ h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 #plseek{flex:1;min-width:0;accent-color:var(--fg);height:24px;cursor:pointer}
 .vol{flex:1;min-width:0;accent-color:var(--fg);height:24px;cursor:pointer}.pv{margin-top:10px}
 .mute .x{display:none}.mute[aria-pressed=true] .x{display:inline}.mute[aria-pressed=true] .w{display:none}
-#pltime{flex:none;font-size:var(--fs-s);min-width:3.2em;text-align:right}
+#pltime,.vp{flex:none;font-size:var(--fs-s);min-width:3.2em;text-align:right}
 .nowplay{display:flex;align-items:center;gap:14px}.nowplay .ps{margin:0}
 .groups details{border-top:1.5px solid var(--line)}.groups details:last-child{border-bottom:1.5px solid var(--line)}
 .groups summary{list-style:none;cursor:pointer;padding:8px 28px 8px 0;position:relative}.groups summary::-webkit-details-marker{display:none}
@@ -638,7 +638,7 @@ $$('.trk button').forEach(function(b){b.addEventListener('click',function(){chan
 $$('.pbtn').forEach(function(b){b.addEventListener('click',function(){if(A.paused){A.play().catch(function(){})}else{A.pause()}})});
 // volume: the slider and the speaker button exist twice (remote on the header image, player); both follow one value (no effect on iPhones: the system volume rules there)
 var vols=$$('.vol'),mutes=$$('.mute'),lastVol=.5;
-function setVol(v){v=Math.max(0,Math.min(1,v));A.volume=v;vols.forEach(function(r){r.value=Math.round(v*100)});mutes.forEach(function(m){m.setAttribute('aria-pressed',v===0)})}
+function setVol(v){v=Math.max(0,Math.min(1,v));A.volume=v;$$('.vp').forEach(function(e){e.textContent=Math.round(v*100)+'\u00a0%'});vols.forEach(function(r){r.value=Math.round(v*100)});mutes.forEach(function(m){m.setAttribute('aria-pressed',v===0)})}
 vols.forEach(function(r){r.addEventListener('input',function(){lastVol=+r.value/100||lastVol;setVol(+r.value/100)})});
 mutes.forEach(function(m){m.addEventListener('click',function(){if(A.volume>0){lastVol=A.volume;setVol(0)}else setVol(lastVol||.5)})});
 setVol(.5);   // starts at half volume

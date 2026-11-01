@@ -99,7 +99,7 @@ h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 #plseek{flex:1;min-width:0;accent-color:var(--fg);height:24px;cursor:pointer}
 .vol{flex:1;min-width:0;accent-color:var(--fg);height:24px;cursor:pointer}.pv{margin-top:10px}
 .mute .x{display:none}.mute[aria-pressed=true] .x{display:inline}.mute[aria-pressed=true] .w{display:none}
-#pltime{flex:none;font-size:var(--fs-s);min-width:3.2em;text-align:right}
+#pltime,.vp{flex:none;font-size:var(--fs-s);min-width:3.2em;text-align:right}
 .nowplay{display:flex;align-items:center;gap:14px}.nowplay .ps{margin:0}
 .groups details{border-top:1.5px solid var(--line)}.groups details:last-child{border-bottom:1.5px solid var(--line)}
 .groups summary{list-style:none;cursor:pointer;padding:8px 28px 8px 0;position:relative}.groups summary::-webkit-details-marker{display:none}
