@@ -126,6 +126,7 @@ T = {
    ('KI-Kennzeichnung', 'Alles, was der Skill erzeugt, ist als KI-Inhalt gekennzeichnet, sowohl mit dem EU-Label für KI-generierte Inhalte als auch im Text und in den Metadaten der Dokumente.'),
   ],
   'lic_h': 'Lizenzen', 'lic_link': 'PolyForm Noncommercial License 1.0.0', 'lic_p': ', frei für nichtkommerzielle Nutzung.',
+  'duck': '„Dienstagabend, er übt für seinen Chor … und ich darf es wieder ausbaden!“ – The duck',
   'lic_third_link': 'Komponenten von Drittanbietern', 'foot_profile': 'GitHub-Repository vbth/choir-practice', 'private': 'privates Projekt', 'og_alt': 'Ein Mann mit Kopfhörern steht in einer alten Badewanne und singt vom Notenblatt, neben ihm schwimmt eine Quietscheente, rote Noten schweben im Raum',
   'alt_cover': 'Deckblatt des Beispielpakets', 'alt_page1': 'Erste Notenseite des Beispielpakets', 'alt_page2': 'Zweite Notenseite des Beispielpakets', 'alt_ai': 'EU-Label AI',
   'ai_label': 'AI', 'top': 'Nach oben',
@@ -192,6 +193,7 @@ T = {
    ('AI labelling', 'Everything the skill creates is labelled as AI content, both with the EU label for AI-generated content and in the text and metadata of the documents.'),
   ],
   'lic_h': 'Licences', 'lic_link': 'PolyForm Noncommercial License 1.0.0', 'lic_p': ', free for non-commercial use.',
+  'duck': '“Tuesday night, he’s rehearsing for his choir … and I’m the one who has to face the music.” – The duck',
   'lic_third_link': 'Third-party components', 'foot_profile': 'GitHub repository vbth/choir-practice', 'private': 'private project', 'og_alt': 'A man with headphones stands in an old bathtub and sings from a sheet of music, a rubber duck floats beside him, red notes drift through the room',
   'alt_cover': 'Title page of the example pack', 'alt_page1': 'First score page of the example pack', 'alt_page2': 'Second score page of the example pack', 'alt_ai': 'EU label AI',
   'ai_label': 'AI', 'top': 'Back to top',
@@ -311,7 +313,7 @@ def page(L):
 </header>
 <main>
 <figure class="banner"><picture><source media="(prefers-color-scheme: dark)" srcset="{A}img/header-dark.png"><img src="{A}img/header.png" alt="{esc(t['og_alt'])}" width="1280" height="640" fetchpriority="high" decoding="async"></picture>
-</figure>
+<figcaption class="duck">{esc(t['duck'])}</figcaption></figure>
 <section id="start" class="hero">
  <h1>{h1_html}</h1>
  <p class="lead">{'<br><br>'.join(esc(x) for x in t['lead'].split(chr(10) * 2))}</p>
@@ -438,6 +440,7 @@ ul.note{padding-left:18px}
 .panel h3{display:flex;gap:12px;align-items:baseline}.panel .gate{margin:10px 0 0;color:var(--mute)}.panel .who{font-weight:400;font-size:var(--fs-s);color:var(--link);letter-spacing:.04em;text-transform:uppercase;font-family:"IBM Plex Sans Condensed",sans-serif}
 .panel p{margin:0}
 .banner{margin:72px 0 0}.banner img{display:block;width:100%;height:auto}
+.banner .duck{margin:10px 0 0;text-align:center;font-style:italic;font-size:var(--fs-s)}
 .exrow{display:grid;grid-template-columns:minmax(0,420px) minmax(0,1fr);gap:32px 64px;align-items:center;margin:0 0 72px}
 h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 .dl p{margin:0 0 20px;max-width:30em}.dl .dlb{margin:0}.steps+.dlb{margin:24px 0 16px}.dlb a{display:inline-block;border:1.5px solid var(--line);padding:12px 20px;font-weight:400;color:var(--fg);text-decoration:none}.dlb a:hover,.dlb a:focus-visible{background:var(--fg);color:var(--bg)}
