@@ -1,6 +1,6 @@
 # choir-practice Skill
 
-> *„Dienstagabend, er übt für seinen Chor … und ich darf es wieder ausbaden!“* – The duck
+> *„Dienstagabend, er übt für seinen Chor … und ich darf es wieder ausbaden!“* – Die Ente eines Tenors
 
 [English](README.md) | Deutsch
 
