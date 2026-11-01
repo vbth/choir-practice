@@ -3,6 +3,7 @@
 All notable changes to the skill. Newest first. Versions follow [SemVer](https://semver.org/); every release is a git tag `vX.Y.Z` with a GitHub release that carries the `.skill` file.
 
 ## Unreleased
+- Wordmark and titles: "Choir Practice Skill" (website next to the logo, page title, link preview, READMEs); skill name, file names, repository and footers keep "choir-practice"
 
 ## 1.2.0 – 2026-11-01
 - Website and READMEs: quote from "Die Ente eines Tenors" / "A tenor's duck" under the header image (italic caption on the website, block quote in the READMEs) and in its alt text (de: "Sonntagmorgen, er übt wieder für seinen Chor … und ich darf es ausbaden!", en: "Sunday morning, he's rehearsing for his choir … and I'm the one who has to face the music.")

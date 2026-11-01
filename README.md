@@ -1,6 +1,6 @@
 <p><a href="https://vbth.github.io/choir-practice/en/"><img src="docs/img/logo.png" alt="choir-practice logo" width="72" height="72"></a></p>
 
-# choir-practice Skill
+# Choir Practice Skill
 
 <p><picture><source media="(prefers-color-scheme: dark)" srcset="docs/img/header-dark.png"><img src="docs/img/header.png" alt="A man with headphones stands in an old bathtub and sings from a sheet of music, a rubber duck floats beside him. “Sunday morning, he’s rehearsing for his choir … and I’m the one who has to face the music.” – A tenor’s duck" width="100%"></picture></p>
 
