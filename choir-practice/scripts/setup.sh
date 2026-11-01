@@ -31,7 +31,6 @@ PY
 
 need=()
 command -v fluidsynth >/dev/null || need+=(fluidsynth)
-[ -f /usr/share/sounds/sf2/FluidR3_GM.sf2 ] || need+=(fluid-soundfont-gm)
 command -v ffmpeg >/dev/null || need+=(ffmpeg)
 command -v pdftoppm >/dev/null || need+=(poppler-utils)
 [ -f /usr/share/fonts/truetype/dejavu/DejaVuSans.ttf ] || need+=(fonts-dejavu-core)
@@ -43,8 +42,11 @@ if [ "$MODE" = "--check" ]; then
 else
   if [ ${#need[@]} -gt 0 ]; then
     echo "apt: ${need[*]}"
-    ($SUDO apt-get install -y -q "${need[@]}" >/dev/null 2>&1) || ($SUDO apt-get update -q >/dev/null 2>&1 && $SUDO apt-get install -y -q "${need[@]}" >/dev/null 2>&1) || \
-      echo "apt install failed (no apt, no rights or no network) – see the report below"
+    $SUDO dpkg --configure -a >/dev/null 2>&1   # an interrupted earlier install blocks every new one
+    log=$(mktemp)
+    ($SUDO apt-get install -y -q "${need[@]}" >"$log" 2>&1) || ($SUDO apt-get update -q >"$log" 2>&1 && $SUDO apt-get install -y -q "${need[@]}" >>"$log" 2>&1) || {
+      echo "apt install failed (no apt, no rights or no network) – last lines:"; tail -n 4 "$log"; }
+    rm -f "$log"
   fi
   if [ "$MODE" = "--stable" ]; then
     pip install -q --break-system-packages -r "$REQ" 2>/dev/null || pip install -q -r "$REQ" || \
