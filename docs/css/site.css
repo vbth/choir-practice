@@ -109,6 +109,9 @@ h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 .mxb[aria-pressed=true]{background:var(--fg);color:var(--bg)}
 .mxplay{width:calc(6.5*var(--fs-s));height:36px}
 .mxt{margin-top:18px}
+.mxtrack{display:block;width:100%;accent-color:var(--fg);height:28px;margin:6px 0 0;cursor:pointer}
+.mxtk{display:flex;justify-content:space-between;padding:0 10px;font-size:var(--fs-s);color:var(--mute)}
+.mxtrack:focus-visible{outline:2px solid var(--fg);outline-offset:4px}
 /* the mixer as a console: on wide screens the channels stand side by side with a level meter and a vertical fader; on phones they stay rows */
 .mxbank{display:flex;flex-direction:column}
 .mxm{order:-1}

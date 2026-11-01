@@ -250,7 +250,7 @@ def page(L):
         f'<div class="mxr"><button type="button" class="mxb" data-stem="{k}" data-pan="{pan}" aria-pressed="true" title="{esc(t["mx_on"])}">{esc(n)}</button>'
         f'{METER.format(k)}<span class="mxf"><input type="range" class="mxv" min="0" max="100" value="100" aria-label="{esc(n)}"></span><span class="mxp2 mono">100&nbsp;%</span></div>'
         for k, n, pan in [(v.lower(), vn, round(-0.6 + 1.2 * i / 3, 2)) for i, (v, vn) in enumerate(t['voices'].items())] + [('acc', t['mx_acc'], 0)])
-    mxtempos = ''.join(f'<button type="button" data-mxt="{p}" aria-pressed="{str(p == 100).lower()}">{p}&nbsp;%</button>' for p in (80, 90, 100))
+    mxtempos = '<input type="range" id="mxtempo" class="mxtrack" min="80" max="100" step="10" value="100" aria-label="' + esc(t['mx_tempo']) + '"><div class="mxtk"><span>80&nbsp;%</span><span>90&nbsp;%</span><span>100&nbsp;%</span></div>'
     voices = ''.join(f'<button type="button" data-voice="{v}" aria-pressed="false">{esc(n)}</button>' for v, n in t['voices'].items())
     stages = ''.join(f'<button type="button" data-stage="{k}" aria-pressed="false">{esc(n)}</button>' for k, n in t['stages'].items())
     sounds = ''.join(f'<button type="button" data-sound="{k}" aria-pressed="false">{esc(n)}</button>' for k, n in t['sounds'].items())
@@ -372,7 +372,7 @@ def page(L):
   <div class="pc"><button type="button" class="mxplay" id="mxplay" aria-label="{esc(t['pl_play'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path id="mxicon" d="M7 4l13 8-13 8z" fill="currentColor"/></svg></button>
    <input type="range" id="mxseek" min="0" max="1000" value="0" aria-label="{esc(t['pl_seek'])}"><span id="mxtime" class="mono">0:00</span></div>
 <div class="mxbank">{mxmaster}{mixrows}</div>
-  <div class="ctl mxt"><span class="lbl" id="mxtl">{esc(t['mx_tempo'])}</span><div class="seg" id="mxtempos" role="group" aria-labelledby="mxtl">{mxtempos}</div></div>
+  <div class="ctl mxt"><span class="lbl" id="mxtl">{esc(t['mx_tempo'])}</span><div id="mxtempos">{mxtempos}</div></div>
   </div>
 </section>
 <section id="{I['paket']}"><h2><span class="num">03</span>{esc(t['paket_h'])}</h2>
@@ -513,6 +513,9 @@ h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 .mxb[aria-pressed=true]{background:var(--fg);color:var(--bg)}
 .mxplay{width:calc(6.5*var(--fs-s));height:36px}
 .mxt{margin-top:18px}
+.mxtrack{display:block;width:100%;accent-color:var(--fg);height:28px;margin:6px 0 0;cursor:pointer}
+.mxtk{display:flex;justify-content:space-between;padding:0 10px;font-size:var(--fs-s);color:var(--mute)}
+.mxtrack:focus-visible{outline:2px solid var(--fg);outline-offset:4px}
 /* the mixer as a console: on wide screens the channels stand side by side with a level meter and a vertical fader; on phones they stay rows */
 .mxbank{display:flex;flex-direction:column}
 .mxm{order:-1}
@@ -790,7 +793,7 @@ function start(from){
 }
 function pause(){if(!playing)return;off=pos();playing=false;stopSrc();setIcon(false);cancelAnimationFrame(raf);tick()}
 function finish(){playing=false;stopSrc();off=0;setIcon(false);cancelAnimationFrame(raf);tick()}
-function mark(){$$('[data-mxt]',mx).forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-mxt')===tp)})}
+function mark(){var tr=$('#mxtempo');if(tr){tr.value=tp;tr.setAttribute('aria-valuetext',tp+' %')}}   // the slider snaps to 80, 90 and 100
 function setTempo(t){
  if(t===tp)return;
  var p=pos(),old=dur(),was=playing;
@@ -815,7 +818,7 @@ rows().forEach(function(r){var b=$('.mxb',r),v=$('.mxv',r),pc=$('.mxp2',r);
  function upd(){pc.innerHTML=v.value+'&nbsp;%';r.classList.toggle('off',b.getAttribute('aria-pressed')!=='true');apply()}
  b.addEventListener('click',function(){b.setAttribute('aria-pressed',b.getAttribute('aria-pressed')!=='true');upd()});
  v.addEventListener('input',upd)});
-$$('[data-mxt]',mx).forEach(function(b){b.addEventListener('click',function(){setTempo(b.getAttribute('data-mxt'))})});
+var tr=$('#mxtempo');if(tr)tr.addEventListener('input',function(){setTempo(tr.value)});
 var mv=$('#mxmaster'),mp=$('#mxmp');if(mv)mv.addEventListener('input',function(){var v=+mv.value/100;mp.innerHTML=mv.value+'&nbsp;%';if(mgain)mgain.gain.setTargetAtTime(v*v,cx.currentTime,.02)});   // master: scales every stem and the room together; the limiter at the output still catches peaks
 // the two never play together: starting the mixer stops the recordings; the recordings only start again when the visitor asks for them
 // (on iPhones the system may resume an interrupted audio element by itself when the mixer pauses: such a start without a click on the recordings is stopped)

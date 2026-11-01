@@ -216,7 +216,7 @@ function start(from){
 }
 function pause(){if(!playing)return;off=pos();playing=false;stopSrc();setIcon(false);cancelAnimationFrame(raf);tick()}
 function finish(){playing=false;stopSrc();off=0;setIcon(false);cancelAnimationFrame(raf);tick()}
-function mark(){$$('[data-mxt]',mx).forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-mxt')===tp)})}
+function mark(){var tr=$('#mxtempo');if(tr){tr.value=tp;tr.setAttribute('aria-valuetext',tp+' %')}}   // the slider snaps to 80, 90 and 100
 function setTempo(t){
  if(t===tp)return;
  var p=pos(),old=dur(),was=playing;
@@ -241,7 +241,7 @@ rows().forEach(function(r){var b=$('.mxb',r),v=$('.mxv',r),pc=$('.mxp2',r);
  function upd(){pc.innerHTML=v.value+'&nbsp;%';r.classList.toggle('off',b.getAttribute('aria-pressed')!=='true');apply()}
  b.addEventListener('click',function(){b.setAttribute('aria-pressed',b.getAttribute('aria-pressed')!=='true');upd()});
  v.addEventListener('input',upd)});
-$$('[data-mxt]',mx).forEach(function(b){b.addEventListener('click',function(){setTempo(b.getAttribute('data-mxt'))})});
+var tr=$('#mxtempo');if(tr)tr.addEventListener('input',function(){setTempo(tr.value)});
 var mv=$('#mxmaster'),mp=$('#mxmp');if(mv)mv.addEventListener('input',function(){var v=+mv.value/100;mp.innerHTML=mv.value+'&nbsp;%';if(mgain)mgain.gain.setTargetAtTime(v*v,cx.currentTime,.02)});   // master: scales every stem and the room together; the limiter at the output still catches peaks
 // the two never play together: starting the mixer stops the recordings; the recordings only start again when the visitor asks for them
 // (on iPhones the system may resume an interrupted audio element by itself when the mixer pauses: such a start without a click on the recordings is stopped)
