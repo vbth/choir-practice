@@ -440,7 +440,8 @@ ul.note{padding-left:18px}
 .panel h3{display:flex;gap:12px;align-items:baseline}.panel .gate{margin:10px 0 0;color:var(--mute)}.panel .who{font-weight:400;font-size:var(--fs-s);color:var(--link);letter-spacing:.04em;text-transform:uppercase;font-family:"IBM Plex Sans Condensed",sans-serif}
 .panel p{margin:0}
 .banner{margin:72px 0 0}.banner img{display:block;width:100%;height:auto}
-.banner .duck{margin:10px 0 0;text-align:center;font-style:italic;font-size:var(--fs-s)}
+.banner .duck{max-width:24em;margin:18px auto 0;text-align:center;font-style:italic;font-size:var(--fs-m);line-height:1.4}
+@media (max-width:600px){.banner .duck{font-size:var(--fs);margin-top:14px}}
 .exrow{display:grid;grid-template-columns:minmax(0,420px) minmax(0,1fr);gap:32px 64px;align-items:center;margin:0 0 72px}
 h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 .dl p{margin:0 0 20px;max-width:30em}.dl .dlb{margin:0}.steps+.dlb{margin:24px 0 16px}.dlb a{display:inline-block;border:1.5px solid var(--line);padding:12px 20px;font-weight:400;color:var(--fg);text-decoration:none}.dlb a:hover,.dlb a:focus-visible{background:var(--fg);color:var(--bg)}
