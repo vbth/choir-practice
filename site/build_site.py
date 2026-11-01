@@ -312,7 +312,7 @@ def page(L):
  <nav id="nav" aria-label="{esc(t['menu_label'])}"><ul>{menu}<li class="navlang"><a href="{other_href}" hreflang="{'en' if L=='de' else 'de'}" lang="{'en' if L=='de' else 'de'}">{'English' if L=='de' else 'Deutsch'}</a></li></ul></nav>
 </header>
 <main>
-<figure class="banner"><picture><source media="(prefers-color-scheme: dark)" srcset="{A}img/header-dark.png"><img src="{A}img/header.png" alt="{esc(t['og_alt'])}" width="1280" height="640" fetchpriority="high" decoding="async"></picture>
+<figure class="banner"><picture><source media="(prefers-color-scheme: dark)" srcset="{A}img/header-dark.png"><img src="{A}img/header.png" alt="{esc(t['og_alt'])}. {esc(t['duck'])}" width="1280" height="640" fetchpriority="high" decoding="async"></picture>
 <figcaption class="duck">{esc(t['duck'])}</figcaption></figure>
 <section id="start" class="hero">
  <h1>{h1_html}</h1>

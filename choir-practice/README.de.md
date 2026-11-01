@@ -1,5 +1,7 @@
 # choir-practice Skill
 
+> *„Dienstagabend, er übt für seinen Chor … und ich darf es wieder ausbaden!“* – The duck
+
 [English](README.md) | Deutsch
 
 ## Deine Chorstimme. Deine Noten.<br>Überall lesen, hören und singen.

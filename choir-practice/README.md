@@ -1,5 +1,7 @@
 # choir-practice Skill
 
+> *“Tuesday night, he’s rehearsing for his choir … and I’m the one who has to face the music.”* – The duck
+
 English | [Deutsch](README.de.md)
 
 ## Your voice. Your sheet music.<br>Read, listen, and sing anywhere.
