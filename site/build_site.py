@@ -119,7 +119,7 @@ T = {
    'tutti': 'Alle Stimmen gleich laut.'}, 'own_lbl': 'Gesang', 'acc_lbl': 'Klavier',
   'dl_p': 'Das Ergebnis: Aufnahmen zum Üben für jede Stimme, Anleitungen und Protokolle.', 'dl_btn': 'Download', 'dl_ttl': 'Alle meine Entchen', 'dl_meta': 'ZIP · ca. 36 MB · Noten, Aufnahmen, Anleitungen',
   'tutti_all': 'Tutti, alle Stimmen', 'pl_title': 'Alle meine Entchen', 'pl_play': 'Wiedergabe', 'pl_pause': 'Pause', 'pl_prev': 'Vorherige Aufnahme', 'pl_next': 'Nächste Aufnahme', 'pl_loop': 'Wiederholen', 'pl_vol': 'Lautstärke', 'pl_mute': 'Stumm', 'pl_seek': 'Position',
-  'pl_cover': 'Albumcover des Beispielpakets', 'mx_h': 'Mixer', 'mx_tempo': 'Tempo', 'mx_p': 'Stimmen und Klavier einzeln ein- und ausschalten und in der Lautstärke regeln, während es läuft.', 'mx_acc': 'Klavier', 'mx_on': 'an / aus', 'mx_load': 'Lädt …',
+  'pl_cover': 'Albumcover des Beispielpakets', 'mx_h': 'Mixer', 'mx_tempo': 'Tempo', 'mx_all': 'Gesamt', 'mx_p': 'Stimmen und Klavier einzeln ein- und ausschalten und in der Lautstärke regeln, während es läuft.', 'mx_acc': 'Klavier', 'mx_on': 'an / aus', 'mx_load': 'Lädt …',
   'rechte_h': 'Rechte & KI',
   'rechte_items': [
    ('Rechte', 'Bevor Noten verarbeitet werden, fragt der Skill nach den Rechten. Diese Angaben werden danach in der README-Datei vermerkt. Ob die Noten verarbeitet und weitergegeben werden dürfen, richtet sich nach dem Urheber- und Lizenzrecht, unter dem sie stehen.'),
@@ -186,7 +186,7 @@ T = {
    'tutti': 'All voices equally loud.'}, 'own_lbl': 'Singing', 'acc_lbl': 'Piano',
   'dl_p': 'The result: practice recordings for every voice, guides and logs.', 'dl_btn': 'Download', 'dl_ttl': 'All My Ducklings', 'dl_meta': 'ZIP · ca. 36 MB · Scores, recordings, guides',
   'tutti_all': 'Tutti, all voices', 'pl_title': 'All My Ducklings', 'pl_play': 'Play', 'pl_pause': 'Pause', 'pl_prev': 'Previous recording', 'pl_next': 'Next recording', 'pl_loop': 'Repeat', 'pl_vol': 'Volume', 'pl_mute': 'Mute', 'pl_seek': 'Position',
-  'pl_cover': 'Album cover of the example pack', 'mx_h': 'Mixer', 'mx_tempo': 'Tempo', 'mx_p': 'Switch each voice and the piano on and off and set its level while it plays.', 'mx_acc': 'Piano', 'mx_on': 'on / off', 'mx_load': 'Loading …',
+  'pl_cover': 'Album cover of the example pack', 'mx_h': 'Mixer', 'mx_tempo': 'Tempo', 'mx_all': 'Master', 'mx_p': 'Switch each voice and the piano on and off and set its level while it plays.', 'mx_acc': 'Piano', 'mx_on': 'on / off', 'mx_load': 'Loading …',
   'rechte_h': 'Rights & AI',
   'rechte_items': [
    ('Rights', 'Before scores are processed, the skill asks about the rights. These details are then recorded in the README file. Whether the scores may be processed and passed on depends on the copyright and licence law they are subject to.'),
@@ -369,8 +369,9 @@ def page(L):
   <p class="mxh" id="mxh">{esc(t['mx_h'])}</p><p class="mxp">{esc(t['mx_p'])}</p>
   <div class="pc"><button type="button" class="mxplay" id="mxplay" aria-label="{esc(t['pl_play'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path id="mxicon" d="M7 4l13 8-13 8z" fill="currentColor"/></svg></button>
    <input type="range" id="mxseek" min="0" max="1000" value="0" aria-label="{esc(t['pl_seek'])}"><span id="mxtime" class="mono">0:00</span></div>
-  <div class="ctl mxt"><span class="lbl" id="mxtl">{esc(t['mx_tempo'])}</span><div class="seg" id="mxtempos" role="group" aria-labelledby="mxtl">{mxtempos}</div></div>
+  <div class="mxr mxm"><span class="mxmlb">{esc(t['mx_all'])}</span><input type="range" id="mxmaster" class="mxv" min="0" max="100" value="100" aria-label="{esc(t['mx_all'])}"><span id="mxmp" class="mxp2 mono">100&nbsp;%</span></div>
 {mixrows}
+  <div class="ctl mxt"><span class="lbl" id="mxtl">{esc(t['mx_tempo'])}</span><div class="seg" id="mxtempos" role="group" aria-labelledby="mxtl">{mxtempos}</div></div>
   </div>
 </section>
 <section id="{I['paket']}"><h2><span class="num">03</span>{esc(t['paket_h'])}</h2>
@@ -509,7 +510,9 @@ h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 .mxr{display:flex;align-items:center;gap:14px;margin-top:10px}
 .mxb{flex:none;width:6.5em;height:36px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg);font:inherit;font-size:var(--fs-s);cursor:pointer;padding:0 6px}
 .mxb[aria-pressed=true]{background:var(--fg);color:var(--bg)}
-.mxplay{width:calc(6.5*var(--fs-s));height:36px}   /* same size as the voice buttons below */
+.mxplay{width:calc(6.5*var(--fs-s));height:36px}
+.mxt{margin-top:18px}
+.mxmlb{flex:none;width:calc(6.5*var(--fs-s));font-size:var(--fs-s);font-weight:700}   /* same size as the voice buttons below */
 .mxv{flex:1;min-width:0;accent-color:var(--fg);height:24px;cursor:pointer}.mxr .mxp2{flex:none;font-size:var(--fs-s);min-width:3.2em;text-align:right}
 .mxr.off .mxv,.mxr.off .mxp2{opacity:.4}
 .mxb:focus-visible,.mxv:focus-visible,#mxseek:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
@@ -727,19 +730,19 @@ sync();ui();
 (function(){
 var mx=$('#mix');if(!mx)return;
 var AC=window.AudioContext||window.webkitAudioContext,base=mx.getAttribute('data-audio'),play=$('#mxplay'),ic=$('#mxicon'),seek=$('#mxseek'),time=$('#mxtime');
-var names=['s','a','t','b','acc','intro'],cx=null,sets={},tp='100',gains={},srcs=[],t0=0,off=0,playing=false,raf=0,asked=0,mixOwns=false;
+var names=['s','a','t','b','acc','intro'],cx=null,mgain=null,sets={},tp='100',gains={},srcs=[],t0=0,off=0,playing=false,raf=0,asked=0,mixOwns=false;
 var PLAY='M7 4l13 8-13 8z',PAUSE='M6 4h4v16H6zM14 4h4v16h-4z';
 function dur(){return sets[tp]?sets[tp].dur:0}
 function fmt(t){t=Math.floor(t||0);return Math.floor(t/60)+':'+('0'+t%60).slice(-2)}
-function rows(){return $$('.mxr',mx)}
+function rows(){return $$('.mxr:not(.mxm)',mx)}   // the master row is not a stem
 function level(r){var b=$('.mxb',r),v=+$('.mxv',r).value/100;return b.getAttribute('aria-pressed')==='true'?v*v:0}   // squared: the slider follows the loudness we hear
 function apply(){if(!cx)return;rows().forEach(function(r){var k=$('.mxb',r).getAttribute('data-stem');if(gains[k])gains[k].gain.setTargetAtTime(level(r),cx.currentTime,.02)})}
 function setIcon(on){ic.setAttribute('d',on?PAUSE:PLAY);play.setAttribute('aria-label',on?pl.getAttribute('data-pause'):pl.getAttribute('data-play'))}
 function ir(c){var rt=1.3,n=Math.floor(c.sampleRate*rt*1.2),b=c.createBuffer(2,n,c.sampleRate);   // synthetic room: decaying noise
  for(var ch=0;ch<2;ch++){var d=b.getChannelData(ch);for(var i=0;i<n;i++)d[i]=(Math.random()*2-1)*Math.exp(-6.9*(i/c.sampleRate)/rt)*.35}return b}
 function setup(){
- cx=new AC();var master=cx.createGain(),lim=cx.createDynamicsCompressor();lim.threshold.value=-6;lim.ratio.value=8;lim.attack.value=.003;lim.release.value=.15;
- var wet=cx.createGain(),cv=cx.createConvolver();wet.gain.value=.3;cv.buffer=ir(cx);master.connect(lim);master.connect(cv);cv.connect(wet);wet.connect(lim);lim.connect(cx.destination);
+ cx=new AC();var master=cx.createGain(),lim=cx.createDynamicsCompressor();mgain=cx.createGain();var mv=$('#mxmaster');mgain.gain.value=mv?Math.pow(+mv.value/100,2):1;master.connect(mgain);lim.threshold.value=-6;lim.ratio.value=8;lim.attack.value=.003;lim.release.value=.15;
+ var wet=cx.createGain(),cv=cx.createConvolver();wet.gain.value=.3;cv.buffer=ir(cx);mgain.connect(lim);mgain.connect(cv);cv.connect(wet);wet.connect(lim);lim.connect(cx.destination);
  names.forEach(function(k){var g=cx.createGain(),p=cx.createStereoPanner?cx.createStereoPanner():null,b=$('.mxb[data-stem="'+k+'"]',mx);g.gain.value=1;
   if(p){p.pan.value=b?+b.getAttribute('data-pan'):0;g.connect(p);p.connect(master)}else g.connect(master);gains[k]=g});
 }
@@ -785,6 +788,7 @@ rows().forEach(function(r){var b=$('.mxb',r),v=$('.mxv',r),pc=$('.mxp2',r);
  b.addEventListener('click',function(){b.setAttribute('aria-pressed',b.getAttribute('aria-pressed')!=='true');upd()});
  v.addEventListener('input',upd)});
 $$('[data-mxt]',mx).forEach(function(b){b.addEventListener('click',function(){setTempo(b.getAttribute('data-mxt'))})});
+var mv=$('#mxmaster'),mp=$('#mxmp');if(mv)mv.addEventListener('input',function(){var v=+mv.value/100;mp.innerHTML=mv.value+'&nbsp;%';if(mgain)mgain.gain.setTargetAtTime(v*v,cx.currentTime,.02)});   // master: scales every stem and the room together; the limiter at the output still catches peaks
 // the two never play together: starting the mixer stops the recordings; the recordings only start again when the visitor asks for them
 // (on iPhones the system may resume an interrupted audio element by itself when the mixer pauses: such a start without a click on the recordings is stopped)
 document.addEventListener('click',function(e){var t=e.target;if(t.closest&&!t.closest('#mix')&&t.closest('button,.hw,#player'))asked=Date.now()},true);
