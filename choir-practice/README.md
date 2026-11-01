@@ -1,4 +1,4 @@
-# choir-practice Skill
+# Choir Practice Skill
 
 > *“Sunday morning, he’s rehearsing for his choir … and I’m the one who has to face the music.”* – A tenor’s duck
 

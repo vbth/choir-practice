@@ -1,4 +1,4 @@
-# choir-practice Skill
+# Choir Practice Skill
 
 > *„Sonntagmorgen, er übt wieder für seinen Chor … und ich darf es ausbaden!“* – Die Ente eines Tenors
 

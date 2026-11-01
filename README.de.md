@@ -1,6 +1,6 @@
 <p><a href="https://vbth.github.io/choir-practice/"><img src="docs/img/logo.png" alt="choir-practice Logo" width="72" height="72"></a></p>
 
-# choir-practice Skill
+# Choir Practice Skill
 
 <p><picture><source media="(prefers-color-scheme: dark)" srcset="docs/img/header-dark.png"><img src="docs/img/header.png" alt="Ein Mann mit Kopfhörern steht in einer alten Badewanne und singt vom Notenblatt, neben ihm schwimmt eine Quietscheente. „Sonntagmorgen, er übt wieder für seinen Chor … und ich darf es ausbaden!“ – Die Ente eines Tenors" width="100%"></picture></p>
 

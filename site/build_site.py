@@ -65,7 +65,7 @@ ST['tutti'] = {own: [[v, spread[v], M.LV['tutti'], 'own'] for v in SEAT] for own
 
 T = {
  'de': {
-  'html': 'de', 'name': 'choir-practice Skill', 'title': 'choir-practice Skill – Deine Chorstimme. Deine Noten. Überall lesen, hören und singen.', 'other': ('../en/', 'EN'), 'self_prefix': '../', 'assets': '../',
+  'html': 'de', 'name': 'Choir Practice Skill', 'title': 'Choir Practice Skill – Deine Chorstimme. Deine Noten. Überall lesen, hören und singen.', 'other': ('../en/', 'EN'), 'self_prefix': '../', 'assets': '../',
   'desc': 'Dokumentation eines agentischen KI-Musik-Workflows und -Skills entwickelt für und mit Claude Code als privates Code-Experiment. Es ist nur ein „Proof of Concept“. Aus Chornoten entsteht ein „KI-geprüftes“ ZIP, in dem sich für jede Stimme 10 Aufnahmen zum Üben befinden.',
   'ids': {'start': 'start', 'ablauf': 'ablauf', 'ueben': 'ueben', 'paket': 'beispiel-zip', 'rechte': 'rechte-und-ki', 'lizenz': 'lizenz'},
   'menu': [('start', 'Start'), ('ablauf', 'Ablauf'), ('ueben', 'Üben'), ('paket', 'Beispiel'), ('rechte', 'Rechte & KI'), ('lizenz', 'Lizenzen')],
@@ -132,7 +132,7 @@ T = {
   'ai_label': 'AI', 'top': 'Nach oben',
  },
  'en': {
-  'html': 'en', 'name': 'choir-practice Skill', 'title': 'choir-practice Skill – Your voice. Your sheet music. Read, listen, and sing anywhere.', 'other': ('../de/', 'DE'), 'self_prefix': '../', 'assets': '../',
+  'html': 'en', 'name': 'Choir Practice Skill', 'title': 'Choir Practice Skill – Your voice. Your sheet music. Read, listen, and sing anywhere.', 'other': ('../de/', 'DE'), 'self_prefix': '../', 'assets': '../',
   'desc': 'Documentation of an agentic AI music workflow and skill developed for and with Claude Code as a private code experiment. It is only a “proof of concept”. A choir score goes in, and an “AI-checked” ZIP comes out with 10 practice recordings for every voice.',
   'ids': {'start': 'start', 'ablauf': 'workflow', 'ueben': 'practice', 'paket': 'example-zip', 'rechte': 'rights-and-ai', 'lizenz': 'licence'},
   'menu': [('start', 'Start'), ('ablauf', 'Workflow'), ('ueben', 'Practice'), ('paket', 'Example'), ('rechte', 'Rights & AI'), ('lizenz', 'Licences')],
@@ -305,7 +305,7 @@ def page(L):
 <body>
 <a class="skip" href="#start">{esc(t['skip'])}</a>
 <header class="bar">
- <a class="brand" href="{SITE}{L}/" aria-label="{esc(t['name'])}"><img src="{A}img/logo.png" alt="" width="46" height="46"><span class="bt"><span class="bn">{esc(t['name'].partition(' ')[0])}</span> {esc(t['name'].partition(' ')[2])}</span></a>
+ <a class="brand" href="{SITE}{L}/" aria-label="{esc(t['name'])}"><img src="{A}img/logo.png" alt="" width="46" height="46"><span class="bt"><span class="bn">{esc(t['name'].rpartition(' ')[0])}</span> {esc(t['name'].rpartition(' ')[2])}</span></a>
  <button class="theme" type="button" aria-label="{esc(t['theme_to_dark'])}"><svg class="moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 14.6A8.6 8.6 0 0 1 9.4 4 8.6 8.6 0 1 0 20 14.6z"/></svg><svg class="sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></svg></button>
  <a class="lang" href="{other_href}" hreflang="{'en' if L=='de' else 'de'}" lang="{'en' if L=='de' else 'de'}">{other_lbl}</a>
  <button class="burger" type="button" aria-expanded="false" aria-controls="nav">{esc(t['menu_label'])}</button>
