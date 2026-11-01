@@ -171,16 +171,18 @@ A.addEventListener('loadedmetadata',function(){tm.textContent=f(A.currentTime)})
 A.addEventListener('ended',function(){ui();sk.value=0});
 sk.addEventListener('input',function(){if(A.duration)A.currentTime=sk.value/1000*A.duration});
 sync();ui();
-// mixer: the stems (4 voices, piano, starting notes) play together through Web Audio; every voice has an on/off button and its own level; the room reverb is added here
+// mixer: the stems (4 voices, piano, starting notes) play together through Web Audio; every voice has an on/off button and its own level; the room reverb is added here.
+// Tempo steps (60, 75, 90, 100 %) are separate sets of files, loaded when first chosen; switching keeps the position in proportion to the length of the set.
 (function(){
 var mx=$('#mix');if(!mx)return;
 var AC=window.AudioContext||window.webkitAudioContext,base=mx.getAttribute('data-audio'),play=$('#mxplay'),ic=$('#mxicon'),seek=$('#mxseek'),time=$('#mxtime');
-var names=['s','a','t','b','acc','intro'],cx=null,bufs=null,gains={},srcs=[],t0=0,off=0,dur=0,playing=false,raf=0,loading=false;
+var names=['s','a','t','b','acc','intro'],cx=null,sets={},tp='100',gains={},srcs=[],t0=0,off=0,playing=false,raf=0,asked=0,mixOwns=false;
 var PLAY='M7 4l13 8-13 8z',PAUSE='M6 4h4v16H6zM14 4h4v16h-4z';
+function dur(){return sets[tp]?sets[tp].dur:0}
 function fmt(t){t=Math.floor(t||0);return Math.floor(t/60)+':'+('0'+t%60).slice(-2)}
 function rows(){return $$('.mxr',mx)}
 function level(r){var b=$('.mxb',r),v=+$('.mxv',r).value/100;return b.getAttribute('aria-pressed')==='true'?v*v:0}   // squared: the slider follows the loudness we hear
-function apply(){rows().forEach(function(r){var k=$('.mxb',r).getAttribute('data-stem');if(gains[k])gains[k].gain.setTargetAtTime(level(r),cx.currentTime,.02)})}
+function apply(){if(!cx)return;rows().forEach(function(r){var k=$('.mxb',r).getAttribute('data-stem');if(gains[k])gains[k].gain.setTargetAtTime(level(r),cx.currentTime,.02)})}
 function setIcon(on){ic.setAttribute('d',on?PAUSE:PLAY);play.setAttribute('aria-label',on?pl.getAttribute('data-pause'):pl.getAttribute('data-play'))}
 function ir(c){var rt=1.3,n=Math.floor(c.sampleRate*rt*1.2),b=c.createBuffer(2,n,c.sampleRate);   // synthetic room: decaying noise
  for(var ch=0;ch<2;ch++){var d=b.getChannelData(ch);for(var i=0;i<n;i++)d[i]=(Math.random()*2-1)*Math.exp(-6.9*(i/c.sampleRate)/rt)*.35}return b}
@@ -190,38 +192,52 @@ function setup(){
  names.forEach(function(k){var g=cx.createGain(),p=cx.createStereoPanner?cx.createStereoPanner():null,b=$('.mxb[data-stem="'+k+'"]',mx);g.gain.value=1;
   if(p){p.pan.value=b?+b.getAttribute('data-pan'):0;g.connect(p);p.connect(master)}else g.connect(master);gains[k]=g});
 }
-function load(){
- if(bufs||loading)return Promise.resolve();loading=true;mx.setAttribute('aria-busy','true');
- return Promise.all(names.map(function(k){return fetch(base+k+'.mp3').then(function(r){return r.arrayBuffer()}).then(function(a){return new Promise(function(ok,no){cx.decodeAudioData(a,ok,no)})})})).then(function(l){
-  bufs={};names.forEach(function(k,i){bufs[k]=l[i]});dur=Math.max.apply(null,l.map(function(b){return b.duration}));loading=false;mx.removeAttribute('aria-busy');apply()});
+function load(t){
+ if(sets[t])return Promise.resolve(sets[t]);
+ return Promise.all(names.map(function(k){return fetch(base+t+'/'+k+'.mp3').then(function(r){return r.arrayBuffer()}).then(function(a){return new Promise(function(ok,no){cx.decodeAudioData(a,ok,no)})})})).then(function(l){
+  var b={};names.forEach(function(k,i){b[k]=l[i]});b.dur=Math.max.apply(null,l.map(function(x){return x.duration}));sets[t]=b;return b});
 }
 function stopSrc(){srcs.forEach(function(s){try{s.onended=null;s.stop()}catch(e){}});srcs=[]}
-function pos(){return playing?Math.max(0,Math.min(dur,off+cx.currentTime-t0)):off}   // t0 lies slightly ahead, so the first frames would be negative
-function tick(){var p=pos();seek.value=dur?Math.round(p/dur*1000):0;time.textContent=fmt(p);if(playing)raf=requestAnimationFrame(tick)}
+function pos(){return playing?Math.max(0,Math.min(dur(),off+cx.currentTime-t0)):off}   // t0 lies slightly ahead, so the first frames would be negative
+function tick(){var p=pos(),d=dur();seek.value=d?Math.round(p/d*1000):0;time.textContent=fmt(p);if(playing)raf=requestAnimationFrame(tick)}
 function start(from){
- stopSrc();off=from;t0=cx.currentTime+.05;
- names.forEach(function(k){var s=cx.createBufferSource();s.buffer=bufs[k];s.connect(gains[k]);s.start(t0,from);srcs.push(s)});
- srcs[0].onended=function(){if(playing&&pos()>=dur-.1)finish()};
+ stopSrc();apply();var b=sets[tp];off=from;t0=cx.currentTime+.05;
+ names.forEach(function(k){var s=cx.createBufferSource();s.buffer=b[k];s.connect(gains[k]);s.start(t0,from);srcs.push(s)});
+ srcs[0].onended=function(){if(playing&&pos()>=dur()-.1)finish()};
  playing=true;setIcon(true);cancelAnimationFrame(raf);tick();
 }
 function pause(){if(!playing)return;off=pos();playing=false;stopSrc();setIcon(false);cancelAnimationFrame(raf);tick()}
 function finish(){playing=false;stopSrc();off=0;setIcon(false);cancelAnimationFrame(raf);tick()}
+function mark(){$$('[data-mxt]',mx).forEach(function(b){b.setAttribute('aria-pressed',b.getAttribute('data-mxt')===tp)})}
+function setTempo(t){
+ if(t===tp)return;
+ var p=pos(),old=dur(),was=playing;
+ tp=t;mark();
+ if(!cx){off=0;return}
+ pause();
+ load(t).then(function(){
+  if(tp!==t)return;   // the visitor changed the step again meanwhile
+  var nd=dur();off=old?Math.min(Math.max(0,nd-.1),p*nd/old):0;
+  if(was&&!playing)start(off);else if(!playing){seek.value=nd?Math.round(off/nd*1000):0;time.textContent=fmt(off)}
+ }).catch(function(){});
+}
 play.addEventListener('click',function(){
  if(!AC)return;if(playing){pause();return}
  if(!cx)setup();if(cx.state==='suspended')cx.resume();
  A.pause();mixOwns=true;   // only one thing plays at a time
- load().then(function(){A.pause();start(off>=dur-.1?0:off)}).catch(function(){loading=false;mx.removeAttribute('aria-busy')});
+ mx.setAttribute('aria-busy','true');
+ load(tp).then(function(){mx.removeAttribute('aria-busy');A.pause();if(!playing)start(off>=dur()-.1?0:off)}).catch(function(){mx.removeAttribute('aria-busy')});
 });
-seek.addEventListener('input',function(){if(!bufs)return;var p=seek.value/1000*dur;if(playing)start(p);else{off=p;time.textContent=fmt(p)}});
+seek.addEventListener('input',function(){if(!sets[tp])return;var p=seek.value/1000*dur();if(playing)start(p);else{off=p;time.textContent=fmt(p)}});
 rows().forEach(function(r){var b=$('.mxb',r),v=$('.mxv',r),pc=$('.mxp2',r);
- function upd(){pc.innerHTML=v.value+'&nbsp;%';r.classList.toggle('off',b.getAttribute('aria-pressed')!=='true');if(cx)apply()}
+ function upd(){pc.innerHTML=v.value+'&nbsp;%';r.classList.toggle('off',b.getAttribute('aria-pressed')!=='true');apply()}
  b.addEventListener('click',function(){b.setAttribute('aria-pressed',b.getAttribute('aria-pressed')!=='true');upd()});
  v.addEventListener('input',upd)});
+$$('[data-mxt]',mx).forEach(function(b){b.addEventListener('click',function(){setTempo(b.getAttribute('data-mxt'))})});
 // the two never play together: starting the mixer stops the recordings; the recordings only start again when the visitor asks for them
 // (on iPhones the system may resume an interrupted audio element by itself when the mixer pauses: such a start without a click on the recordings is stopped)
-var asked=0,mixOwns=false;
 document.addEventListener('click',function(e){var t=e.target;if(t.closest&&!t.closest('#mix')&&t.closest('button,.hw,#player'))asked=Date.now()},true);
-A.addEventListener('play',function(){if(mixOwns&&Date.now()-asked>1500){A.pause();return}mixOwns=false;pause()})
+A.addEventListener('play',function(){if(mixOwns&&Date.now()-asked>1500){A.pause();return}mixOwns=false;pause()});
 document.addEventListener('visibilitychange',function(){if(!document.hidden&&playing)tick()});
 })();
 window.addEventListener('resize',function(){clearTimeout(window.__rz);window.__rz=setTimeout(function(){draw();fitLead()},150)});
