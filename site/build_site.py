@@ -517,7 +517,7 @@ h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 .mxtk{display:flex;justify-content:space-between;padding:0 10px;font-size:var(--fs-s);color:var(--mute)}
 .mxtrack:focus-visible{outline:2px solid var(--fg);outline-offset:4px}
 /* the mixer as a console: on wide screens the channels stand side by side with a level meter and a vertical fader; on phones they stay rows */
-.mxbank{display:flex;flex-direction:column}
+.mxbank{display:flex;flex-direction:column;margin-top:20px}   /* space between the play row and the channels */
 .mxm{order:-1}
 .mxmeter{display:none}
 .mxmeter i{display:block;flex:1;border:1px solid var(--line)}
@@ -534,6 +534,7 @@ h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
  .mxf{grid-column:2;grid-row:2;flex:none;width:auto;height:150px}
  .mxf .mxv{position:absolute;left:50%;top:50%;width:150px;height:28px;transform:translate(-50%,-50%) rotate(-90deg)}
  .mxr .mxp2,.mxm .mxp2{grid-column:1/-1;text-align:center;min-width:0}
+ .mxm .mxmlb{width:100%}   /* as wide as the channels */
 }
 .mxmlb{flex:none;width:calc(6.5*var(--fs-s));height:36px;display:grid;place-items:center;box-sizing:border-box;border:1.5px solid var(--line);background:var(--fg);color:var(--bg);font-size:var(--fs-s);font-weight:700}   /* always on, so filled like a pressed voice */   /* same size as the voice buttons below */
 .mxv{flex:1;min-width:0;accent-color:var(--fg);height:24px;cursor:pointer}.mxr .mxp2{flex:none;font-size:var(--fs-s);min-width:3.2em;text-align:right}
