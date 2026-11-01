@@ -84,11 +84,12 @@ h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 .hw{position:relative;container-type:inline-size}
 .ov{--b:clamp(26px,3.4cqw,40px);position:absolute;left:50%;top:80%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:0;padding:calc(var(--b)*.2) calc(var(--b)*.35);opacity:0;pointer-events:none;transition:opacity .15s}
 .ov .rw{position:relative;display:flex;gap:2px}.ov .vw{position:relative;display:flex;align-items:center;gap:4px;width:100%}.ov .vol{flex:1 1 0;width:0;min-width:0;height:max(18px,calc(var(--b)*.5));accent-color:var(--fg)}.ov .vw .mute{width:calc(var(--b)*.8);height:calc(var(--b)*.8)}
-.ov .fr{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}.ov .fr path{fill:none;stroke:var(--fg);stroke-width:clamp(2.4px,.3cqw,3.4px);vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round}
+.ov .fr{filter:url(#kf);position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}.ov .fr path{fill:none;stroke:var(--fg);stroke-width:clamp(1.3px,.16cqw,1.9px);vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round}
 .hw:hover .ov,.hw:focus-within .ov{opacity:1;pointer-events:auto}
 .ov button{position:relative;width:var(--b);height:var(--b);border:0;background:transparent;color:var(--fg);display:grid;place-items:center;cursor:pointer;padding:0}
 .ov .loop[aria-pressed=true]{color:var(--link)}.ov button svg{width:55%;height:55%}.ov button svg,.pbtn svg,.vbtn svg{filter:url(#kr)}.ov button:focus-visible{outline:2px solid var(--fg);outline-offset:-2px}
 .pbtn:hover,.vbtn:hover,.ov button:hover,.ov button[aria-pressed=true]:hover{color:var(--link)}.vol:hover,.ov .vol:hover,#plseek:hover{accent-color:var(--link)}
+.vol{filter:url(#kb)}
 @media (hover:none){.ov{opacity:1;pointer-events:auto}}
 @container (max-width:520px){.ov .vw{display:none}}   /* narrow image: the tub is too small for a second row; the volume stays in the player below */
 .pt{margin:0;font-weight:700}.ps{margin:2px 0 12px;color:var(--mute);font-size:var(--fs-s);min-height:1.55em}
