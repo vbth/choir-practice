@@ -1,0 +1,41 @@
+{
+ "source_file": "no source",
+ "meta_sources": [
+  {
+   "field": "composer",
+   "value": "Unbekannt (Volkslied)",
+   "url": "https://de.wikipedia.org/wiki/Alle_meine_Entchen",
+   "approved": true
+  },
+  {
+   "field": "lyricist",
+   "value": "Unbekannt (Volkslied)",
+   "url": "https://de.wikipedia.org/wiki/Alle_meine_Entchen",
+   "approved": true
+  }
+ ],
+ "texts": {
+  "de": {
+   "notes": [
+    "Fiktives Beispielpaket für die Webseite: bekanntes Kinderlied, vierstimmiger Satz (Sopran, Alt, Tenor, Bass) neu gesetzt.",
+    "Es gibt keine Vorlage zum Abtippen; die Noten sind der Ausgangspunkt.",
+    "Volkslied: Verfasser und Komponist sind nicht überliefert (Quelle: Wikipedia, Alle meine Entchen). Der vierstimmige Satz ist neu gesetzt."
+   ],
+   "open": [
+    "Die Audiodateien wurden nicht angehört, nur technisch geprüft."
+   ]
+  },
+  "en": {
+   "notes": [
+    "Fictional example package for the website: a well-known children's song, newly arranged for four voices (soprano, alto, tenor, bass).",
+    "There is no source score to transcribe; the notes are the starting point.",
+    "The English singing text is a machine translation of the German text (DeepL, provided by the user), with the last line shortened to fit the melody (AI-generated, no guarantee). The German text is traditional.",
+    "Folk song: author and composer are not known (source: Wikipedia, Alle meine Entchen). The four-part setting is newly arranged."
+   ],
+   "open": [
+    "The audio files were not listened to, only checked technically."
+   ]
+  }
+ },
+ "corrections": []
+}

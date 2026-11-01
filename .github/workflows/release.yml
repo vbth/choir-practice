@@ -1,0 +1,28 @@
+name: Release
+on:
+  push:
+    tags: ['v*']
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Check that tag, VERSION, CHANGELOG and handoff match
+        run: python choir-practice/scripts/check_version.py --tag "$GITHUB_REF_NAME"
+      - name: Build .skill and release notes
+        run: |
+          V="${GITHUB_REF_NAME#v}"
+          zip -qr choir-practice.skill choir-practice -x '*/__pycache__/*'
+          python choir-practice/scripts/check_version.py --tag "$GITHUB_REF_NAME" --file choir-practice.skill
+          awk -v v="$V" '$0 ~ "^## "v" " {p=1; next} /^## / {p=0} p' CHANGELOG.md > notes.md
+      - name: Create GitHub release (or add the file to a release created in the web interface)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
+            gh release upload "$GITHUB_REF_NAME" choir-practice.skill --clobber
+          else
+            gh release create "$GITHUB_REF_NAME" choir-practice.skill --title "$GITHUB_REF_NAME" --notes-file notes.md
+          fi

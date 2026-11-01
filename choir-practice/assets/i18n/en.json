@@ -1,0 +1,336 @@
+{
+  "lang": "en",
+  "language_name": "English",
+  "folders": {
+    "scores": "01_Scores",
+    "practice": "02_Practice",
+    "tutti": "03_Tutti",
+    "original": "04_Original",
+    "tools": "05_Tools"
+  },
+  "stages": {
+    "solo": "1_Solo",
+    "accomp": "2_With_Accompaniment",
+    "choir": "3_In_the_Choir"
+  },
+  "sounds": {
+    "choir": "Choir",
+    "piano": "Piano"
+  },
+  "files": {
+    "score": "Score",
+    "tutti": "Tutti",
+    "overview": "Overview_Practice_Mixes",
+    "protocol": "Check_Log"
+  },
+  "credit_text": "Lyrics",
+  "credit_arr": "Arr.",
+  "overview": {
+    "title": "Practice files: headphone layout",
+    "sub1": "Own voice (black) always centred at 0 dB. Dot size = level, position = left/right in the headphones.",
+    "sub2": "Choir seating from left to right: {seating}",
+    "stage_titles": {
+      "solo": "Stage 1 – solo (no. 1, 2)",
+      "accomp": "Stage 2 – with accompaniment (no. 3, 4)",
+      "choir": "Stage 3 – in the choir (no. 5)"
+    },
+    "stage_subs": {
+      "solo": "Own voice only: learn the line.",
+      "accomp": "Own voice plus the melody ({melody}) and a soft piano accompaniment of all parts – like rehearsing with the conductor at the piano.",
+      "choir": "As in the choir row: neighbours left/right; edge voices get the next-but-one voice on the free side."
+    },
+    "own": "own voice",
+    "accomp": "piano accompaniment",
+    "left": "left",
+    "right": "right",
+    "center": "centre",
+    "panel": "Practice files {voice}"
+  },
+  "readme": {
+    "title": "Scores and practice files",
+    "poc": "Documentation of an agentic AI music workflow and skill developed for and with Claude Code as a private code experiment. This is a proof of concept only.",
+    "intro": "This package contains the choir parts as scores with lyrics and practice files (audio). It is based on the supplied source {source}.",
+    "folders_h": "Folders",
+    "col_folder": "Folder",
+    "col_content": "Content",
+    "col_use": "Use",
+    "f_scores": [
+      "Score (AI version and the supplied scan), MusicXML with choir and piano playback, MIDI files of all voices and the tutti",
+      "View, continue editing in a notation program, reuse the MIDI files"
+    ],
+    "f_practice": [
+      "Overview of the practice files, guide for the director (numbers, abbreviations, hints) and one ZIP per voice \"<abbr>_Practice_<title>.zip\" with guide, score and the practice MP3s in choir and piano sound; file 6 (tutti) is in every voice ZIP",
+      "Entry point for the person who distributes the package; pass the voice ZIPs on as they are"
+    ],
+    "f_tools": [
+      "Project data (score.json, docs.json, mixes.json, layout.json) and the skill to rebuild",
+      "Rebuild or change"
+    ],
+    "f_docs": [
+      "README (bilingual), check log, correction log, session handoff (English)",
+      "Information and continuing the work"
+    ],
+    "stages_h": "Practice files and stages",
+    "col_stage": "Stage",
+    "col_mix": "Mix",
+    "col_purpose": "Meant for",
+    "s_solo": [
+      "own voice only",
+      "learning the line"
+    ],
+    "s_accomp": [
+      "own voice, melody {mel} dB, piano accompaniment {acc} dB",
+      "hearing context and harmony"
+    ],
+    "s_choir": [
+      "neighbours left/right {near} dB, next-but-one {second} dB, others {far} dB",
+      "holding one's own in the choir"
+    ],
+    "s_tutti": [
+      "all voices at equal level",
+      "listening to the full sound"
+    ],
+    "sound_h": "Sound and settings",
+    "sound_items": [
+      "Every audio file exists twice: choir sound and optimised piano (legato).",
+      "Soundfont {soundfont}, rendered with FluidSynth, light room reverb, loudness {lufs} LUFS.",
+      "Tempo: {tempo}.",
+      "The own voice is always centred; the MIDI files carry the same volume and pan values.",
+      "Solo and With accompaniment (no. 1 to 4) also exist slowly ({slow_pct} % tempo, \"{slow}\" in the file name). Before the music the voice's own starting note sounds, then a short pause; file 6 (tutti) starts with the starting notes of all voices one after another (bottom to top). There is a short pause between the verses."
+    ],
+    "sound_generaluser": "Soundfont credit: GeneralUser GS 2.0.3 by S. Christian Collins (https://www.schristiancollins.com/generaluser.php), compressed to the SF3 format for the skill; the licence text is in the skill folder (assets/soundfonts).",
+    "ai_h": "How this was made",
+    "ai_text": "The notes were transcribed from the source (scan) with AI assistance, corrected twice against the source and engraved with Verovio (verovio.org). The corrections are listed in the correction log. The sound is software synthesis with a soundfont, not generative AI. The practice files are purely mechanical and exact to the notes; they do not replace an interpretation. The source, decisions and approvals come from people. No guarantee: when in doubt, the source applies.",
+    "score_h": "Score",
+    "notes_h": "Notes on the source and corrections",
+    "open_h": "Open points",
+    "sources_h": "Sources",
+    "meta_h": "Work details",
+    "confirmed": "approved by the user",
+    "unconfirmed": "not confirmed",
+    "date": "Date",
+    "score_line": "A4 portrait, cover page and {pages} music pages × {spp} systems, staff space {mm} mm (readable from 1.6 mm)",
+    "col_no": "No.",
+    "stage_nos": {
+      "solo": "1, 2",
+      "accomp": "3, 4",
+      "choir": "5",
+      "tutti": "6"
+    },
+    "stage_names": {
+      "tutti": "Tutti"
+    },
+    "rights_h": "Rights",
+    "rights_base": "The rights to the music, the text and the source belong to the authors and rights holders (composer, lyricist, publisher). This package does not replace clearing the rights. Use and passing on only within the permission that exists.",
+    "rights_status": {
+      "public_domain": "Rights status as stated by the user: public domain.",
+      "licensed": "Rights status as stated by the user: a licence or permission for copying and use exists.",
+      "own": "Rights status as stated by the user: own work or rights held by the client."
+    },
+    "rights_note": "Note on the rights: {note}",
+    "rights_notice": "Notice printed in the source: {notice}",
+    "rights_ref": "Licence reference: {reference}"
+  },
+  "protocol": {
+    "title": "Check log",
+    "col_phase": "Phase",
+    "col_check": "Check",
+    "col_result": "Result",
+    "col_note": "Note",
+    "pass": "passed",
+    "fail": "failed",
+    "warn": "note",
+    "manual": "manual"
+  },
+  "slow": "slow",
+  "beats": {
+    "quarter": "quarter",
+    "dotted-quarter": "dotted quarter",
+    "half": "half",
+    "dotted-half": "dotted half",
+    "eighth": "eighth",
+    "whole": "whole"
+  },
+  "corr": {
+    "title": "Correction log",
+    "intro": "All deviations from the source, corrections, interpretations and uncertain spots. Please check uncertain spots against the original.",
+    "cols": [
+      "No.",
+      "Bar",
+      "Voice",
+      "Kind",
+      "Source",
+      "Result",
+      "Reason",
+      "Status"
+    ],
+    "kinds": {
+      "pitch": "pitch",
+      "rhythm": "rhythm",
+      "lyrics": "lyrics",
+      "slur": "slur/tie",
+      "dynamics": "dynamics",
+      "meta": "work details",
+      "layout": "layout",
+      "other": "other"
+    },
+    "status": {
+      "corrected": "corrected",
+      "as_in_source": "as in source (checked)",
+      "interpretation": "interpretation",
+      "uncertain": "uncertain – please check"
+    },
+    "none": "No corrections or anomalies."
+  },
+  "protocol_intro": "Automatic and manual checks in the order they were run.",
+  "phases": {
+    "0": "Setup",
+    "1": "Survey",
+    "2": "Transcription",
+    "3": "Proofreading",
+    "4": "Engraving",
+    "5": "Audio",
+    "6": "Documentation/package"
+  },
+  "files_more": {
+    "corrections": "Correction_Log",
+    "voice_pkg": "Voice"
+  },
+  "readme_more": {
+    "lang_note": "English",
+    "meta_cols": [
+      "Item",
+      "Value",
+      "Source",
+      "Status"
+    ],
+    "fields": {
+      "title": "Title",
+      "subtitle": "Subtitle",
+      "composer": "Music",
+      "arranger": "Arrangement",
+      "lyricist": "Lyrics",
+      "source": "Source"
+    },
+    "per_voice": "Each voice ZIP in {practice} is complete on its own. Only guide, score and file 6 (tutti) exist several times, so that one voice ZIP can be passed on alone. All files and folders start with a number; only the voice ZIPs (and the MIDI folders per voice) start with the abbreviation, for example T1_<title>. All MP3s carry title, album, track and artist tags."
+  },
+  "share": {
+    "root": "Share",
+    "director": "Director",
+    "items": {
+      "guide": "Guide",
+      "score": "Score",
+      "solo_slow": "Alone slow",
+      "solo": "Alone",
+      "accomp_slow": "With melody slow",
+      "accomp": "With melody",
+      "accomp_mel_slow": "With piano slow",
+      "accomp_mel": "With piano",
+      "choir": "Own voice louder",
+      "tutti": "All voices equal",
+      "zip": "All files"
+    },
+    "what": {
+      "score": "The score to read along and print.",
+      "solo_slow": "Only your voice, slower. Learn the notes and words here.",
+      "solo": "Only your voice, at the right tempo.",
+      "accomp_slow": "Your voice with the melody and piano softly in the background. Slower.",
+      "accomp": "Your voice with melody and piano, at the right tempo.",
+      "accomp_mel_slow": "Your voice with soft piano accompaniment. Slower.",
+      "accomp_mel": "Your voice with piano accompaniment, at the right tempo.",
+      "choir": "The whole choir, your voice a little louder.",
+      "tutti": "The whole choir, all voices equally loud."
+    },
+    "guide": {
+      "sub": "Practice files for {voice}",
+      "intro": "Practise with headphones if you can.",
+      "col_no": "No.",
+      "col_file": "File",
+      "col_what": "What you hear",
+      "tips": [
+        "Every recording starts with your first note, then a short pause, then the music. Only the last file (all voices equal) starts with the first notes of all voices, one after another.",
+        "The number at the start of each file name is the order to practise in.",
+        "The two audio folders (\"{choir_dir}\" and \"{piano_dir}\" in the name) hold the same recordings, once in choir sound and once in piano sound."
+      ]
+    },
+    "director_guide": {
+      "sub": "Practice files of all voices for the choir director",
+      "intro": "The practice files of all voices are in 2_Practice, one ZIP per voice that can be passed on as it is. The numbers are the same in every ZIP.",
+      "naming": "Audio file names: number, voice abbreviation, title, sound, content, e.g. {example}.",
+      "title_word": "Title",
+      "abbr_h": "Abbreviations",
+      "table_h": "This is what the singers' guide says:",
+      "melody_note": "For the melody voice ({abbr}) files 3 and 4 are called \"With piano\", because it sings the melody itself.",
+      "tutti_note": "File 6 is the same for all voices and therefore lies in every voice ZIP."
+    }
+  },
+  "proj_note": "choir-practice – AI music workflow/skill for Claude.",
+  "ai_note": "AI-generated. Use at your own risk.",
+  "ai_note_info": "AI-generated. Use at your own risk.",
+  "ai_tag": "AI-generated",
+  "ai_meta": "AI-generated. Use at your own risk.",
+  "skill_name": "choir-practice",
+  "made_with": "Made with the skill \"{name}\".",
+  "delivery": {
+    "score_layout": "{pages} music pages x {systems} systems, scale {scale}, staff space {space} mm",
+    "scores": "1_Scores",
+    "practice": "2_Practice",
+    "docs": "3_Documentation",
+    "tools": "4_Tools",
+    "guide": "Guide",
+    "score": "Score",
+    "partitur": "Score",
+    "scan": "Scan",
+    "overview": "Overview",
+    "musicxml": "MusicXML",
+    "midi": "MIDI",
+    "package": "Choir_Practice",
+    "audio": "Audio",
+    "choir_dir": "Choir_Sound",
+    "piano_dir": "Piano_Sound",
+    "readme": "README",
+    "handoff": "Session_Handoff",
+    "data": "Project_Data",
+    "skill": "SKILL",
+    "tutti": "Tutti",
+    "fname": {
+      "solo_slow": "alone_slow",
+      "solo": "alone",
+      "accomp_slow": "with_melody_slow",
+      "accomp": "with_melody",
+      "accomp_mel_slow": "with_piano_slow",
+      "accomp_mel": "with_piano",
+      "choir": "own_voice_louder",
+      "tutti": "all_voices_equal"
+    },
+    "voice_dir": "Practice"
+  },
+  "cover": {
+    "composer": "Music",
+    "arranger": "Arrangement",
+    "source": "Source",
+    "permission": "Arrangement with permission of {by}.",
+    "permission_date": "Arrangement with permission of {by} dated {date}.",
+    "set_licence": "The engraving is licensed under {name} ({url}).",
+    "internal": "For internal use in the choir only.",
+    "lyricist": "Lyrics",
+    "notes_h": "Performance notes (printed in the source)",
+    "bar_page": "Bar {bar}, page {page}",
+    "tempo": "Tempo",
+    "time": "Time",
+    "voices": "Voices",
+    "melody": "Melody",
+    "verses": "Verses"
+  },
+  "doc_titles": {
+    "partitur": "Score",
+    "score": "Score",
+    "guide": "Guide",
+    "overview": "Overview",
+    "readme": "README",
+    "protocol": "Check log",
+    "corrections": "Correction log"
+  },
+  "capitalised_nouns": [],
+  "protocol_notes": []
+}
