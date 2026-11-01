@@ -312,7 +312,13 @@ def page(L):
  <nav id="nav" aria-label="{esc(t['menu_label'])}"><ul>{menu}<li class="navlang"><a href="{other_href}" hreflang="{'en' if L=='de' else 'de'}" lang="{'en' if L=='de' else 'de'}">{'English' if L=='de' else 'Deutsch'}</a></li></ul></nav>
 </header>
 <main>
-<figure class="banner"><picture><source media="(prefers-color-scheme: dark)" srcset="{A}img/header-dark.png"><img src="{A}img/header.png" alt="{esc(t['og_alt'])}. {esc(t['duck'].replace(chr(10), ' '))} — {esc(t['duck_by'])}" width="1280" height="640" fetchpriority="high" decoding="async"></picture>
+<figure class="banner"><div class="hw"><picture><source media="(prefers-color-scheme: dark)" srcset="{A}img/header-dark.png"><img src="{A}img/header.png" alt="{esc(t['og_alt'])}. {esc(t['duck'].replace(chr(10), ' '))} — {esc(t['duck_by'])}" width="1280" height="640" fetchpriority="high" decoding="async"></picture>
+<div class="ov" role="group" aria-label="{esc(t['pl_title'])}">
+     <button type="button" class="prev" aria-label="{esc(t['pl_prev'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 5h2.5v14H6zM19 5v14L9.5 12z" fill="currentColor"/></svg></button>
+     <button type="button" class="pbtn" aria-label="{esc(t['pl_play'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path class="picon" d="M7 4l13 8-13 8z" fill="currentColor"/></svg></button>
+     <button type="button" class="next" aria-label="{esc(t['pl_next'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M15.5 5H18v14h-2.5zM5 5l9.5 7L5 19z" fill="currentColor"/></svg></button>
+     <button type="button" class="loop" aria-pressed="false" aria-label="{esc(t['pl_loop'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M7 7h10v3l4-4-4-4v3H5v6h2zM17 17H7v-3l-4 4 4 4v-3h12v-6h-2z" fill="currentColor"/></svg></button>
+    </div></div>
 <figcaption class="duck">{esc(t['duck']).replace(chr(10), ' <br class="dbr">')}<span class="by">— {esc(t['duck_by'])}</span></figcaption></figure>
 <section id="start" class="hero">
  <h1>{h1_html}</h1>
@@ -329,13 +335,7 @@ def page(L):
  <p class="intro">{esc(t['ueben_p'])}</p>
  <div class="listen" id="player" data-audio="{A}audio/" data-play="{esc(t['pl_play'])}" data-pause="{esc(t['pl_pause'])}">
   <div class="pbox">
-   <div class="artw"><img class="art" src="{A}img/cover-{L}.jpg" alt="{esc(t['pl_cover'])}" width="600" height="600" loading="lazy">
-    <div class="ov" role="group" aria-label="{esc(t['pl_title'])}">
-     <button type="button" class="prev" aria-label="{esc(t['pl_prev'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 5h2.5v14H6zM19 5v14L9.5 12z" fill="currentColor"/></svg></button>
-     <button type="button" class="pbtn" aria-label="{esc(t['pl_play'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path class="picon" d="M7 4l13 8-13 8z" fill="currentColor"/></svg></button>
-     <button type="button" class="next" aria-label="{esc(t['pl_next'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M15.5 5H18v14h-2.5zM5 5l9.5 7L5 19z" fill="currentColor"/></svg></button>
-     <button type="button" class="loop" aria-pressed="false" aria-label="{esc(t['pl_loop'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M7 7h10v3l4-4-4-4v3H5v6h2zM17 17H7v-3l-4 4 4 4v-3h12v-6h-2z" fill="currentColor"/></svg></button>
-    </div></div>
+   <img class="art" src="{A}img/cover-{L}.jpg" alt="{esc(t['pl_cover'])}" width="600" height="600" loading="lazy">
    <div class="pl">
     <p class="pt">{esc(t['pl_title'])}</p><p class="ps" id="plname" aria-live="polite"></p>
     <div class="pc"><button type="button" class="pbtn" aria-label="{esc(t['pl_play'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path class="picon" d="M7 4l13 8-13 8z" fill="currentColor"/></svg></button>
@@ -467,9 +467,9 @@ h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 .listen{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 56px;align-items:start}
 .pbox{display:grid;grid-template-columns:1fr;gap:20px;align-items:start;justify-self:start;width:100%;max-width:26em}
 .listen .art{width:100%;height:auto;display:block;border:1.5px solid var(--line)}
-.artw{position:relative}
+.hw{position:relative}
 .ov{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);display:flex;gap:2px;padding:6px;background:rgba(255,255,255,.78);opacity:0;pointer-events:none;transition:opacity .15s}
-.artw:hover .ov,.artw:focus-within .ov{opacity:1;pointer-events:auto}
+.hw:hover .ov,.hw:focus-within .ov{opacity:1;pointer-events:auto}
 .ov button{width:40px;height:40px;border:0;background:transparent;color:#000;display:grid;place-items:center;cursor:pointer;padding:0}
 .ov button:hover{background:rgba(0,0,0,.1)}.ov button[aria-pressed=true]{background:#000;color:#fff}.ov button:focus-visible{outline:2px solid #000;outline-offset:-2px}
 @media (hover:none){.ov{opacity:1;pointer-events:auto}}
