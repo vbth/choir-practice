@@ -244,9 +244,11 @@ def page(L):
         for i, (n, d, ch) in enumerate(t['tree']))
     steps = ''.join(f'<li><button type="button" data-step="{i}" aria-pressed="false"><span class="n">{i+1}</span><span class="s">{esc(s[0])}</span></button></li>' for i, s in enumerate(t['steps']))
     rights = ''.join(f'<article><h3>{esc(h)}</h3><p>{esc(p)}</p></article>' for h, p in t['rechte_items'])
+    METER = '<span class="mxmeter" data-meter="{}" aria-hidden="true">' + '<i></i>' * 16 + '</span>'
+    mxmaster = f'<div class="mxr mxm"><span class="mxmlb">{esc(t["mx_all"])}</span>{METER.format("master")}<span class="mxf"><input type="range" id="mxmaster" class="mxv" min="0" max="100" value="100" aria-label="{esc(t["mx_all"])}"></span><span id="mxmp" class="mxp2 mono">100&nbsp;%</span></div>'
     mixrows = ''.join(
         f'<div class="mxr"><button type="button" class="mxb" data-stem="{k}" data-pan="{pan}" aria-pressed="true" title="{esc(t["mx_on"])}">{esc(n)}</button>'
-        f'<input type="range" class="mxv" min="0" max="100" value="100" aria-label="{esc(n)}"><span class="mxp2 mono">100&nbsp;%</span></div>'
+        f'{METER.format(k)}<span class="mxf"><input type="range" class="mxv" min="0" max="100" value="100" aria-label="{esc(n)}"></span><span class="mxp2 mono">100&nbsp;%</span></div>'
         for k, n, pan in [(v.lower(), vn, round(-0.6 + 1.2 * i / 3, 2)) for i, (v, vn) in enumerate(t['voices'].items())] + [('acc', t['mx_acc'], 0)])
     mxtempos = ''.join(f'<button type="button" data-mxt="{p}" aria-pressed="{str(p == 100).lower()}">{p}&nbsp;%</button>' for p in (80, 90, 100))
     voices = ''.join(f'<button type="button" data-voice="{v}" aria-pressed="false">{esc(n)}</button>' for v, n in t['voices'].items())
@@ -369,8 +371,7 @@ def page(L):
   <p class="mxh" id="mxh">{esc(t['mx_h'])}</p><p class="mxp">{esc(t['mx_p'])}</p>
   <div class="pc"><button type="button" class="mxplay" id="mxplay" aria-label="{esc(t['pl_play'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path id="mxicon" d="M7 4l13 8-13 8z" fill="currentColor"/></svg></button>
    <input type="range" id="mxseek" min="0" max="1000" value="0" aria-label="{esc(t['pl_seek'])}"><span id="mxtime" class="mono">0:00</span></div>
-  <div class="mxr mxm"><span class="mxmlb">{esc(t['mx_all'])}</span><input type="range" id="mxmaster" class="mxv" min="0" max="100" value="100" aria-label="{esc(t['mx_all'])}"><span id="mxmp" class="mxp2 mono">100&nbsp;%</span></div>
-{mixrows}
+<div class="mxbank">{mxmaster}{mixrows}</div>
   <div class="ctl mxt"><span class="lbl" id="mxtl">{esc(t['mx_tempo'])}</span><div class="seg" id="mxtempos" role="group" aria-labelledby="mxtl">{mxtempos}</div></div>
   </div>
 </section>
@@ -512,6 +513,25 @@ h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 .mxb[aria-pressed=true]{background:var(--fg);color:var(--bg)}
 .mxplay{width:calc(6.5*var(--fs-s));height:36px}
 .mxt{margin-top:18px}
+/* the mixer as a console: on wide screens the channels stand side by side with a level meter and a vertical fader; on phones they stay rows */
+.mxbank{display:flex;flex-direction:column}
+.mxm{order:-1}
+.mxmeter{display:none}
+.mxmeter i{display:block;flex:1;border:1px solid var(--line)}
+.mxmeter i.on{background:var(--fg)}
+.mxmeter i:nth-child(n+14){border-color:var(--link)}.mxmeter i:nth-child(n+14).on{background:var(--link)}
+.mxf{position:relative;flex:1 1 0;width:0;min-width:0;height:auto}
+.mxf .mxv{position:static;width:100%;height:24px;margin:0;transform:none}
+@media (min-width:760px){
+ .mxbank{flex-direction:row;align-items:flex-start;gap:12px}
+ .mxm{order:0}
+ .mxr,.mxm{display:grid;grid-template-columns:14px 1fr;gap:10px;flex:1 1 0;min-width:0;margin-top:0;align-items:stretch}
+ .mxb,.mxmlb{grid-column:1/-1;width:100%}
+ .mxmeter{display:flex;flex-direction:column-reverse;gap:2px;grid-column:1;grid-row:2;width:14px;height:150px;align-self:center}
+ .mxf{grid-column:2;grid-row:2;flex:none;width:auto;height:150px}
+ .mxf .mxv{position:absolute;left:50%;top:50%;width:150px;height:28px;transform:translate(-50%,-50%) rotate(-90deg)}
+ .mxr .mxp2,.mxm .mxp2{grid-column:1/-1;text-align:center;min-width:0}
+}
 .mxmlb{flex:none;width:calc(6.5*var(--fs-s));height:36px;display:grid;place-items:center;box-sizing:border-box;border:1.5px solid var(--line);background:var(--fg);color:var(--bg);font-size:var(--fs-s);font-weight:700}   /* always on, so filled like a pressed voice */   /* same size as the voice buttons below */
 .mxv{flex:1;min-width:0;accent-color:var(--fg);height:24px;cursor:pointer}.mxr .mxp2{flex:none;font-size:var(--fs-s);min-width:3.2em;text-align:right}
 .mxr.off .mxv,.mxr.off .mxp2{opacity:.4}
@@ -730,7 +750,7 @@ sync();ui();
 (function(){
 var mx=$('#mix');if(!mx)return;
 var AC=window.AudioContext||window.webkitAudioContext,base=mx.getAttribute('data-audio'),play=$('#mxplay'),ic=$('#mxicon'),seek=$('#mxseek'),time=$('#mxtime');
-var names=['s','a','t','b','acc','intro'],cx=null,mgain=null,sets={},tp='100',gains={},srcs=[],t0=0,off=0,playing=false,raf=0,asked=0,mixOwns=false;
+var names=['s','a','t','b','acc','intro'],cx=null,mgain=null,anal={},mloop=0,sets={},tp='100',gains={},srcs=[],t0=0,off=0,playing=false,raf=0,asked=0,mixOwns=false;
 var PLAY='M7 4l13 8-13 8z',PAUSE='M6 4h4v16H6zM14 4h4v16h-4z';
 function dur(){return sets[tp]?sets[tp].dur:0}
 function fmt(t){t=Math.floor(t||0);return Math.floor(t/60)+':'+('0'+t%60).slice(-2)}
@@ -744,12 +764,20 @@ function setup(){
  cx=new AC();var master=cx.createGain(),lim=cx.createDynamicsCompressor();mgain=cx.createGain();var mv=$('#mxmaster');mgain.gain.value=mv?Math.pow(+mv.value/100,2):1;master.connect(mgain);lim.threshold.value=-6;lim.ratio.value=8;lim.attack.value=.003;lim.release.value=.15;
  var wet=cx.createGain(),cv=cx.createConvolver();wet.gain.value=.3;cv.buffer=ir(cx);mgain.connect(lim);mgain.connect(cv);cv.connect(wet);wet.connect(lim);lim.connect(cx.destination);
  names.forEach(function(k){var g=cx.createGain(),p=cx.createStereoPanner?cx.createStereoPanner():null,b=$('.mxb[data-stem="'+k+'"]',mx);g.gain.value=1;
-  if(p){p.pan.value=b?+b.getAttribute('data-pan'):0;g.connect(p);p.connect(master)}else g.connect(master);gains[k]=g});
+  if(p){p.pan.value=b?+b.getAttribute('data-pan'):0;g.connect(p);p.connect(master)}else g.connect(master);gains[k]=g;anal[k]=cx.createAnalyser();anal[k].fftSize=512;g.connect(anal[k])});anal.master=cx.createAnalyser();anal.master.fftSize=512;mgain.connect(anal.master);
 }
 function load(t){
  if(sets[t])return Promise.resolve(sets[t]);
  return Promise.all(names.map(function(k){return fetch(base+t+'/'+k+'.mp3').then(function(r){return r.arrayBuffer()}).then(function(a){return new Promise(function(ok,no){cx.decodeAudioData(a,ok,no)})})})).then(function(l){
   var b={};names.forEach(function(k,i){b[k]=l[i]});b.dur=Math.max.apply(null,l.map(function(x){return x.duration}));sets[t]=b;return b});
+}
+// level meters: one per channel and one for the master, each behind its gain; 16 segments from -60 dB to 0 dB
+function lamp(el,n){if(el._n===n)return;el._n=n;var c=el.children;for(var i=0;i<c.length;i++)c[i].className=i<n?'on':''}
+function meterTick(){
+ if(!playing){mloop=0;$$('.mxmeter',mx).forEach(function(m){lamp(m,0)});return}
+ var buf=new Float32Array(512);
+ $$('.mxmeter',mx).forEach(function(m){var an=anal[m.getAttribute('data-meter')];if(!an)return;an.getFloatTimeDomainData(buf);var q=0,i;for(i=0;i<buf.length;i++)q+=buf[i]*buf[i];var db=20*Math.log10(Math.sqrt(q/buf.length)+1e-9);lamp(m,Math.max(0,Math.min(16,Math.round((db+60)/60*16))))});
+ mloop=requestAnimationFrame(meterTick);
 }
 function stopSrc(){srcs.forEach(function(s){try{s.onended=null;s.stop()}catch(e){}});srcs=[]}
 function pos(){return playing?Math.max(0,Math.min(dur(),off+cx.currentTime-t0)):off}   // t0 lies slightly ahead, so the first frames would be negative
@@ -758,7 +786,7 @@ function start(from){
  stopSrc();apply();var b=sets[tp];off=from;t0=cx.currentTime+.05;
  names.forEach(function(k){var s=cx.createBufferSource();s.buffer=b[k];s.connect(gains[k]);s.start(t0,from);srcs.push(s)});
  srcs[0].onended=function(){if(playing&&pos()>=dur()-.1)finish()};
- playing=true;setIcon(true);cancelAnimationFrame(raf);tick();
+ playing=true;setIcon(true);cancelAnimationFrame(raf);tick(); if(!mloop)mloop=requestAnimationFrame(meterTick);
 }
 function pause(){if(!playing)return;off=pos();playing=false;stopSrc();setIcon(false);cancelAnimationFrame(raf);tick()}
 function finish(){playing=false;stopSrc();off=0;setIcon(false);cancelAnimationFrame(raf);tick()}

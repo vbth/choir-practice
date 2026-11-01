@@ -176,7 +176,7 @@ sync();ui();
 (function(){
 var mx=$('#mix');if(!mx)return;
 var AC=window.AudioContext||window.webkitAudioContext,base=mx.getAttribute('data-audio'),play=$('#mxplay'),ic=$('#mxicon'),seek=$('#mxseek'),time=$('#mxtime');
-var names=['s','a','t','b','acc','intro'],cx=null,mgain=null,sets={},tp='100',gains={},srcs=[],t0=0,off=0,playing=false,raf=0,asked=0,mixOwns=false;
+var names=['s','a','t','b','acc','intro'],cx=null,mgain=null,anal={},mloop=0,sets={},tp='100',gains={},srcs=[],t0=0,off=0,playing=false,raf=0,asked=0,mixOwns=false;
 var PLAY='M7 4l13 8-13 8z',PAUSE='M6 4h4v16H6zM14 4h4v16h-4z';
 function dur(){return sets[tp]?sets[tp].dur:0}
 function fmt(t){t=Math.floor(t||0);return Math.floor(t/60)+':'+('0'+t%60).slice(-2)}
@@ -190,12 +190,20 @@ function setup(){
  cx=new AC();var master=cx.createGain(),lim=cx.createDynamicsCompressor();mgain=cx.createGain();var mv=$('#mxmaster');mgain.gain.value=mv?Math.pow(+mv.value/100,2):1;master.connect(mgain);lim.threshold.value=-6;lim.ratio.value=8;lim.attack.value=.003;lim.release.value=.15;
  var wet=cx.createGain(),cv=cx.createConvolver();wet.gain.value=.3;cv.buffer=ir(cx);mgain.connect(lim);mgain.connect(cv);cv.connect(wet);wet.connect(lim);lim.connect(cx.destination);
  names.forEach(function(k){var g=cx.createGain(),p=cx.createStereoPanner?cx.createStereoPanner():null,b=$('.mxb[data-stem="'+k+'"]',mx);g.gain.value=1;
-  if(p){p.pan.value=b?+b.getAttribute('data-pan'):0;g.connect(p);p.connect(master)}else g.connect(master);gains[k]=g});
+  if(p){p.pan.value=b?+b.getAttribute('data-pan'):0;g.connect(p);p.connect(master)}else g.connect(master);gains[k]=g;anal[k]=cx.createAnalyser();anal[k].fftSize=512;g.connect(anal[k])});anal.master=cx.createAnalyser();anal.master.fftSize=512;mgain.connect(anal.master);
 }
 function load(t){
  if(sets[t])return Promise.resolve(sets[t]);
  return Promise.all(names.map(function(k){return fetch(base+t+'/'+k+'.mp3').then(function(r){return r.arrayBuffer()}).then(function(a){return new Promise(function(ok,no){cx.decodeAudioData(a,ok,no)})})})).then(function(l){
   var b={};names.forEach(function(k,i){b[k]=l[i]});b.dur=Math.max.apply(null,l.map(function(x){return x.duration}));sets[t]=b;return b});
+}
+// level meters: one per channel and one for the master, each behind its gain; 16 segments from -60 dB to 0 dB
+function lamp(el,n){if(el._n===n)return;el._n=n;var c=el.children;for(var i=0;i<c.length;i++)c[i].className=i<n?'on':''}
+function meterTick(){
+ if(!playing){mloop=0;$$('.mxmeter',mx).forEach(function(m){lamp(m,0)});return}
+ var buf=new Float32Array(512);
+ $$('.mxmeter',mx).forEach(function(m){var an=anal[m.getAttribute('data-meter')];if(!an)return;an.getFloatTimeDomainData(buf);var q=0,i;for(i=0;i<buf.length;i++)q+=buf[i]*buf[i];var db=20*Math.log10(Math.sqrt(q/buf.length)+1e-9);lamp(m,Math.max(0,Math.min(16,Math.round((db+60)/60*16))))});
+ mloop=requestAnimationFrame(meterTick);
 }
 function stopSrc(){srcs.forEach(function(s){try{s.onended=null;s.stop()}catch(e){}});srcs=[]}
 function pos(){return playing?Math.max(0,Math.min(dur(),off+cx.currentTime-t0)):off}   // t0 lies slightly ahead, so the first frames would be negative
@@ -204,7 +212,7 @@ function start(from){
  stopSrc();apply();var b=sets[tp];off=from;t0=cx.currentTime+.05;
  names.forEach(function(k){var s=cx.createBufferSource();s.buffer=b[k];s.connect(gains[k]);s.start(t0,from);srcs.push(s)});
  srcs[0].onended=function(){if(playing&&pos()>=dur()-.1)finish()};
- playing=true;setIcon(true);cancelAnimationFrame(raf);tick();
+ playing=true;setIcon(true);cancelAnimationFrame(raf);tick(); if(!mloop)mloop=requestAnimationFrame(meterTick);
 }
 function pause(){if(!playing)return;off=pos();playing=false;stopSrc();setIcon(false);cancelAnimationFrame(raf);tick()}
 function finish(){playing=false;stopSrc();off=0;setIcon(false);cancelAnimationFrame(raf);tick()}

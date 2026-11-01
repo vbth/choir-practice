@@ -109,6 +109,25 @@ h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 .mxb[aria-pressed=true]{background:var(--fg);color:var(--bg)}
 .mxplay{width:calc(6.5*var(--fs-s));height:36px}
 .mxt{margin-top:18px}
+/* the mixer as a console: on wide screens the channels stand side by side with a level meter and a vertical fader; on phones they stay rows */
+.mxbank{display:flex;flex-direction:column}
+.mxm{order:-1}
+.mxmeter{display:none}
+.mxmeter i{display:block;flex:1;border:1px solid var(--line)}
+.mxmeter i.on{background:var(--fg)}
+.mxmeter i:nth-child(n+14){border-color:var(--link)}.mxmeter i:nth-child(n+14).on{background:var(--link)}
+.mxf{position:relative;flex:1 1 0;width:0;min-width:0;height:auto}
+.mxf .mxv{position:static;width:100%;height:24px;margin:0;transform:none}
+@media (min-width:760px){
+ .mxbank{flex-direction:row;align-items:flex-start;gap:12px}
+ .mxm{order:0}
+ .mxr,.mxm{display:grid;grid-template-columns:14px 1fr;gap:10px;flex:1 1 0;min-width:0;margin-top:0;align-items:stretch}
+ .mxb,.mxmlb{grid-column:1/-1;width:100%}
+ .mxmeter{display:flex;flex-direction:column-reverse;gap:2px;grid-column:1;grid-row:2;width:14px;height:150px;align-self:center}
+ .mxf{grid-column:2;grid-row:2;flex:none;width:auto;height:150px}
+ .mxf .mxv{position:absolute;left:50%;top:50%;width:150px;height:28px;transform:translate(-50%,-50%) rotate(-90deg)}
+ .mxr .mxp2,.mxm .mxp2{grid-column:1/-1;text-align:center;min-width:0}
+}
 .mxmlb{flex:none;width:calc(6.5*var(--fs-s));height:36px;display:grid;place-items:center;box-sizing:border-box;border:1.5px solid var(--line);background:var(--fg);color:var(--bg);font-size:var(--fs-s);font-weight:700}   /* always on, so filled like a pressed voice */   /* same size as the voice buttons below */
 .mxv{flex:1;min-width:0;accent-color:var(--fg);height:24px;cursor:pointer}.mxr .mxp2{flex:none;font-size:var(--fs-s);min-width:3.2em;text-align:right}
 .mxr.off .mxv,.mxr.off .mxp2{opacity:.4}
