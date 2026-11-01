@@ -118,7 +118,7 @@ T = {
    'choir': 'Die anderen Stimmen sitzen wie im Chor: Nachbarn links und rechts etwas leiser, weiter entfernte noch leiser.',
    'tutti': 'Alle Stimmen gleich laut.'}, 'own_lbl': 'Gesang', 'acc_lbl': 'Klavier',
   'dl_p': 'Das Ergebnis: Aufnahmen zum Üben für jede Stimme, Anleitungen und Protokolle.', 'dl_btn': 'Beispiel herunterladen',
-  'tutti_all': 'Tutti, alle Stimmen', 'pl_title': 'Alle meine Entchen', 'pl_play': 'Wiedergabe', 'pl_pause': 'Pause', 'pl_prev': 'Vorherige Aufnahme', 'pl_next': 'Nächste Aufnahme', 'pl_loop': 'Wiederholen', 'pl_seek': 'Position',
+  'tutti_all': 'Tutti, alle Stimmen', 'pl_title': 'Alle meine Entchen', 'pl_play': 'Wiedergabe', 'pl_pause': 'Pause', 'pl_prev': 'Vorherige Aufnahme', 'pl_next': 'Nächste Aufnahme', 'pl_loop': 'Wiederholen', 'pl_vol': 'Lautstärke', 'pl_mute': 'Stumm', 'pl_seek': 'Position',
   'pl_cover': 'Albumcover des Beispielpakets',
   'rechte_h': 'Rechte & KI',
   'rechte_items': [
@@ -185,7 +185,7 @@ T = {
    'choir': 'The other voices sit as in the choir: neighbours left and right a little quieter, voices further away quieter still.',
    'tutti': 'All voices equally loud.'}, 'own_lbl': 'Singing', 'acc_lbl': 'Piano',
   'dl_p': 'The result: practice recordings for every voice, guides and logs.', 'dl_btn': 'Download the example',
-  'tutti_all': 'Tutti, all voices', 'pl_title': 'All My Ducklings', 'pl_play': 'Play', 'pl_pause': 'Pause', 'pl_prev': 'Previous recording', 'pl_next': 'Next recording', 'pl_loop': 'Repeat', 'pl_seek': 'Position',
+  'tutti_all': 'Tutti, all voices', 'pl_title': 'All My Ducklings', 'pl_play': 'Play', 'pl_pause': 'Pause', 'pl_prev': 'Previous recording', 'pl_next': 'Next recording', 'pl_loop': 'Repeat', 'pl_vol': 'Volume', 'pl_mute': 'Mute', 'pl_seek': 'Position',
   'pl_cover': 'Album cover of the example pack',
   'rechte_h': 'Rights & AI',
   'rechte_items': [
@@ -315,10 +315,13 @@ def page(L):
 <figure class="banner"><div class="hw"><picture><source media="(prefers-color-scheme: dark)" srcset="{A}img/header-dark.png"><img src="{A}img/header.png" alt="{esc(t['og_alt'])}. {esc(t['duck'].replace(chr(10), ' '))} — {esc(t['duck_by'])}" width="1280" height="640" fetchpriority="high" decoding="async"></picture>
 <div class="ov" role="group" aria-label="{esc(t['pl_title'])}">
 <svg class="fr" viewBox="0 0 200 60" preserveAspectRatio="none" aria-hidden="true"><path d="M16 3.6C60 1.6 140 4.6 184 2.8Q198 3 197.6 17C198.6 25 196.6 40 197 44Q197 57.6 183 57C140 58.6 60 55.6 17 57.6Q2.6 58 3 44C2 35 4 22 2.8 16Q3 2.6 17.4 3.8L27 2.4"/></svg>
+<div class="rw">
      <button type="button" class="prev" aria-label="{esc(t['pl_prev'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 5h2.5v14H6zM19 5v14L9.5 12z" fill="currentColor"/></svg></button>
      <button type="button" class="pbtn" aria-label="{esc(t['pl_play'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path class="picon" d="M7 4l13 8-13 8z" fill="currentColor"/></svg></button>
      <button type="button" class="next" aria-label="{esc(t['pl_next'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M15.5 5H18v14h-2.5zM5 5l9.5 7L5 19z" fill="currentColor"/></svg></button>
      <button type="button" class="loop" aria-pressed="false" aria-label="{esc(t['pl_loop'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M7 7h10v3l4-4-4-4v3H5v6h2zM17 17H7v-3l-4 4 4 4v-3h12v-6h-2z" fill="currentColor"/></svg></button>
+</div>
+<div class="vw"><button type="button" class="mute" aria-pressed="false" aria-label="{esc(t['pl_mute'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3z" fill="currentColor"/><path class="w" d="M15.5 8.5a5 5 0 010 7M18 6a8.5 8.5 0 010 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path class="x" d="M15 9l6 6M21 9l-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button><input type="range" class="vol" min="0" max="100" value="100" aria-label="{esc(t['pl_vol'])}"></div>
     </div></div>
 <figcaption class="duck">{esc(t['duck']).replace(chr(10), ' <br class="dbr">')}<span class="by">— {esc(t['duck_by'])}</span></figcaption></figure>
 <section id="start" class="hero">
@@ -341,6 +344,7 @@ def page(L):
     <p class="pt">{esc(t['pl_title'])}</p><p class="ps" id="plname" aria-live="polite"></p>
     <div class="pc"><button type="button" class="pbtn" aria-label="{esc(t['pl_play'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path class="picon" d="M7 4l13 8-13 8z" fill="currentColor"/></svg></button>
      <input type="range" id="plseek" min="0" max="1000" value="0" aria-label="{esc(t['pl_seek'])}"><span id="pltime" class="mono">0:00</span></div>
+    <div class="pc pv"><button type="button" class="vbtn mute" aria-pressed="false" aria-label="{esc(t['pl_mute'])}"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3z" fill="currentColor"/><path class="w" d="M15.5 8.5a5 5 0 010 7M18 6a8.5 8.5 0 010 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path class="x" d="M15 9l6 6M21 9l-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button><input type="range" class="vol" min="0" max="100" value="100" aria-label="{esc(t['pl_vol'])}"></div>
    </div>
   </div>
   <div class="groups">{playlist(t)}</div>
@@ -469,7 +473,8 @@ h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 .pbox{display:grid;grid-template-columns:1fr;gap:20px;align-items:start;justify-self:start;width:100%;max-width:26em}
 .listen .art{width:100%;height:auto;display:block;border:1.5px solid var(--line)}
 .hw{position:relative}
-.ov{--b:clamp(28px,3.6vw,40px);position:absolute;left:50%;top:80%;transform:translate(-50%,-50%);display:flex;gap:2px;padding:8px 14px;opacity:0;pointer-events:none;transition:opacity .15s}
+.ov{--b:clamp(28px,3.6vw,40px);position:absolute;left:50%;top:80%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:0;padding:8px 14px;opacity:0;pointer-events:none;transition:opacity .15s}
+.ov .rw{position:relative;display:flex;gap:2px}.ov .vw{position:relative;display:flex;align-items:center;gap:4px;width:100%}.ov .vol{flex:1;min-width:0;height:18px;accent-color:#000}.ov .vw .mute{width:calc(var(--b)*.8);height:calc(var(--b)*.8)}
 .ov .fr{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}.ov .fr path{fill:rgba(255,255,255,.78);stroke:#000;stroke-width:3.2;vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round}
 .hw:hover .ov,.hw:focus-within .ov{opacity:1;pointer-events:auto}
 .ov button{position:relative;width:var(--b);height:var(--b);border:0;background:transparent;color:#000;display:grid;place-items:center;cursor:pointer;padding:0}
@@ -477,9 +482,11 @@ h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 @media (hover:none){.ov{opacity:1;pointer-events:auto}}
 .pt{margin:0;font-weight:700}.ps{margin:2px 0 12px;color:var(--mute);font-size:var(--fs-s);min-height:1.55em}
 .pc{display:flex;align-items:center;gap:14px}
-.pbtn{flex:none;width:44px;height:44px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg);display:grid;place-items:center;cursor:pointer;padding:0}
-.pbtn:focus-visible,#plseek:focus-visible,.groups summary:focus-visible,.trk button:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+.pbtn,.vbtn{flex:none;width:44px;height:44px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg);display:grid;place-items:center;cursor:pointer;padding:0}
+.pbtn:focus-visible,.vbtn:focus-visible,#plseek:focus-visible,.vol:focus-visible,.groups summary:focus-visible,.trk button:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
 #plseek{flex:1;min-width:0;accent-color:var(--fg);height:24px;cursor:pointer}
+.vol{flex:1;min-width:0;accent-color:var(--fg);height:24px;cursor:pointer}.pv{margin-top:10px}
+.mute .x{display:none}.mute[aria-pressed=true] .x{display:inline}.mute[aria-pressed=true] .w{display:none}
 #pltime{flex:none;font-size:var(--fs-s);min-width:3.2em;text-align:right}
 .nowplay{display:flex;align-items:center;gap:14px}.nowplay .ps{margin:0}
 .groups details{border-top:1.5px solid var(--line)}.groups details:last-child{border-bottom:1.5px solid var(--line)}
@@ -625,6 +632,11 @@ $$('#sounds button').forEach(function(b){b.addEventListener('click',function(){c
 $$('#tempos button').forEach(function(b){b.addEventListener('click',function(){change(function(){cur.tempo=b.getAttribute('data-tempo')},A.paused)})});
 $$('.trk button').forEach(function(b){b.addEventListener('click',function(){change(function(){var v=b.getAttribute('data-voice');if(v)cur.voice=v;cur.stage=b.getAttribute('data-stage');cur.sound=b.getAttribute('data-sound');cur.tempo=b.getAttribute('data-tempo')},true)})});
 $$('.pbtn').forEach(function(b){b.addEventListener('click',function(){if(A.paused){A.play().catch(function(){})}else{A.pause()}})});
+// volume: the slider and the speaker button exist twice (remote on the header image, player); both follow one value (no effect on iPhones: the system volume rules there)
+var vols=$$('.vol'),mutes=$$('.mute'),lastVol=1;
+function setVol(v){v=Math.max(0,Math.min(1,v));A.volume=v;vols.forEach(function(r){r.value=Math.round(v*100)});mutes.forEach(function(m){m.setAttribute('aria-pressed',v===0)})}
+vols.forEach(function(r){r.addEventListener('input',function(){lastVol=+r.value/100||lastVol;setVol(+r.value/100)})});
+mutes.forEach(function(m){m.addEventListener('click',function(){if(A.volume>0){lastVol=A.volume;setVol(0)}else setVol(lastVol||1)})});
 // remote control on the cover (shown while the pointer is over it): previous / next recording of the playlist, repeat
 function step(d){var all=$$('.trk button'),i=0;all.forEach(function(b,k){if(b.getAttribute('aria-pressed')==='true')i=k});all[(i+d+all.length)%all.length].click()}
 $('.ov .prev').addEventListener('click',function(){step(-1)});$('.ov .next').addEventListener('click',function(){step(1)});
