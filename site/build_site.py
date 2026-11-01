@@ -458,7 +458,7 @@ ul.note{padding-left:18px}
 .exrow{--pop:150px;--pw:250px;display:grid;grid-template-columns:calc(var(--pw)*1.8) minmax(0,1fr);gap:32px 56px;align-items:center;border:1.5px solid var(--line);padding:40px 48px;margin:calc(var(--pop) + 56px) 0 72px}   /* card; the fan pops out of its top edge by --pop, 56px stay free below the headline */
 h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 .dl p{margin:0 0 20px;max-width:30em}.dl .dlb{margin:0}.steps+.dlb{margin:24px 0 16px}.dlb a{display:inline-block;border:1.5px solid var(--line);padding:12px 20px;font-weight:400;color:var(--fg);text-decoration:none}.dlb a:hover,.dlb a:focus-visible{background:var(--fg);color:var(--bg)}
-#hp .vb{cursor:pointer}#hp .vb:hover circle{stroke:var(--link)}#hp .vb:hover text{fill:var(--link)}#hp .vb:focus-visible{outline:2px solid var(--fg);outline-offset:4px}
+#hp .vb{cursor:pointer}@media (hover:hover){#hp .vb:hover circle{stroke:var(--link)}#hp .vb:hover text{fill:var(--link)}}   /* hover only where a pointer exists: on touch screens it would stay red after the tap */#hp .vb:focus-visible{outline:2px solid var(--fg);outline-offset:4px}
 .fan{width:100%;margin:calc(var(--pop)*-1) 0 -10px}.fan .pages{position:relative;height:calc(var(--pw)*1.62)}.fan img{position:absolute;bottom:calc(var(--pw)*.13);left:50%;width:var(--pw);height:auto;background:#fff;border:1.5px solid var(--line);transform-origin:50% 100%}
 .fan .p0{transform:translateX(-50%) rotate(-15deg)}.fan .p1{transform:translateX(-50%) rotate(0)}.fan .p2{transform:translateX(-50%) rotate(15deg)}
 
@@ -483,7 +483,7 @@ h3.sub{margin:0 0 8px;font-size:var(--fs-m)}
 .hw:hover .ov,.hw:focus-within .ov{opacity:1;pointer-events:auto}
 .ov button{position:relative;width:var(--b);height:var(--b);border:0;background:transparent;color:var(--fg);display:grid;place-items:center;cursor:pointer;padding:0}
 .ov .loop[aria-pressed=true]{color:var(--link)}.ov button svg{width:55%;height:55%}.ov button svg{filter:url(#kr)}.ov button:focus-visible{outline:2px solid var(--fg);outline-offset:-2px}
-.pbtn:hover,.vbtn:hover,.ov button:hover,.ov button[aria-pressed=true]:hover{color:var(--link)}.vol:hover,.ov .vol:hover,#plseek:hover{accent-color:var(--link)}
+@media (hover:hover){.pbtn:hover,.vbtn:hover,.ov button:hover,.ov button[aria-pressed=true]:hover{color:var(--link)}.vol:hover,.ov .vol:hover,#plseek:hover{accent-color:var(--link)}}
 .ov .vol{filter:url(#kb)}
 @media (hover:none){.ov{opacity:1;pointer-events:auto}}
 @container (max-width:520px){.ov .vw{display:none}.ov button svg{width:68%;height:68%;filter:url(#krs)}.ov .fr{filter:url(#kfs)}}   /* narrow image: the tub is too small for a second row; the volume stays in the player below */
