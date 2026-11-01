@@ -35,11 +35,6 @@ h3{margin:0 0 8px;font-size:var(--fs-m)}
 .input{margin:0 0 24px;color:var(--mute)}
 .intro{max-width:44em;margin:0 0 28px}.intro.wide{max-width:none}
 .cta{display:flex;flex-wrap:wrap;gap:12px 28px;margin:0 0 36px}
-.prwrap{margin:0 0 36px;max-width:44em}.prlabel{margin:0 0 8px;color:var(--mute);font-size:var(--fs-s)}
-.prbox{display:flex;align-items:flex-start;gap:12px;border:1.5px solid var(--line);padding:14px 16px}
-.prbox code{flex:1 1 auto;min-width:0;font-family:inherit;font-size:var(--fs-s);line-height:1.5;overflow-wrap:anywhere}
-.prcopy{flex:0 0 44px;width:44px;height:44px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg);padding:0;display:grid;place-items:center;cursor:pointer}
-.prcopy:focus-visible{outline:2px solid var(--link);outline-offset:2px}
 .facts{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:0;border-top:1.5px solid var(--line)}
 .facts div{padding:22px 12px 0 0}.facts dt{font-size:clamp(28px,4vw,44px);font-weight:700;line-height:1}.facts dd{margin:6px 0 0;color:var(--mute);font-size:var(--fs-s)}
 .aitag{display:flex;align-items:center;gap:10px;margin:0}
