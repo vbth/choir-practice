@@ -245,10 +245,10 @@ def page(L):
     steps = ''.join(f'<li><button type="button" data-step="{i}" aria-pressed="false"><span class="n">{i+1}</span><span class="s">{esc(s[0])}</span></button></li>' for i, s in enumerate(t['steps']))
     rights = ''.join(f'<article><h3>{esc(h)}</h3><p>{esc(p)}</p></article>' for h, p in t['rechte_items'])
     METER = '<span class="mxmeter" data-meter="{}" aria-hidden="true">' + '<i></i>' * 16 + '</span>'
-    mxmaster = f'<div class="mxr mxm"><span class="mxmlb">{esc(t["mx_all"])}</span>{METER.format("master")}<span class="mxf"><input type="range" id="mxmaster" class="mxv" min="0" max="100" value="100" aria-label="{esc(t["mx_all"])}"></span><span id="mxmp" class="mxp2 mono">100&nbsp;%</span></div>'
+    mxmaster = f'<div class="mxr mxm"><span class="mxmlb">{esc(t["mx_all"])}</span>{METER.format("master")}<span class="mxf"><input type="range" id="mxmaster" class="mxv" min="0" max="100" step="10" value="100"aria-label="{esc(t["mx_all"])}"></span><span id="mxmp" class="mxp2 mono">100&nbsp;%</span></div>'
     mixrows = ''.join(
         f'<div class="mxr"><button type="button" class="mxb" data-stem="{k}" data-pan="{pan}" aria-pressed="true" title="{esc(t["mx_on"])}">{esc(n)}</button>'
-        f'{METER.format(k)}<span class="mxf"><input type="range" class="mxv" min="0" max="100" value="100" aria-label="{esc(n)}"></span><span class="mxp2 mono">100&nbsp;%</span></div>'
+        f'{METER.format(k)}<span class="mxf"><input type="range" class="mxv" min="0" max="100" step="10" value="100" aria-label="{esc(n)}"></span><span class="mxp2 mono">100&nbsp;%</span></div>'
         for k, n, pan in [(v.lower(), vn, round(-0.6 + 1.2 * i / 3, 2)) for i, (v, vn) in enumerate(t['voices'].items())] + [('acc', t['mx_acc'], 0)])
     mxtempos = '<input type="range" id="mxtempo" class="mxtrack" min="80" max="100" step="10" value="100" aria-label="' + esc(t['mx_tempo']) + '"><div class="mxtk"><span>80&nbsp;%</span><span>90&nbsp;%</span><span>100&nbsp;%</span></div>'
     voices = ''.join(f'<button type="button" data-voice="{v}" aria-pressed="false">{esc(n)}</button>' for v, n in t['voices'].items())
